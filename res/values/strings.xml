@@ -4,5 +4,12 @@
     <string name="app_name">LBSSHNU</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="searchview">搜索</string>
+    <string name="userpref">userpref</string>
+    <string name="actionmore">actionmore</string>
+    <string name="data_path">/sdcard/SuperMap/MapData/MapData.smwu</string>
+    <string name="license_path">/sdcard/SuperMap/license/</string>
+    <string name="temp_path">/sdcard/SuperMap/temp/</string>
+    <string name="cache_path">/sdcard/SuperMap/WebCache/</string>
 
 </resources>

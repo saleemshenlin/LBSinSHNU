@@ -3,14 +3,17 @@ package com.shnu.lbsshnu;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class BaseActivity extends Activity {
 	LBSApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
+	private boolean bExit = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +57,21 @@ public class BaseActivity extends Activity {
 				simpleSideDrawer.toggleRightDrawer();
 			}
 		});
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			if (bExit) {
+				this.finish();
+				System.exit(0);
+			} else {
+				bExit = true;
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

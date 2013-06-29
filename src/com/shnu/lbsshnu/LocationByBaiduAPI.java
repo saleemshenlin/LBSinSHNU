@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.supermap.data.GeoCircle;
 import com.supermap.data.Point;
 import com.supermap.data.Point2D;
 import com.supermap.data.Rectangle2D;
@@ -32,7 +31,7 @@ public class LocationByBaiduAPI {
 		option.setOpenGps(true); // 打开gps_mGpsCheck.isChecked()
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
-		option.setScanSpan(10000);
+		option.setScanSpan(5000);
 		// option.setPriority(LocationClientOption.NetWorkFirst); // 设置网络优先
 		option.setPriority(LocationClientOption.GpsFirst); // 不设置，默认是gps优先
 		option.disableCache(true);
@@ -64,19 +63,12 @@ public class LocationByBaiduAPI {
 		callout.setCustomize(true);
 		ImageView image = new ImageView(context);
 		callout.setLocation(location.getX(), location.getY());
-		image.setBackgroundResource(R.drawable.ball);
+		image.setBackgroundResource(R.drawable.ic_action_ball);
 		callout.setContentView(image);
 		mMapView.addCallout(callout);
 	}
 
-	public void addAccuracyBuffer(Point2D location, float radius,
-			MapView mMapView) {
-		mMapView.removeAllCallOut();
-		CallOut callout = new CallOut(context);
-		callout.setStyle(CalloutAlignment.CENTER);
-		callout.setCustomize(true);
-		GeoCircle accuracyBuffer = new GeoCircle(location, radius);
-	}
+	
 
 	public boolean isLocInMap(Point2D point2d, MapView mMapView) {
 		Rectangle2D rcMap = mMapView.getMapControl().getMap().getViewBounds();
@@ -221,7 +213,7 @@ public class LocationByBaiduAPI {
 		ImageView imageArrow = new ImageView(context);
 
 		Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),
-				R.drawable.arrow);
+				R.drawable.ic_action_arrow);
 		float frotation = (float) (angle / PI * 180);
 
 		// 创建操作图片是用的matrix对象

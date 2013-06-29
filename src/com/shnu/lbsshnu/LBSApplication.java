@@ -40,8 +40,13 @@ public class LBSApplication extends Application {
 	private void getScreenDesplay() {
 		DisplayMetrics dm = new DisplayMetrics();
 		dm = getResources().getDisplayMetrics();
-		setScreenWidth(dm.xdpi);
-		setScreenHeight(dm.ydpi);
+		if (dm.xdpi < dm.ydpi) {
+			setScreenWidth(dm.xdpi);
+			setScreenHeight(dm.ydpi);
+		} else {
+			setScreenWidth(dm.ydpi);
+			setScreenHeight(dm.xdpi);
+		}
 
 	}
 

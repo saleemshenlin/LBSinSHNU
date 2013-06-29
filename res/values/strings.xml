@@ -11,5 +11,6 @@
     <string name="license_path">/sdcard/SuperMap/license/</string>
     <string name="temp_path">/sdcard/SuperMap/temp/</string>
     <string name="cache_path">/sdcard/SuperMap/WebCache/</string>
+    <string name="actionlocation">定位</string>
 
 </resources>

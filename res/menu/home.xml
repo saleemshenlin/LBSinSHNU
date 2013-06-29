@@ -5,11 +5,5 @@
         android:icon="@drawable/ic_action_user"
         android:showAsAction="ifRoom"
         android:title="@string/searchview"/>
-    <item
-        android:id="@+id/menu_search"
-        android:actionViewClass="android.widget.SearchView"
-        android:icon="@drawable/action_search"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/searchview"/>
 
 </menu>

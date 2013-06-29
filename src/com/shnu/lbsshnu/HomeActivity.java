@@ -2,26 +2,37 @@ package com.shnu.lbsshnu;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.FrameLayout.LayoutParams;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.supermap.data.Color;
+import com.supermap.data.GeoCircle;
+import com.supermap.data.GeoStyle;
 import com.supermap.data.Point2D;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
 import com.supermap.mapping.MapControl;
-import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
+import com.supermap.mapping.TrackingLayer;
 
 public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
 	Workspace mWorkspace;
 	MapView mMapView;
+	MapControl mMapControl;
 	LocationByBaiduAPI baiduAPI = new LocationByBaiduAPI();
 	LocationClient locationClient;
 	Point2D locationPoint2d;
+	Point2D lastlocationPoint2d = new Point2D(0, 0);
 	public BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
+	TrackingLayer mTrackingLayer;
+	ImageView locationImageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +41,31 @@ public class HomeActivity extends BaseActivity {
 		locationClient = new LocationClient(getApplicationContext());
 		locationClient.registerLocationListener(this.baiduLocationListener);
 		baiduAPI.startLocate(locationClient);
+		locationImageView = (ImageView) findViewById(R.id.actionLociton);
+		locationImageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onLocated();
+			}
+		});
+
+		openData();
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		openData();
+		refreshMap();
 	}
 
 	protected void onDestroy() {
 		super.onDestroy();
-		mMapView.getMapControl().removeMapParamChangedListener(
-				mapParameterChangedListener);
+		mMapControl.getMap().close();
+		mMapControl.getMap().dispose();
+		mMapControl.dispose();
+		mWorkspace.close();
+		mWorkspace.dispose();
 	}
 
 	/**
@@ -79,6 +102,10 @@ public class HomeActivity extends BaseActivity {
 			}
 			locationPoint2d = new Point2D(location.getLongitude(),
 					location.getLatitude());
+			if (lastlocationPoint2d != locationPoint2d) {
+				addAccuracyBuffer(locationPoint2d, location.getRadius());
+				lastlocationPoint2d = locationPoint2d;
+			}
 			if (baiduAPI.isLocInMap(locationPoint2d, mMapView)) {
 				baiduAPI.addCallOutBall(locationPoint2d, mMapView,
 						getApplicationContext());
@@ -86,6 +113,7 @@ public class HomeActivity extends BaseActivity {
 				baiduAPI.addCallOutArrow(locationPoint2d, mMapView,
 						getApplicationContext());
 			}
+
 			Log.i(TAG, sb.toString());
 		}
 
@@ -108,29 +136,62 @@ public class HomeActivity extends BaseActivity {
 		mWorkspace.open(info);
 
 		mMapView = (MapView) findViewById(R.id.mapView);
-		MapControl mapControl = mMapView.getMapControl();
+		mMapControl = mMapView.getMapControl();
 
-		mapControl.getMap().setWorkspace(mWorkspace);
+		mMapControl.getMap().setWorkspace(mWorkspace);
 
 		String mapName = mWorkspace.getMaps().get(0);
 		Log.i(TAG, "add Map: " + mapName);
-		mapControl.getMap().open(mapName);
-		mapControl.getMap().refresh();
-
-		mapControl.setMapParamChangedListener(mapParameterChangedListener);
+		mMapControl.getMap().open(mapName);
+		mMapControl.getMap().setScale(1 / 1200);
+		refreshMap();
+		mTrackingLayer = mMapControl.getMap().getTrackingLayer();
 	}
 
-	private final MapParameterChangedListener mapParameterChangedListener = new MapParameterChangedListener() {
+	/*
+	 * 刷新地图
+	 */
+	private void refreshMap() {
+		mMapControl.getMap().refresh();
+	}
 
-		@Override
-		public void scaleChanged(double arg0) {
-			// updateLocation();
-		}
+	/*
+	 * 清除上一次的定位buffer
+	 */
+	private void clearTrackingLayer() {
+		mTrackingLayer.clear();
+		refreshMap();
+	}
 
-		@Override
-		public void boundsChanged(Point2D arg0) {
-			// updateLocation();
-		}
-	};
+	/*
+	 * 增加定位精度buffer 半径=精度*地图scale*0.02
+	 */
+	public void addAccuracyBuffer(Point2D location, float radius) {
+		clearTrackingLayer();
+		double mapScale = mMapControl.getMap().getScale();
+		GeoCircle accuracyBuffer = new GeoCircle(location, radius * mapScale
+				* 0.02);
+		GeoStyle geoStyle_R = new GeoStyle();
+		geoStyle_R.setFillOpaqueRate(10);
+		geoStyle_R.setLineSymbolID(0);
+		geoStyle_R.setLineWidth(0.5);
+		geoStyle_R.setLineColor(new Color(0, 153, 204));
+		accuracyBuffer.setStyle(geoStyle_R);
+		mTrackingLayer.add(accuracyBuffer, "");
+		refreshMap();
+	}
 
+	/*
+	 * 定位后操作
+	 */
+	private void onLocated() {
+		if (lastlocationPoint2d != null)
+			mMapControl.getMap().setCenter(lastlocationPoint2d);
+		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
+		LayoutParams linearParams = (LayoutParams) relativeLayout
+				.getLayoutParams();
+		linearParams.height = LBSApplication.getScreenHeight();
+		relativeLayout.setLayoutParams(linearParams);
+
+	}
 }

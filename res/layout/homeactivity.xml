@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Main Layout of Status Activity -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mapViewRelativeLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <com.supermap.mapping.MapView
         android:id="@+id/mapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     </com.supermap.mapping.MapView>
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_above="@id/mapView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="8dp"
+        android:background="#666" >
+
+        <ImageView
+            android:id="@+id/actionLociton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="false"
+            android:background="#ffffff"
+            android:contentDescription="@string/actionlocation"
+            android:padding="7dp"
+            android:src="@drawable/ic_action_location" />
+    </RelativeLayout>
+
+</RelativeLayout>

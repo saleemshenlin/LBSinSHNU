@@ -1,6 +1,7 @@
 package com.shnu.lbsshnu;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -19,7 +20,7 @@ public class LBSApplication extends Application {
 		setEnvironment();
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
-		Log.i(TAG, "LBSApplication gerScreenDisplay");
+		Log.i(TAG, "LBSApplication getScreenDisplay height:" + screenHeight);
 	}
 
 	@Override
@@ -40,13 +41,8 @@ public class LBSApplication extends Application {
 	private void getScreenDesplay() {
 		DisplayMetrics dm = new DisplayMetrics();
 		dm = getResources().getDisplayMetrics();
-		if (dm.xdpi < dm.ydpi) {
-			setScreenWidth(dm.xdpi);
-			setScreenHeight(dm.ydpi);
-		} else {
-			setScreenWidth(dm.ydpi);
-			setScreenHeight(dm.xdpi);
-		}
+		setScreenWidth(dm.widthPixels);
+		setScreenHeight(dm.heightPixels);
 
 	}
 
@@ -66,4 +62,8 @@ public class LBSApplication extends Application {
 		LBSApplication.screenHeight = (int) ydpi;
 	}
 
+	public static int Dp2Px(Context context, int dp) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dp * scale + 0.5f);
+	}
 }

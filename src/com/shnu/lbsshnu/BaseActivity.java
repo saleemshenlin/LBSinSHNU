@@ -14,6 +14,7 @@ public class BaseActivity extends Activity {
 	LBSApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
 	private boolean bExit = false;
+	public static boolean isPopUp = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

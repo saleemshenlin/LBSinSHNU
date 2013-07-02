@@ -3,9 +3,9 @@ package com.shnu.lbsshnu;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
-import android.widget.FrameLayout.LayoutParams;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -32,7 +32,7 @@ public class HomeActivity extends BaseActivity {
 	Point2D lastlocationPoint2d = new Point2D(0, 0);
 	public BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
 	TrackingLayer mTrackingLayer;
-	ImageView locationImageView;
+	RelativeLayout locationImageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class HomeActivity extends BaseActivity {
 		locationClient = new LocationClient(getApplicationContext());
 		locationClient.registerLocationListener(this.baiduLocationListener);
 		baiduAPI.startLocate(locationClient);
-		locationImageView = (ImageView) findViewById(R.id.actionLociton);
+		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -114,7 +114,7 @@ public class HomeActivity extends BaseActivity {
 						getApplicationContext());
 			}
 
-			Log.i(TAG, sb.toString());
+			// Log.i(TAG, sb.toString());
 		}
 
 		@Override
@@ -185,13 +185,62 @@ public class HomeActivity extends BaseActivity {
 	 * 定位后操作
 	 */
 	private void onLocated() {
-		if (lastlocationPoint2d != null)
-			mMapControl.getMap().setCenter(lastlocationPoint2d);
-		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
-		LayoutParams linearParams = (LayoutParams) relativeLayout
-				.getLayoutParams();
-		linearParams.height = LBSApplication.getScreenHeight();
-		relativeLayout.setLayoutParams(linearParams);
 
+		RelativeLayout mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
+		RelativeLayout detailRelativeLayout = (RelativeLayout) findViewById(R.id.locationdetail);
+		if (!isPopUp) {
+			viewPopup(0, -LBSApplication.Dp2Px(this, 96), mapRelativeLayout);
+			// viewPopup(0, -LBSApplication.Dp2Px(this, 96),
+			// detailRelativeLayout);
+			isPopUp = true;
+		} else {
+			viewPopup(-LBSApplication.Dp2Px(this, 96), 0, mapRelativeLayout);
+			// viewPopup(-LBSApplication.Dp2Px(this, 96), 0,
+			// detailRelativeLayout);
+			isPopUp = false;
+		}
+
+	}
+
+	/*
+	 * 地图框上移
+	 */
+	private void viewPopup(final float p1, final float p2,
+			final RelativeLayout view) {
+		TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
+		// animation.setInterpolator(new AccelerateDecelerateInterpolator());
+		animation.setDuration(500);
+		animation.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				Log.i(TAG,
+						"Left: " + view.getLeft() + "Top: " + view.getTop()
+								+ "Right: " + view.getRight() + "Bottom: "
+								+ view.getBottom());
+				locationImageView.setEnabled(false);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				view.setVisibility(View.GONE);
+				view.clearAnimation();
+				view.getLayoutParams().height = view.getBottom()
+						+ (int) (p2 - p1);
+				view.setVisibility(View.VISIBLE);
+				Log.i(TAG,
+						"Left: " + view.getLeft() + "Top: " + view.getTop()
+								+ "Right: " + view.getRight() + "Bottom: "
+								+ view.getBottom());
+
+				if (lastlocationPoint2d != null)
+					mMapControl.getMap().setCenter(lastlocationPoint2d);
+				locationImageView.setEnabled(true);
+			}
+		});
+		view.startAnimation(animation);
 	}
 }

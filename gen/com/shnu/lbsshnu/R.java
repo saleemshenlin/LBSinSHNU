@@ -29,11 +29,18 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int actionLociton=0x7f080005;
+        public static final int actionLociton=0x7f080006;
         public static final int actionmore=0x7f080002;
+        public static final int btnDetail=0x7f08000c;
+        public static final int button1=0x7f08000b;
+        public static final int linearLayout1=0x7f080008;
+        public static final int locationRelativeLayout=0x7f080005;
+        public static final int locationdetail=0x7f080007;
         public static final int mapView=0x7f080004;
         public static final int mapViewRelativeLayout=0x7f080003;
         public static final int searchView1=0x7f080001;
+        public static final int textView1=0x7f080009;
+        public static final int textView2=0x7f08000a;
         public static final int userpref=0x7f080000;
     }
     public static final class layout {
@@ -53,8 +60,12 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int cache_path=0x7f050009;
         public static final int data_path=0x7f050006;
+        public static final int detail=0x7f05000b;
         public static final int hello_world=0x7f050002;
         public static final int license_path=0x7f050007;
+        public static final int location=0x7f05000c;
+        public static final int locationdetail=0x7f05000d;
+        public static final int searcharround=0x7f05000e;
         public static final int searchview=0x7f050003;
         public static final int temp_path=0x7f050008;
         public static final int userpref=0x7f050004;

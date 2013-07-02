@@ -12,5 +12,9 @@
     <string name="temp_path">/sdcard/SuperMap/temp/</string>
     <string name="cache_path">/sdcard/SuperMap/WebCache/</string>
     <string name="actionlocation">定位</string>
+    <string name="detail">详情</string>
+    <string name="location">我的位置(精度：10米)</string>
+    <string name="locationdetail">上海师范大学，旅游学院</string>
+    <string name="searcharround">周边查询</string>
 
 </resources>

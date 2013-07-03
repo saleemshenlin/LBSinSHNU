@@ -41,7 +41,9 @@
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="com.shnu.lbsshnu.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme.NoTitleBar.CustomBackground" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

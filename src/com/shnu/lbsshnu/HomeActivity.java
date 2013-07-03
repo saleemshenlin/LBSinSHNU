@@ -1,11 +1,13 @@
 package com.shnu.lbsshnu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -18,6 +20,7 @@ import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
 import com.supermap.mapping.MapControl;
+import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
 import com.supermap.mapping.TrackingLayer;
 
@@ -27,20 +30,22 @@ public class HomeActivity extends BaseActivity {
 	MapView mMapView;
 	MapControl mMapControl;
 	LocationByBaiduAPI baiduAPI = new LocationByBaiduAPI();
+	BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
 	LocationClient locationClient;
 	Point2D locationPoint2d;
 	Point2D lastlocationPoint2d = new Point2D(0, 0);
-	public BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
 	TrackingLayer mTrackingLayer;
 	RelativeLayout locationImageView;
+	TextView accuracyTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homeactivity);
+		new GetLocation().execute("");		
 		locationClient = new LocationClient(getApplicationContext());
-		locationClient.registerLocationListener(this.baiduLocationListener);
-		baiduAPI.startLocate(locationClient);
+		locationClient.registerLocationListener(baiduLocationListener);
+		setSliderActionBar();
 		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -48,7 +53,6 @@ public class HomeActivity extends BaseActivity {
 				onLocated();
 			}
 		});
-
 		openData();
 	}
 
@@ -105,14 +109,19 @@ public class HomeActivity extends BaseActivity {
 			if (lastlocationPoint2d != locationPoint2d) {
 				addAccuracyBuffer(locationPoint2d, location.getRadius());
 				lastlocationPoint2d = locationPoint2d;
+				if (baiduAPI.isLocInMap(locationPoint2d, mMapView)) {
+					baiduAPI.addCallOutBall(locationPoint2d, mMapView,
+							getApplicationContext());
+				} else {
+					baiduAPI.addCallOutArrow(locationPoint2d, mMapView,
+							getApplicationContext());
+				}
+				accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
+				accuracyTextView.setText("我的位置(精度："
+						+ LBSApplication.twoDecimal(location.getRadius())
+						+ "米)");
 			}
-			if (baiduAPI.isLocInMap(locationPoint2d, mMapView)) {
-				baiduAPI.addCallOutBall(locationPoint2d, mMapView,
-						getApplicationContext());
-			} else {
-				baiduAPI.addCallOutArrow(locationPoint2d, mMapView,
-						getApplicationContext());
-			}
+			
 
 			// Log.i(TAG, sb.toString());
 		}
@@ -131,7 +140,7 @@ public class HomeActivity extends BaseActivity {
 		// 打开工作空间
 		mWorkspace = new Workspace();
 		WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
-		info.setServer(getString(R.string.data_path));
+		info.setServer(LBSApplication.sDcard + getString(R.string.data_path));
 		info.setType(WorkspaceType.SMWU);
 		mWorkspace.open(info);
 
@@ -146,7 +155,24 @@ public class HomeActivity extends BaseActivity {
 		mMapControl.getMap().setScale(1 / 1200);
 		refreshMap();
 		mTrackingLayer = mMapControl.getMap().getTrackingLayer();
+		mMapControl.setMapParamChangedListener(mapParameterChangedListener);
 	}
+	/*
+	 * 监听地图参数变化
+	 */
+	MapParameterChangedListener mapParameterChangedListener = new MapParameterChangedListener() {
+		
+		@Override
+		public void scaleChanged(double scale) {
+			addAccuracyBuffer(lastlocationPoint2d,(float)scale);
+		}
+		
+		@Override
+		public void boundsChanged(Point2D point2d) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 
 	/*
 	 * 刷新地图
@@ -164,13 +190,13 @@ public class HomeActivity extends BaseActivity {
 	}
 
 	/*
-	 * 增加定位精度buffer 半径=精度*地图scale*0.02
+	 * 增加定位精度buffer 半径=精度(单位：米)*地图scale*0.01
 	 */
 	public void addAccuracyBuffer(Point2D location, float radius) {
 		clearTrackingLayer();
 		double mapScale = mMapControl.getMap().getScale();
 		GeoCircle accuracyBuffer = new GeoCircle(location, radius * mapScale
-				* 0.02);
+				* 0.01);
 		GeoStyle geoStyle_R = new GeoStyle();
 		geoStyle_R.setFillOpaqueRate(10);
 		geoStyle_R.setLineSymbolID(0);
@@ -187,16 +213,11 @@ public class HomeActivity extends BaseActivity {
 	private void onLocated() {
 
 		RelativeLayout mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
-		RelativeLayout detailRelativeLayout = (RelativeLayout) findViewById(R.id.locationdetail);
 		if (!isPopUp) {
 			viewPopup(0, -LBSApplication.Dp2Px(this, 96), mapRelativeLayout);
-			// viewPopup(0, -LBSApplication.Dp2Px(this, 96),
-			// detailRelativeLayout);
 			isPopUp = true;
 		} else {
 			viewPopup(-LBSApplication.Dp2Px(this, 96), 0, mapRelativeLayout);
-			// viewPopup(-LBSApplication.Dp2Px(this, 96), 0,
-			// detailRelativeLayout);
 			isPopUp = false;
 		}
 
@@ -243,4 +264,18 @@ public class HomeActivity extends BaseActivity {
 		});
 		view.startAnimation(animation);
 	}
+	
+	/*
+	 * 多线程请求位置服务，防止请求时间过长而无相应
+	 */
+	class GetLocation extends AsyncTask<String, Integer, String> {
+
+		@Override
+		protected String doInBackground(String... contexts) {
+			baiduAPI.startLocate(locationClient);
+			return null;
+		}
+
+	}
+
 }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="#ccc"
     android:orientation="vertical"
     android:overScrollMode="ifContentScrolls" >
 
@@ -15,7 +16,6 @@
             android:id="@+id/userpref"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|left"
             android:adjustViewBounds="true"
             android:clickable="true"
             android:padding="8dp"
@@ -39,12 +39,10 @@
             android:id="@+id/actionmore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:adjustViewBounds="true"
             android:clickable="true"
             android:padding="8dp"
             android:src="@drawable/ic_action_more" />
-
     </LinearLayout>
 
 </LinearLayout>

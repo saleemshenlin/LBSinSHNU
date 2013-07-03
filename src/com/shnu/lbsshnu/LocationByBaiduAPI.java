@@ -32,8 +32,9 @@ public class LocationByBaiduAPI {
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
 		option.setScanSpan(5000);
-		// option.setPriority(LocationClientOption.NetWorkFirst); // 设置网络优先
-		option.setPriority(LocationClientOption.GpsFirst); // 不设置，默认是gps优先
+		if (LBSApplication.isNetWork()) {
+			option.setPriority(LocationClientOption.NetWorkFirst);
+		}
 		option.disableCache(true);
 		locationClient.setLocOption(option);
 	}
@@ -67,8 +68,6 @@ public class LocationByBaiduAPI {
 		callout.setContentView(image);
 		mMapView.addCallout(callout);
 	}
-
-	
 
 	public boolean isLocInMap(Point2D point2d, MapView mMapView) {
 		Rectangle2D rcMap = mMapView.getMapControl().getMap().getViewBounds();
@@ -242,4 +241,5 @@ public class LocationByBaiduAPI {
 		callout.setContentView(image);
 		mMapView.addCallout(callout);
 	}
+
 }

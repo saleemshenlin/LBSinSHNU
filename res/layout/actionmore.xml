@@ -3,6 +3,7 @@
 
     <LinearLayout
         style="@style/behindMenuScrollContent"
+        android:background="#eee"
         android:paddingTop="25dp" >
     </LinearLayout>
 

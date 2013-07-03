@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppBaseTheme" parent="android:Theme.Light"></style>
 
@@ -7,11 +7,13 @@
     <style name="leftBehindMenuScroll">
         <item name="android:layout_width">240dp</item>
         <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#fff</item>
     </style>
 
     <style name="rightBehindMenuScroll">
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#fff</item>
     </style>
 
     <style name="behindMenuScrollContent">
@@ -37,6 +39,12 @@
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="MyTheme.NoTitleBar.CustomBackground" parent="@android:Theme.Holo.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_welcome</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
 </resources>

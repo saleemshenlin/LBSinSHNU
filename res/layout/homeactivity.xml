@@ -1,90 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mapViewRelativeLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#fff"
     android:orientation="vertical" >
 
-    <com.supermap.mapping.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </com.supermap.mapping.MapView>
-
-    <RelativeLayout
-        android:id="@+id/locationRelativeLayout"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_above="@id/mapView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
-        android:background="#666" >
-
-        <ImageView
-            android:id="@+id/actionLociton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:adjustViewBounds="false"
-            android:background="#ffffff"
-            android:contentDescription="@string/actionlocation"
-            android:padding="7dp"
-            android:src="@drawable/ic_action_location" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/locationdetail"
+    <LinearLayout
+        android:id="@+id/actionbar"
         android:layout_width="fill_parent"
-        android:layout_height="96dp"
-        android:layout_above="@id/mapView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="-96dp"
-        android:background="#fff" >
+        android:layout_height="48dp" >
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
+        <include layout="@layout/actionbar" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="48dp" >
+
+        <RelativeLayout
+            android:id="@+id/mapViewRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textView1"
+            <com.supermap.mapping.MapView
+                android:id="@+id/mapView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/location"
-                android:textSize="24sp" />
+                android:layout_height="match_parent" >
+            </com.supermap.mapping.MapView>
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/locationdetail" />
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/locationRelativeLayout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_above="@id/mapView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:background="#666" >
 
-        <LinearLayout
+                <ImageView
+                    android:id="@+id/actionLociton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="false"
+                    android:background="#ffffff"
+                    android:contentDescription="@string/actionlocation"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_action_location" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/locationDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" >
+            android:layout_height="96dp"
+            android:layout_above="@id/mapViewRelativeLayout"
+            android:layout_alignBottom="@id/mapViewRelativeLayout"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="-96dp"
+            android:background="#fff" >
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/searcharround" />
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btnDetail"
+                <TextView
+                    android:id="@+id/txtAccuracy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/location"
+                    android:textColor="#333"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/geocoding"
+                    android:textColor="#4c4c4c"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                android:text="@string/detail" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true" >
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="@string/querysurrounding"
+                    android:textColor="#666666" />
+
+                <Button
+                    android:id="@+id/btnDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:text="@string/detail"
+                    android:textColor="#666666" />
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

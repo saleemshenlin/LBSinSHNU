@@ -1,6 +1,5 @@
 package com.shnu.lbsshnu;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -13,14 +12,12 @@ import android.widget.Toast;
 public class BaseActivity extends Activity {
 	LBSApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
-	private boolean bExit = false;
+	private long exitTime = 0;
 	public static boolean isPopUp = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		lbsApplication = (LBSApplication) getApplication();
-		setSliderActionBar();
-
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,10 +33,10 @@ public class BaseActivity extends Activity {
 		}
 	}
 
-	private void setSliderActionBar() {
-		ActionBar actionBar = this.getActionBar();
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		actionBar.setCustomView(R.layout.actionbar);
+	/*
+	 * 设置slideractionbar
+	 */
+	public void setSliderActionBar() {
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.userpref);
 		simpleSideDrawer.setRightBehindContentView(R.layout.actionmore);
@@ -60,15 +57,21 @@ public class BaseActivity extends Activity {
 		});
 	}
 
+	/*
+	 * 设置退出
+	 */
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			if (bExit) {
-				this.finish();
-				System.exit(0);
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
 			} else {
-				bExit = true;
-				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				finish();
+				System.exit(0);
 			}
 			return true;
 		}

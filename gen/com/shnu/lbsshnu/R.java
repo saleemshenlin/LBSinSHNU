@@ -35,6 +35,7 @@ public final class R {
         public static final int actionmore=0x7f080002;
         public static final int btnDetail=0x7f08000d;
         public static final int button1=0x7f08000c;
+        public static final int imageView1=0x7f08000e;
         public static final int linearLayout1=0x7f080009;
         public static final int locationDetail=0x7f080008;
         public static final int locationRelativeLayout=0x7f080006;
@@ -44,6 +45,7 @@ public final class R {
         public static final int textView2=0x7f08000b;
         public static final int txtAccuracy=0x7f08000a;
         public static final int userpref=0x7f080000;
+        public static final int wifiswitch=0x7f08000f;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -71,6 +73,7 @@ public final class R {
         public static final int searchview=0x7f050003;
         public static final int temp_path=0x7f050008;
         public static final int userpref=0x7f050004;
+        public static final int wifiswitch=0x7f05000f;
     }
     public static final class style {
         /** 

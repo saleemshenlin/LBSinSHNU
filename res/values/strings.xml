@@ -16,5 +16,6 @@
     <string name="location">我的位置(精度：10米)</string>
     <string name="geocoding">上海师范大学，旅游学院</string>
     <string name="querysurrounding">周边查询</string>
+    <string name="wifiswitch">WIfi层</string>
 
 </resources>

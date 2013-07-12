@@ -10,6 +10,9 @@ import android.widget.ImageView;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.supermap.data.Color;
+import com.supermap.data.GeoCircle;
+import com.supermap.data.GeoStyle;
 import com.supermap.data.Point;
 import com.supermap.data.Point2D;
 import com.supermap.data.Rectangle2D;
@@ -22,7 +25,6 @@ public class LocationByBaiduAPI {
 	boolean isStart = false;
 	private static final double PI = 3.1459266;
 	private static final double HALF_PI = 1.57079633;
-
 	private static final int SCREEN_MAERGIN = 24;
 
 	// 设置相关参数
@@ -242,4 +244,22 @@ public class LocationByBaiduAPI {
 		mMapView.addCallout(callout);
 	}
 
+	/*
+	 * 增加定位精度buffer 半径=精度(单位：米)*地图scale*0.01
+	 */
+	public void addAccuracyBuffer(Point2D location, float radius) {
+		LBSApplication.clearTrackingLayer();
+		double mapScale = LBSApplication.getmMapControl().getMap().getScale();
+		GeoCircle accuracyBuffer = new GeoCircle(location, radius * mapScale
+				* 0.01);
+		GeoStyle geoStyle_R = new GeoStyle();
+		geoStyle_R.setFillOpaqueRate(10);
+		geoStyle_R.setLineSymbolID(0);
+		geoStyle_R.setLineWidth(0.5);
+		geoStyle_R.setLineColor(new Color(0, 153, 204));
+		accuracyBuffer.setStyle(geoStyle_R);
+		LBSApplication.getmTrackingLayer()
+				.add(accuracyBuffer, "accuracyBuffer");
+		LBSApplication.refreshMap();
+	}
 }

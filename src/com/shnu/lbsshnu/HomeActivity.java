@@ -1,58 +1,64 @@
 package com.shnu.lbsshnu;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.supermap.data.Color;
-import com.supermap.data.GeoCircle;
-import com.supermap.data.GeoStyle;
 import com.supermap.data.Point2D;
+import com.supermap.data.Rectangle2D;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
-import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
-import com.supermap.mapping.TrackingLayer;
 
 public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
-	Workspace mWorkspace;
-	MapView mMapView;
-	MapControl mMapControl;
-	LocationByBaiduAPI baiduAPI = new LocationByBaiduAPI();
-	BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
-	LocationClient locationClient;
-	Point2D locationPoint2d;
-	Point2D lastlocationPoint2d = new Point2D(0, 0);
-	TrackingLayer mTrackingLayer;
 	RelativeLayout locationImageView;
 	TextView accuracyTextView;
+	Switch wifiLayerSwitch;
+	private Handler handler = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homeactivity);
-		new GetLocation().execute("");		
-		locationClient = new LocationClient(getApplicationContext());
-		locationClient.registerLocationListener(baiduLocationListener);
 		setSliderActionBar();
+		handler = new Handler();
 		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
+		wifiLayerSwitch = (Switch) findViewById(R.id.wifiswitch);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onLocated();
 			}
 		});
+		wifiLayerSwitch
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						if (isChecked) {
+							lbsApplication.mWifiLayerL.setVisible(true);
+							lbsApplication.mWifiLayerS.setVisible(true);
+							LBSApplication.refreshMap();
+						} else {
+							lbsApplication.mWifiLayerL.setVisible(false);
+							lbsApplication.mWifiLayerS.setVisible(false);
+							LBSApplication.refreshMap();
+						}
+					}
+				});
 		openData();
 	}
 
@@ -60,77 +66,19 @@ public class HomeActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		refreshMap();
+		LBSApplication.refreshMap();
+		LBSApplication.isChange = true;
+		DrawPointAndBuffer drawPointAndBuffer = new DrawPointAndBuffer();
+		drawPointAndBuffer.start();
 	}
 
 	protected void onDestroy() {
 		super.onDestroy();
-		mMapControl.getMap().close();
-		mMapControl.getMap().dispose();
-		mMapControl.dispose();
-		mWorkspace.close();
-		mWorkspace.dispose();
-	}
-
-	/**
-	 * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。 63 ：
-	 * 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：
-	 * 离线定位结果。通过requestOfflineLocaiton调用时对应的返回结果 67 ：
-	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
-	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
-	 */
-	public class BaiduLocationListener implements BDLocationListener {
-		@Override
-		public void onReceiveLocation(BDLocation location) {
-			if (location == null)
-				return;
-			StringBuffer sb = new StringBuffer(256);
-			sb.append("time : ");
-			sb.append(location.getTime());
-			sb.append("\nerror code : ");
-			sb.append(location.getLocType());
-			sb.append("\nlatitude : ");
-			sb.append(location.getLatitude());
-			sb.append("\nlontitude : ");
-			sb.append(location.getLongitude());
-			sb.append("\nradius : ");
-			sb.append(location.getRadius());
-			if (location.getLocType() == BDLocation.TypeGpsLocation) {
-				sb.append("\nspeed : ");
-				sb.append(location.getSpeed());
-				sb.append("\nsatellite : ");
-				sb.append(location.getSatelliteNumber());
-			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
-				sb.append("\naddr : ");
-				sb.append(location.getAddrStr());
-			}
-			locationPoint2d = new Point2D(location.getLongitude(),
-					location.getLatitude());
-			if (lastlocationPoint2d != locationPoint2d) {
-				addAccuracyBuffer(locationPoint2d, location.getRadius());
-				lastlocationPoint2d = locationPoint2d;
-				if (baiduAPI.isLocInMap(locationPoint2d, mMapView)) {
-					baiduAPI.addCallOutBall(locationPoint2d, mMapView,
-							getApplicationContext());
-				} else {
-					baiduAPI.addCallOutArrow(locationPoint2d, mMapView,
-							getApplicationContext());
-				}
-				accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
-				accuracyTextView.setText("我的位置(精度："
-						+ LBSApplication.twoDecimal(location.getRadius())
-						+ "米)");
-			}
-			
-
-			// Log.i(TAG, sb.toString());
-		}
-
-		@Override
-		public void onReceivePoi(BDLocation arg0) {
-
-		}
-
+		LBSApplication.getmMapControl().getMap().close();
+		LBSApplication.getmMapControl().getMap().dispose();
+		LBSApplication.getmMapControl().dispose();
+		LBSApplication.getmWorkspace().close();
+		LBSApplication.getmWorkspace().dispose();
 	}
 
 	/*
@@ -138,74 +86,72 @@ public class HomeActivity extends BaseActivity {
 	 */
 	private void openData() {
 		// 打开工作空间
-		mWorkspace = new Workspace();
+		LBSApplication.setmWorkspace(new Workspace());
 		WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
-		info.setServer(LBSApplication.sDcard + getString(R.string.data_path));
+		info.setServer(LBSApplication.getSdCard()
+				+ getString(R.string.data_path));
 		info.setType(WorkspaceType.SMWU);
-		mWorkspace.open(info);
+		LBSApplication.getmWorkspace().open(info);
 
-		mMapView = (MapView) findViewById(R.id.mapView);
-		mMapControl = mMapView.getMapControl();
+		LBSApplication.setmMapView((MapView) findViewById(R.id.mapView));
+		LBSApplication.setmMapControl(LBSApplication.getmMapView()
+				.getMapControl());
 
-		mMapControl.getMap().setWorkspace(mWorkspace);
-
-		String mapName = mWorkspace.getMaps().get(0);
+		LBSApplication.getmMapControl().getMap()
+				.setWorkspace(LBSApplication.getmWorkspace());
+		String mapName = LBSApplication.getmWorkspace().getMaps().get(0);
 		Log.i(TAG, "add Map: " + mapName);
-		mMapControl.getMap().open(mapName);
-		mMapControl.getMap().setScale(1 / 1200);
-		refreshMap();
-		mTrackingLayer = mMapControl.getMap().getTrackingLayer();
-		mMapControl.setMapParamChangedListener(mapParameterChangedListener);
+		LBSApplication.getmMapControl().getMap().open(mapName);
+		LBSApplication.setMlayers(LBSApplication.getmMapControl().getMap()
+				.getLayers());
+		lbsApplication.mWifiLayerS = LBSApplication.getMlayers().get(2);
+		lbsApplication.mWifiLayerL = LBSApplication.getMlayers().get(3);
+		lbsApplication.mWifiLayerL.setVisible(false);
+		lbsApplication.mWifiLayerS.setVisible(false);
+		LBSApplication.getmMapControl().getMap().setScale(1 / 1200);
+		LBSApplication.getmMapControl().getMap().setAntialias(true);
+		LBSApplication
+				.getmMapControl()
+				.getMap()
+				.setLockedViewBounds(
+						new Rectangle2D(121.412490774567, 31.1566896665659,
+								121.426210646701, 31.1651384499396));
+		LBSApplication.getmMapControl().getMap().setViewBoundsLocked(true);
+		// 左: 121.412490774567; 上: 31.1651384499396; 右: 121.426210646701; 下:
+		// 31.1566896665659; 宽: 0.01371987213399; 高: 0.00844878337370147
+
+		LBSApplication.refreshMap();
+		LBSApplication.setmTrackingLayer(LBSApplication.getmMapControl()
+				.getMap().getTrackingLayer());
+		LBSApplication.getmMapControl().setMapParamChangedListener(
+				mapParameterChangedListener);
+		Log.i(TAG, "Max:"
+				+ LBSApplication.getmMapControl().getMap().getMaxScale()
+				+ " Min:"
+				+ LBSApplication.getmMapControl().getMap().getMinScale()
+				+ " Dpi:"
+				+ LBSApplication.getmMapControl().getMap().getMapDPI());
 	}
+
 	/*
 	 * 监听地图参数变化
 	 */
 	MapParameterChangedListener mapParameterChangedListener = new MapParameterChangedListener() {
-		
+
 		@Override
 		public void scaleChanged(double scale) {
-			addAccuracyBuffer(lastlocationPoint2d,(float)scale);
+			Log.i(TAG, "Scale:" + scale);
+			LBSApplication.getLocationApi().addAccuracyBuffer(
+					LBSApplication.getLastlocationPoint2d(), (float) scale);
+			LBSApplication.refreshMap();
 		}
-		
+
 		@Override
 		public void boundsChanged(Point2D point2d) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	};
-
-	/*
-	 * 刷新地图
-	 */
-	private void refreshMap() {
-		mMapControl.getMap().refresh();
-	}
-
-	/*
-	 * 清除上一次的定位buffer
-	 */
-	private void clearTrackingLayer() {
-		mTrackingLayer.clear();
-		refreshMap();
-	}
-
-	/*
-	 * 增加定位精度buffer 半径=精度(单位：米)*地图scale*0.01
-	 */
-	public void addAccuracyBuffer(Point2D location, float radius) {
-		clearTrackingLayer();
-		double mapScale = mMapControl.getMap().getScale();
-		GeoCircle accuracyBuffer = new GeoCircle(location, radius * mapScale
-				* 0.01);
-		GeoStyle geoStyle_R = new GeoStyle();
-		geoStyle_R.setFillOpaqueRate(10);
-		geoStyle_R.setLineSymbolID(0);
-		geoStyle_R.setLineWidth(0.5);
-		geoStyle_R.setLineColor(new Color(0, 153, 204));
-		accuracyBuffer.setStyle(geoStyle_R);
-		mTrackingLayer.add(accuracyBuffer, "");
-		refreshMap();
-	}
 
 	/*
 	 * 定位后操作
@@ -220,7 +166,9 @@ public class HomeActivity extends BaseActivity {
 			viewPopup(-LBSApplication.Dp2Px(this, 96), 0, mapRelativeLayout);
 			isPopUp = false;
 		}
-
+		Log.d(TAG, "locationPoint2d:"
+				+ LBSApplication.getLastlocationPoint2d().getX() + " , "
+				+ LBSApplication.getLastlocationPoint2d().getY());
 	}
 
 	/*
@@ -257,25 +205,59 @@ public class HomeActivity extends BaseActivity {
 								+ "Right: " + view.getRight() + "Bottom: "
 								+ view.getBottom());
 
-				if (lastlocationPoint2d != null)
-					mMapControl.getMap().setCenter(lastlocationPoint2d);
+				if (LBSApplication.getLastlocationPoint2d() != null)
+					LBSApplication.getmMapControl().getMap()
+							.setCenter(LBSApplication.getLastlocationPoint2d());
 				locationImageView.setEnabled(true);
 			}
 		});
 		view.startAnimation(animation);
 	}
-	
-	/*
-	 * 多线程请求位置服务，防止请求时间过长而无相应
-	 */
-	class GetLocation extends AsyncTask<String, Integer, String> {
+
+	private class DrawPointAndBuffer extends Thread {
 
 		@Override
-		protected String doInBackground(String... contexts) {
-			baiduAPI.startLocate(locationClient);
-			return null;
+		public void run() {
+			super.run();
+			while (LBSApplication.isChange) {
+				try {
+					handler.post(runnableUi);
+					Thread.sleep(3000);
+				} catch (Exception e) {
+					Toast.makeText(LBSApplication.getContext(), e.toString(),
+							Toast.LENGTH_LONG).show();
+				} finally {
+					// LBSApplication.isChange = false;
+				}
+			}
 		}
-
 	}
+
+	Runnable runnableUi = new Runnable() {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			while (LBSApplication.getLocationAccuracy() > 0) {
+				try {
+					LBSApplication.getLocationApi().addCallOutBall(
+							LBSApplication.getLastlocationPoint2d(),
+							LBSApplication.getmMapView(),
+							LBSApplication.getContext());
+					LBSApplication.getLocationApi().addAccuracyBuffer(
+							LBSApplication.getLastlocationPoint2d(),
+							LBSApplication.getLocationAccuracy());
+
+				} catch (Exception e) {
+					Log.e(TAG, e.toString());
+					Log.e(TAG, "locationPoint2d:"
+							+ LBSApplication.getLastlocationPoint2d().getX()
+							+ " , "
+							+ LBSApplication.getLastlocationPoint2d().getY()
+							+ " , " + LBSApplication.getLocationAccuracy());
+				}
+			}
+		}
+	};
 
 }

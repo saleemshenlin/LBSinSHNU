@@ -33,7 +33,7 @@ public class LocationByBaiduAPI {
 		option.setOpenGps(true); // 打开gps_mGpsCheck.isChecked()
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
-		option.setScanSpan(5000);
+		option.setScanSpan(1000);
 		if (LBSApplication.isNetWork()) {
 			option.setPriority(LocationClientOption.NetWorkFirst);
 		}
@@ -245,7 +245,7 @@ public class LocationByBaiduAPI {
 	}
 
 	/*
-	 * 增加定位精度buffer 半径=精度(单位：米)*地图scale*0.01
+	 * 增加定位精度buffer 半径=精度(单位：米)*地图scale*0.02
 	 */
 	public void addAccuracyBuffer(Point2D location, float radius) {
 		LBSApplication.clearTrackingLayer();

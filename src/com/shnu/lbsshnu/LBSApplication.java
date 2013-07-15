@@ -1,16 +1,14 @@
 package com.shnu.lbsshnu;
 
+import java.text.DecimalFormat;
+
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.supermap.data.Environment;
 import com.supermap.data.Point2D;
 import com.supermap.data.Workspace;
@@ -25,20 +23,17 @@ public class LBSApplication extends Application {
 	private final static String TAG = "LBSApplication";
 	private static int screenWidth;
 	private static int screenHeight;
+	private static double screenDPI;
 	private static String sDcard;
 	private static Context context;
-
+	private static LocationByBaiduAPI locationApi = new LocationByBaiduAPI();
 	private static Point2D lastlocationPoint2d;
 	private static float locationAccuracy;
-	private static LocationByBaiduAPI locationApi = new LocationByBaiduAPI();
-	private BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
-	private LocationClient locationClient;
 	private static Workspace mWorkspace;
 	private static MapView mMapView;
 	private static MapControl mMapControl;
 	private static TrackingLayer mTrackingLayer;
 	private static Layers mlayers;
-	public static boolean isChange;//
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -52,10 +47,7 @@ public class LBSApplication extends Application {
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + screenHeight);
 		LBSApplication.lastlocationPoint2d = new Point2D();
-		LBSApplication.locationAccuracy = (float) 0;
-		locationClient = new LocationClient(getApplicationContext());
-		locationClient.registerLocationListener(baiduLocationListener);
-		new GetLocation().execute("");
+		LBSApplication.locationAccuracy = (float) 10;
 	}
 
 	@Override
@@ -87,7 +79,7 @@ public class LBSApplication extends Application {
 		dm = getResources().getDisplayMetrics();
 		setScreenWidth(dm.widthPixels);
 		setScreenHeight(dm.heightPixels);
-
+		setScreenDPI(dm.densityDpi);
 	}
 
 	public static int getScreenWidth() {
@@ -104,6 +96,14 @@ public class LBSApplication extends Application {
 
 	public static void setScreenHeight(float ydpi) {
 		LBSApplication.screenHeight = (int) ydpi;
+	}
+
+	public static double getScreenDPI() {
+		return screenDPI;
+	}
+
+	public static void setScreenDPI(double screenDPI) {
+		LBSApplication.screenDPI = screenDPI;
 	}
 
 	/*
@@ -140,71 +140,6 @@ public class LBSApplication extends Application {
 		}
 	}
 
-	/**
-	 * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。 63 ：
-	 * 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：
-	 * 离线定位结果。通过requestOfflineLocaiton调用时对应的返回结果 67 ：
-	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
-	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
-	 */
-	private class BaiduLocationListener implements BDLocationListener {
-		@Override
-		public void onReceiveLocation(BDLocation location) {
-			if (location == null)
-				return;
-			// StringBuffer sb = new StringBuffer(256);
-			// sb.append("time : ");
-			// sb.append(location.getTime());
-			// sb.append("\nerror code : ");
-			// sb.append(location.getLocType());
-			// sb.append("\nlatitude : ");
-			// sb.append(location.getLatitude());
-			// sb.append("\nlontitude : ");
-			// sb.append(location.getLongitude());
-			// sb.append("\nradius : ");
-			// sb.append(location.getRadius());
-			// if (location.getLocType() == BDLocation.TypeGpsLocation) {
-			// sb.append("\nspeed : ");
-			// sb.append(location.getSpeed());
-			// sb.append("\nsatellite : ");
-			// sb.append(location.getSatelliteNumber());
-			// } else if (location.getLocType() ==
-			// BDLocation.TypeNetWorkLocation) {
-			// sb.append("\naddr : ");
-			// sb.append(location.getAddrStr());
-			// }
-			if (LBSApplication.lastlocationPoint2d.getX() != location
-					.getLongitude()
-					|| LBSApplication.lastlocationPoint2d.getY() != location
-							.getLatitude()) {
-				LBSApplication.lastlocationPoint2d = new Point2D(
-						location.getLongitude(), location.getLatitude());
-			}
-			if (LBSApplication.getLocationAccuracy() != location.getRadius())
-				LBSApplication.setLocationAccuracy(location.getRadius());
-			// Log.i(TAG, sb.toString());
-		}
-
-		@Override
-		public void onReceivePoi(BDLocation arg0) {
-
-		}
-
-	}
-
-	/*
-	 * 多线程请求位置服务，防止请求时间过长而无相应
-	 */
-	class GetLocation extends AsyncTask<String, Integer, String> {
-
-		@Override
-		protected String doInBackground(String... contexts) {
-			getLocationApi().startLocate(locationClient);
-			return null;
-		}
-
-	}
-
 	/*
 	 * 刷新地图
 	 */
@@ -218,6 +153,14 @@ public class LBSApplication extends Application {
 	public static void clearTrackingLayer() {
 		mTrackingLayer.clear();
 		refreshMap();
+	}
+
+	/*
+	 * 保留2位小数
+	 */
+	public static String save2Point(float value) {
+		DecimalFormat df = new java.text.DecimalFormat("#0.00");
+		return df.format(value);
 	}
 
 	public static LocationByBaiduAPI getLocationApi() {
@@ -280,6 +223,10 @@ public class LBSApplication extends Application {
 		return lastlocationPoint2d;
 	}
 
+	public static void setLastlocationPoint2d(Point2D point) {
+		LBSApplication.lastlocationPoint2d = point;
+	}
+
 	public static float getLocationAccuracy() {
 		return locationAccuracy;
 	}
@@ -287,4 +234,5 @@ public class LBSApplication extends Application {
 	public static void setLocationAccuracy(float value) {
 		LBSApplication.locationAccuracy = value;
 	}
+
 }

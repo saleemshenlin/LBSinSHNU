@@ -42,8 +42,8 @@ public final class R {
         public static final int mapView=0x7f080005;
         public static final int mapViewRelativeLayout=0x7f080004;
         public static final int searchView1=0x7f080001;
-        public static final int textView2=0x7f08000b;
         public static final int txtAccuracy=0x7f08000a;
+        public static final int txtAddress=0x7f08000b;
         public static final int userpref=0x7f080000;
         public static final int wifiswitch=0x7f08000f;
     }

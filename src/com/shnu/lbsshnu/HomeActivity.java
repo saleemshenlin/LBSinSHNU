@@ -1,5 +1,6 @@
 package com.shnu.lbsshnu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,13 +11,21 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.supermap.data.CursorType;
+import com.supermap.data.DatasetVector;
+import com.supermap.data.GeoPoint;
+import com.supermap.data.Geometrist;
 import com.supermap.data.Point2D;
+import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
+import com.supermap.mapping.Layer;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
 
@@ -24,8 +33,12 @@ public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
 	RelativeLayout locationImageView;
 	TextView accuracyTextView;
+	TextView addressTextView;
 	Switch wifiLayerSwitch;
-	private Handler handler = null;
+	Handler handler;
+	DrawPointAndBuffer drawPointAndBuffer;
+	private BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
+	private LocationClient locationClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +47,19 @@ public class HomeActivity extends BaseActivity {
 		setSliderActionBar();
 		handler = new Handler();
 		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
-		wifiLayerSwitch = (Switch) findViewById(R.id.wifiswitch);
+		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
+		addressTextView = (TextView) findViewById(R.id.txtAddress);
+		drawPointAndBuffer = new DrawPointAndBuffer();
+		locationClient = new LocationClient(getApplicationContext());
+		locationClient.registerLocationListener(baiduLocationListener);
+		LBSApplication.getLocationApi().startLocate(locationClient);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onLocated();
 			}
 		});
+		wifiLayerSwitch = (Switch) findViewById(R.id.wifiswitch);
 		wifiLayerSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -67,9 +86,6 @@ public class HomeActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		LBSApplication.refreshMap();
-		LBSApplication.isChange = true;
-		DrawPointAndBuffer drawPointAndBuffer = new DrawPointAndBuffer();
-		drawPointAndBuffer.start();
 	}
 
 	protected void onDestroy() {
@@ -99,6 +115,8 @@ public class HomeActivity extends BaseActivity {
 
 		LBSApplication.getmMapControl().getMap()
 				.setWorkspace(LBSApplication.getmWorkspace());
+		LBSApplication.getmMapControl().getMap()
+				.setMapDPI(LBSApplication.getScreenDPI());
 		String mapName = LBSApplication.getmWorkspace().getMaps().get(0);
 		Log.i(TAG, "add Map: " + mapName);
 		LBSApplication.getmMapControl().getMap().open(mapName);
@@ -120,7 +138,6 @@ public class HomeActivity extends BaseActivity {
 		// 左: 121.412490774567; 上: 31.1651384499396; 右: 121.426210646701; 下:
 		// 31.1566896665659; 宽: 0.01371987213399; 高: 0.00844878337370147
 
-		LBSApplication.refreshMap();
 		LBSApplication.setmTrackingLayer(LBSApplication.getmMapControl()
 				.getMap().getTrackingLayer());
 		LBSApplication.getmMapControl().setMapParamChangedListener(
@@ -131,6 +148,7 @@ public class HomeActivity extends BaseActivity {
 				+ LBSApplication.getmMapControl().getMap().getMinScale()
 				+ " Dpi:"
 				+ LBSApplication.getmMapControl().getMap().getMapDPI());
+		LBSApplication.refreshMap();
 	}
 
 	/*
@@ -141,9 +159,9 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		public void scaleChanged(double scale) {
 			Log.i(TAG, "Scale:" + scale);
-			LBSApplication.getLocationApi().addAccuracyBuffer(
-					LBSApplication.getLastlocationPoint2d(), (float) scale);
-			LBSApplication.refreshMap();
+			// LBSApplication.getLocationApi().addAccuracyBuffer(
+			// LBSApplication.getLastlocationPoint2d(), (float) scale);
+			// LBSApplication.refreshMap();
 		}
 
 		@Override
@@ -160,6 +178,10 @@ public class HomeActivity extends BaseActivity {
 
 		RelativeLayout mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
 		if (!isPopUp) {
+			new GeoCoding().execute();
+			accuracyTextView.setText("我的位置(精度:"
+					+ LBSApplication.save2Point(LBSApplication
+							.getLocationAccuracy()) + "米)");
 			viewPopup(0, -LBSApplication.Dp2Px(this, 96), mapRelativeLayout);
 			isPopUp = true;
 		} else {
@@ -214,50 +236,164 @@ public class HomeActivity extends BaseActivity {
 		view.startAnimation(animation);
 	}
 
-	private class DrawPointAndBuffer extends Thread {
-
+	/*
+	 * 线程绘制location point & 精度buffer
+	 */
+	private class DrawPointAndBuffer extends AsyncTask<String, Integer, String> {
 		@Override
-		public void run() {
-			super.run();
-			while (LBSApplication.isChange) {
-				try {
-					handler.post(runnableUi);
-					Thread.sleep(3000);
-				} catch (Exception e) {
-					Toast.makeText(LBSApplication.getContext(), e.toString(),
-							Toast.LENGTH_LONG).show();
-				} finally {
-					// LBSApplication.isChange = false;
-				}
+		protected String doInBackground(String... contexts) {
+			try {
+				handler.post(runnableUi);
+				return "DrawPointAndBuffer ok";
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+				return null;
 			}
 		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			Log.e(TAG, result);
+		}
+
 	}
 
 	Runnable runnableUi = new Runnable() {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-			while (LBSApplication.getLocationAccuracy() > 0) {
-				try {
-					LBSApplication.getLocationApi().addCallOutBall(
-							LBSApplication.getLastlocationPoint2d(),
-							LBSApplication.getmMapView(),
-							LBSApplication.getContext());
-					LBSApplication.getLocationApi().addAccuracyBuffer(
-							LBSApplication.getLastlocationPoint2d(),
-							LBSApplication.getLocationAccuracy());
+			try {
+				LBSApplication.getLocationApi().addCallOutBall(
+						LBSApplication.getLastlocationPoint2d(),
+						LBSApplication.getmMapView(),
+						LBSApplication.getContext());
+				LBSApplication.getLocationApi().addAccuracyBuffer(
+						LBSApplication.getLastlocationPoint2d(),
+						LBSApplication.getLocationAccuracy());
 
-				} catch (Exception e) {
-					Log.e(TAG, e.toString());
-					Log.e(TAG, "locationPoint2d:"
-							+ LBSApplication.getLastlocationPoint2d().getX()
-							+ " , "
-							+ LBSApplication.getLastlocationPoint2d().getY()
-							+ " , " + LBSApplication.getLocationAccuracy());
-				}
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+				Log.e(TAG, "locationPoint2d:"
+						+ LBSApplication.getLastlocationPoint2d().getX()
+						+ " , "
+						+ LBSApplication.getLastlocationPoint2d().getY()
+						+ " , " + LBSApplication.getLocationAccuracy());
 			}
 		}
 	};
 
+	/*
+	 * 位置显示 By 缓冲区查询 防止等待查询结果而未响应
+	 */
+	private class GeoCoding extends AsyncTask<String, Integer, String> {
+		HomeActivity homeActivity = HomeActivity.this;
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+			homeActivity.addressTextView.setText("正在获取中……");
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			homeActivity.addressTextView.setText("上海师范大学" + result);
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				Layer layer = null;
+				layer = LBSApplication.getmMapControl().getMap().getLayers()
+						.get(15);
+				String locationAddresString = "";
+				GeoPoint point = new GeoPoint(
+						LBSApplication.getLastlocationPoint2d());
+				// GeoPoint point = new GeoPoint(121.416781751312,
+				// 31.1617360260643);
+				DatasetVector datasetvector = (DatasetVector) layer
+						.getDataset();
+				System.out.println(layer.getName());
+				Recordset recordset = datasetvector.getRecordset(false,
+						CursorType.STATIC);
+				for (int i = 0; i < recordset.getRecordCount(); i++) {
+					if (i == 0) {
+						recordset.moveFirst();
+					} else {
+						recordset.moveNext();
+					}
+					boolean isTrue = Geometrist.canContain(
+							recordset.getGeometry(), point);
+					if (isTrue) {
+						locationAddresString = " , "
+								+ recordset.getFieldValue("Name").toString();
+						break;
+					}
+				}
+				// 释放资源
+				Log.i("geoCoding", locationAddresString);
+				recordset.dispose();
+				return locationAddresString;
+			} catch (Exception e) {
+				Log.e(TAG + " GeoCoding", e.toString());
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。 63 ：
+	 * 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：
+	 * 离线定位结果。通过requestOfflineLocaiton调用时对应的返回结果 67 ：
+	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
+	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
+	 */
+	public class BaiduLocationListener implements BDLocationListener {
+		@Override
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null)
+				return;
+			StringBuffer sb = new StringBuffer(256);
+			sb.append("time : ");
+			sb.append(location.getTime());
+			sb.append("\nerror code : ");
+			sb.append(location.getLocType());
+			sb.append("\nlatitude : ");
+			sb.append(location.getLatitude());
+			sb.append("\nlontitude : ");
+			sb.append(location.getLongitude());
+			sb.append("\nradius : ");
+			sb.append(location.getRadius());
+			if (location.getLocType() == BDLocation.TypeGpsLocation) {
+				sb.append("\nspeed : ");
+				sb.append(location.getSpeed());
+				sb.append("\nsatellite : ");
+				sb.append(location.getSatelliteNumber());
+			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
+				sb.append("\naddr : ");
+				sb.append(location.getAddrStr());
+			}
+			if (LBSApplication.getLastlocationPoint2d().getX() != location
+					.getLongitude()
+					|| LBSApplication.getLastlocationPoint2d().getY() != location
+							.getLatitude()) {
+				LBSApplication.setLastlocationPoint2d(new Point2D(location
+						.getLongitude(), location.getLatitude()));
+				LBSApplication.setLocationAccuracy(location.getRadius());
+				drawPointAndBuffer = new DrawPointAndBuffer();
+				drawPointAndBuffer.execute("");
+				Log.i(TAG, sb.toString());
+			}
+		}
+
+		@Override
+		public void onReceivePoi(BDLocation arg0) {
+
+		}
+
+	}
 }

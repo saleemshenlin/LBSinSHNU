@@ -1,5 +1,6 @@
 package com.shnu.lbsshnu;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -31,54 +30,47 @@ import com.supermap.mapping.MapView;
 
 public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
-	RelativeLayout locationImageView;
-	TextView accuracyTextView;
-	TextView addressTextView;
-	Switch wifiLayerSwitch;
-	Handler handler;
-	DrawPointAndBuffer drawPointAndBuffer;
+	private DrawPointAndBuffer drawPointAndBuffer;
 	private BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
 	private LocationClient locationClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initLocationAPi();
 		setContentView(R.layout.homeactivity);
 		setSliderActionBar();
-		handler = new Handler();
-		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
-		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
-		addressTextView = (TextView) findViewById(R.id.txtAddress);
 		drawPointAndBuffer = new DrawPointAndBuffer();
+		initView();
+		openData();
+	}
+
+	/*
+	 * 初始化启动 定位api
+	 */
+	private void initLocationAPi() {
 		locationClient = new LocationClient(getApplicationContext());
 		locationClient.registerLocationListener(baiduLocationListener);
 		LBSApplication.getLocationApi().startLocate(locationClient);
+
+	}
+
+	/*
+	 * 初始化View
+	 */
+	private void initView() {
+		handler = new Handler();
+		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onLocated();
 			}
 		});
-		wifiLayerSwitch = (Switch) findViewById(R.id.wifiswitch);
-		wifiLayerSwitch
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						// TODO Auto-generated method stub
-						if (isChecked) {
-							lbsApplication.mWifiLayerL.setVisible(true);
-							lbsApplication.mWifiLayerS.setVisible(true);
-							LBSApplication.refreshMap();
-						} else {
-							lbsApplication.mWifiLayerL.setVisible(false);
-							lbsApplication.mWifiLayerS.setVisible(false);
-							LBSApplication.refreshMap();
-						}
-					}
-				});
-		openData();
+		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
+		addressTextView = (TextView) findViewById(R.id.txtAddress);
+		setActivityRightSilder();
+		setWifiLayer();
 	}
 
 	@Override
@@ -90,11 +82,11 @@ public class HomeActivity extends BaseActivity {
 
 	protected void onDestroy() {
 		super.onDestroy();
-		LBSApplication.getmMapControl().getMap().close();
-		LBSApplication.getmMapControl().getMap().dispose();
-		LBSApplication.getmMapControl().dispose();
-		LBSApplication.getmWorkspace().close();
-		LBSApplication.getmWorkspace().dispose();
+		// LBSApplication.getmMapControl().getMap().close();
+		// LBSApplication.getmMapControl().getMap().dispose();
+		// LBSApplication.getmMapControl().dispose();
+		// LBSApplication.getmWorkspace().close();
+		// LBSApplication.getmWorkspace().dispose();
 	}
 
 	/*

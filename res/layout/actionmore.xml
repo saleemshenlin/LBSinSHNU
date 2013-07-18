@@ -2,9 +2,156 @@
     style="@style/rightBehindMenuScroll" >
 
     <LinearLayout
-        style="@style/behindMenuScrollContent"
-        android:background="#eee"
-        android:paddingTop="25dp" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical|left"
+                android:text="@string/txtactivity"
+                android:textColor="#ccc"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/sliderbg" >
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_action_mic" />
+
+            <TextView
+                android:id="@+id/txtLecture"
+                android:layout_width="0dip"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical|left"
+                android:text="@string/txtlecture"
+                android:textColor="#ccc"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/sliderbg" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_action_play" />
+
+            <TextView
+                android:id="@+id/txtPlay"
+                android:layout_width="0dip"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical|left"
+                android:text="@string/txtplay"
+                android:textColor="#ccc"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/sliderbg" >
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_action_book" />
+
+            <TextView
+                android:id="@+id/txtCourse"
+                android:layout_width="0dip"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical|left"
+                android:text="@string/txtcourse"
+                android:textColor="#ccc"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/sliderbg" >
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_action_setting" />
+
+            <TextView
+                android:id="@+id/txtSetting"
+                android:layout_width="0dip"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical|left"
+                android:text="@string/txtsetting"
+                android:textColor="#ccc"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

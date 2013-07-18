@@ -17,5 +17,10 @@
     <string name="geocoding">上海师范大学</string>
     <string name="querysurrounding">周边查询</string>
     <string name="wifiswitch">WIfi层</string>
+    <string name="txtactivity">活动公告</string>
+    <string name="txtlecture">学术讲座</string>
+    <string name="txtplay">电影演出</string>
+    <string name="txtcourse">精品课程</string>
+    <string name="txtsetting">设置</string>
 
 </resources>

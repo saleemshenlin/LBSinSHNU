@@ -48,6 +48,7 @@ public class LBSApplication extends Application {
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
 		LBSApplication.LASTLOCATION = new Point2D();
 		LBSApplication.LOCATIONACCUCRACY = (float) 10;
+		importDataFromXML();
 	}
 
 	@Override
@@ -161,6 +162,14 @@ public class LBSApplication extends Application {
 	public static String save2Point(float value) {
 		DecimalFormat df = new java.text.DecimalFormat("#0.00");
 		return df.format(value);
+	}
+
+	/*
+	 * 调用FileIO导入数据
+	 */
+	private void importDataFromXML() {
+		FileIO fileIO = new FileIO();
+		fileIO.getDateFromXML();
 	}
 
 	public static LocationByBaiduAPI getLocationApi() {

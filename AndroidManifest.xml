@@ -50,6 +50,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.shnu.lbsshnu.ActivityListView" >
+        </activity>
 
         <service
             android:name="com.baidu.location.f"

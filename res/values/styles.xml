@@ -7,13 +7,13 @@
     <style name="leftBehindMenuScroll">
         <item name="android:layout_width">260dp</item>
         <item name="android:layout_height">fill_parent</item>
-        <item name="android:background">#eee</item>
+        <item name="android:background">@drawable/sliderbg</item>
     </style>
 
     <style name="rightBehindMenuScroll">
         <item name="android:layout_width">120dp</item>
         <item name="android:layout_height">fill_parent</item>
-        <item name="android:background">#fff</item>
+        <item name="android:background">#000</item>
     </style>
 
     <style name="behindMenuScrollContent">

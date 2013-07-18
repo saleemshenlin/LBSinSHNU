@@ -23,36 +23,53 @@ public final class R {
     public static final class drawable {
         public static final int bg_welcome=0x7f020000;
         public static final int ic_action_arrow=0x7f020001;
-        public static final int ic_action_ball=0x7f020002;
-        public static final int ic_action_location=0x7f020003;
-        public static final int ic_action_more=0x7f020004;
-        public static final int ic_action_user=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int ic_action_back=0x7f020002;
+        public static final int ic_action_ball=0x7f020003;
+        public static final int ic_action_book=0x7f020004;
+        public static final int ic_action_location=0x7f020005;
+        public static final int ic_action_mic=0x7f020006;
+        public static final int ic_action_more=0x7f020007;
+        public static final int ic_action_play=0x7f020008;
+        public static final int ic_action_setting=0x7f020009;
+        public static final int ic_action_user=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int sliderbg=0x7f02000c;
     }
     public static final class id {
-        public static final int actionLociton=0x7f090007;
-        public static final int actionbar=0x7f090003;
+        public static final int actionLociton=0x7f090011;
+        public static final int actionbar=0x7f09000d;
         public static final int actionmore=0x7f090002;
-        public static final int btnDetail=0x7f09000d;
-        public static final int button1=0x7f09000c;
-        public static final int imageView1=0x7f09000e;
-        public static final int linearLayout1=0x7f090009;
-        public static final int locationDetail=0x7f090008;
-        public static final int locationRelativeLayout=0x7f090006;
-        public static final int mapView=0x7f090005;
-        public static final int mapViewRelativeLayout=0x7f090004;
+        public static final int btnDetail=0x7f090017;
+        public static final int button1=0x7f090016;
+        public static final int imageView1=0x7f090006;
+        public static final int imageView2=0x7f090004;
+        public static final int imageView3=0x7f09000a;
+        public static final int imageView4=0x7f090008;
+        public static final int linearLayout1=0x7f090013;
+        public static final int locationDetail=0x7f090012;
+        public static final int locationRelativeLayout=0x7f090010;
+        public static final int mapView=0x7f09000f;
+        public static final int mapViewRelativeLayout=0x7f09000e;
+        public static final int pager=0x7f09000c;
         public static final int searchView1=0x7f090001;
-        public static final int txtAccuracy=0x7f09000a;
-        public static final int txtAddress=0x7f09000b;
+        public static final int txtAccuracy=0x7f090014;
+        public static final int txtActivity=0x7f090003;
+        public static final int txtAddress=0x7f090015;
+        public static final int txtCourse=0x7f090009;
+        public static final int txtLecture=0x7f090005;
+        public static final int txtPlay=0x7f090007;
+        public static final int txtSetting=0x7f09000b;
         public static final int userpref=0x7f090000;
-        public static final int wifiswitch=0x7f09000f;
+        public static final int wifiswitch=0x7f090018;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
         public static final int actionmore=0x7f030001;
-        public static final int homeactivity=0x7f030002;
-        public static final int searchview=0x7f030003;
-        public static final int userpref=0x7f030004;
+        public static final int activitylistview=0x7f030002;
+        public static final int activityview=0x7f030003;
+        public static final int homeactivity=0x7f030004;
+        public static final int searchview=0x7f030005;
+        public static final int userpref=0x7f030006;
     }
     public static final class menu {
         public static final int home=0x7f080000;
@@ -72,6 +89,11 @@ public final class R {
         public static final int querysurrounding=0x7f06000e;
         public static final int searchview=0x7f060003;
         public static final int temp_path=0x7f060008;
+        public static final int txtactivity=0x7f060010;
+        public static final int txtcourse=0x7f060013;
+        public static final int txtlecture=0x7f060011;
+        public static final int txtplay=0x7f060012;
+        public static final int txtsetting=0x7f060014;
         public static final int userpref=0x7f060004;
         public static final int wifiswitch=0x7f06000f;
     }

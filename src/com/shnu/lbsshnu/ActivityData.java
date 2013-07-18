@@ -2,6 +2,7 @@ package com.shnu.lbsshnu;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -33,9 +34,13 @@ public class ActivityData {
 			super(context, DATABASE, null, VERSION);
 			// TODO Auto-generated constructor stub
 		}
+
 		/*
 		 * 创建数据库
-		 * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
+		 * 
+		 * @see
+		 * android.database.sqlite.SQLiteOpenHelper#onCreate(android.database
+		 * .sqlite.SQLiteDatabase)
 		 */
 		@Override
 		public void onCreate(SQLiteDatabase db) {
@@ -81,4 +86,25 @@ public class ActivityData {
 		}
 	}
 
+	public boolean tabIsExist() {
+		boolean result = false;
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		try {
+			db = this.dbHelper.getReadableDatabase();
+			String sql = "select count(*) as c from sqlite_master where type ='table' and name ='"
+					+ TABLE.trim() + "' ";
+			cursor = db.rawQuery(sql, null);
+			if (cursor.moveToNext()) {
+				int count = cursor.getInt(0);
+				if (count > 0) {
+					result = true;
+				}
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
+	}
 }

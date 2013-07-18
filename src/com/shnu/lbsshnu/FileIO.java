@@ -10,12 +10,15 @@ import android.util.Log;
 
 public class FileIO {
 	private static final String TAG = "FileIO";
-	ActivityData activityData = new ActivityData(LBSApplication.getContext());
-
+	private ActivityData activityData = new ActivityData(
+			LBSApplication.getContext());
 	/*
 	 * 从data.xml获取数据
 	 */
 	public void getDateFromXML() {
+		if (activityData.tabIsExist()) {
+			return;
+		}
 		XmlResourceParser xrp = LBSApplication.getContext().getResources()
 				.getXml(R.xml.data);
 		int eventType;

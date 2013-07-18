@@ -3,46 +3,39 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#ccc"
-    android:orientation="vertical"
     android:overScrollMode="ifContentScrolls" >
 
-    <!--  -->
+    <ImageView
+        android:id="@+id/userpref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:padding="8dp"
+        android:src="@drawable/ic_action_user" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/userpref"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_action_user" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <SearchView
-                android:id="@+id/searchView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-            </SearchView>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/actionmore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_action_more" />
+        <SearchView
+            android:id="@+id/searchView1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" >
+        </SearchView>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/actionmore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:padding="8dp"
+        android:src="@drawable/ic_action_more" />
 
 </LinearLayout>

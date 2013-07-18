@@ -21,14 +21,14 @@ import com.supermap.mapping.TrackingLayer;
 public class LBSApplication extends Application {
 
 	private final static String TAG = "LBSApplication";
-	private static int screenWidth;
-	private static int screenHeight;
-	private static double screenDPI;
-	private static String sDcard;
-	private static Context context;
-	private static LocationByBaiduAPI locationApi = new LocationByBaiduAPI();
-	private static Point2D lastlocationPoint2d;
-	private static float locationAccuracy;
+	private static int SCREENWIDTH;
+	private static int SCREENHEIGHT;
+	private static double SCREENDPI;
+	private static String SDCARD;
+	private static Context CONTEXT;
+	private static LocationByBaiduAPI LOCATIONAPI = new LocationByBaiduAPI();
+	private static Point2D LASTLOCATION;
+	private static float LOCATIONACCUCRACY;
 	private static Workspace mWorkspace;
 	private static MapView mMapView;
 	private static MapControl mMapControl;
@@ -42,12 +42,12 @@ public class LBSApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		setEnvironment();
-		context = getApplicationContext();
+		CONTEXT = getApplicationContext();
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
-		Log.i(TAG, "LBSApplication getScreenDisplay height:" + screenHeight);
-		LBSApplication.lastlocationPoint2d = new Point2D();
-		LBSApplication.locationAccuracy = (float) 10;
+		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
+		LBSApplication.LASTLOCATION = new Point2D();
+		LBSApplication.LOCATIONACCUCRACY = (float) 10;
 	}
 
 	@Override
@@ -61,11 +61,11 @@ public class LBSApplication extends Application {
 	 * 设置supermap环境
 	 */
 	private void setEnvironment() {
-		sDcard = android.os.Environment.getExternalStorageDirectory()
+		SDCARD = android.os.Environment.getExternalStorageDirectory()
 				.toString();
-		Environment.setLicensePath(sDcard + getString(R.string.license_path));
-		Environment.setTemporaryPath(sDcard + getString(R.string.temp_path));
-		Environment.setWebCacheDirectory(sDcard
+		Environment.setLicensePath(SDCARD + getString(R.string.license_path));
+		Environment.setTemporaryPath(SDCARD + getString(R.string.temp_path));
+		Environment.setWebCacheDirectory(SDCARD
 				+ getString(R.string.cache_path));
 		Environment.initialization(this);
 		Log.i(TAG, "LBSApplication setEnvironment!");
@@ -83,27 +83,27 @@ public class LBSApplication extends Application {
 	}
 
 	public static int getScreenWidth() {
-		return screenWidth;
+		return SCREENWIDTH;
 	}
 
 	public static void setScreenWidth(float xdpi) {
-		LBSApplication.screenWidth = (int) xdpi;
+		LBSApplication.SCREENWIDTH = (int) xdpi;
 	}
 
 	public static int getScreenHeight() {
-		return screenHeight;
+		return SCREENHEIGHT;
 	}
 
 	public static void setScreenHeight(float ydpi) {
-		LBSApplication.screenHeight = (int) ydpi;
+		LBSApplication.SCREENHEIGHT = (int) ydpi;
 	}
 
 	public static double getScreenDPI() {
-		return screenDPI;
+		return SCREENDPI;
 	}
 
 	public static void setScreenDPI(double screenDPI) {
-		LBSApplication.screenDPI = screenDPI;
+		LBSApplication.SCREENDPI = screenDPI;
 	}
 
 	/*
@@ -126,7 +126,7 @@ public class LBSApplication extends Application {
 	 * 判断是否联网
 	 */
 	public static boolean isNetWork() {
-		ConnectivityManager cwjManager = (ConnectivityManager) context
+		ConnectivityManager cwjManager = (ConnectivityManager) CONTEXT
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = cwjManager.getActiveNetworkInfo();
 		if (info != null && info.isAvailable()) {
@@ -164,11 +164,11 @@ public class LBSApplication extends Application {
 	}
 
 	public static LocationByBaiduAPI getLocationApi() {
-		return locationApi;
+		return LOCATIONAPI;
 	}
 
 	public static void setLocationApi(LocationByBaiduAPI locationApi) {
-		LBSApplication.locationApi = locationApi;
+		LBSApplication.LOCATIONAPI = locationApi;
 	}
 
 	public static Layers getMlayers() {
@@ -180,11 +180,11 @@ public class LBSApplication extends Application {
 	}
 
 	public static Context getContext() {
-		return context;
+		return CONTEXT;
 	}
 
 	public static String getSdCard() {
-		return sDcard;
+		return SDCARD;
 	}
 
 	public static Workspace getmWorkspace() {
@@ -220,19 +220,19 @@ public class LBSApplication extends Application {
 	}
 
 	public static Point2D getLastlocationPoint2d() {
-		return lastlocationPoint2d;
+		return LASTLOCATION;
 	}
 
 	public static void setLastlocationPoint2d(Point2D point) {
-		LBSApplication.lastlocationPoint2d = point;
+		LBSApplication.LASTLOCATION = point;
 	}
 
 	public static float getLocationAccuracy() {
-		return locationAccuracy;
+		return LOCATIONACCUCRACY;
 	}
 
 	public static void setLocationAccuracy(float value) {
-		LBSApplication.locationAccuracy = value;
+		LBSApplication.LOCATIONACCUCRACY = value;
 	}
 
 }

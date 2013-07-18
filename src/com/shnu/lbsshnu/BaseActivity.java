@@ -53,6 +53,8 @@ public class BaseActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				simpleSideDrawer.toggleRightDrawer();
+				// FileIO fileIO = new FileIO();
+				// fileIO.getDateFromXML();
 			}
 		});
 	}

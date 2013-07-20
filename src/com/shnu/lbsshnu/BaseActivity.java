@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -109,14 +109,40 @@ public class BaseActivity extends Activity {
 	 * 设置right slide的活动
 	 */
 	public void setActivityRightSilder() {
-		TextView lectureTextView = (TextView) findViewById(R.id.txtLecture);
-		lectureTextView.setOnClickListener(new View.OnClickListener() {
-
+		final Bundle bundleDataBundle = new Bundle();
+		LinearLayout lectureLinear = (LinearLayout) findViewById(R.id.linearLecture);
+		LinearLayout playLinear = (LinearLayout) findViewById(R.id.linearPlay);
+		LinearLayout courseLinear = (LinearLayout) findViewById(R.id.linearCourse);
+		lectureLinear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(BaseActivity.this,
 						ActivityListView.class);
+				bundleDataBundle.putString("Tab", "0");
+				intent.putExtras(bundleDataBundle);
+				startActivity(intent);
+			}
+		});
+		playLinear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BaseActivity.this,
+						ActivityListView.class);
+				bundleDataBundle.putString("Tab", "1");
+				intent.putExtras(bundleDataBundle);
+				startActivity(intent);
+			}
+		});
+		courseLinear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BaseActivity.this,
+						ActivityListView.class);
+				bundleDataBundle.putString("Tab", "2");
+				intent.putExtras(bundleDataBundle);
 				startActivity(intent);
 			}
 		});

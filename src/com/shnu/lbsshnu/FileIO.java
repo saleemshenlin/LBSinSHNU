@@ -10,15 +10,15 @@ import android.util.Log;
 
 public class FileIO {
 	private static final String TAG = "FileIO";
-	private ActivityData activityData = new ActivityData(
-			LBSApplication.getContext());
+
 	/*
 	 * 从data.xml获取数据
 	 */
 	public void getDateFromXML() {
-		if (activityData.tabIsExist()) {
+		if (!LBSApplication.getActivityData().tableIsNull()) {
 			return;
 		}
+
 		XmlResourceParser xrp = LBSApplication.getContext().getResources()
 				.getXml(R.xml.data);
 		int eventType;
@@ -45,7 +45,7 @@ public class FileIO {
 					if (tagName.equals("row")) {
 						sb.append(")");
 						Log.d(TAG, sb.toString());
-						activityData.insertOrIgnore(values);//
+						LBSApplication.getActivityData().insertOrIgnore(values);//
 						sb.delete(0, sb.length() - 1);
 					} else if (tagName.equals("root")) {
 						Log.d(TAG, "end");

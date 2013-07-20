@@ -15,7 +15,7 @@ public class ActivityData {
 
 	public static final String C_ID = "_id";
 	public static final String C_NAME = "_name";
-	public static final String C_DATE = "_datatime";
+	public static final String C_DATE = "_date";
 	public static final String C_TIME = "_time";
 	public static final String C_LOCATION = "_location";
 	public static final String C_BUILDING = "_building";
@@ -26,8 +26,8 @@ public class ActivityData {
 	public static final String C_PRICE = "_price";
 	public static final String C_DESCRIPTION = "_description";
 
-	private static String ORDERBY = " ORDER BY " + C_TIME + " ASC";
-	private static String GROUPBY = " GROUP BY " + C_DATE;
+	// private static String ORDERBY = " ORDER BY " + C_TIME + " ASC";
+	// private static String GROUPBY = " GROUP BY " + C_DATE;
 
 	class DbHelper extends SQLiteOpenHelper {
 		public DbHelper(Context context) {
@@ -48,7 +48,7 @@ public class ActivityData {
 			Log.i(TAG, "Creating database: " + DATABASE);
 			db.execSQL("create TABLE " + TABLE + "(" + C_ID
 					+ " INTEGER PRIMARY KEY," + C_NAME + " VARCHAR(50),"
-					+ C_DATE + " DATE," + C_TIME + " DATE," + C_LOCATION
+					+ C_DATE + " DATE," + C_TIME + " TIME," + C_LOCATION
 					+ " VARCHAR(50)," + C_BUILDING + " TINYINT," + C_TYPE
 					+ " TINYINT," + C_SPEAKER + " VARCHAR(50),"
 					+ C_SPEAKERTITLE + " VARCHAR(128)," + C_ISLIKE
@@ -86,6 +86,9 @@ public class ActivityData {
 		}
 	}
 
+	/*
+	 * Table 是否存在
+	 */
 	public boolean tabIsExist() {
 		boolean result = false;
 		SQLiteDatabase db = null;
@@ -104,7 +107,37 @@ public class ActivityData {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			db.close();
 		}
 		return result;
 	}
+
+	/*
+	 * Table 是否有数据
+	 */
+	public boolean tableIsNull() {
+		boolean result = false;
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		try {
+			db = this.dbHelper.getReadableDatabase();
+			String sql = "select * from " + TABLE;
+			cursor = db.rawQuery(sql, null);
+			int num = cursor.getCount();
+			if (num < 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			db.close();
+		}
+		return result;
+	}
+
+	public DbHelper getDbHelper() {
+		return this.dbHelper;
+	}
+
 }

@@ -18,22 +18,28 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 
 	private ViewPager viewPager;
 	public static final int MAX_TAB_SIZE = 3;
-	public static final String ARGUMENTS_NAME = "args";
+	public static final String ARGUMENTS_NAME = "Index";
 	private TabFragmentPagerAdapter tabFragmentPagerAdapter;
+	Intent intent;
+	static Bundle tabBundle;
+	ActionBar actionBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activityview);
+		intent = getIntent();
+		tabBundle = intent.getExtras();
 		initView();
+		int index = Integer.parseInt(tabBundle.getString("Tab"));
+		actionBar.getTabAt(index).select();
 	}
 
 	private void initView() {
 		viewPager = (ViewPager) this.findViewById(R.id.pager);
-		final ActionBar actionBar = getActionBar();
+		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("活动通告");
-		actionBar.setIcon(R.drawable.ic_action_back);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
@@ -65,19 +71,6 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 		}
 	}
 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// app icon in action bar clicked; go home
-			Intent intent = new Intent(this, HomeActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
 	public static class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
 		public TabFragmentPagerAdapter(FragmentManager fm) {
@@ -85,15 +78,15 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 		}
 
 		@Override
-		public Fragment getItem(int arg0) {
+		public Fragment getItem(int index) {
 			Fragment ft = null;
-			switch (arg0) {
+			switch (index) {
 
 			default:
 				ft = new CommonUIFragment();
 
 				Bundle args = new Bundle();
-				args.putString(ARGUMENTS_NAME, "TAB" + (arg0 + 1));
+				args.putInt(ARGUMENTS_NAME, index);
 				ft.setArguments(args);
 
 				break;
@@ -113,9 +106,10 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 			case 0:
 				return "学术讲座";
 			case 1:
-				return "電影演出";
+				return "电影演出";
 			case 2:
-				return "精品課程";
+				return "精品课程";
+
 			default:
 				return "";
 			}
@@ -138,4 +132,20 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 
 	}
 
+	/*
+	 * 返回上级
+	 */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// app icon in action bar clicked; go home
+			Intent intent = new Intent(this, HomeActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }

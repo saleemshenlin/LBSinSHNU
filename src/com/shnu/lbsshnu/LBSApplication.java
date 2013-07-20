@@ -34,6 +34,7 @@ public class LBSApplication extends Application {
 	private static MapControl mMapControl;
 	private static TrackingLayer mTrackingLayer;
 	private static Layers mlayers;
+	private static ActivityData activityData;
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -81,30 +82,6 @@ public class LBSApplication extends Application {
 		setScreenWidth(dm.widthPixels);
 		setScreenHeight(dm.heightPixels);
 		setScreenDPI(dm.densityDpi);
-	}
-
-	public static int getScreenWidth() {
-		return SCREENWIDTH;
-	}
-
-	public static void setScreenWidth(float xdpi) {
-		LBSApplication.SCREENWIDTH = (int) xdpi;
-	}
-
-	public static int getScreenHeight() {
-		return SCREENHEIGHT;
-	}
-
-	public static void setScreenHeight(float ydpi) {
-		LBSApplication.SCREENHEIGHT = (int) ydpi;
-	}
-
-	public static double getScreenDPI() {
-		return SCREENDPI;
-	}
-
-	public static void setScreenDPI(double screenDPI) {
-		LBSApplication.SCREENDPI = screenDPI;
 	}
 
 	/*
@@ -242,6 +219,35 @@ public class LBSApplication extends Application {
 
 	public static void setLocationAccuracy(float value) {
 		LBSApplication.LOCATIONACCUCRACY = value;
+	}
+
+	public static int getScreenWidth() {
+		return SCREENWIDTH;
+	}
+
+	public static void setScreenWidth(float xdpi) {
+		LBSApplication.SCREENWIDTH = (int) xdpi;
+	}
+
+	public static int getScreenHeight() {
+		return SCREENHEIGHT;
+	}
+
+	public static void setScreenHeight(float ydpi) {
+		LBSApplication.SCREENHEIGHT = (int) ydpi;
+	}
+
+	public static double getScreenDPI() {
+		return SCREENDPI;
+	}
+
+	public static void setScreenDPI(double screenDPI) {
+		LBSApplication.SCREENDPI = screenDPI;
+	}
+
+	public static ActivityData getActivityData() {
+		activityData = new ActivityData(getContext());
+		return activityData;
 	}
 
 }

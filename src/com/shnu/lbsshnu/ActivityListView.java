@@ -12,9 +12,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.MenuItem;
 
-public class ActivityListView extends FragmentActivity implements TabListener {
+public class ActivityListView extends FragmentActivity implements TabListener,
+		CommonUIFragment.OnFragmeng2ActivityListener {
 
 	private ViewPager viewPager;
 	public static final int MAX_TAB_SIZE = 3;
@@ -147,5 +149,24 @@ public class ActivityListView extends FragmentActivity implements TabListener {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	/*
+	 * (non-Javadoc) Fragment 和 activity 的数据通信
+	 * 
+	 * @see com.shnu.lbsshnu.CommonUIFragment.OnHeadlineSelectedListener#
+	 * onArticleSelected(long)
+	 */
+	public void onArticleSelected(long position) {
+		long value = position;
+		Log.e("postion", value + "");
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		Bundle bundle = new Bundle();
+		bundle.putString("TAG", value + "");
+		intent.putExtras(bundle);
+		setResult(0, intent);
+		finish();
 	}
 }

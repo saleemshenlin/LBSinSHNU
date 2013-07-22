@@ -38,7 +38,11 @@ public final class R {
         public static final int ic_action_user=0x7f02000b;
         public static final int ic_actiuon_back=0x7f02000c;
         public static final int ic_launcher=0x7f02000d;
-        public static final int sliderbg=0x7f02000e;
+        public static final int ic_map=0x7f02000e;
+        public static final int ic_rate=0x7f02000f;
+        public static final int ic_unrate=0x7f020010;
+        public static final int popupbg=0x7f020011;
+        public static final int sliderbg=0x7f020012;
     }
     public static final class id {
         public static final int actionLociton=0x7f0a0017;
@@ -48,6 +52,8 @@ public final class R {
         public static final int activitylistview=0x7f0a0010;
         public static final int btnDetail=0x7f0a001d;
         public static final int button1=0x7f0a001c;
+        public static final int imageLike=0x7f0a0021;
+        public static final int imageMap=0x7f0a0020;
         public static final int imageView1=0x7f0a0008;
         public static final int imageView2=0x7f0a0005;
         public static final int imageView3=0x7f0a000e;
@@ -62,19 +68,26 @@ public final class R {
         public static final int mapView=0x7f0a0015;
         public static final int mapViewRelativeLayout=0x7f0a0014;
         public static final int pager=0x7f0a0012;
+        public static final int popupLinearLayout=0x7f0a001e;
         public static final int searchView1=0x7f0a0001;
         public static final int txtAccuracy=0x7f0a001a;
         public static final int txtActivity=0x7f0a0003;
+        public static final int txtActivityTitle=0x7f0a001f;
         public static final int txtAddress=0x7f0a001b;
         public static final int txtCourse=0x7f0a000c;
-        public static final int txtDateTime=0x7f0a001f;
+        public static final int txtDate=0x7f0a0024;
+        public static final int txtDateTime=0x7f0a0029;
+        public static final int txtDecription=0x7f0a0026;
         public static final int txtLecture=0x7f0a0006;
-        public static final int txtLocation=0x7f0a0020;
+        public static final int txtLocation=0x7f0a0028;
+        public static final int txtPlace=0x7f0a0025;
         public static final int txtPlay=0x7f0a0009;
         public static final int txtSetting=0x7f0a000f;
-        public static final int txtTitle=0x7f0a001e;
+        public static final int txtSpeaker=0x7f0a0022;
+        public static final int txtSpeakerTitle=0x7f0a0023;
+        public static final int txtTitle=0x7f0a0027;
         public static final int userpref=0x7f0a0000;
-        public static final int wifiswitch=0x7f0a0021;
+        public static final int wifiswitch=0x7f0a002a;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -98,6 +111,7 @@ public final class R {
         public static final int cache_path=0x7f070009;
         public static final int data_path=0x7f070006;
         public static final int detail=0x7f07000b;
+        public static final int detailtitle=0x7f070015;
         public static final int geocoding=0x7f07000d;
         public static final int hello_world=0x7f070002;
         public static final int license_path=0x7f070007;
@@ -107,6 +121,7 @@ public final class R {
         public static final int temp_path=0x7f070008;
         public static final int txtactivity=0x7f070010;
         public static final int txtcourse=0x7f070013;
+        public static final int txtdecription=0x7f070016;
         public static final int txtlecture=0x7f070011;
         public static final int txtplay=0x7f070012;
         public static final int txtsetting=0x7f070014;

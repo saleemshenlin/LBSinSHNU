@@ -75,8 +75,9 @@ public class ActivityProvider extends ContentProvider {
 				return db.query(ActivityData.TABLE, projection, selection,
 						selectionArgs, null, null, sortOrder); //
 			} else {
-				return db.query(ActivityData.TABLE, projection,
-						ActivityData.C_ID + "=" + id, null, null, null, null); //
+				Cursor cursor = db.query(ActivityData.TABLE, projection,
+						ActivityData.C_ID + " = " + id, null, null, null, null);
+				return cursor; //
 			}
 		} catch (Exception e) {
 			Log.e("TAG", e.toString());

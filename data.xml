@@ -1,4 +1,4 @@
-<?xml version="1-0" encoding="UTF-08" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns:xsi="http://www-w3-org/2001/XMLSchema-instance">
 	<row>
 		<id>1</id>
@@ -12,13 +12,13 @@
 		<speakertitle>苏州大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>2</id>
 		<name>清代江南的教育与人口文化素质</name>
 		<date>2013-07-25</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼509</location>
 		<building>2</building>
 		<type>2</type>
@@ -26,13 +26,13 @@
 		<speakertitle>苏州大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>3</id>
 		<name>我与上海史研究</name>
 		<date>2013-07-26</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼810</location>
 		<building>2</building>
 		<type>2</type>
@@ -40,7 +40,7 @@
 		<speakertitle>香港大学亚洲研究中心教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>4</id>
@@ -54,13 +54,13 @@
 		<speakertitle>台湾中央研究院中国文哲研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>5</id>
 		<name>翻译·政治·教争：谈龙华民译《圣若撒法始末》</name>
 		<date>2013-08-01</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼812</location>
 		<building>2</building>
 		<type>2</type>
@@ -68,13 +68,13 @@
 		<speakertitle>台湾中央研究院中国文哲研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>6</id>
 		<name>三面玛利亚：谈高一志译《圣母行实》里的奇迹故事</name>
 		<date>2013-08-3</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼813</location>
 		<building>2</building>
 		<type>2</type>
@@ -82,7 +82,7 @@
 		<speakertitle>台湾中央研究院中国文哲研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>7</id>
@@ -96,13 +96,13 @@
 		<speakertitle>台湾中央研究院中国文哲研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>8</id>
 		<name>阿哩原来是荷马：明清传教士笔下的荷马及其史诗</name>
 		<date>2013-08-13</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼509</location>
 		<building>2</building>
 		<type>2</type>
@@ -110,13 +110,13 @@
 		<speakertitle>台湾中央研究院中国文哲研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>9</id>
 		<name>实践存在论美学的提出与发展</name>
 		<date>2013-09-18</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼810</location>
 		<building>2</building>
 		<type>2</type>
@@ -124,7 +124,7 @@
 		<speakertitle>复旦大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>10</id>
@@ -138,13 +138,13 @@
 		<speakertitle>南京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>11</id>
 		<name>当代英国马克思主义文论的特点及其趋势</name>
 		<date>2013-08-25</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼812</location>
 		<building>2</building>
 		<type>2</type>
@@ -152,13 +152,13 @@
 		<speakertitle>上海交通大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>12</id>
 		<name>马克思主义文学批评的“文化转向”</name>
 		<date>2013-09-01</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼813</location>
 		<building>2</building>
 		<type>2</type>
@@ -166,7 +166,7 @@
 		<speakertitle>人民大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>13</id>
@@ -180,13 +180,13 @@
 		<speakertitle>山东大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>14</id>
 		<name>马克思主义文论中国化的三条思路</name>
 		<date>2013-09-12</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼509</location>
 		<building>2</building>
 		<type>2</type>
@@ -194,13 +194,13 @@
 		<speakertitle>复旦大学副教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>15</id>
 		<name>马克思主义现象学美学初探</name>
 		<date>2013-09-19</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>文苑楼810</location>
 		<building>2</building>
 		<type>2</type>
@@ -208,7 +208,7 @@
 		<speakertitle>上海师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>16</id>
@@ -222,13 +222,13 @@
 		<speakertitle>香港大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>17</id>
 		<name>革命的结构观念：俄国的极端贫富差距 </name>
 		<date>2013-07-26</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
 		<type>2</type>
@@ -236,13 +236,13 @@
 		<speakertitle>俄罗斯科学院圣彼得堡历史所高级研究员、圣彼得堡大学教授 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>18</id>
 		<name>碑志与历史研究 </name>
 		<date>2013-07-31</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院308</location>
 		<building>44</building>
 		<type>2</type>
@@ -250,7 +250,7 @@
 		<speakertitle>陕西师范大学历史文化学院副教授 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>19</id>
@@ -264,13 +264,13 @@
 		<speakertitle>美国南卡罗来纳州大学副教授 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>20</id>
 		<name>Botswana —a shining example of African development </name>
 		<date>2013-08-08</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院308</location>
 		<building>44</building>
 		<type>2</type>
@@ -278,13 +278,13 @@
 		<speakertitle>博茨瓦纳大学前副校长 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>21</id>
 		<name>胡适与文法——语言学视角解读《文学改良刍议》</name>
 		<date>2013-08-13</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
 		<type>2</type>
@@ -292,7 +292,7 @@
 		<speakertitle>日本关西大学教授 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>22</id>
@@ -306,13 +306,13 @@
 		<speakertitle>上海市艺术研究所研究员 </speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>23</id>
 		<name>权利义务观——中世纪西欧封建政治的基础</name>
 		<date>2013-08-23</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
 		<type>2</type>
@@ -320,13 +320,13 @@
 		<speakertitle>复旦大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>24</id>
 		<name>欧债危机与欧洲一体化前景分析</name>
 		<date>2013-08-28</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院308</location>
 		<building>44</building>
 		<type>2</type>
@@ -334,7 +334,7 @@
 		<speakertitle>上海国际问题研究所教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>25</id>
@@ -348,13 +348,13 @@
 		<speakertitle>华东师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>26</id>
 		<name>古典时代的雅典——空间、图像与城邦</name>
 		<date>2013-09-09</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院308</location>
 		<building>44</building>
 		<type>2</type>
@@ -362,13 +362,13 @@
 		<speakertitle>北京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>27</id>
 		<name>古希腊神话与女性</name>
 		<date>2013-09-16</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
 		<type>2</type>
@@ -376,7 +376,7 @@
 		<speakertitle>上海师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>28</id>
@@ -390,13 +390,13 @@
 		<speakertitle>浙江大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>29</id>
 		<name>法国国家象征物的历史解读</name>
 		<date>2013-09-30</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
 		<type>2</type>
@@ -404,13 +404,13 @@
 		<speakertitle>浙江大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>30</id>
 		<name>从新浪潮电影到二十一世纪的影像衍变</name>
 		<date>2013-07-24</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心101</location>
 		<building>28</building>
 		<type>2</type>
@@ -418,7 +418,7 @@
 		<speakertitle>法国导演、艺术家</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>31</id>
@@ -432,13 +432,13 @@
 		<speakertitle>法国电影作曲家</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>32</id>
 		<name>二十一世纪法国作者电影的风格与走向</name>
 		<date>2013-08-4</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
 		<type>2</type>
@@ -446,13 +446,13 @@
 		<speakertitle>法国影评人</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>33</id>
 		<name>未来的电影大师：法国新一代电影作者群像</name>
 		<date>2013-08-10</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心101</location>
 		<building>28</building>
 		<type>2</type>
@@ -460,7 +460,7 @@
 		<speakertitle>法国《电影手册》主编、电影理论家</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>34</id>
@@ -474,13 +474,13 @@
 		<speakertitle>美国加州大学尔湾分校教授、加州大学洛杉矶分校教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>35</id>
 		<name>多样的全球化及其对文化和社会的影响——东西方比较</name>
 		<date>2013-08-22</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
 		<type>2</type>
@@ -488,13 +488,13 @@
 		<speakertitle>丹麦Aarhus大学神学院教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>36</id>
 		<name>亚洲主义思想的解析</name>
 		<date>2013-08-28</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心101</location>
 		<building>28</building>
 		<type>2</type>
@@ -502,7 +502,7 @@
 		<speakertitle>日本冈山大学文学部教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>37</id>
@@ -516,13 +516,13 @@
 		<speakertitle>文史作家、台湾秀威出版公司副总编辑</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>38</id>
 		<name>鲁迅笔下的爱情主题——理解《伤逝》</name>
 		<date>2013-09-5</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
 		<type>2</type>
@@ -530,13 +530,13 @@
 		<speakertitle>复旦大学中文系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>39</id>
 		<name>中西学术文化交汇中的诠释学</name>
 		<date>2013-09-09</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心101</location>
 		<building>28</building>
 		<type>2</type>
@@ -544,7 +544,7 @@
 		<speakertitle>复旦大学中文系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>40</id>
@@ -558,13 +558,13 @@
 		<speakertitle>华东师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>41</id>
 		<name>批判性的社会工作</name>
 		<date>2013-09-17</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
 		<type>2</type>
@@ -572,13 +572,13 @@
 		<speakertitle>德国比勒菲尔德大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>42</id>
 		<name>西方汉学的文学史研究及观念变迁</name>
 		<date>2013-09-21</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>会议中心101</location>
 		<building>28</building>
 		<type>2</type>
@@ -586,7 +586,7 @@
 		<speakertitle>复旦大学中文系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>43</id>
@@ -600,7 +600,7 @@
 		<speakertitle>上海师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>44</id>
@@ -614,13 +614,13 @@
 		<speakertitle>复旦大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>45</id>
 		<name>宋史研究方法论琐议</name>
 		<date>2013-07-31</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院407</location>
 		<building>32</building>
 		<type>2</type>
@@ -628,13 +628,13 @@
 		<speakertitle>北京师范大学特聘教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>46</id>
 		<name>翻译佛经对汉语词汇的影响 </name>
 		<date>2013-08-5</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
 		<type>2</type>
@@ -642,7 +642,7 @@
 		<speakertitle>西南科技大学文学院教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>47</id>
@@ -656,13 +656,13 @@
 		<speakertitle>四川师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>48</id>
 		<name>明清鼎革之际东亚“华夷观”的演变</name>
 		<date>2013-08-17</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
 		<type>2</type>
@@ -670,14 +670,14 @@
 		<speakertitle>东北师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>49</id>
 		<name>时间与历史学
 </name>
 		<date>2013-08-23</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院407</location>
 		<building>32</building>
 		<type>2</type>
@@ -685,7 +685,7 @@
 		<speakertitle>中国社会科学院研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>50</id>
@@ -699,13 +699,13 @@
 		<speakertitle>北京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>51</id>
 		<name>美日对中国研究核武器的认识与对策</name>
 		<date>2013-09-01</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院407</location>
 		<building>32</building>
 		<type>2</type>
@@ -713,13 +713,13 @@
 		<speakertitle>华东师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>52</id>
 		<name>中非合作论坛的机遇与挑战</name>
 		<date>2013-09-5</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
 		<type>2</type>
@@ -727,7 +727,7 @@
 		<speakertitle>上海师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>53</id>
@@ -741,7 +741,7 @@
 		<speakertitle>清华大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>54</id>
@@ -755,13 +755,13 @@
 		<speakertitle>南京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>55</id>
 		<name>反抗权——欧洲封建主义的历史遗产</name>
 		<date>2013-09-17</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院407</location>
 		<building>32</building>
 		<type>2</type>
@@ -769,14 +769,14 @@
 		<speakertitle>天津师范大学、南京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>56</id>
 		<name>20世纪西方史学“新”在哪里？
 </name>
 		<date>2013-09-21</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
 		<type>2</type>
@@ -784,7 +784,7 @@
 		<speakertitle>北京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>57</id>
@@ -798,7 +798,7 @@
 		<speakertitle>东北师范大学古典所教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>58</id>
@@ -812,13 +812,13 @@
 		<speakertitle>美国华盛顿理工大学MBA客座教授、上海财经大学兼职教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>59</id>
 		<name>谈宋朝积弱与宋史研究</name>
 		<date>2013-08-01</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院304</location>
 		<building>34</building>
 		<type>2</type>
@@ -826,13 +826,13 @@
 		<speakertitle>首都师范大学唐宋史研究中心主任、中国宋史研究会副会长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>60</id>
 		<name>新媒体与当代社会</name>
 		<date>2013-08-07</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院404</location>
 		<building>34</building>
 		<type>2</type>
@@ -840,7 +840,7 @@
 		<speakertitle>上海大学影视学院博导、教育部新闻学科指导委员会委员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>61</id>
@@ -854,13 +854,13 @@
 		<speakertitle>复旦大学文史研究院副研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>62</id>
 		<name>研究生常见心理问题及其应对</name>
 		<date>2013-08-19</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院404</location>
 		<building>34</building>
 		<type>2</type>
@@ -868,13 +868,13 @@
 		<speakertitle>上海师范大学教育学院心理学教研室主任、心理咨询站主任</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>63</id>
 		<name>历史是什么——西方历史哲学四大流派</name>
 		<date>2013-08-25</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院304</location>
 		<building>34</building>
 		<type>2</type>
@@ -882,7 +882,7 @@
 		<speakertitle>华东师范大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>64</id>
@@ -896,13 +896,13 @@
 		<speakertitle>首都师范大学历史学院院长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>65</id>
 		<name>忏悔录1•1•1释义</name>
 		<date>2013-09-02</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院304</location>
 		<building>34</building>
 		<type>2</type>
@@ -910,13 +910,13 @@
 		<speakertitle>复旦大学博士</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>66</id>
 		<name>宋代主流国防观演变及其影响</name>
 		<date>2013-09-6</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院404</location>
 		<building>34</building>
 		<type>2</type>
@@ -924,7 +924,7 @@
 		<speakertitle>西北大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>67</id>
@@ -938,7 +938,7 @@
 		<speakertitle>日本南山大学外国语学部亚洲学系主任、教授、著名学者</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>68</id>
@@ -952,13 +952,13 @@
 		<speakertitle>上海电影集团公司国家一级编剧</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>69</id>
 		<name>历史上的他者——女性与人类文明</name>
 		<date>2013-09-18</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院304</location>
 		<building>34</building>
 		<type>2</type>
@@ -966,13 +966,13 @@
 		<speakertitle>东北师范大学历史文化学院教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>70</id>
 		<name>利奥十三《政教关系通谕》与19 世纪法国宗教政治</name>
 		<date>2013-09-22</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>生环学院404</location>
 		<building>34</building>
 		<type>2</type>
@@ -980,7 +980,7 @@
 		<speakertitle>北京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>71</id>
@@ -994,7 +994,7 @@
 		<speakertitle>上海大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>72</id>
@@ -1008,13 +1008,13 @@
 		<speakertitle>原复旦大学副校长、历史学名家</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>73</id>
 		<name>史学方法在中学历史课程中的价值与运用</name>
 		<date>2013-08-5</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院201</location>
 		<building>43</building>
 		<type>2</type>
@@ -1022,13 +1022,13 @@
 		<speakertitle>上海市教委教研室中学历史教研员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>74</id>
 		<name>陶片放逐法、平民领袖、“诬告者”与雅典民主</name>
 		<date>2013-08-08</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院203</location>
 		<building>43</building>
 		<type>2</type>
@@ -1036,7 +1036,7 @@
 		<speakertitle>北京大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>75</id>
@@ -1050,13 +1050,13 @@
 		<speakertitle>法国国家科学研究中心研究员、法国远东学院、巴黎第七大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>76</id>
 		<name>基督教与欧洲文明</name>
 		<date>2013-08-14</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院203</location>
 		<building>43</building>
 		<type>2</type>
@@ -1064,13 +1064,13 @@
 		<speakertitle>天津师范大学教授、南京大学特聘教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>77</id>
 		<name>用生命科学阐释历史——曹操与鲜卑历史新探</name>
 		<date>2013-08-17</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院201</location>
 		<building>43</building>
 		<type>2</type>
@@ -1078,7 +1078,7 @@
 		<speakertitle>复旦大学历史系教授、中国魏晋南北朝史学会副会长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>78</id>
@@ -1092,13 +1092,13 @@
 		<speakertitle>交大附中历史教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>79</id>
 		<name>20世纪世界城市化的转型及其理论意义</name>
 		<date>2013-08-23</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院201</location>
 		<building>43</building>
 		<type>2</type>
@@ -1106,13 +1106,13 @@
 		<speakertitle>中国美国史研究会理事长、厦门大学闽江学者特聘教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>80</id>
 		<name>从好莱坞影片透视美国的文化价值观</name>
 		<date>2013-08-26</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院203</location>
 		<building>43</building>
 		<type>2</type>
@@ -1120,7 +1120,7 @@
 		<speakertitle>福建师范大学闽江学者特聘教授、社会历史学院院长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>81</id>
@@ -1134,7 +1134,7 @@
 		<speakertitle>美国加州大学洛杉矶分校教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>82</id>
@@ -1148,13 +1148,13 @@
 		<speakertitle>海南中学历史高级教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>83</id>
 		<name>茶与咖啡—文化与经济</name>
 		<date>2013-09-08</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院201</location>
 		<building>43</building>
 		<type>2</type>
@@ -1162,13 +1162,13 @@
 		<speakertitle>原香港城市大学校长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>84</id>
 		<name>The Crisis Of Value And The Way Out Of It</name>
 		<date>2013-09-14</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>数理学院203</location>
 		<building>43</building>
 		<type>2</type>
@@ -1176,7 +1176,7 @@
 		<speakertitle>罗马拉特兰大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>85</id>
@@ -1190,7 +1190,7 @@
 		<speakertitle>南京大学教授、犹太文化研究所所长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>86</id>
@@ -1204,13 +1204,13 @@
 		<speakertitle>上海师范大学附中副校长、上海市语文特级教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>87</id>
 		<name>在规范中寻求创新——优化课堂教学，提高教学有效性之教学建议</name>
 		<date>2013-07-22</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
 		<type>2</type>
@@ -1218,13 +1218,13 @@
 		<speakertitle>徐汇区历史教研员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>88</id>
 		<name>柏拉图为何写对话录</name>
 		<date>2013-07-27</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼302</location>
 		<building>25</building>
 		<type>2</type>
@@ -1232,7 +1232,7 @@
 		<speakertitle>复旦大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>89</id>
@@ -1246,13 +1246,13 @@
 		<speakertitle>知名灾难管理学者、台北大学公共行政暨政策学系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>90</id>
 		<name>《钱钟书手稿》与南宋诗发展观</name>
 		<date>2013-08-08</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼302</location>
 		<building>25</building>
 		<type>2</type>
@@ -1260,13 +1260,13 @@
 		<speakertitle>复旦大学教授、中国宋代文学学会会长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>91</id>
 		<name>态度决定历史：后现代主义视野中的历史学</name>
 		<date>2013-08-13</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
 		<type>2</type>
@@ -1274,7 +1274,7 @@
 		<speakertitle>复旦大学教授、德国埃森文化科学研究所访问学者</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>92</id>
@@ -1288,13 +1288,13 @@
 		<speakertitle>辽宁大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>93</id>
 		<name>“敞田制”起源及其对欧洲农业经济发展的影响——以英国为例</name>
 		<date>2013-08-23</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
 		<type>2</type>
@@ -1302,13 +1302,13 @@
 		<speakertitle>武汉大学教授、伯明翰大学史学博士</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>94</id>
 		<name>文学史研究的多种可能性</name>
 		<date>2013-08-28</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼302</location>
 		<building>25</building>
 		<type>2</type>
@@ -1316,7 +1316,7 @@
 		<speakertitle>中国社会科学院文学所党委书记、副所长、《文学评论》社长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>95</id>
@@ -1330,7 +1330,7 @@
 		<speakertitle>中国法国史研究会副会长、浙江大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>96</id>
@@ -1344,13 +1344,13 @@
 		<speakertitle>美国得克萨斯A&amp;M大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>97</id>
 		<name>现当代西方戏剧面面观</name>
 		<date>2013-09-6</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
 		<type>2</type>
@@ -1358,13 +1358,13 @@
 		<speakertitle>上海戏剧学院前院长、博士生导师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>98</id>
 		<name>可译性•白话文•文化资本：20年代新文化运动中关于翻译的争论</name>
 		<date>2013-09-10</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼302</location>
 		<building>25</building>
 		<type>2</type>
@@ -1372,7 +1372,7 @@
 		<speakertitle>克利斯朵夫•纽波特大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>99</id>
@@ -1386,7 +1386,7 @@
 		<speakertitle>奉贤区历史教研员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>100</id>
@@ -1400,13 +1400,13 @@
 		<speakertitle>浙江大学历史系教授、杭州市社会科学院南宋史研究中心主任</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>101</id>
 		<name>人文学术研究中的融通与越界</name>
 		<date>2013-09-22</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
 		<type>2</type>
@@ -1414,13 +1414,13 @@
 		<speakertitle>北京大学比较文学与比较文化研究所所长、博士生导师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>102</id>
 		<name>朴素的经济自由主义取向——中国民间经济与基层社会的管理传统流变</name>
 		<date>2013-09-26</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>教苑楼302</location>
 		<building>25</building>
 		<type>2</type>
@@ -1428,7 +1428,7 @@
 		<speakertitle>清华大学华商研究中心主任、经济学研究所所长、博导</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>103</id>
@@ -1442,13 +1442,13 @@
 		<speakertitle>嘉定进修学院院长、特级历史教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>104</id>
 		<name>一梦典藏——张静娴与她的1/2个世纪</name>
 		<date>2013-07-28</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
 		<type>2</type>
@@ -1456,13 +1456,13 @@
 		<speakertitle>上海昆剧团著名表演艺术家、国家一级演员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>105</id>
 		<name>教学设计的智慧</name>
 		<date>2013-07-31</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼203</location>
 		<building>5</building>
 		<type>2</type>
@@ -1470,7 +1470,7 @@
 		<speakertitle>晋元中学历史特级教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>106</id>
@@ -1484,13 +1484,13 @@
 		<speakertitle>中国社会科学院文学研究所所长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>107</id>
 		<name>历史课的创意、设计与实施</name>
 		<date>2013-08-09</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼203</location>
 		<building>5</building>
 		<type>2</type>
@@ -1498,13 +1498,13 @@
 		<speakertitle>晋元中学历史特级教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>108</id>
 		<name>正在发生的议题——美国当代传播学研究进展</name>
 		<date>2013-08-14</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
 		<type>2</type>
@@ -1512,7 +1512,7 @@
 		<speakertitle>世界传播学大会学者；艾美奖获得者；副教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>109</id>
@@ -1526,13 +1526,13 @@
 		<speakertitle>大同中学历史教师</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>110</id>
 		<name>个人与历史的关系——以竹内好的《鲁迅》为例</name>
 		<date>2013-08-24</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
 		<type>2</type>
@@ -1540,13 +1540,13 @@
 		<speakertitle>中国社会科学院文学研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>111</id>
 		<name>我的历史地理学研究与伊莎贝拉•博德论——在世界人文地理学的潮流之中</name>
 		<date>2013-08-29</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼203</location>
 		<building>5</building>
 		<type>2</type>
@@ -1554,7 +1554,7 @@
 		<speakertitle>日本京都大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>112</id>
@@ -1568,7 +1568,7 @@
 		<speakertitle>中研院历史语言研究所原所长、研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>113</id>
@@ -1582,13 +1582,13 @@
 		<speakertitle>日本大阪市立大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>114</id>
 		<name>季风亚洲与多元文化</name>
 		<date>2013-09-5</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
 		<type>2</type>
@@ -1596,13 +1596,13 @@
 		<speakertitle>台湾新竹清华大学人文社会学院前院长、教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>115</id>
 		<name>谈“如何看游本宽的摄影艺术”</name>
 		<date>2013-09-09</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼203</location>
 		<building>5</building>
 		<type>2</type>
@@ -1610,7 +1610,7 @@
 		<speakertitle>台湾政治大学广告系专任、特聘教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>116</id>
@@ -1624,7 +1624,7 @@
 		<speakertitle>三位均为台湾中央研究院历史研究所研究员</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>117</id>
@@ -1638,13 +1638,13 @@
 		<speakertitle>杰出校友、日本圣托马斯大学教授、日本中国教授会干事</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>118</id>
 		<name>日常生活审美化与艺术的使命</name>
 		<date>2013-09-21</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
 		<type>2</type>
@@ -1652,13 +1652,13 @@
 		<speakertitle>中国社会科学院文学研究所副所长 著名美学家、教授、博导</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>119</id>
 		<name>社会管理创新与社会工作发展</name>
 		<date>2013-09-25</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>外国语新大楼203</location>
 		<building>5</building>
 		<type>2</type>
@@ -1666,7 +1666,7 @@
 		<speakertitle>北京大学社会学系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>120</id>
@@ -1680,7 +1680,7 @@
 		<speakertitle>巴黎高等师范学校教授；法国凯布朗列人类学博物馆教育与科学部主任</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>121</id>
@@ -1694,13 +1694,13 @@
 		<speakertitle>云南大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>122</id>
 		<name>关于近代小说研究的几个问题</name>
 		<date>2013-07-26</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
 		<type>2</type>
@@ -1708,13 +1708,13 @@
 		<speakertitle>国务院中文学科评议组成员、华东师范大学图书馆馆长</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>123</id>
 		<name>全球五零文化现象</name>
 		<date>2013-07-30</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院102</location>
 		<building>14</building>
 		<type>2</type>
@@ -1722,7 +1722,7 @@
 		<speakertitle>北京大学西班牙语教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>124</id>
@@ -1736,7 +1736,7 @@
 		<speakertitle>武汉大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>125</id>
@@ -1750,13 +1750,13 @@
 		<speakertitle>南京大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>126</id>
 		<name>古今地中海世界与世界文明格局的演变</name>
 		<date>2013-08-11</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
 		<type>2</type>
@@ -1764,13 +1764,13 @@
 		<speakertitle>浙江大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>127</id>
 		<name>普罗提诺的古典和奥古斯丁的现代</name>
 		<date>2013-08-15</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院102</location>
 		<building>14</building>
 		<type>2</type>
@@ -1778,7 +1778,7 @@
 		<speakertitle>浙江大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>128</id>
@@ -1792,7 +1792,7 @@
 		<speakertitle>上海音像资料馆研究馆员、导演</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>129</id>
@@ -1806,13 +1806,13 @@
 		<speakertitle>日本熊本学园大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>130</id>
 		<name>南宋经济的实力、活力和潜力</name>
 		<date>2013-08-27</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
 		<type>2</type>
@@ -1820,13 +1820,13 @@
 		<speakertitle>中国宋史研究会副会长、北京师范大学特聘教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>131</id>
 		<name>历史与距离的探讨——以法国史为对象</name>
 		<date>2013-08-31</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院102</location>
 		<building>14</building>
 		<type>2</type>
@@ -1834,7 +1834,7 @@
 		<speakertitle>北京大学历史系教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>132</id>
@@ -1848,7 +1848,7 @@
 		<speakertitle>复旦大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>133</id>
@@ -1862,13 +1862,13 @@
 		<speakertitle>《高校学报文摘》副编审</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>134</id>
 		<name>《犹太战史》与后圣殿时期犹太民族身分的失落与重建</name>
 		<date>2013-09-11</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
 		<type>2</type>
@@ -1876,13 +1876,13 @@
 		<speakertitle>上海大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>135</id>
 		<name>青年电影 让梦想飞</name>
 		<date>2013-09-15</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院102</location>
 		<building>14</building>
 		<type>2</type>
@@ -1890,7 +1890,7 @@
 		<speakertitle>电影编剧、导演、影评人、《青年电影手册》主编</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>136</id>
@@ -1904,7 +1904,7 @@
 		<speakertitle>首都师范大学文学院教授、博导</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>137</id>
@@ -1918,13 +1918,13 @@
 		<speakertitle>中国社会科学院名誉院士、著名民间宗教史家</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>138</id>
 		<name>乐府诗的文学与文献</name>
 		<date>2013-09-27</date>
-		<time>13:30</time>
+		<time>13:30:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
 		<type>2</type>
@@ -1932,7 +1932,7 @@
 		<speakertitle>首都师范大学教授</speakertitle>
 		<islike>0</islike>
 		<price>0</price>
-		<description>null</description>
+		<description>现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域.</description>
 	</row>
 	<row>
 		<id>139</id>
@@ -1952,7 +1952,7 @@
 		<id>140</id>
 		<name>《听风者》</name>
 		<date>2013-07-25</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -1967,7 +1967,7 @@
 		<id>141</id>
 		<name>《一天之后》</name>
 		<date>2013-07-30</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -1982,7 +1982,7 @@
 		<id>142</id>
 		<name>《敢死队2》</name>
 		<date>2013-08-01</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -1997,7 +1997,7 @@
 		<id>143</id>
 		<name>《一场风花雪月的事》</name>
 		<date>2013-08-6</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2011,7 +2011,7 @@
 		<id>144</id>
 		<name>《全面回忆》</name>
 		<date>2013-08-08</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2026,7 +2026,7 @@
 		<id>145</id>
 		<name>《二次曝光》</name>
 		<date>2013-08-13</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2042,7 +2042,7 @@
 		<id>146</id>
 		<name>《致命急件》</name>
 		<date>2013-08-15</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2058,7 +2058,7 @@
 		<id>147</id>
 		<name>《寒战》</name>
 		<date>2013-08-20</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2072,7 +2072,7 @@
 		<id>148</id>
 		<name>《五星上将》</name>
 		<date>2013-08-22</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2086,7 +2086,7 @@
 		<id>149</id>
 		<name>《诡婚》</name>
 		<date>2013-08-27</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2101,7 +2101,7 @@
 		<id>150</id>
 		<name>《愤怒的小孩》</name>
 		<date>2013-08-29</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2115,7 +2115,7 @@
 		<id>151</id>
 		<name>《在路上》</name>
 		<date>2013-09-3</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2130,7 +2130,7 @@
 		<id>152</id>
 		<name>《白雪公主与猎人》</name>
 		<date>2013-09-5</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2145,7 +2145,7 @@
 		<id>153</id>
 		<name>《凶间雪山》</name>
 		<date>2013-09-10</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2160,7 +2160,7 @@
 		<id>154</id>
 		<name>《午夜微博》</name>
 		<date>2013-09-12</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2175,7 +2175,7 @@
 		<id>155</id>
 		<name>《黑暗阴影》</name>
 		<date>2013-09-17</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2190,7 +2190,7 @@
 		<id>156</id>
 		<name>《穿靴子的猫》</name>
 		<date>2013-09-19</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2205,7 +2205,7 @@
 		<id>157</id>
 		<name>《十二生肖》</name>
 		<date>2013-09-24</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2220,7 +2220,7 @@
 		<id>158</id>
 		<name>《一代宗师》</name>
 		<date>2013-09-26</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2235,7 +2235,7 @@
 		<id>159</id>
 		<name>歌剧《茶花女》</name>
 		<date>2013-07-18</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2249,7 +2249,7 @@
 		<id>160</id>
 		<name>舞剧《一起跳舞吧》</name>
 		<date>2013-07-26</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2263,7 +2263,7 @@
 		<id>161</id>
 		<name>芭蕾《天鹅湖》</name>
 		<date>2013-07-31</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2277,7 +2277,7 @@
 		<id>162</id>
 		<name>弗拉门戈舞剧《卡门》</name>
 		<date>2013-08-5</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2291,7 +2291,7 @@
 		<id>163</id>
 		<name>大戏《飞鱼王》</name>
 		<date>2013-08-09</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2305,7 +2305,7 @@
 		<id>164</id>
 		<name>喜剧《市井魔都》</name>
 		<date>2013-08-12</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2325,7 +2325,7 @@
 		<id>165</id>
 		<name>舞台剧《那一夜，在旅途中说相声》</name>
 		<date>2013-08-17</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2339,7 +2339,7 @@
 		<id>166</id>
 		<name>歌剧《弄臣》</name>
 		<date>2013-08-21</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2353,7 +2353,7 @@
 		<id>167</id>
 		<name>新概念越剧《江南好人》</name>
 		<date>2013-08-25</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2367,7 +2367,7 @@
 		<id>168</id>
 		<name>越剧《柳永》</name>
 		<date>2013-08-28</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2381,7 +2381,7 @@
 		<id>169</id>
 		<name>芭蕾《吉赛尔》</name>
 		<date>2013-08-31</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2395,7 +2395,7 @@
 		<id>170</id>
 		<name>京剧《伍子胥》</name>
 		<date>2013-09-02</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2409,7 +2409,7 @@
 		<id>171</id>
 		<name>《爱的记忆》</name>
 		<date>2013-09-08</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2423,7 +2423,7 @@
 		<id>172</id>
 		<name>音乐剧《和谐：生命的乐章》</name>
 		<date>2013-09-13</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2437,7 +2437,7 @@
 		<id>173</id>
 		<name>歌剧《托斯卡》</name>
 		<date>2013-09-18</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2452,7 +2452,7 @@
 		<id>174</id>
 		<name>炫动青春——美国百人弦舞秀</name>
 		<date>2013-09-23</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2466,7 +2466,7 @@
 		<id>175</id>
 		<name>芭蕾《睡美人》</name>
 		<date>2013-09-28</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>
@@ -2480,7 +2480,7 @@
 		<id>176</id>
 		<name>音乐剧精选荟萃《热辣百老汇》</name>
 		<date>2013-09-30</date>
-		<time>18:30</time>
+		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
 		<type>1</type>

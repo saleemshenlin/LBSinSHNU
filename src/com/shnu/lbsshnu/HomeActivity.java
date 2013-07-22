@@ -1,5 +1,6 @@
 package com.shnu.lbsshnu;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,38 @@ public class HomeActivity extends BaseActivity {
 		openData();
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		simpleSideDrawer.toggleRightDrawer();
+		LBSApplication.refreshMap();
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+		LBSApplication.getmMapControl().getMap().close();
+		LBSApplication.getmMapControl().getMap().dispose();
+		LBSApplication.getmMapControl().dispose();
+		LBSApplication.getmWorkspace().close();
+		LBSApplication.getmWorkspace().dispose();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0) {
+			if (resultCode == 0) {
+				if (data != null) {
+					Bundle bundle = data.getExtras();
+					String str = bundle.getString("TAG");
+					Log.d(TAG, str);
+				}
+			}
+		}
+	}
+
 	/*
 	 * 初始化启动 定位api
 	 */
@@ -70,22 +103,6 @@ public class HomeActivity extends BaseActivity {
 		addressTextView = (TextView) findViewById(R.id.txtAddress);
 		setActivityRightSilder();
 		setWifiLayer();
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		LBSApplication.refreshMap();
-	}
-
-	protected void onDestroy() {
-		super.onDestroy();
-		// LBSApplication.getmMapControl().getMap().close();
-		// LBSApplication.getmMapControl().getMap().dispose();
-		// LBSApplication.getmMapControl().dispose();
-		// LBSApplication.getmWorkspace().close();
-		// LBSApplication.getmWorkspace().dispose();
 	}
 
 	/*
@@ -387,4 +404,5 @@ public class HomeActivity extends BaseActivity {
 		}
 
 	}
+
 }

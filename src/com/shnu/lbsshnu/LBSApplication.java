@@ -35,6 +35,7 @@ public class LBSApplication extends Application {
 	private static TrackingLayer mTrackingLayer;
 	private static Layers mlayers;
 	private static ActivityData activityData;
+	private static int requestCode = 0;
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -248,6 +249,14 @@ public class LBSApplication extends Application {
 	public static ActivityData getActivityData() {
 		activityData = new ActivityData(getContext());
 		return activityData;
+	}
+
+	public static int getRequestCode() {
+		return requestCode;
+	}
+
+	public static void setRequestCode(int requestCode) {
+		LBSApplication.requestCode = requestCode;
 	}
 
 }

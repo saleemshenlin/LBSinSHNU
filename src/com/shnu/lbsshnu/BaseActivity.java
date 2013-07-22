@@ -121,7 +121,7 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "0");
 				intent.putExtras(bundleDataBundle);
-				startActivity(intent);
+				startActivityForResult(intent, LBSApplication.getRequestCode());
 			}
 		});
 		playLinear.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +132,7 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "1");
 				intent.putExtras(bundleDataBundle);
-				startActivity(intent);
+				startActivityForResult(intent, LBSApplication.getRequestCode());
 			}
 		});
 		courseLinear.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +143,7 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "2");
 				intent.putExtras(bundleDataBundle);
-				startActivity(intent);
+				startActivityForResult(intent, LBSApplication.getRequestCode());
 			}
 		});
 	}

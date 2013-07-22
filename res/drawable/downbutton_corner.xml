@@ -4,14 +4,14 @@
 
     <gradient
         android:angle="90"
-        android:endColor="#c0000000"
-        android:startColor="#c0000000" />
- <!-- 背景颜色渐变 -->
+        android:endColor="#000"
+        android:startColor="#000" />
+    <!-- 背景颜色渐变 -->
     <stroke
-        android:dashGap="2dp"
+        android:dashGap="0dp"
         android:dashWidth="2dp"
         android:width="2dp"
-        android:color="#FF00ff00" >
+        android:color="#fff" >
     </stroke>
     <!-- 描边 -->
     <corners
@@ -19,6 +19,6 @@
         android:bottomRightRadius="5dp"
         android:topLeftRadius="5dp"
         android:topRightRadius="5dp" />
- <!-- 设置圆角 -->
+    <!-- 设置圆角 -->
 
 </shape>

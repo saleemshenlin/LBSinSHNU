@@ -16,7 +16,8 @@
     <string name="location">我的位置(精度：10米)</string>
     <string name="geocoding">上海师范大学</string>
     <string name="querysurrounding">周边查询</string>
-    <string name="wifiswitch">WIfi层</string>
+    <string name="swtwifi">WLAN层</string>
+    <string name="swtlocation">定位</string>
     <string name="txtactivity">活动公告</string>
     <string name="txtlecture">学术讲座</string>
     <string name="txtplay">电影演出</string>

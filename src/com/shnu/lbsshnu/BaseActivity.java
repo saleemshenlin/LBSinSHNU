@@ -19,6 +19,7 @@ public class BaseActivity extends Activity {
 	LBSApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
+	Switch locationSwitch;
 	RelativeLayout locationImageView;
 	TextView accuracyTextView;
 	TextView addressTextView;
@@ -41,8 +42,8 @@ public class BaseActivity extends Activity {
 	 */
 	public void setSliderActionBar() {
 		simpleSideDrawer = new SimpleSideDrawer(this);
-		simpleSideDrawer.setLeftBehindContentView(R.layout.userpref);
-		simpleSideDrawer.setRightBehindContentView(R.layout.actionmore);
+		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
+		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
 		ImageView userImageView = (ImageView) findViewById(R.id.userpref);
 		ImageView moreImageView = (ImageView) findViewById(R.id.actionmore);
 		userImageView.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +85,7 @@ public class BaseActivity extends Activity {
 	 * 设置wifi层
 	 */
 	public void setWifiLayer() {
-		wifiLayerSwitch = (Switch) findViewById(R.id.wifiswitch);
+		wifiLayerSwitch = (Switch) findViewById(R.id.swtWifi);
 		wifiLayerSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -102,6 +103,34 @@ public class BaseActivity extends Activity {
 							LBSApplication.refreshMap();
 						}
 					}
+				});
+	}
+
+	/*
+	 * 设置是否开启定位
+	 */
+	public void setLocation() {
+		locationSwitch = (Switch) findViewById(R.id.swtLocation);
+		locationSwitch
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						if (isChecked) {
+							LBSApplication.getLocationApi().startLocate(
+									LBSApplication.getLocationClient());
+							LBSApplication.setStart(true);
+						} else {
+							LBSApplication.getLocationApi().stopLocate(
+									LBSApplication.getLocationClient());
+							LBSApplication.setStart(false);
+						}
+						LBSApplication.clearTrackingLayer();
+						LBSApplication.refreshMap();
+					}
+
 				});
 	}
 

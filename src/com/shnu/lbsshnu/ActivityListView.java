@@ -19,8 +19,9 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 		CommonUIFragment.OnFragmeng2ActivityListener {
 
 	private ViewPager viewPager;
-	public static final int MAX_TAB_SIZE = 3;
-	public static final String ARGUMENTS_NAME = "Index";
+	private static final int MAX_TAB_SIZE = 3;
+	private static final String ARGUMENTS_NAME = "Index";
+	private static final String TAG = "ActivityListView";
 	private TabFragmentPagerAdapter tabFragmentPagerAdapter;
 	Intent intent;
 	static Bundle tabBundle;
@@ -157,16 +158,17 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	 * @see com.shnu.lbsshnu.CommonUIFragment.OnHeadlineSelectedListener#
 	 * onArticleSelected(long)
 	 */
-	public void onArticleSelected(long position) {
-		long value = position;
-		Log.e("postion", value + "");
+	public void onArticleSelected(long position, long id, long type) {
 		Intent intent = new Intent(this, HomeActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		Bundle bundle = new Bundle();
-		bundle.putString("TAG", value + "");
+		bundle.putInt("buildingNum", (int) position);
+		bundle.putInt("id", (int) id);
+		bundle.putInt("type", (int) type);
 		intent.putExtras(bundle);
-		setResult(0, intent);
+		Log.i(TAG, "buildingNum: " + position + " id: " + id);
+		setResult(LBSApplication.getRequestCode(), intent);
 		finish();
 	}
 }

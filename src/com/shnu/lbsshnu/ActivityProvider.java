@@ -17,6 +17,17 @@ public class ActivityProvider extends ContentProvider {
 	private static final String TAG = "ActivityProvider";
 
 	@Override
+	public boolean onCreate() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)删除数据
+	 * 
+	 * @see android.content.ContentProvider#delete(android.net.Uri,
+	 * java.lang.String, java.lang.String[])
+	 */
+	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		long id = this.getId(uri);
 		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
@@ -33,13 +44,12 @@ public class ActivityProvider extends ContentProvider {
 		}
 	}
 
-	@Override
-	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
-		return this.getId(uri) < 0 ? MULTIPLE_RECORDS_MIME_TYPE
-				: SINGLE_RECORD_MIME_TYPE;
-	}
-
+	/*
+	 * (non-Javadoc)插入数据
+	 * 
+	 * @see android.content.ContentProvider#insert(android.net.Uri,
+	 * android.content.ContentValues)
+	 */
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
@@ -59,11 +69,13 @@ public class ActivityProvider extends ContentProvider {
 		}
 	}
 
-	@Override
-	public boolean onCreate() {
-		return true;
-	}
-
+	/*
+	 * (non-Javadoc)查询数据
+	 * 
+	 * @see android.content.ContentProvider#query(android.net.Uri,
+	 * java.lang.String[], java.lang.String, java.lang.String[],
+	 * java.lang.String)
+	 */
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
@@ -85,6 +97,12 @@ public class ActivityProvider extends ContentProvider {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)更新数据
+	 * 
+	 * @see android.content.ContentProvider#update(android.net.Uri,
+	 * android.content.ContentValues, java.lang.String, java.lang.String[])
+	 */
 	@Override
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
@@ -104,6 +122,9 @@ public class ActivityProvider extends ContentProvider {
 		}
 	}
 
+	/*
+	 * 获取查询Uri中是的有id
+	 */
 	private long getId(Uri uri) {
 		String lastPathSegment = uri.getLastPathSegment(); //
 		if (lastPathSegment != null) {
@@ -116,4 +137,15 @@ public class ActivityProvider extends ContentProvider {
 		return -1; //
 	}
 
+	/*
+	 * (non-Javadoc)根据id判读查询类型
+	 * 
+	 * @see android.content.ContentProvider#getType(android.net.Uri)
+	 */
+	@Override
+	public String getType(Uri uri) {
+		// TODO Auto-generated method stub
+		return this.getId(uri) < 0 ? MULTIPLE_RECORDS_MIME_TYPE
+				: SINGLE_RECORD_MIME_TYPE;
+	}
 }

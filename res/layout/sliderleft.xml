@@ -1,0 +1,59 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/leftBehindMenuScroll" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/repeat_bg" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="@string/app_name" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/repeat_bg"
+            android:orientation="vertical" >
+
+            <Switch
+                android:id="@+id/swtLocation"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="right"
+                android:layout_margin="8dp"
+                android:checked="true"
+                android:text="@string/swtlocation"
+                android:textColor="#ccc"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/repeat_bg"
+            android:orientation="vertical" >
+
+            <Switch
+                android:id="@+id/swtWifi"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="right"
+                android:layout_margin="8dp"
+                android:text="@string/swtwifi"
+                android:textColor="#ccc"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

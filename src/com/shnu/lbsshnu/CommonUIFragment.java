@@ -34,6 +34,7 @@ public class CommonUIFragment extends Fragment {
 	private Cursor cursor;
 	private boolean isLike = false;
 	private int index;
+	private int type;
 	private int buildingNum = 0;
 	private SimpleCursorAdapter adapter;
 	private final String[] FROM = { ActivityData.C_NAME,
@@ -206,7 +207,7 @@ public class CommonUIFragment extends Fragment {
 	 * 容器Activity必须实现这个接口，用来传递消息
 	 */
 	public interface OnFragmeng2ActivityListener {
-		public void onArticleSelected(long position);
+		public void onArticleSelected(long position, long id, long type);
 	}
 
 	/*
@@ -235,7 +236,8 @@ public class CommonUIFragment extends Fragment {
 	/*
 	 * popupwindow绑数据
 	 */
-	private void bindPopupData(long id, View view, final PopupWindow popupwindow) {
+	private void bindPopupData(final long id, View view,
+			final PopupWindow popupwindow) {
 		try {
 			TextView txtDes = (TextView) view.findViewById(R.id.txtDecription);
 			TextView txtTitle = (TextView) view
@@ -253,7 +255,8 @@ public class CommonUIFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					onFragmeng2ActivityListener.onArticleSelected(buildingNum);
+					onFragmeng2ActivityListener.onArticleSelected(buildingNum,
+							id, type);
 					popupwindow.dismiss();
 				}
 			});
@@ -279,6 +282,8 @@ public class CommonUIFragment extends Fragment {
 						.getColumnIndex(ActivityData.C_DESCRIPTION)));
 				buildingNum = detailCursor.getInt(detailCursor
 						.getColumnIndex(ActivityData.C_BUILDING));
+				type = detailCursor.getInt(detailCursor
+						.getColumnIndex(ActivityData.C_TYPE));
 				if (detailCursor.getInt(detailCursor
 						.getColumnIndex(ActivityData.C_ISLIKE)) == 1) {
 					isLike = true;

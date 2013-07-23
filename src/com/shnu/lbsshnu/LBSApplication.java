@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.baidu.location.LocationClient;
 import com.supermap.data.Environment;
 import com.supermap.data.Point2D;
 import com.supermap.data.Workspace;
@@ -36,6 +37,8 @@ public class LBSApplication extends Application {
 	private static Layers mlayers;
 	private static ActivityData activityData;
 	private static int requestCode = 0;
+	private static boolean isStart = false;
+	private static LocationClient locationClient;
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -94,15 +97,8 @@ public class LBSApplication extends Application {
 	}
 
 	/*
-	 * 保留两位小数
-	 */
-	public static float twoDecimal(float value) {
-		final float valueTwoDecimal = (float) (Math.round(value * 100)) / 100;// (这里的100就是2位小数点,如果要其它位,如4位,这里两个100改成10000)
-		return valueTwoDecimal;
-	}
-
-	/*
-	 * 判断是否联网
+	 * 
+	 * /* 判断是否联网
 	 */
 	public static boolean isNetWork() {
 		ConnectivityManager cwjManager = (ConnectivityManager) CONTEXT
@@ -127,11 +123,18 @@ public class LBSApplication extends Application {
 	}
 
 	/*
-	 * 清除上一次的定位buffer
+	 * 清除跟踪层
 	 */
 	public static void clearTrackingLayer() {
 		mTrackingLayer.clear();
 		refreshMap();
+	}
+
+	/*
+	 * 清除点标注
+	 */
+	public static void clearCallout() {
+		LBSApplication.mMapView.removeAllCallOut();
 	}
 
 	/*
@@ -259,4 +262,20 @@ public class LBSApplication extends Application {
 		LBSApplication.requestCode = requestCode;
 	}
 
+	public static LocationClient getLocationClient() {
+		return locationClient;
+	}
+
+	public static void setLocationClient(Context context) {
+		LocationClient locationClient = new LocationClient(context);
+		LBSApplication.locationClient = locationClient;
+	}
+
+	public static boolean isStart() {
+		return isStart;
+	}
+
+	public static void setStart(boolean isStart) {
+		LBSApplication.isStart = isStart;
+	}
 }

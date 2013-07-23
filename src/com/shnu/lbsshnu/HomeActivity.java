@@ -8,22 +8,24 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.supermap.data.CursorType;
 import com.supermap.data.DatasetVector;
-import com.supermap.data.GeoPoint;
-import com.supermap.data.Geometrist;
 import com.supermap.data.Point2D;
+import com.supermap.data.QueryParameter;
 import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
+import com.supermap.mapping.CallOut;
+import com.supermap.mapping.CalloutAlignment;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
@@ -31,8 +33,9 @@ import com.supermap.mapping.MapView;
 public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
 	private DrawPointAndBuffer drawPointAndBuffer;
-	private BaiduLocationListener baiduLocationListener = new BaiduLocationListener();
-	private LocationClient locationClient;
+	private LocationListener baiduLocationListener = new LocationListener();
+	private Query queryViaSuperMap;
+	private RelativeLayout mapRelativeLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +69,14 @@ public class HomeActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == 0) {
-			if (resultCode == 0) {
-				if (data != null) {
+		if (data != null) {
+			if (requestCode == 0) {
+				if (resultCode == 0) {
 					Bundle bundle = data.getExtras();
-					String str = bundle.getString("TAG");
-					Log.d(TAG, str);
+					int building = bundle.getInt("buildingNum");
+					int id = bundle.getInt("id");
+					int type = bundle.getInt("type");
+					activityLocate(building, id, type);
 				}
 			}
 		}
@@ -81,9 +86,11 @@ public class HomeActivity extends BaseActivity {
 	 * 初始化启动 定位api
 	 */
 	private void initLocationAPi() {
-		locationClient = new LocationClient(getApplicationContext());
-		locationClient.registerLocationListener(baiduLocationListener);
-		LBSApplication.getLocationApi().startLocate(locationClient);
+		LBSApplication.setLocationClient(getApplicationContext());
+		LBSApplication.getLocationClient().registerLocationListener(
+				baiduLocationListener);
+		LBSApplication.getLocationApi().startLocate(
+				LBSApplication.getLocationClient());
 
 	}
 
@@ -93,16 +100,18 @@ public class HomeActivity extends BaseActivity {
 	private void initView() {
 		handler = new Handler();
 		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
+		mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onLocated();
+				onLocated(false);
 			}
 		});
 		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
 		addressTextView = (TextView) findViewById(R.id.txtAddress);
 		setActivityRightSilder();
 		setWifiLayer();
+		setLocation();
 	}
 
 	/*
@@ -167,14 +176,12 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		public void scaleChanged(double scale) {
 			Log.i(TAG, "Scale:" + scale);
-			// LBSApplication.getLocationApi().addAccuracyBuffer(
-			// LBSApplication.getLastlocationPoint2d(), (float) scale);
-			// LBSApplication.refreshMap();
+			LBSApplication.refreshMap();
 		}
 
 		@Override
 		public void boundsChanged(Point2D point2d) {
-			// TODO Auto-generated method stub
+			LBSApplication.refreshMap();
 
 		}
 	};
@@ -182,18 +189,26 @@ public class HomeActivity extends BaseActivity {
 	/*
 	 * 定位后操作
 	 */
-	private void onLocated() {
+	private void onLocated(boolean hasDetail) {
 
-		RelativeLayout mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
+		if (!hasDetail) {
+			Button detailButton = (Button) findViewById(R.id.btnDetail);
+			detailButton.setVisibility(View.GONE);
+		}
 		if (!isPopUp) {
 			new GeoCoding().execute();
 			accuracyTextView.setText("我的位置(精度:"
 					+ LBSApplication.save2Point(LBSApplication
 							.getLocationAccuracy()) + "米)");
-			viewPopup(0, -LBSApplication.Dp2Px(this, 96), mapRelativeLayout);
+			locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
+					mapRelativeLayout);
 			isPopUp = true;
+			if (LBSApplication.getLastlocationPoint2d() != null)
+				LBSApplication.getmMapControl().getMap()
+						.setCenter(LBSApplication.getLastlocationPoint2d());
 		} else {
-			viewPopup(-LBSApplication.Dp2Px(this, 96), 0, mapRelativeLayout);
+			locationViewPopup(-LBSApplication.Dp2Px(this, 50), 0,
+					mapRelativeLayout);
 			isPopUp = false;
 		}
 		Log.d(TAG, "locationPoint2d:"
@@ -202,9 +217,9 @@ public class HomeActivity extends BaseActivity {
 	}
 
 	/*
-	 * 地图框上移
+	 * 定位详细框上移
 	 */
-	private void viewPopup(final float p1, final float p2,
+	private void locationViewPopup(final float p1, final float p2,
 			final RelativeLayout view) {
 		TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
 		// animation.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -234,10 +249,6 @@ public class HomeActivity extends BaseActivity {
 						"Left: " + view.getLeft() + "Top: " + view.getTop()
 								+ "Right: " + view.getRight() + "Bottom: "
 								+ view.getBottom());
-
-				if (LBSApplication.getLastlocationPoint2d() != null)
-					LBSApplication.getmMapControl().getMap()
-							.setCenter(LBSApplication.getLastlocationPoint2d());
 				locationImageView.setEnabled(true);
 			}
 		});
@@ -273,14 +284,11 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		public void run() {
 			try {
-				LBSApplication.getLocationApi().addCallOutBall(
+				LBSApplication.getLocationApi().drawLocationPoint(
 						LBSApplication.getLastlocationPoint2d(),
 						LBSApplication.getmMapView(),
-						LBSApplication.getContext());
-				LBSApplication.getLocationApi().addAccuracyBuffer(
-						LBSApplication.getLastlocationPoint2d(),
+						LBSApplication.getContext(),
 						LBSApplication.getLocationAccuracy());
-
 			} catch (Exception e) {
 				Log.e(TAG, e.toString());
 				Log.e(TAG, "locationPoint2d:"
@@ -293,7 +301,7 @@ public class HomeActivity extends BaseActivity {
 	};
 
 	/*
-	 * 位置显示 By 缓冲区查询 防止等待查询结果而未响应
+	 * Geocoding 防止等待查询结果而未响应
 	 */
 	private class GeoCoding extends AsyncTask<String, Integer, String> {
 		HomeActivity homeActivity = HomeActivity.this;
@@ -315,37 +323,9 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		protected String doInBackground(String... params) {
 			try {
-				Layer layer = null;
-				layer = LBSApplication.getmMapControl().getMap().getLayers()
-						.get(15);
-				String locationAddresString = "";
-				GeoPoint point = new GeoPoint(
-						LBSApplication.getLastlocationPoint2d());
-				// GeoPoint point = new GeoPoint(121.416781751312,
-				// 31.1617360260643);
-				DatasetVector datasetvector = (DatasetVector) layer
-						.getDataset();
-				System.out.println(layer.getName());
-				Recordset recordset = datasetvector.getRecordset(false,
-						CursorType.STATIC);
-				for (int i = 0; i < recordset.getRecordCount(); i++) {
-					if (i == 0) {
-						recordset.moveFirst();
-					} else {
-						recordset.moveNext();
-					}
-					boolean isTrue = Geometrist.canContain(
-							recordset.getGeometry(), point);
-					if (isTrue) {
-						locationAddresString = " , "
-								+ recordset.getFieldValue("Name").toString();
-						break;
-					}
-				}
-				// 释放资源
-				Log.i("geoCoding", locationAddresString);
-				recordset.dispose();
-				return locationAddresString;
+				queryViaSuperMap = new Query();
+				String queryResult = queryViaSuperMap.geoCode();
+				return queryResult;
 			} catch (Exception e) {
 				Log.e(TAG + " GeoCoding", e.toString());
 				return null;
@@ -360,7 +340,7 @@ public class HomeActivity extends BaseActivity {
 	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
 	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
 	 */
-	public class BaiduLocationListener implements BDLocationListener {
+	public class LocationListener implements BDLocationListener {
 		@Override
 		public void onReceiveLocation(BDLocation location) {
 			if (location == null)
@@ -405,4 +385,37 @@ public class HomeActivity extends BaseActivity {
 
 	}
 
+	/*
+	 * 活动详情定位
+	 */
+	private void activityLocate(int buildingNum, int id, int type) {
+		Layer mLayer = null;
+		mLayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
+		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
+		try {
+			QueryParameter parameter = new QueryParameter();
+			parameter.setAttributeFilter("Id=" + buildingNum);
+			parameter.setCursorType(CursorType.STATIC);
+
+			Recordset mRecordset = mDatasetVector.query(parameter);
+			mRecordset.moveFirst();
+			Point2D mPoint2d = mRecordset.getGeometry().getInnerPoint();
+			CallOut mCallOut = new CallOut(this);
+			mCallOut.setStyle(CalloutAlignment.BOTTOM);
+			mCallOut.setCustomize(true);
+			ImageView image = new ImageView(this);
+			mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
+			image.setBackgroundResource(R.drawable.ic_mic_pin);
+			mCallOut.setContentView(image);
+			LBSApplication.clearCallout();
+			locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
+					mapRelativeLayout);
+			isPopUp = true;
+			LBSApplication.getmMapControl().getMap().setCenter(mPoint2d);
+			LBSApplication.getmMapView().addCallout(mCallOut);
+			LBSApplication.refreshMap();
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+	}
 }

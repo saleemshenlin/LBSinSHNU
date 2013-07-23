@@ -21,14 +21,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#000"
             android:orientation="vertical"
             android:padding="2dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/sliderbg" >
+                android:background="@drawable/repeat_bg" >
 
                 <TextView
                     android:id="@+id/txtActivityTitle"
@@ -71,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/sliderbg"
+                android:background="@drawable/repeat_bg"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -81,9 +82,10 @@
             <TextView
                 android:id="@+id/txtSpeakerTitle"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/sliderbg"
+                android:background="@drawable/repeat_bg"
+                android:minHeight="32dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -95,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/sliderbg"
+                android:background="@drawable/repeat_bg"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -108,7 +110,7 @@
                 android:layout_height="32dp"
                 android:layout_marginBottom="1dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/sliderbg"
+                android:background="@drawable/repeat_bg"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -119,7 +121,7 @@
                 android:id="@+id/txtDecription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/sliderbg"
+                android:background="@drawable/repeat_bg"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:scrollbars="vertical"

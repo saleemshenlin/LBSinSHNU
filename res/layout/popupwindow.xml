@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="@drawable/popupbg"
+    android:background="@drawable/popup_bg"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="2dp" >

@@ -8,9 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
@@ -31,11 +28,9 @@ public class CommonUIFragment extends Fragment {
 	private static final String TAG = "CommonUI";
 	private ListView activityListView;
 	private View rootView;
-	private Cursor cursor;
-	private boolean isLike = false;
-	private int index;
-	private int type;
-	private int buildingNum = 0;
+	private Cursor itemCursor;
+	private int indexTab;
+	private static ActivityClass activity = new ActivityClass();
 	private SimpleCursorAdapter adapter;
 	private final String[] FROM = { ActivityData.C_NAME,
 			ActivityData.C_LOCATION, ActivityData.C_DATE };
@@ -46,7 +41,7 @@ public class CommonUIFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		index = getArguments().getInt("Index");
+		indexTab = getArguments().getInt("Index");
 		rootView = inflater
 				.inflate(R.layout.activitylistview, container, false);
 		activityListView = (ListView) rootView.findViewById(R.id.activityList);
@@ -69,15 +64,20 @@ public class CommonUIFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		initCursorLoader(FROM, getQuerySection(index));
+	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 		try {
 			ActivityProvider activityProvider = new ActivityProvider();
-			cursor = activityProvider.query(ActivityProvider.CONTENT_URI, null,
-					getQuerySection(index), null, getOrderBy());
-			int num = cursor.getCount();
+			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
+					null, getQuerySection(indexTab), null, getOrderBy());
+			int num = itemCursor.getCount();
 			Log.i(TAG, "ActivityProvider cursor" + num);
 			adapter = new SimpleCursorAdapter(LBSApplication.getContext(),
-					R.layout.row, cursor, FROM, TO,
+					R.layout.row, itemCursor, FROM, TO,
 					CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 			adapter.setViewBinder(LIST_VIEW_BINDER);
 			activityListView.setAdapter(adapter);
@@ -86,20 +86,16 @@ public class CommonUIFragment extends Fragment {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					// Toast.makeText(getActivity(), position + " , " + id,
-					// Toast.LENGTH_SHORT).show();
 					showPopupwindows(id);
 				}
 			});
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
-	}
-
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
+		if (ActivityListView.getActivityId() != 0) {
+			showPopupwindows(ActivityListView.getActivityId());
+			ActivityListView.setActivityId(0);
+		}
 	}
 
 	@Override
@@ -107,37 +103,6 @@ public class CommonUIFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		LBSApplication.getActivityData().closeDatabase();
-	}
-
-	public void initCursorLoader(final String[] projection,
-			final String selection) {
-		getActivity().getSupportLoaderManager().initLoader(0, null,
-				new LoaderCallbacks<Cursor>() {
-
-					@Override
-					public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-						Log.d(TAG, "on create loader");
-						CursorLoader cursorLoader = new CursorLoader(
-								getActivity(), ActivityProvider.CONTENT_URI,
-								projection, selection, null, getOrderBy());
-						return cursorLoader;
-					}
-
-					@Override
-					public void onLoadFinished(Loader<Cursor> loader,
-							Cursor cursor) {
-						if (cursor != null) {
-							adapter.swapCursor(cursor);
-						}
-					}
-
-					@Override
-					public void onLoaderReset(Loader<Cursor> loader) {
-						// TODO Auto-generated method stub
-						Log.d(TAG, "on loader reset");
-						adapter.swapCursor(null);
-					}
-				});
 	}
 
 	/*
@@ -162,6 +127,10 @@ public class CommonUIFragment extends Fragment {
 			return sql;
 		case 2:
 			sql = ActivityData.C_TYPE + " = 3";
+			return sql;
+		case 3:
+			sql = ActivityData.C_DATE + " > (SELECT DATE('now')) and "
+					+ ActivityData.C_ISLIKE + " = 1";
 			return sql;
 		default:
 			return null;
@@ -197,6 +166,7 @@ public class CommonUIFragment extends Fragment {
 			popupWindow.setAnimationStyle(R.anim.popupanimation);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
+			popupWindow.setAnimationStyle(R.style.PopupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -207,7 +177,7 @@ public class CommonUIFragment extends Fragment {
 	 * 容器Activity必须实现这个接口，用来传递消息
 	 */
 	public interface OnFragmeng2ActivityListener {
-		public void onArticleSelected(long position, long id, long type);
+		public void onArticleSelected(ActivityClass activity);
 	}
 
 	/*
@@ -255,8 +225,7 @@ public class CommonUIFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					onFragmeng2ActivityListener.onArticleSelected(buildingNum,
-							id, type);
+					onFragmeng2ActivityListener.onArticleSelected(activity);
 					popupwindow.dismiss();
 				}
 			});
@@ -265,34 +234,46 @@ public class CommonUIFragment extends Fragment {
 			Cursor detailCursor = activityProvider.query(queryUri, null, null,
 					null, getOrderBy());
 			if (detailCursor.moveToFirst()) {
-				txtTitle.setText(detailCursor.getString(detailCursor
+				activity.setActivityId((int) id);
+				activity.setActivityName(detailCursor.getString(detailCursor
 						.getColumnIndex(ActivityData.C_NAME)));
-				txtSpeak.setText(detailCursor.getString(detailCursor
+				activity.setActivityDate(detailCursor.getString(detailCursor
+						.getColumnIndex(ActivityData.C_DATE)));
+				activity.setActivityTime(detailCursor.getString(detailCursor
+						.getColumnIndex(ActivityData.C_TIME)));
+				activity.setActivityLocation(detailCursor
+						.getString(detailCursor
+								.getColumnIndex(ActivityData.C_LOCATION)));
+				activity.setActivityBuilding(detailCursor.getInt(detailCursor
+						.getColumnIndex(ActivityData.C_BUILDING)));
+				activity.setActivityType(detailCursor.getInt(detailCursor
+						.getColumnIndex(ActivityData.C_TYPE)));
+				activity.setActivitySpeaker(detailCursor.getString(detailCursor
 						.getColumnIndex(ActivityData.C_SPEAKER)));
-				txtSpeakTitle.setText(detailCursor.getString(detailCursor
-						.getColumnIndex(ActivityData.C_SPEAKERTITLE)));
-				txtDate.setText(detailCursor.getString(detailCursor
-						.getColumnIndex(ActivityData.C_DATE))
-						+ " "
-						+ cursor.getString(detailCursor
-								.getColumnIndex(ActivityData.C_TIME)));
-				txtPlace.setText(detailCursor.getString(detailCursor
-						.getColumnIndex(ActivityData.C_LOCATION)));
-				txtDes.setText(detailCursor.getString(detailCursor
-						.getColumnIndex(ActivityData.C_DESCRIPTION)));
-				buildingNum = detailCursor.getInt(detailCursor
-						.getColumnIndex(ActivityData.C_BUILDING));
-				type = detailCursor.getInt(detailCursor
-						.getColumnIndex(ActivityData.C_TYPE));
+				activity.setActivitySpeakerTitle(detailCursor
+						.getString(detailCursor
+								.getColumnIndex(ActivityData.C_SPEAKERTITLE)));
+				activity.setActivityDescription(detailCursor
+						.getString(detailCursor
+								.getColumnIndex(ActivityData.C_DESCRIPTION)));
+				txtTitle.setText(activity.getActivityName());
+				txtSpeak.setText(activity.getActivitySpeaker());
+				txtSpeakTitle.setText(activity.getActivitySpeakerTitle());
+				txtDate.setText(activity.getActivityDate() + " "
+						+ activity.getActivityTime());
+				txtPlace.setText(activity.getActivityLocation());
+				txtDes.setText(activity.getActivityDescription());
 				if (detailCursor.getInt(detailCursor
 						.getColumnIndex(ActivityData.C_ISLIKE)) == 1) {
-					isLike = true;
+					activity.setActivityIsLike(true);
+				} else {
+					activity.setActivityIsLike(false);
 				}
 			}
 			detailCursor.close();
 			final ImageView likeImageView = (ImageView) view
 					.findViewById(R.id.imageLike);
-			if (isLike) {
+			if (activity.isActivityIsLike()) {
 				likeImageView.setImageDrawable(getResources().getDrawable(
 						R.drawable.ic_rate));
 			}
@@ -301,7 +282,7 @@ public class CommonUIFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if (isLike) {
+					if (activity.isActivityIsLike()) {
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_unrate));
 						ContentValues values = new ContentValues();
@@ -309,7 +290,6 @@ public class CommonUIFragment extends Fragment {
 						int num = activityProvider.update(queryUri, values,
 								null, null);
 						Log.d(TAG, num + " rows changed");
-						isLike = false;
 					} else {
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_rate));
@@ -318,7 +298,6 @@ public class CommonUIFragment extends Fragment {
 						int num = activityProvider.update(queryUri, values,
 								null, null);
 						Log.d(TAG, num + " rows changed");
-						isLike = true;
 					}
 				}
 			});

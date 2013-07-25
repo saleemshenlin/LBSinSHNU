@@ -22,8 +22,15 @@
     <string name="txtlecture">学术讲座</string>
     <string name="txtplay">电影演出</string>
     <string name="txtcourse">精品课程</string>
+    <string name="txtlike">我关注的</string>
     <string name="txtsetting">设置</string>
     <string name="detailtitle">活动详细</string>
     <string name="txtdecription">现代测试技术的发展极大地促进了现代科学的发展。他涉及到从我们的日常生活到最尖端的科学的方方面面。因此，了解现代测试技术的发展和应用、掌握一些必要的现代测试技术，是每一个研究生应具备的知识和技能。作为现代测试技术的概述，讲座将介绍分析测试技术的发展史，分析测试技术所应用的领域和所能解决的问题；一些主要的测试技术（包括电化学技术、光分析技术、质谱与能谱技术、显微技术、色谱技术、热分析技术、联用技术等）简单的基本原理和应用领域。 </string>
+    <string name="search_hint">讲座，电影&#8230;</string>
+    <string name="app_label">缓冲区查询</string>
+    <string name="txtbattitle">活动公告</string>
+    <string name="btnmap">地图</string>
+    <string name="btnlist">列表</string>
+    <string name="swtquery">查询结果</string>
 
 </resources>

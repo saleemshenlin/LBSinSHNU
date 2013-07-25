@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="48dp"
     android:background="#ccc"
     android:overScrollMode="ifContentScrolls" >
 
     <ImageView
-        android:id="@+id/userpref"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgUser"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:adjustViewBounds="true"
         android:clickable="true"
         android:contentDescription="@string/app_name"
@@ -21,17 +21,20 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <SearchView
-            android:id="@+id/searchView1"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" >
-        </SearchView>
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/app_name"
+            android:padding="8dp"
+            android:src="@drawable/ic_action_search" />
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/actionmore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgMore"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
         android:adjustViewBounds="true"
         android:clickable="true"
         android:contentDescription="@string/app_name"

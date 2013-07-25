@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GB18030"?>
+<SuperMapCache xmlns:sml="http://www.supermap.com/SuperMapCache/vectorltile">
+<sml:Version>1.300000</sml:Version>
+<sml:NetCachePath/>
+<sml:LocalCachePath/>
+<sml:CacheName>Building@MapData</sml:CacheName>
+<sml:StoreType>MixedFiles</sml:StoreType>
+<sml:Description/>
+<sml:CompressType>ZIP</sml:CompressType>
+<sml:Type>Vector</sml:Type>
+<sml:MipMapTexture>TRUE</sml:MipMapTexture>
+<sml:UpdateDataVersion>false</sml:UpdateDataVersion>
+<sml:Bounds>
+<sml:Left>121.413375</sml:Left>
+<sml:Top>31.163723</sml:Top>
+<sml:Right>121.423647</sml:Right>
+<sml:Bottom>31.158498</sml:Bottom>
+</sml:Bounds>
+<sml:LevelInfo>
+<sml:Level0Width>180</sml:Level0Width>
+<sml:Level0Height>180</sml:Level0Height>
+<sml:Level>15</sml:Level>
+<sml:LevelWidth>16</sml:LevelWidth>
+</sml:LevelInfo>
+</SuperMapCache>

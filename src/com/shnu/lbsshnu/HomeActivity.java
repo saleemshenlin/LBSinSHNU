@@ -5,13 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -36,15 +40,20 @@ public class HomeActivity extends BaseActivity {
 	private LocationListener baiduLocationListener = new LocationListener();
 	private Query queryViaSuperMap;
 	private RelativeLayout mapRelativeLayout;
+	private RelativeLayout locationImageView;
+	private TextView accuracyTextView;
+	private TextView geoCodeTextView;
+	private Button detailButton;
+	private ActivityClass activity;
+	private static boolean hasDetail;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initLocationAPi();
 		setContentView(R.layout.homeactivity);
-		setSliderActionBar();
-		drawPointAndBuffer = new DrawPointAndBuffer();
 		initView();
+		drawPointAndBuffer = new DrawPointAndBuffer();
 		openData();
 	}
 
@@ -52,7 +61,15 @@ public class HomeActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		simpleSideDrawer.toggleRightDrawer();
+		if (!simpleSideDrawer.isClosed()) {
+			simpleSideDrawer.toggleRightDrawer();
+		}
+		if (hasDetail) {
+			activityLocate(activity);
+		}
+		if (!LBSApplication.isSearch()) {
+			setSliderActionBar();
+		}
 		LBSApplication.refreshMap();
 	}
 
@@ -73,10 +90,8 @@ public class HomeActivity extends BaseActivity {
 			if (requestCode == 0) {
 				if (resultCode == 0) {
 					Bundle bundle = data.getExtras();
-					int building = bundle.getInt("buildingNum");
-					int id = bundle.getInt("id");
-					int type = bundle.getInt("type");
-					activityLocate(building, id, type);
+					activity = bundle.getParcelable("activity");
+					hasDetail = true;
 				}
 			}
 		}
@@ -101,6 +116,7 @@ public class HomeActivity extends BaseActivity {
 		handler = new Handler();
 		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
 		mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
+		actionbarView = (LinearLayout) findViewById(R.id.actionbar);
 		locationImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -108,7 +124,9 @@ public class HomeActivity extends BaseActivity {
 			}
 		});
 		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
-		addressTextView = (TextView) findViewById(R.id.txtAddress);
+		geoCodeTextView = (TextView) findViewById(R.id.txtAddress);
+		detailButton = (Button) findViewById(R.id.btnDetail);
+		setSliderActionBar();
 		setActivityRightSilder();
 		setWifiLayer();
 		setLocation();
@@ -192,7 +210,6 @@ public class HomeActivity extends BaseActivity {
 	private void onLocated(boolean hasDetail) {
 
 		if (!hasDetail) {
-			Button detailButton = (Button) findViewById(R.id.btnDetail);
 			detailButton.setVisibility(View.GONE);
 		}
 		if (!isPopUp) {
@@ -200,6 +217,7 @@ public class HomeActivity extends BaseActivity {
 			accuracyTextView.setText("我的位置(精度:"
 					+ LBSApplication.save2Point(LBSApplication
 							.getLocationAccuracy()) + "米)");
+			geoCodeTextView.setText("上海师范大学");
 			locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
 					mapRelativeLayout);
 			isPopUp = true;
@@ -207,9 +225,11 @@ public class HomeActivity extends BaseActivity {
 				LBSApplication.getmMapControl().getMap()
 						.setCenter(LBSApplication.getLastlocationPoint2d());
 		} else {
+			LBSApplication.clearCallout();
 			locationViewPopup(-LBSApplication.Dp2Px(this, 50), 0,
 					mapRelativeLayout);
 			isPopUp = false;
+			hasDetail = false;
 		}
 		Log.d(TAG, "locationPoint2d:"
 				+ LBSApplication.getLastlocationPoint2d().getX() + " , "
@@ -222,7 +242,7 @@ public class HomeActivity extends BaseActivity {
 	private void locationViewPopup(final float p1, final float p2,
 			final RelativeLayout view) {
 		TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
-		// animation.setInterpolator(new AccelerateDecelerateInterpolator());
+		animation.setInterpolator(new AnticipateOvershootInterpolator());
 		animation.setDuration(500);
 		animation.setAnimationListener(new Animation.AnimationListener() {
 			@Override
@@ -310,14 +330,14 @@ public class HomeActivity extends BaseActivity {
 		protected void onProgressUpdate(Integer... values) {
 			// TODO Auto-generated method stub
 			super.onProgressUpdate(values);
-			homeActivity.addressTextView.setText("正在获取中……");
+			homeActivity.geoCodeTextView.setText("正在获取中……");
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			homeActivity.addressTextView.setText("上海师范大学" + result);
+			homeActivity.geoCodeTextView.setText("上海师范大学" + result);
 		}
 
 		@Override
@@ -388,13 +408,15 @@ public class HomeActivity extends BaseActivity {
 	/*
 	 * 活动详情定位
 	 */
-	private void activityLocate(int buildingNum, int id, int type) {
+	private void activityLocate(final ActivityClass activity) {
+		hasDetail = false;
 		Layer mLayer = null;
 		mLayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
 		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
 		try {
 			QueryParameter parameter = new QueryParameter();
-			parameter.setAttributeFilter("Id=" + buildingNum);
+			parameter
+					.setAttributeFilter("Id=" + activity.getActivityBuilding());
 			parameter.setCursorType(CursorType.STATIC);
 
 			Recordset mRecordset = mDatasetVector.query(parameter);
@@ -405,17 +427,86 @@ public class HomeActivity extends BaseActivity {
 			mCallOut.setCustomize(true);
 			ImageView image = new ImageView(this);
 			mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
-			image.setBackgroundResource(R.drawable.ic_mic_pin);
+			switch (activity.getActivityType()) {
+			case 1:
+				image.setBackgroundResource(R.drawable.ic_play_pin);
+				break;
+			case 2:
+				image.setBackgroundResource(R.drawable.ic_mic_pin);
+				break;
+			case 3:
+				image.setBackgroundResource(R.drawable.ic_book_pin);
+				break;
+			default:
+				break;
+			}
 			mCallOut.setContentView(image);
-			LBSApplication.clearCallout();
-			locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
-					mapRelativeLayout);
-			isPopUp = true;
+			detailButton.setVisibility(View.VISIBLE);
+			if (!isPopUp) {
+				LBSApplication.clearCallout();
+				locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
+						mapRelativeLayout);
+				isPopUp = true;
+			}
+			if (activity.getActivityName().length() > 13) {
+				accuracyTextView.setText(activity.getActivityName().substring(
+						0, 12)
+						+ "...");
+			} else {
+				accuracyTextView.setText(activity.getActivityName());
+			}
+			if (activity.getActivitySpeakerTitle().length() > 16) {
+				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
+						+ activity.getActivitySpeakerTitle().substring(0, 15)
+						+ "...");
+			} else {
+				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
+						+ activity.getActivitySpeakerTitle());
+			}
+			detailButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					locationViewPopup(-LBSApplication.Dp2Px(
+							LBSApplication.getContext(), 50), 0,
+							mapRelativeLayout);
+					isPopUp = false;
+					LBSApplication.clearCallout();
+					Intent intent = new Intent(LBSApplication.getContext(),
+							ActivityListView.class);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("activity", activity);
+					intent.putExtras(bundle);
+					startActivityForResult(intent,
+							LBSApplication.getRequestCode());
+					HomeActivity.this.overridePendingTransition(
+							R.anim.popup_enter, R.anim.popup_exit);
+				}
+			});
 			LBSApplication.getmMapControl().getMap().setCenter(mPoint2d);
 			LBSApplication.getmMapView().addCallout(mCallOut);
 			LBSApplication.refreshMap();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
+	}
+
+	/*
+	 * 设置退出
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

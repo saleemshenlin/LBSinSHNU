@@ -45,10 +45,19 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="MyTheme.NoTitleBar.CustomBackground" parent="@android:Theme.Holo.NoActionBar">
+    <style name="MyTheme.NoActionBar.CustomBackground" parent="@android:Theme.Holo.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_welcome</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="searchTheme" parent="android:Theme.Holo.Light">
+        <item name="android:icon">@drawable/ic_play_pin</item>
+    </style>
+
+    <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
     </style>
 
 </resources>

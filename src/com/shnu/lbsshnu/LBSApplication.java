@@ -39,6 +39,7 @@ public class LBSApplication extends Application {
 	private static int requestCode = 0;
 	private static boolean isStart = false;
 	private static LocationClient locationClient;
+	private static boolean isSearch = false;
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -277,5 +278,13 @@ public class LBSApplication extends Application {
 
 	public static void setStart(boolean isStart) {
 		LBSApplication.isStart = isStart;
+	}
+
+	public static boolean isSearch() {
+		return isSearch;
+	}
+
+	public static void setSearch(boolean isSearch) {
+		LBSApplication.isSearch = isSearch;
 	}
 }

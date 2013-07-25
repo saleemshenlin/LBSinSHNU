@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="GB18030"?>
+<SuperMapCache xmlns:sml="http://www.supermap.com/SuperMapCache/modeltile">
+<sml:DataType>5</sml:DataType>
+<FieldDefines>
+<FieldDefine Name="SMID" Type="4" Size="4" Caption="SMID" IsRequired="1"/>
+<FieldDefine Name="SMSDRIW" Type="6" Size="4" Caption="SMSDRIW" IsRequired="1"/>
+<FieldDefine Name="SMSDRIN" Type="6" Size="4" Caption="SMSDRIN" IsRequired="1"/>
+<FieldDefine Name="SMSDRIE" Type="6" Size="4" Caption="SMSDRIE" IsRequired="1"/>
+<FieldDefine Name="SMSDRIS" Type="6" Size="4" Caption="SMSDRIS" IsRequired="1"/>
+<FieldDefine Name="SMUSERID" Type="4" Size="4" Caption="SMUSERID" IsRequired="1"/>
+<FieldDefine Name="SMAREA" Type="7" Size="8" Caption="SMAREA" IsRequired="1"/>
+<FieldDefine Name="SMPERIMETER" Type="7" Size="8" Caption="SMPERIMETER" IsRequired="1"/>
+<FieldDefine Name="SMGEOMETRYSIZE" Type="4" Size="4" Caption="SMGEOMETRYSIZE" IsRequired="0"/>
+<FieldDefine Name="Id" Type="4" Size="4" Caption="Id" IsRequired="0"/>
+</FieldDefines>
+<sml:IndexTiles>
+<sml:MaxID>80</sml:MaxID>
+<sml:IndexTile>
+<sml:Row>10710</sml:Row>
+<sml:Col>54871</sml:Col>
+<sml:Left>121.415405</sml:Left>
+<sml:Top>31.168213</sml:Top>
+<sml:Right>121.420898</sml:Right>
+<sml:Bottom>31.162644</sml:Bottom>
+</sml:IndexTile>
+<sml:IndexTile>
+<sml:Row>10710</sml:Row>
+<sml:Col>54872</sml:Col>
+<sml:Left>121.420898</sml:Left>
+<sml:Top>31.168213</sml:Top>
+<sml:Right>121.426392</sml:Right>
+<sml:Bottom>31.162720</sml:Bottom>
+</sml:IndexTile>
+<sml:IndexTile>
+<sml:Row>10711</sml:Row>
+<sml:Col>54870</sml:Col>
+<sml:Left>121.409912</sml:Left>
+<sml:Top>31.162734</sml:Top>
+<sml:Right>121.415588</sml:Right>
+<sml:Bottom>31.157227</sml:Bottom>
+</sml:IndexTile>
+<sml:IndexTile>
+<sml:Row>10711</sml:Row>
+<sml:Col>54871</sml:Col>
+<sml:Left>121.414951</sml:Left>
+<sml:Top>31.162720</sml:Top>
+<sml:Right>121.421427</sml:Right>
+<sml:Bottom>31.157227</sml:Bottom>
+</sml:IndexTile>
+<sml:IndexTile>
+<sml:Row>10711</sml:Row>
+<sml:Col>54872</sml:Col>
+<sml:Left>121.420331</sml:Left>
+<sml:Top>31.162775</sml:Top>
+<sml:Right>121.426392</sml:Right>
+<sml:Bottom>31.157227</sml:Bottom>
+</sml:IndexTile>
+</sml:IndexTiles>
+</SuperMapCache>

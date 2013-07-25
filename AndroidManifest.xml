@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <supports-screens
         android:anyDensity="true"
@@ -43,14 +43,23 @@
             android:name="com.shnu.lbsshnu.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme.NoTitleBar.CustomBackground" >
+            android:theme="@style/MyTheme.NoActionBar.CustomBackground" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name="com.shnu.lbsshnu.ActivityListView" >
+        </activity>
+        <activity android:name="com.shnu.lbsshnu.QueryResult" >
         </activity>
 
         <service
@@ -58,6 +67,17 @@
             android:enabled="true"
             android:process=":remote" >
         </service>
+
+        <provider
+            android:name="com.shnu.lbsshnu.ActivityProvider"
+            android:authorities="com.shnu.lbsshnu.activityprovider"
+            android:exported="false" >
+        </provider>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value="com.shnu.lbsshnu.ActivityProvider" >
+        </meta-data>
     </application>
 
 </manifest>

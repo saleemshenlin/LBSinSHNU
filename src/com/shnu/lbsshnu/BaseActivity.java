@@ -1,30 +1,25 @@
 package com.shnu.lbsshnu;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class BaseActivity extends Activity {
 	LBSApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
 	Switch locationSwitch;
-	RelativeLayout locationImageView;
-	TextView accuracyTextView;
-	TextView addressTextView;
 	Handler handler;
-	private long exitTime = 0;
+	LinearLayout actionbarView;
+	long exitTime = 0;
 	public static boolean isPopUp = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +27,27 @@ public class BaseActivity extends Activity {
 		lbsApplication = (LBSApplication) getApplication();
 	}
 
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// getMenuInflater().inflate(R.menu.home, menu);
-		return true;
-	}
-
 	/*
 	 * 设置slideractionbar
 	 */
 	public void setSliderActionBar() {
+		LBSApplication.setSearch(false);
+		actionbarView.removeAllViews();
+		View.inflate(BaseActivity.this, R.layout.actionbar, actionbarView);
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
 		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
-		ImageView userImageView = (ImageView) findViewById(R.id.userpref);
-		ImageView moreImageView = (ImageView) findViewById(R.id.actionmore);
+		ImageView userImageView = (ImageView) findViewById(R.id.imgUser);
+		ImageView moreImageView = (ImageView) findViewById(R.id.imgMore);
+		ImageView searchImageView = (ImageView) findViewById(R.id.imgSearch);
+		searchImageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				setSearchView();
+			}
+		});
 		userImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -59,26 +61,6 @@ public class BaseActivity extends Activity {
 				simpleSideDrawer.toggleRightDrawer();
 			}
 		});
-	}
-
-	/*
-	 * 设置退出
-	 */
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 	/*
@@ -142,6 +124,7 @@ public class BaseActivity extends Activity {
 		LinearLayout lectureLinear = (LinearLayout) findViewById(R.id.linearLecture);
 		LinearLayout playLinear = (LinearLayout) findViewById(R.id.linearPlay);
 		LinearLayout courseLinear = (LinearLayout) findViewById(R.id.linearCourse);
+		LinearLayout likeLinear = (LinearLayout) findViewById(R.id.linearLike);
 		lectureLinear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -151,6 +134,8 @@ public class BaseActivity extends Activity {
 				bundleDataBundle.putString("Tab", "0");
 				intent.putExtras(bundleDataBundle);
 				startActivityForResult(intent, LBSApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
+						R.anim.popup_exit);
 			}
 		});
 		playLinear.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +147,8 @@ public class BaseActivity extends Activity {
 				bundleDataBundle.putString("Tab", "1");
 				intent.putExtras(bundleDataBundle);
 				startActivityForResult(intent, LBSApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
+						R.anim.popup_exit);
 			}
 		});
 		courseLinear.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +160,63 @@ public class BaseActivity extends Activity {
 				bundleDataBundle.putString("Tab", "2");
 				intent.putExtras(bundleDataBundle);
 				startActivityForResult(intent, LBSApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
+						R.anim.popup_exit);
+			}
+		});
+		likeLinear.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(BaseActivity.this,
+						ActivityListView.class);
+				bundleDataBundle.putString("Tab", "3");
+				intent.putExtras(bundleDataBundle);
+				startActivityForResult(intent, LBSApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
+						R.anim.popup_exit);
+			}
+		});
+	}
+
+	/*
+	 * 设置缓冲区查询入口
+	 */
+	@SuppressWarnings("static-access")
+	public void setSearchView() {
+		LBSApplication.setSearch(true);
+		actionbarView.removeAllViews();
+		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarView);
+		SearchManager searchManager = (SearchManager) getSystemService(LBSApplication
+				.getContext().SEARCH_SERVICE);
+		SearchView searchView = (SearchView) findViewById(R.id.bufferSearch);
+		searchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				Intent intent = new Intent(getApplicationContext(),
+						QueryResult.class);
+				intent.putExtra("Query", query);
+				startActivityForResult(intent, LBSApplication.getRequestCode());
+				return true;
+
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+
+			@Override
+			public boolean onClose() {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		});
 	}

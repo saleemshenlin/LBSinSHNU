@@ -2,12 +2,15 @@ package com.shnu.lbsshnu;
 
 import java.text.DecimalFormat;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.baidu.location.LocationClient;
 import com.supermap.data.Environment;
@@ -152,6 +155,25 @@ public class LBSApplication extends Application {
 	private void importDataFromXML() {
 		FileIO fileIO = new FileIO();
 		fileIO.getDateFromXML();
+	}
+	
+	@SuppressWarnings("static-access")
+	public static void hideIme(Activity context) {
+		if (context == null)
+			return;
+		final View v = context.getWindow().peekDecorView();
+		if (v != null && v.getWindowToken() != null) {
+			InputMethodManager imm = (InputMethodManager) context
+					.getSystemService(context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	public static boolean isImeShow(Context context) {
+		InputMethodManager imm = (InputMethodManager) context
+				.getSystemService(context.INPUT_METHOD_SERVICE);
+		return imm.isActive();
 	}
 
 	public static LocationByBaiduAPI getLocationApi() {

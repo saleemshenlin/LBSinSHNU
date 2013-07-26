@@ -3,8 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp" >
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp" >
 
     <TextView
         android:id="@+id/txtTitle"

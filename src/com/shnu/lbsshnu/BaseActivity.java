@@ -3,12 +3,15 @@ package com.shnu.lbsshnu;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Switch;
 
@@ -17,9 +20,10 @@ public class BaseActivity extends Activity {
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
 	Switch locationSwitch;
-	Handler handler;
+	RelativeLayout locationImageView;
 	LinearLayout actionbarView;
-	long exitTime = 0;
+	Handler handler;
+
 	public static boolean isPopUp = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,25 +31,27 @@ public class BaseActivity extends Activity {
 		lbsApplication = (LBSApplication) getApplication();
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// getMenuInflater().inflate(R.menu.home, menu);
+		return true;
+	}
+
 	/*
 	 * 设置slideractionbar
 	 */
-	public void setSliderActionBar() {
+	public void initMainBar() {
 		LBSApplication.setSearch(false);
-		actionbarView.removeAllViews();
-		View.inflate(BaseActivity.this, R.layout.actionbar, actionbarView);
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
 		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
 		ImageView userImageView = (ImageView) findViewById(R.id.imgUser);
 		ImageView moreImageView = (ImageView) findViewById(R.id.imgMore);
-		ImageView searchImageView = (ImageView) findViewById(R.id.imgSearch);
+		LinearLayout searchImageView = (LinearLayout) findViewById(R.id.lnySearch);
 		searchImageView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				setSearchView();
+				initSearchBar();
 			}
 		});
 		userImageView.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +67,15 @@ public class BaseActivity extends Activity {
 				simpleSideDrawer.toggleRightDrawer();
 			}
 		});
+		initActivityRightSilder();
+		initWifiLayer();
+		initLocation();
 	}
 
 	/*
 	 * 设置wifi层
 	 */
-	public void setWifiLayer() {
+	public void initWifiLayer() {
 		wifiLayerSwitch = (Switch) findViewById(R.id.swtWifi);
 		wifiLayerSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,7 +100,7 @@ public class BaseActivity extends Activity {
 	/*
 	 * 设置是否开启定位
 	 */
-	public void setLocation() {
+	public void initLocation() {
 		locationSwitch = (Switch) findViewById(R.id.swtLocation);
 		locationSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -119,7 +128,7 @@ public class BaseActivity extends Activity {
 	/*
 	 * 设置right slide的活动
 	 */
-	public void setActivityRightSilder() {
+	public void initActivityRightSilder() {
 		final Bundle bundleDataBundle = new Bundle();
 		LinearLayout lectureLinear = (LinearLayout) findViewById(R.id.linearLecture);
 		LinearLayout playLinear = (LinearLayout) findViewById(R.id.linearPlay);
@@ -181,16 +190,18 @@ public class BaseActivity extends Activity {
 	}
 
 	/*
-	 * 设置缓冲区查询入口
+	 * 设置缓冲区查询actionbar
 	 */
 	@SuppressWarnings("static-access")
-	public void setSearchView() {
+	public void initSearchBar() {
 		LBSApplication.setSearch(true);
 		actionbarView.removeAllViews();
 		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarView);
 		SearchManager searchManager = (SearchManager) getSystemService(LBSApplication
 				.getContext().SEARCH_SERVICE);
 		SearchView searchView = (SearchView) findViewById(R.id.bufferSearch);
+		ImageView backImageView = (ImageView) findViewById(R.id.imgSearchBack);
+		searchView.setBackgroundColor(Color.parseColor("#000000"));
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getComponentName()));
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -201,6 +212,8 @@ public class BaseActivity extends Activity {
 						QueryResult.class);
 				intent.putExtra("Query", query);
 				startActivityForResult(intent, LBSApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(
+						R.anim.in_right2left, R.anim.out_left2right);
 				return true;
 
 			}
@@ -215,9 +228,81 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public boolean onClose() {
-				// TODO Auto-generated method stub
-				return false;
+				return true;
 			}
 		});
+		backImageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (LBSApplication.isImeShow(lbsApplication.getContext()))
+					LBSApplication.hideIme(BaseActivity.this);
+				actionbarView.removeAllViews();
+				View.inflate(BaseActivity.this, R.layout.actionbar,
+						actionbarView);
+				initMainBar();
+			}
+		});
+	}
+
+	/*
+	 * 设置查询结果actionbar
+	 */
+	public void initResultBar(final String flag) {
+		// actionbarView.removeAllViews();
+		// View.inflate(this, R.layout.resultbar, actionbarView);
+		ImageView backImageView = (ImageView) findViewById(R.id.imgBackHome);
+		final Switch resultSwitch = (Switch) findViewById(R.id.swtQuery);
+		resultSwitch.setTextColor(Color.parseColor("#000000"));
+		backImageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				LBSApplication.setSearch(false);
+				Intent intent = new Intent(LBSApplication.getContext(),
+						HomeActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				startActivity(intent);
+				if (flag.equals("list")) {
+					BaseActivity.this.overridePendingTransition(
+							R.anim.in_right2left, R.anim.out_left2right);
+				}
+			}
+		});
+		resultSwitch
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						if (isChecked) {
+							if (flag.equals("map")) {
+								Intent intent = new Intent(LBSApplication
+										.getContext(), QueryResult.class);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+								startActivity(intent);
+								BaseActivity.this.overridePendingTransition(
+										R.anim.in_right2left,
+										R.anim.out_left2right);
+							}
+						} else {
+							if (flag.equals("list")) {
+								Intent intent = new Intent(LBSApplication
+										.getContext(), HomeActivity.class);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+								startActivity(intent);
+								BaseActivity.this.overridePendingTransition(
+										R.anim.in_right2left,
+										R.anim.out_left2right);
+							}
+						}
+					}
+				});
+		if (flag.equals("map")) {
+			resultSwitch.setChecked(false);
+		}
 	}
 }

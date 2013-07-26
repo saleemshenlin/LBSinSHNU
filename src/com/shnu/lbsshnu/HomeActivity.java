@@ -46,14 +46,15 @@ public class HomeActivity extends BaseActivity {
 	private Button detailButton;
 	private ActivityClass activity;
 	private static boolean hasDetail;
+	private long exitTime = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initLocationAPi();
 		setContentView(R.layout.homeactivity);
-		initView();
 		drawPointAndBuffer = new DrawPointAndBuffer();
+		initView();
 		openData();
 	}
 
@@ -64,11 +65,17 @@ public class HomeActivity extends BaseActivity {
 		if (!simpleSideDrawer.isClosed()) {
 			simpleSideDrawer.toggleRightDrawer();
 		}
+		if (!LBSApplication.isSearch()) {
+			actionbarView.removeAllViews();
+			View.inflate(this, R.layout.actionbar, actionbarView);
+			initMainBar();
+		} else {
+			actionbarView.removeAllViews();
+			View.inflate(this, R.layout.resultbar, actionbarView);
+			initResultBar("map");
+		}
 		if (hasDetail) {
 			activityLocate(activity);
-		}
-		if (!LBSApplication.isSearch()) {
-			setSliderActionBar();
 		}
 		LBSApplication.refreshMap();
 	}
@@ -106,7 +113,6 @@ public class HomeActivity extends BaseActivity {
 				baiduLocationListener);
 		LBSApplication.getLocationApi().startLocate(
 				LBSApplication.getLocationClient());
-
 	}
 
 	/*
@@ -126,10 +132,7 @@ public class HomeActivity extends BaseActivity {
 		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
 		geoCodeTextView = (TextView) findViewById(R.id.txtAddress);
 		detailButton = (Button) findViewById(R.id.btnDetail);
-		setSliderActionBar();
-		setActivityRightSilder();
-		setWifiLayer();
-		setLocation();
+		initMainBar();
 	}
 
 	/*
@@ -405,6 +408,23 @@ public class HomeActivity extends BaseActivity {
 
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
 	/*
 	 * 活动详情定位
 	 */
@@ -488,25 +508,5 @@ public class HomeActivity extends BaseActivity {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
-	}
-
-	/*
-	 * 设置退出
-	 */
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 }

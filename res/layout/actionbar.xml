@@ -16,13 +16,13 @@
         android:src="@drawable/ic_action_user" />
 
     <LinearLayout
+        android:id="@+id/lnySearch"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical" >
 
         <ImageView
-            android:id="@+id/imgSearch"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="@string/app_name"

@@ -40,9 +40,11 @@ public class LBSApplication extends Application {
 	private static Layers mlayers;
 	private static ActivityData activityData;
 	private static int requestCode = 0;
+	private static int bufferQueryCode = 1;
 	private static boolean isStart = false;
 	private static LocationClient locationClient;
 	private static boolean isSearch = false;
+	private static String queryString = "";
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -145,8 +147,8 @@ public class LBSApplication extends Application {
 	 * 保留2位小数
 	 */
 	public static String save2Point(float value) {
-		DecimalFormat df = new java.text.DecimalFormat("#0.00");
-		return df.format(value);
+		DecimalFormat df = new java.text.DecimalFormat("#.00");
+		return df.format(value) + "";
 	}
 
 	/*
@@ -156,7 +158,7 @@ public class LBSApplication extends Application {
 		FileIO fileIO = new FileIO();
 		fileIO.getDateFromXML();
 	}
-	
+
 	@SuppressWarnings("static-access")
 	public static void hideIme(Activity context) {
 		if (context == null)
@@ -285,6 +287,14 @@ public class LBSApplication extends Application {
 		LBSApplication.requestCode = requestCode;
 	}
 
+	public static int getBufferQueryCode() {
+		return bufferQueryCode;
+	}
+
+	public static void setBufferQueryCode(int bufferQueryCode) {
+		LBSApplication.bufferQueryCode = bufferQueryCode;
+	}
+
 	public static LocationClient getLocationClient() {
 		return locationClient;
 	}
@@ -292,6 +302,14 @@ public class LBSApplication extends Application {
 	public static void setLocationClient(Context context) {
 		LocationClient locationClient = new LocationClient(context);
 		LBSApplication.locationClient = locationClient;
+	}
+
+	public static String getQueryString() {
+		return queryString;
+	}
+
+	public static void setQueryString(String queryString) {
+		LBSApplication.queryString = queryString;
 	}
 
 	public static boolean isStart() {

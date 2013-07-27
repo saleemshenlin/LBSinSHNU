@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 public class ActivityListView extends FragmentActivity implements TabListener,
-		CommonUIFragment.OnFragmeng2ActivityListener {
+		ActivityListFragment.OnFragmeng2ActivityListener {
 
 	private ViewPager viewPager;
 	private static final int MAX_TAB_SIZE = 4;
@@ -109,7 +109,7 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 			switch (index) {
 
 			default:
-				ft = new CommonUIFragment();
+				ft = new ActivityListFragment();
 
 				Bundle args = new Bundle();
 				args.putInt(ARGUMENTS_NAME, index);

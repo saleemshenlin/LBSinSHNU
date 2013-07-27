@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-public class CommonUIFragment extends Fragment {
+public class ActivityListFragment extends Fragment {
 	private static final String TAG = "CommonUI";
 	private ListView activityListView;
 	private View rootView;

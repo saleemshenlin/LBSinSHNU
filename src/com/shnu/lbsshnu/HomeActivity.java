@@ -1,5 +1,7 @@
 package com.shnu.lbsshnu;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -77,6 +79,10 @@ public class HomeActivity extends BaseActivity {
 		if (hasDetail) {
 			activityLocate(activity);
 		}
+		if (results != null) {
+			LBSApplication.getmMapView().removeAllCallOut();
+			resultLocate(results);
+		}
 		LBSApplication.refreshMap();
 	}
 
@@ -99,6 +105,12 @@ public class HomeActivity extends BaseActivity {
 					Bundle bundle = data.getExtras();
 					activity = bundle.getParcelable("activity");
 					hasDetail = true;
+				}
+			}
+			if (requestCode == 1) {
+				Bundle bundle = data.getExtras();
+				if (results == null) {
+					results = bundle.getParcelableArrayList("results");
 				}
 			}
 		}
@@ -508,5 +520,33 @@ public class HomeActivity extends BaseActivity {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
+	}
+
+	public void resultLocate(List<Result> results) {
+		Layer mLayer = null;
+		mLayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
+		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
+		try {
+			for (Result result : results) {
+				QueryParameter parameter = new QueryParameter();
+				parameter.setAttributeFilter("Id=" + result.getId());
+				parameter.setCursorType(CursorType.STATIC);
+				Recordset mRecordset = mDatasetVector.query(parameter);
+				mRecordset.moveFirst();
+				Point2D mPoint2d = mRecordset.getGeometry().getInnerPoint();
+				String resultName = result.getId() + "";
+				CallOut mCallOut = new CallOut(this);
+				mCallOut.setStyle(CalloutAlignment.BOTTOM);
+				mCallOut.setCustomize(true);
+				ImageView image = new ImageView(this);
+				image.setBackgroundResource(R.drawable.ic_unselect_pin);
+				mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
+				mCallOut.setContentView(image);
+				LBSApplication.getmMapView().addCallout(mCallOut, resultName);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+		LBSApplication.refreshMap();
 	}
 }

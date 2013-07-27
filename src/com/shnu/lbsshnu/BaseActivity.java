@@ -1,5 +1,8 @@
 package com.shnu.lbsshnu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -23,6 +26,7 @@ public class BaseActivity extends Activity {
 	RelativeLayout locationImageView;
 	LinearLayout actionbarView;
 	Handler handler;
+	List<Result> results;
 
 	public static boolean isPopUp = false;
 
@@ -208,10 +212,12 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
+				LBSApplication.setQueryString(query);
 				Intent intent = new Intent(getApplicationContext(),
-						QueryResult.class);
-				intent.putExtra("Query", query);
-				startActivityForResult(intent, LBSApplication.getRequestCode());
+						BufferQueryResult.class);
+				intent.putExtra("QueryString", query);
+				startActivityForResult(intent,
+						LBSApplication.getBufferQueryCode());
 				BaseActivity.this.overridePendingTransition(
 						R.anim.in_right2left, R.anim.out_left2right);
 				return true;
@@ -249,8 +255,6 @@ public class BaseActivity extends Activity {
 	 * 设置查询结果actionbar
 	 */
 	public void initResultBar(final String flag) {
-		// actionbarView.removeAllViews();
-		// View.inflate(this, R.layout.resultbar, actionbarView);
 		ImageView backImageView = (ImageView) findViewById(R.id.imgBackHome);
 		final Switch resultSwitch = (Switch) findViewById(R.id.swtQuery);
 		resultSwitch.setTextColor(Color.parseColor("#000000"));
@@ -259,6 +263,8 @@ public class BaseActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				LBSApplication.setSearch(false);
+				LBSApplication.clearCallout();
+				results.clear();
 				Intent intent = new Intent(LBSApplication.getContext(),
 						HomeActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -278,11 +284,13 @@ public class BaseActivity extends Activity {
 							boolean isChecked) {
 						if (isChecked) {
 							if (flag.equals("map")) {
-								Intent intent = new Intent(LBSApplication
-										.getContext(), QueryResult.class);
-								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-								startActivity(intent);
+								Intent intent = new Intent(
+										getApplicationContext(),
+										BufferQueryResult.class);
+								intent.putExtra("QueryString",
+										LBSApplication.getQueryString());
+								startActivityForResult(intent,
+										LBSApplication.getBufferQueryCode());
 								BaseActivity.this.overridePendingTransition(
 										R.anim.in_right2left,
 										R.anim.out_left2right);
@@ -293,10 +301,20 @@ public class BaseActivity extends Activity {
 										.getContext(), HomeActivity.class);
 								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-								startActivity(intent);
+								if (BufferQueryResult.getResults() != null) {
+									Bundle bundle = new Bundle();
+									bundle.putParcelableArrayList(
+											"results",
+											(ArrayList<Result>) BufferQueryResult
+													.getResults());
+									intent.putExtras(bundle);
+								}
+								setResult(LBSApplication.getBufferQueryCode(),
+										intent);
 								BaseActivity.this.overridePendingTransition(
 										R.anim.in_right2left,
 										R.anim.out_left2right);
+								finish();
 							}
 						}
 					}

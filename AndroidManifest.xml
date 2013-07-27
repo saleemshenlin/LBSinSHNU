@@ -59,7 +59,7 @@
         </activity>
         <activity android:name="com.shnu.lbsshnu.ActivityListView" >
         </activity>
-        <activity android:name="com.shnu.lbsshnu.QueryResult" >
+        <activity android:name="com.shnu.lbsshnu.BufferQueryResult" >
         </activity>
 
         <service

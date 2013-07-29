@@ -22,10 +22,10 @@ public class Query {
 	 */
 	public String geoCode() {
 		Layer mlayer = null;
-		mlayer = LBSApplication.getmMapControl().getMap().getLayers().get(15);
+		mlayer = LbsApplication.getmMapControl().getMap().getLayers().get(15);
 		String locationAddresString = "";
 		GeoPoint mGeoPoint = new GeoPoint(
-				LBSApplication.getLastlocationPoint2d());
+				LbsApplication.getLastlocationPoint2d());
 		DatasetVector mDatasetVector = (DatasetVector) mlayer.getDataset();
 		Recordset mRecordset = mDatasetVector.getRecordset(false,
 				CursorType.STATIC);
@@ -55,7 +55,7 @@ public class Query {
 	public List<Place> queryByBuffer(GeoRegion buffer) {
 		List<Place> locationPlaces = new ArrayList<Place>();
 		Layer mlayer = null;
-		mlayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
+		mlayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
 		try {
 			DatasetVector mDatasetVector = (DatasetVector) mlayer.getDataset();
 			Recordset mRecordset = mDatasetVector.getRecordset(false,
@@ -74,9 +74,9 @@ public class Query {
 							.toString();
 					float distancef = (float) Geometrist.distance(
 							mRecordset.getGeometry(),
-							new GeoPoint(LBSApplication
+							new GeoPoint(LbsApplication
 									.getLastlocationPoint2d()));
-					String distance = LBSApplication
+					String distance = LbsApplication
 							.save2Point(distancef * 100000);
 					Place placeItem = new Place(buildingNum, buildingName,
 							distance);

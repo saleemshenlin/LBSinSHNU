@@ -34,7 +34,7 @@
     </uses-permission>
 
     <application
-        android:name="com.shnu.lbsshnu.LBSApplication"
+        android:name="com.shnu.lbsshnu.LbsApplication"
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/ic_launcher"

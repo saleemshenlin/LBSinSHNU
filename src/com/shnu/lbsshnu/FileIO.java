@@ -15,11 +15,11 @@ public class FileIO {
 	 * 从data.xml获取数据
 	 */
 	public void getDateFromXML() {
-		if (!LBSApplication.getActivityData().tableIsNull()) {
+		if (!LbsApplication.getActivityData().tableIsNull()) {
 			return;
 		}
 
-		XmlResourceParser xrp = LBSApplication.getContext().getResources()
+		XmlResourceParser xrp = LbsApplication.getContext().getResources()
 				.getXml(R.xml.data);
 		int eventType;
 		StringBuffer sb = new StringBuffer();
@@ -45,7 +45,7 @@ public class FileIO {
 					if (tagName.equals("row")) {
 						sb.append(")");
 						Log.d(TAG, sb.toString());
-						LBSApplication.getActivityData().insertOrIgnore(values);//
+						LbsApplication.getActivityData().insertOrIgnore(values);//
 						sb.delete(0, sb.length() - 1);
 					} else if (tagName.equals("root")) {
 						Log.d(TAG, "end");

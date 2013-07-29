@@ -19,20 +19,20 @@ import android.widget.SearchView;
 import android.widget.Switch;
 
 public class BaseActivity extends Activity {
-	LBSApplication lbsApplication;
+	LbsApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
 	Switch locationSwitch;
 	RelativeLayout locationImageView;
 	LinearLayout actionbarView;
 	Handler handler;
-	List<Result> results;
-
+	public static List<Result> results = new ArrayList<Result>();
 	public static boolean isPopUp = false;
+	public static boolean isSearch = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		lbsApplication = (LBSApplication) getApplication();
+		lbsApplication = (LbsApplication) getApplication();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,7 +44,7 @@ public class BaseActivity extends Activity {
 	 * …Ë÷√slideractionbar
 	 */
 	public void initMainBar() {
-		LBSApplication.setSearch(false);
+		LbsApplication.setSearch(false);
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
 		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
@@ -91,11 +91,11 @@ public class BaseActivity extends Activity {
 						if (isChecked) {
 							lbsApplication.mWifiLayerL.setVisible(true);
 							lbsApplication.mWifiLayerS.setVisible(true);
-							LBSApplication.refreshMap();
+							LbsApplication.refreshMap();
 						} else {
 							lbsApplication.mWifiLayerL.setVisible(false);
 							lbsApplication.mWifiLayerS.setVisible(false);
-							LBSApplication.refreshMap();
+							LbsApplication.refreshMap();
 						}
 					}
 				});
@@ -114,16 +114,16 @@ public class BaseActivity extends Activity {
 							boolean isChecked) {
 						// TODO Auto-generated method stub
 						if (isChecked) {
-							LBSApplication.getLocationApi().startLocate(
-									LBSApplication.getLocationClient());
-							LBSApplication.setStart(true);
+							LbsApplication.getLocationApi().startLocate(
+									LbsApplication.getLocationClient());
+							LbsApplication.setStart(true);
 						} else {
-							LBSApplication.getLocationApi().stopLocate(
-									LBSApplication.getLocationClient());
-							LBSApplication.setStart(false);
+							LbsApplication.getLocationApi().stopLocate(
+									LbsApplication.getLocationClient());
+							LbsApplication.setStart(false);
 						}
-						LBSApplication.clearTrackingLayer();
-						LBSApplication.refreshMap();
+						LbsApplication.clearTrackingLayer();
+						LbsApplication.refreshMap();
 					}
 
 				});
@@ -146,9 +146,9 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "0");
 				intent.putExtras(bundleDataBundle);
-				startActivityForResult(intent, LBSApplication.getRequestCode());
-				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
-						R.anim.popup_exit);
+				startActivityForResult(intent, LbsApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(
+						R.anim.in_right2left, R.anim.out_left2right);
 			}
 		});
 		playLinear.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +159,9 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "1");
 				intent.putExtras(bundleDataBundle);
-				startActivityForResult(intent, LBSApplication.getRequestCode());
-				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
-						R.anim.popup_exit);
+				startActivityForResult(intent, LbsApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(
+						R.anim.in_right2left, R.anim.out_left2right);
 			}
 		});
 		courseLinear.setOnClickListener(new View.OnClickListener() {
@@ -172,9 +172,9 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "2");
 				intent.putExtras(bundleDataBundle);
-				startActivityForResult(intent, LBSApplication.getRequestCode());
-				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
-						R.anim.popup_exit);
+				startActivityForResult(intent, LbsApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(
+						R.anim.in_right2left, R.anim.out_left2right);
 			}
 		});
 		likeLinear.setOnClickListener(new View.OnClickListener() {
@@ -186,9 +186,9 @@ public class BaseActivity extends Activity {
 						ActivityListView.class);
 				bundleDataBundle.putString("Tab", "3");
 				intent.putExtras(bundleDataBundle);
-				startActivityForResult(intent, LBSApplication.getRequestCode());
-				BaseActivity.this.overridePendingTransition(R.anim.popup_enter,
-						R.anim.popup_exit);
+				startActivityForResult(intent, LbsApplication.getRequestCode());
+				BaseActivity.this.overridePendingTransition(
+						R.anim.in_right2left, R.anim.out_left2right);
 			}
 		});
 	}
@@ -198,10 +198,10 @@ public class BaseActivity extends Activity {
 	 */
 	@SuppressWarnings("static-access")
 	public void initSearchBar() {
-		LBSApplication.setSearch(true);
+		LbsApplication.setSearch(true);
 		actionbarView.removeAllViews();
 		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarView);
-		SearchManager searchManager = (SearchManager) getSystemService(LBSApplication
+		SearchManager searchManager = (SearchManager) getSystemService(LbsApplication
 				.getContext().SEARCH_SERVICE);
 		SearchView searchView = (SearchView) findViewById(R.id.bufferSearch);
 		ImageView backImageView = (ImageView) findViewById(R.id.imgSearchBack);
@@ -212,12 +212,12 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				LBSApplication.setQueryString(query);
+				LbsApplication.setQueryString(query);
 				Intent intent = new Intent(getApplicationContext(),
 						BufferQueryResult.class);
 				intent.putExtra("QueryString", query);
 				startActivityForResult(intent,
-						LBSApplication.getBufferQueryCode());
+						LbsApplication.getBufferQueryCode());
 				BaseActivity.this.overridePendingTransition(
 						R.anim.in_right2left, R.anim.out_left2right);
 				return true;
@@ -241,8 +241,8 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (LBSApplication.isImeShow(lbsApplication.getContext()))
-					LBSApplication.hideIme(BaseActivity.this);
+				if (LbsApplication.isImeShow(lbsApplication.getContext()))
+					LbsApplication.hideIme(BaseActivity.this);
 				actionbarView.removeAllViews();
 				View.inflate(BaseActivity.this, R.layout.actionbar,
 						actionbarView);
@@ -262,19 +262,20 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				LBSApplication.setSearch(false);
-				LBSApplication.clearCallout();
+				LbsApplication.setSearch(false);
+				isSearch = false;
+				LbsApplication.clearCallout();
 				if (results != null) {
 					results.clear();
 				}
-				Intent intent = new Intent(LBSApplication.getContext(),
+				Intent intent = new Intent(LbsApplication.getContext(),
 						HomeActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 				if (flag.equals("list")) {
 					BaseActivity.this.overridePendingTransition(
-							R.anim.in_right2left, R.anim.out_left2right);
+							R.anim.in_left2right, R.anim.out_left2right);
 				}
 			}
 		});
@@ -290,16 +291,16 @@ public class BaseActivity extends Activity {
 										getApplicationContext(),
 										BufferQueryResult.class);
 								intent.putExtra("QueryString",
-										LBSApplication.getQueryString());
+										LbsApplication.getQueryString());
 								startActivityForResult(intent,
-										LBSApplication.getBufferQueryCode());
+										LbsApplication.getBufferQueryCode());
 								BaseActivity.this.overridePendingTransition(
 										R.anim.in_right2left,
 										R.anim.out_left2right);
 							}
 						} else {
 							if (flag.equals("list")) {
-								Intent intent = new Intent(LBSApplication
+								Intent intent = new Intent(LbsApplication
 										.getContext(), HomeActivity.class);
 								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -311,12 +312,12 @@ public class BaseActivity extends Activity {
 													.getResults());
 									intent.putExtras(bundle);
 								}
-								setResult(LBSApplication.getBufferQueryCode(),
+								setResult(LbsApplication.getRequestCode(),
 										intent);
+								finish();
 								BaseActivity.this.overridePendingTransition(
 										R.anim.in_left2right,
 										R.anim.out_left2right);
-								finish();
 							}
 						}
 					}

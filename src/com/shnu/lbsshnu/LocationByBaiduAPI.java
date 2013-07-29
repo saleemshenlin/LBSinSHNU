@@ -25,7 +25,7 @@ public class LocationByBaiduAPI {
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
 		option.setScanSpan(1000);
-		if (LBSApplication.isNetWork()) {
+		if (LbsApplication.isNetWork()) {
 			option.setPriority(LocationClientOption.NetWorkFirst);
 		}
 		option.disableCache(true);
@@ -36,12 +36,12 @@ public class LocationByBaiduAPI {
 	 * 开启定位
 	 */
 	public void startLocate(LocationClient locationClient) {
-		if (!LBSApplication.isStart()) {
+		if (!LbsApplication.isStart()) {
 			setLocationOption(locationClient);
 			locationClient.start();
 			// Log.d(TAG, "version:" + locationClient.getVersion());
 			Log.d(TAG, "start to locate");
-			LBSApplication.setStart(true);
+			LbsApplication.setStart(true);
 		}
 	}
 
@@ -49,10 +49,10 @@ public class LocationByBaiduAPI {
 	 * 关闭定位
 	 */
 	public void stopLocate(LocationClient locationClient) {
-		if (LBSApplication.isStart()) {
+		if (LbsApplication.isStart()) {
 			locationClient.stop();
 			Log.d(TAG, "stop to locate");
-			LBSApplication.setStart(false);
+			LbsApplication.setStart(false);
 		}
 	}
 
@@ -61,9 +61,9 @@ public class LocationByBaiduAPI {
 	 */
 	public void drawLocationPoint(Point2D location, MapView mMapView,
 			Context context, float radius) {
-		LBSApplication.clearCallout();
-		LBSApplication.clearTrackingLayer();
-		double mapScale = LBSApplication.getmMapControl().getMap().getScale();
+		LbsApplication.clearCallout();
+		LbsApplication.clearTrackingLayer();
+		double mapScale = LbsApplication.getmMapControl().getMap().getScale();
 		GeoCircle mGeoCircle = new GeoCircle(location, radius * mapScale * 0.02);
 		GeoRegion mGeoRegion = new GeoCircle(location, radius * mapScale
 				* 0.005).convertToRegion(100);
@@ -77,9 +77,9 @@ public class LocationByBaiduAPI {
 		mGeoStyle_P.setLineSymbolID(5);
 		mGeoRegion.setStyle(mGeoStyle_P);
 		mGeoCircle.setStyle(mGeoStyle);
-		LBSApplication.getmTrackingLayer().add(mGeoCircle, "accuracyBuffer");
-		LBSApplication.getmTrackingLayer().add(mGeoRegion, "geopoint");
-		LBSApplication.refreshMap();
+		LbsApplication.getmTrackingLayer().add(mGeoCircle, "accuracyBuffer");
+		LbsApplication.getmTrackingLayer().add(mGeoRegion, "geopoint");
+		LbsApplication.refreshMap();
 	}
 
 	/*

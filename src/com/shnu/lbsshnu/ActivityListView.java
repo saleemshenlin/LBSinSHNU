@@ -47,11 +47,12 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 				break;
 			case 2:
 				indexTab = 0;
+				break;
 			case 3:
 				indexTab = 2;
+				break;
 			case 4:
 				indexTab = 3;
-			default:
 				break;
 			}
 		}
@@ -169,7 +170,8 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			startActivity(intent);
-			this.overridePendingTransition(R.anim.popup_exit, R.anim.popup_exit);
+			this.overridePendingTransition(R.anim.in_left2right,
+					R.anim.out_left2right);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -183,16 +185,21 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	 * onArticleSelected(long)
 	 */
 	public void onArticleSelected(ActivityClass activity) {
-		Intent intent = new Intent(this, HomeActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		Log.i(TAG, activity.toString());
-		Bundle bundle = new Bundle();
-		bundle.putParcelable("activity", activity);
-		intent.putExtras(bundle);
-		setResult(LBSApplication.getRequestCode(), intent);
-		this.overridePendingTransition(R.anim.popup_exit, R.anim.popup_exit);
-		finish();
+		try {
+			Intent intent = new Intent(this, HomeActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			Log.i(TAG, activity.toString());
+			Bundle bundle = new Bundle();
+			bundle.putParcelable("activity", activity);
+			intent.putExtras(bundle);
+			setResult(LbsApplication.getRequestCode(), intent);
+			finish();
+			this.overridePendingTransition(R.anim.in_left2right,
+					R.anim.out_left2right);
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage().toString());
+		}
 	}
 
 	public static int getActivityId() {

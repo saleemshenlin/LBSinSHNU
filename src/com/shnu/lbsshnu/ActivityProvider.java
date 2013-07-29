@@ -30,7 +30,7 @@ public class ActivityProvider extends ContentProvider {
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		long id = this.getId(uri);
-		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
+		SQLiteDatabase db = LbsApplication.getActivityData().getDbHelper()
 				.getWritableDatabase();
 		try {
 			if (id < 0) {
@@ -52,7 +52,7 @@ public class ActivityProvider extends ContentProvider {
 	 */
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
+		SQLiteDatabase db = LbsApplication.getActivityData().getDbHelper()
 				.getWritableDatabase();
 		try {
 			long id = db.insertOrThrow(ActivityData.TABLE, null, values); //
@@ -80,7 +80,7 @@ public class ActivityProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 		long id = this.getId(uri); //
-		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
+		SQLiteDatabase db = LbsApplication.getActivityData().getDbHelper()
 				.getReadableDatabase(); //
 		try {
 			if (id < 0) {
@@ -107,7 +107,7 @@ public class ActivityProvider extends ContentProvider {
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 		long id = this.getId(uri);
-		SQLiteDatabase db = LBSApplication.getActivityData().getDbHelper()
+		SQLiteDatabase db = LbsApplication.getActivityData().getDbHelper()
 				.getWritableDatabase();
 		try {
 			if (id < 0) {

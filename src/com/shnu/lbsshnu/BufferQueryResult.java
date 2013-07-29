@@ -40,7 +40,6 @@ import com.supermap.data.PrjCoordSys;
 public class BufferQueryResult extends BaseActivity {
 	private static final String TAG = "QueryResult";
 	private static String QER_STRING = "";
-	private Cursor itemCursor;
 	private Query bufferQuery = new Query();
 	private SimpleCursorAdapter adapter;
 	private final String[] FROM = { ActivityData.C_NAME,
@@ -51,6 +50,7 @@ public class BufferQueryResult extends BaseActivity {
 	private ActivityClass activity = new ActivityClass();
 	public static List<Result> results = new ArrayList<Result>();
 
+	@SuppressWarnings("unused")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,15 +61,17 @@ public class BufferQueryResult extends BaseActivity {
 		QER_STRING = getIntent().getStringExtra("QueryString");
 		queryList = (ListView) findViewById(R.id.listResult);
 		NullResultAdapter nullResultAdapter = new NullResultAdapter(
-				LBSApplication.getContext());
+				LbsApplication.getContext());
 		try {
 			List<Place> places = bufferQuery.queryByBuffer(addQueryBuffer());
 			if (places != null) {
+				Cursor itemCursor = null;
 				for (Place place : places) {
 					String caption = place.buildingName;
 					String distance = place.distance + "m";
 					String selection = getQuerySection(place);
-					SimpleCursorAdapter adapter = getQueryResult(selection);
+					SimpleCursorAdapter adapter = getQueryResult(selection,
+							itemCursor);
 					if (adapter.getCount() > 0) {
 						sectionedAdapter.addSection(caption, distance, adapter);
 					} else {
@@ -78,6 +80,9 @@ public class BufferQueryResult extends BaseActivity {
 					}
 				}
 				queryList.setAdapter(sectionedAdapter);
+				if (itemCursor != null) {
+					itemCursor.close();
+				}
 			} else {
 				queryList.setAdapter(nullResultAdapter);
 			}
@@ -95,6 +100,8 @@ public class BufferQueryResult extends BaseActivity {
 			});
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
 		}
 
 	}
@@ -116,8 +123,8 @@ public class BufferQueryResult extends BaseActivity {
 			bufferAnalystParam.setRightDistance(100);
 
 			Geometry geoForBuffer = new GeoPoint(
-					LBSApplication.getLastlocationPoint2d());
-			PrjCoordSys prj = LBSApplication.getmMapControl().getMap()
+					LbsApplication.getLastlocationPoint2d());
+			PrjCoordSys prj = LbsApplication.getmMapControl().getMap()
 					.getPrjCoordSys();
 			geometryBuffer = BufferAnalystGeometry.createBuffer(geoForBuffer,
 					bufferAnalystParam, prj);
@@ -127,7 +134,8 @@ public class BufferQueryResult extends BaseActivity {
 		return geometryBuffer;
 	}
 
-	private SimpleCursorAdapter getQueryResult(String seclection) {
+	private SimpleCursorAdapter getQueryResult(String seclection,
+			Cursor itemCursor) {
 		ActivityProvider activityProvider = new ActivityProvider();
 		itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI, null,
 				seclection, null, getOrderBy());
@@ -141,7 +149,7 @@ public class BufferQueryResult extends BaseActivity {
 			Result result = new Result(id, num);
 			results.add(result);
 		}
-		adapter = new SimpleCursorAdapter(LBSApplication.getContext(),
+		adapter = new SimpleCursorAdapter(LbsApplication.getContext(),
 				R.layout.row, itemCursor, FROM, TO,
 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		adapter.setViewBinder(LIST_VIEW_BINDER);
@@ -198,7 +206,7 @@ public class BufferQueryResult extends BaseActivity {
 			View result = convertView;
 			try {
 				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) LBSApplication
+					LayoutInflater inflater = (LayoutInflater) LbsApplication
 							.getContext().getSystemService(
 									Context.LAYOUT_INFLATER_SERVICE);
 					result = inflater.inflate(R.layout.listheader, null);
@@ -222,8 +230,8 @@ public class BufferQueryResult extends BaseActivity {
 			View view = layoutInflater.inflate(R.layout.popupwindow, null);
 			View rootView = layoutInflater.inflate(R.layout.queryresult, null);
 			final PopupWindow popupWindow = new PopupWindow(view,
-					LBSApplication.getScreenWidth() * 3 / 4,
-					LBSApplication.getScreenHeight() * 3 / 4, true);
+					LbsApplication.getScreenWidth() * 3 / 4,
+					LbsApplication.getScreenHeight() * 3 / 4, true);
 			bindPopupData(id, view, popupWindow);
 			popupWindow
 					.setBackgroundDrawable(new BitmapDrawable(getResources()));

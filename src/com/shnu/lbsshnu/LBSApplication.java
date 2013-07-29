@@ -22,7 +22,7 @@ import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapView;
 import com.supermap.mapping.TrackingLayer;
 
-public class LBSApplication extends Application {
+public class LbsApplication extends Application {
 
 	private final static String TAG = "LBSApplication";
 	private static int SCREENWIDTH;
@@ -57,8 +57,8 @@ public class LBSApplication extends Application {
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
-		LBSApplication.LASTLOCATION = new Point2D();
-		LBSApplication.LOCATIONACCUCRACY = (float) 10;
+		LbsApplication.LASTLOCATION = new Point2D();
+		LbsApplication.LOCATIONACCUCRACY = (float) 10;
 		importDataFromXML();
 	}
 
@@ -140,7 +140,7 @@ public class LBSApplication extends Application {
 	 * Çå³ýµã±ê×¢
 	 */
 	public static void clearCallout() {
-		LBSApplication.mMapView.removeAllCallOut();
+		LbsApplication.mMapView.removeAllCallOut();
 	}
 
 	/*
@@ -183,7 +183,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setLocationApi(LocationByBaiduAPI locationApi) {
-		LBSApplication.LOCATIONAPI = locationApi;
+		LbsApplication.LOCATIONAPI = locationApi;
 	}
 
 	public static Layers getMlayers() {
@@ -191,7 +191,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setMlayers(Layers mlayers) {
-		LBSApplication.mlayers = mlayers;
+		LbsApplication.mlayers = mlayers;
 	}
 
 	public static Context getContext() {
@@ -207,7 +207,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setmWorkspace(Workspace mWorkspace) {
-		LBSApplication.mWorkspace = mWorkspace;
+		LbsApplication.mWorkspace = mWorkspace;
 	}
 
 	public static MapView getmMapView() {
@@ -215,7 +215,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setmMapView(MapView mMapView) {
-		LBSApplication.mMapView = mMapView;
+		LbsApplication.mMapView = mMapView;
 	}
 
 	public static MapControl getmMapControl() {
@@ -223,7 +223,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setmMapControl(MapControl mMapControl) {
-		LBSApplication.mMapControl = mMapControl;
+		LbsApplication.mMapControl = mMapControl;
 	}
 
 	public static TrackingLayer getmTrackingLayer() {
@@ -231,7 +231,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setmTrackingLayer(TrackingLayer mTrackingLayer) {
-		LBSApplication.mTrackingLayer = mTrackingLayer;
+		LbsApplication.mTrackingLayer = mTrackingLayer;
 	}
 
 	public static Point2D getLastlocationPoint2d() {
@@ -239,7 +239,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setLastlocationPoint2d(Point2D point) {
-		LBSApplication.LASTLOCATION = point;
+		LbsApplication.LASTLOCATION = point;
 	}
 
 	public static float getLocationAccuracy() {
@@ -247,7 +247,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setLocationAccuracy(float value) {
-		LBSApplication.LOCATIONACCUCRACY = value;
+		LbsApplication.LOCATIONACCUCRACY = value;
 	}
 
 	public static int getScreenWidth() {
@@ -255,7 +255,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setScreenWidth(float xdpi) {
-		LBSApplication.SCREENWIDTH = (int) xdpi;
+		LbsApplication.SCREENWIDTH = (int) xdpi;
 	}
 
 	public static int getScreenHeight() {
@@ -263,7 +263,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setScreenHeight(float ydpi) {
-		LBSApplication.SCREENHEIGHT = (int) ydpi;
+		LbsApplication.SCREENHEIGHT = (int) ydpi;
 	}
 
 	public static double getScreenDPI() {
@@ -271,7 +271,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setScreenDPI(double screenDPI) {
-		LBSApplication.SCREENDPI = screenDPI;
+		LbsApplication.SCREENDPI = screenDPI;
 	}
 
 	public static ActivityData getActivityData() {
@@ -284,7 +284,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setRequestCode(int requestCode) {
-		LBSApplication.requestCode = requestCode;
+		LbsApplication.requestCode = requestCode;
 	}
 
 	public static int getBufferQueryCode() {
@@ -292,7 +292,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setBufferQueryCode(int bufferQueryCode) {
-		LBSApplication.bufferQueryCode = bufferQueryCode;
+		LbsApplication.bufferQueryCode = bufferQueryCode;
 	}
 
 	public static LocationClient getLocationClient() {
@@ -301,7 +301,7 @@ public class LBSApplication extends Application {
 
 	public static void setLocationClient(Context context) {
 		LocationClient locationClient = new LocationClient(context);
-		LBSApplication.locationClient = locationClient;
+		LbsApplication.locationClient = locationClient;
 	}
 
 	public static String getQueryString() {
@@ -309,7 +309,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setQueryString(String queryString) {
-		LBSApplication.queryString = queryString;
+		LbsApplication.queryString = queryString;
 	}
 
 	public static boolean isStart() {
@@ -317,7 +317,7 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setStart(boolean isStart) {
-		LBSApplication.isStart = isStart;
+		LbsApplication.isStart = isStart;
 	}
 
 	public static boolean isSearch() {
@@ -325,6 +325,6 @@ public class LBSApplication extends Application {
 	}
 
 	public static void setSearch(boolean isSearch) {
-		LBSApplication.isSearch = isSearch;
+		LbsApplication.isSearch = isSearch;
 	}
 }

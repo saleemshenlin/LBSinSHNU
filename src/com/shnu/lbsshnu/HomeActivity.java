@@ -67,7 +67,7 @@ public class HomeActivity extends BaseActivity {
 		if (!simpleSideDrawer.isClosed()) {
 			simpleSideDrawer.toggleRightDrawer();
 		}
-		if (!LBSApplication.isSearch()) {
+		if (!LbsApplication.isSearch()) {
 			actionbarView.removeAllViews();
 			View.inflate(this, R.layout.actionbar, actionbarView);
 			initMainBar();
@@ -76,23 +76,19 @@ public class HomeActivity extends BaseActivity {
 			View.inflate(this, R.layout.resultbar, actionbarView);
 			initResultBar("map");
 		}
-		if (results != null) {
-			LBSApplication.getmMapView().removeAllCallOut();
+		if (!results.isEmpty() && !isSearch) {
+			LbsApplication.getmMapView().removeAllCallOut();
 			resultLocate(results);
 		}
 		if (hasDetail) {
 			activityLocate(activity);
 		}
-		LBSApplication.refreshMap();
+		LbsApplication.refreshMap();
+		Log.d(TAG, "on resume!");
 	}
 
 	protected void onDestroy() {
 		super.onDestroy();
-		LBSApplication.getmMapControl().getMap().close();
-		LBSApplication.getmMapControl().getMap().dispose();
-		LBSApplication.getmMapControl().dispose();
-		LBSApplication.getmWorkspace().close();
-		LBSApplication.getmWorkspace().dispose();
 	}
 
 	@Override
@@ -109,7 +105,7 @@ public class HomeActivity extends BaseActivity {
 			}
 			if (requestCode == 1) {
 				Bundle bundle = data.getExtras();
-				if (results == null) {
+				if (results.isEmpty() || bundle != null) {
 					results = bundle.getParcelableArrayList("results");
 				}
 			}
@@ -120,11 +116,11 @@ public class HomeActivity extends BaseActivity {
 	 * 初始化启动 定位api
 	 */
 	private void initLocationAPi() {
-		LBSApplication.setLocationClient(getApplicationContext());
-		LBSApplication.getLocationClient().registerLocationListener(
+		LbsApplication.setLocationClient(getApplicationContext());
+		LbsApplication.getLocationClient().registerLocationListener(
 				baiduLocationListener);
-		LBSApplication.getLocationApi().startLocate(
-				LBSApplication.getLocationClient());
+		LbsApplication.getLocationApi().startLocate(
+				LbsApplication.getLocationClient());
 	}
 
 	/*
@@ -152,53 +148,53 @@ public class HomeActivity extends BaseActivity {
 	 */
 	private void openData() {
 		// 打开工作空间
-		LBSApplication.setmWorkspace(new Workspace());
+		LbsApplication.setmWorkspace(new Workspace());
 		WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
-		info.setServer(LBSApplication.getSdCard()
+		info.setServer(LbsApplication.getSdCard()
 				+ getString(R.string.data_path));
 		info.setType(WorkspaceType.SMWU);
-		LBSApplication.getmWorkspace().open(info);
+		LbsApplication.getmWorkspace().open(info);
 
-		LBSApplication.setmMapView((MapView) findViewById(R.id.mapView));
-		LBSApplication.setmMapControl(LBSApplication.getmMapView()
+		LbsApplication.setmMapView((MapView) findViewById(R.id.mapView));
+		LbsApplication.setmMapControl(LbsApplication.getmMapView()
 				.getMapControl());
 
-		LBSApplication.getmMapControl().getMap()
-				.setWorkspace(LBSApplication.getmWorkspace());
-		LBSApplication.getmMapControl().getMap()
-				.setMapDPI(LBSApplication.getScreenDPI());
-		String mapName = LBSApplication.getmWorkspace().getMaps().get(0);
+		LbsApplication.getmMapControl().getMap()
+				.setWorkspace(LbsApplication.getmWorkspace());
+		LbsApplication.getmMapControl().getMap()
+				.setMapDPI(LbsApplication.getScreenDPI());
+		String mapName = LbsApplication.getmWorkspace().getMaps().get(0);
 		Log.i(TAG, "add Map: " + mapName);
-		LBSApplication.getmMapControl().getMap().open(mapName);
-		LBSApplication.setMlayers(LBSApplication.getmMapControl().getMap()
+		LbsApplication.getmMapControl().getMap().open(mapName);
+		LbsApplication.setMlayers(LbsApplication.getmMapControl().getMap()
 				.getLayers());
-		lbsApplication.mWifiLayerS = LBSApplication.getMlayers().get(2);
-		lbsApplication.mWifiLayerL = LBSApplication.getMlayers().get(3);
+		lbsApplication.mWifiLayerS = LbsApplication.getMlayers().get(2);
+		lbsApplication.mWifiLayerL = LbsApplication.getMlayers().get(3);
 		lbsApplication.mWifiLayerL.setVisible(false);
 		lbsApplication.mWifiLayerS.setVisible(false);
-		LBSApplication.getmMapControl().getMap().setScale(1 / 1200);
-		LBSApplication.getmMapControl().getMap().setAntialias(true);
-		LBSApplication
+		LbsApplication.getmMapControl().getMap().setScale(1 / 1200);
+		LbsApplication.getmMapControl().getMap().setAntialias(true);
+		LbsApplication
 				.getmMapControl()
 				.getMap()
 				.setLockedViewBounds(
 						new Rectangle2D(121.412490774567, 31.1566896665659,
 								121.426210646701, 31.1651384499396));
-		LBSApplication.getmMapControl().getMap().setViewBoundsLocked(true);
+		LbsApplication.getmMapControl().getMap().setViewBoundsLocked(true);
 		// 左: 121.412490774567; 上: 31.1651384499396; 右: 121.426210646701; 下:
 		// 31.1566896665659; 宽: 0.01371987213399; 高: 0.00844878337370147
 
-		LBSApplication.setmTrackingLayer(LBSApplication.getmMapControl()
+		LbsApplication.setmTrackingLayer(LbsApplication.getmMapControl()
 				.getMap().getTrackingLayer());
-		LBSApplication.getmMapControl().setMapParamChangedListener(
+		LbsApplication.getmMapControl().setMapParamChangedListener(
 				mapParameterChangedListener);
 		Log.i(TAG, "Max:"
-				+ LBSApplication.getmMapControl().getMap().getMaxScale()
+				+ LbsApplication.getmMapControl().getMap().getMaxScale()
 				+ " Min:"
-				+ LBSApplication.getmMapControl().getMap().getMinScale()
+				+ LbsApplication.getmMapControl().getMap().getMinScale()
 				+ " Dpi:"
-				+ LBSApplication.getmMapControl().getMap().getMapDPI());
-		LBSApplication.refreshMap();
+				+ LbsApplication.getmMapControl().getMap().getMapDPI());
+		LbsApplication.refreshMap();
 	}
 
 	/*
@@ -209,12 +205,12 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		public void scaleChanged(double scale) {
 			Log.i(TAG, "Scale:" + scale);
-			LBSApplication.refreshMap();
+			LbsApplication.refreshMap();
 		}
 
 		@Override
 		public void boundsChanged(Point2D point2d) {
-			LBSApplication.refreshMap();
+			LbsApplication.refreshMap();
 
 		}
 	};
@@ -230,25 +226,25 @@ public class HomeActivity extends BaseActivity {
 		if (!isPopUp) {
 			new GeoCoding().execute();
 			accuracyTextView.setText("我的位置(精度:"
-					+ LBSApplication.save2Point(LBSApplication
+					+ LbsApplication.save2Point(LbsApplication
 							.getLocationAccuracy()) + "米)");
 			geoCodeTextView.setText("上海师范大学");
-			locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
+			locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
 					mapRelativeLayout);
 			isPopUp = true;
-			if (LBSApplication.getLastlocationPoint2d() != null)
-				LBSApplication.getmMapControl().getMap()
-						.setCenter(LBSApplication.getLastlocationPoint2d());
+			if (LbsApplication.getLastlocationPoint2d() != null)
+				LbsApplication.getmMapControl().getMap()
+						.setCenter(LbsApplication.getLastlocationPoint2d());
 		} else {
-			LBSApplication.clearCallout();
-			locationViewPopup(-LBSApplication.Dp2Px(this, 50), 0,
+			LbsApplication.clearCallout();
+			locationViewPopup(-LbsApplication.Dp2Px(this, 50), 0,
 					mapRelativeLayout);
 			isPopUp = false;
 			hasDetail = false;
 		}
 		Log.d(TAG, "locationPoint2d:"
-				+ LBSApplication.getLastlocationPoint2d().getX() + " , "
-				+ LBSApplication.getLastlocationPoint2d().getY());
+				+ LbsApplication.getLastlocationPoint2d().getX() + " , "
+				+ LbsApplication.getLastlocationPoint2d().getY());
 	}
 
 	/*
@@ -298,11 +294,11 @@ public class HomeActivity extends BaseActivity {
 		protected String doInBackground(String... contexts) {
 			try {
 				handler.post(runnableUi);
-				return "DrawPointAndBuffer ok";
 			} catch (Exception e) {
 				Log.e(TAG, e.toString());
 				return null;
 			}
+			return "DrawPointAndBuffer ok";
 		}
 
 		@Override
@@ -319,18 +315,18 @@ public class HomeActivity extends BaseActivity {
 		@Override
 		public void run() {
 			try {
-				LBSApplication.getLocationApi().drawLocationPoint(
-						LBSApplication.getLastlocationPoint2d(),
-						LBSApplication.getmMapView(),
-						LBSApplication.getContext(),
-						LBSApplication.getLocationAccuracy());
+				LbsApplication.getLocationApi().drawLocationPoint(
+						LbsApplication.getLastlocationPoint2d(),
+						LbsApplication.getmMapView(),
+						LbsApplication.getContext(),
+						LbsApplication.getLocationAccuracy());
 			} catch (Exception e) {
 				Log.e(TAG, e.toString());
 				Log.e(TAG, "locationPoint2d:"
-						+ LBSApplication.getLastlocationPoint2d().getX()
+						+ LbsApplication.getLastlocationPoint2d().getX()
 						+ " , "
-						+ LBSApplication.getLastlocationPoint2d().getY()
-						+ " , " + LBSApplication.getLocationAccuracy());
+						+ LbsApplication.getLastlocationPoint2d().getY()
+						+ " , " + LbsApplication.getLocationAccuracy());
 			}
 		}
 	};
@@ -357,14 +353,16 @@ public class HomeActivity extends BaseActivity {
 
 		@Override
 		protected String doInBackground(String... params) {
+			String queryResult = "";
+			queryViaSuperMap = new Query();
 			try {
 				queryViaSuperMap = new Query();
-				String queryResult = queryViaSuperMap.geoCode();
-				return queryResult;
+				queryResult = queryViaSuperMap.geoCode();
 			} catch (Exception e) {
 				Log.e(TAG + " GeoCoding", e.toString());
 				return null;
 			}
+			return queryResult;
 		}
 	}
 
@@ -400,13 +398,13 @@ public class HomeActivity extends BaseActivity {
 				sb.append("\naddr : ");
 				sb.append(location.getAddrStr());
 			}
-			if (LBSApplication.getLastlocationPoint2d().getX() != location
+			if (LbsApplication.getLastlocationPoint2d().getX() != location
 					.getLongitude()
-					|| LBSApplication.getLastlocationPoint2d().getY() != location
+					|| LbsApplication.getLastlocationPoint2d().getY() != location
 							.getLatitude()) {
-				LBSApplication.setLastlocationPoint2d(new Point2D(location
+				LbsApplication.setLastlocationPoint2d(new Point2D(location
 						.getLongitude(), location.getLatitude()));
-				LBSApplication.setLocationAccuracy(location.getRadius());
+				LbsApplication.setLocationAccuracy(location.getRadius());
 				drawPointAndBuffer = new DrawPointAndBuffer();
 				drawPointAndBuffer.execute("");
 				Log.i(TAG, sb.toString());
@@ -443,7 +441,7 @@ public class HomeActivity extends BaseActivity {
 	private void activityLocate(final ActivityClass activity) {
 		hasDetail = false;
 		Layer mLayer = null;
-		mLayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
+		mLayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
 		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
 		try {
 			QueryParameter parameter = new QueryParameter();
@@ -475,8 +473,8 @@ public class HomeActivity extends BaseActivity {
 			mCallOut.setContentView(image);
 			detailButton.setVisibility(View.VISIBLE);
 			if (!isPopUp) {
-				LBSApplication.clearCallout();
-				locationViewPopup(0, -LBSApplication.Dp2Px(this, 50),
+				LbsApplication.clearCallout();
+				locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
 						mapRelativeLayout);
 				isPopUp = true;
 			}
@@ -487,9 +485,9 @@ public class HomeActivity extends BaseActivity {
 			} else {
 				accuracyTextView.setText(activity.getActivityName());
 			}
-			if (activity.getActivitySpeakerTitle().length() > 16) {
+			if (activity.getActivitySpeakerTitle().length() > 10) {
 				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
-						+ activity.getActivitySpeakerTitle().substring(0, 15)
+						+ activity.getActivitySpeakerTitle().substring(0, 10)
 						+ "...");
 			} else {
 				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
@@ -498,33 +496,35 @@ public class HomeActivity extends BaseActivity {
 			detailButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					locationViewPopup(-LBSApplication.Dp2Px(
-							LBSApplication.getContext(), 50), 0,
+					locationViewPopup(-LbsApplication.Dp2Px(
+							LbsApplication.getContext(), 50), 0,
 							mapRelativeLayout);
 					isPopUp = false;
-					LBSApplication.clearCallout();
-					Intent intent = new Intent(LBSApplication.getContext(),
+					LbsApplication.clearCallout();
+					LbsApplication.refreshMap();
+					Intent intent = new Intent(LbsApplication.getContext(),
 							ActivityListView.class);
 					Bundle bundle = new Bundle();
 					bundle.putParcelable("activity", activity);
 					intent.putExtras(bundle);
 					startActivityForResult(intent,
-							LBSApplication.getRequestCode());
+							LbsApplication.getRequestCode());
 					HomeActivity.this.overridePendingTransition(
-							R.anim.popup_enter, R.anim.popup_exit);
+							R.anim.in_right2left, R.anim.out_left2right);
 				}
 			});
-			LBSApplication.getmMapControl().getMap().setCenter(mPoint2d);
-			LBSApplication.getmMapView().addCallout(mCallOut);
-			LBSApplication.refreshMap();
+			LbsApplication.getmMapControl().getMap().setCenter(mPoint2d);
+			LbsApplication.getmMapView().addCallout(mCallOut);
+			LbsApplication.refreshMap();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
 	}
 
 	public void resultLocate(List<Result> results) {
+		isSearch = true;
 		Layer mLayer = null;
-		mLayer = LBSApplication.getmMapControl().getMap().getLayers().get(14);
+		mLayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
 		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
 		try {
 			for (Result result : results) {
@@ -542,11 +542,11 @@ public class HomeActivity extends BaseActivity {
 				image.setBackgroundResource(R.drawable.ic_unselect_pin);
 				mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
 				mCallOut.setContentView(image);
-				LBSApplication.getmMapView().addCallout(mCallOut, resultName);
+				LbsApplication.getmMapView().addCallout(mCallOut, resultName);
 			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
-		LBSApplication.refreshMap();
+		LbsApplication.refreshMap();
 	}
 }

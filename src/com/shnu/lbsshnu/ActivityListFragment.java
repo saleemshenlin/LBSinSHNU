@@ -28,7 +28,6 @@ public class ActivityListFragment extends Fragment {
 	private static final String TAG = "CommonUI";
 	private ListView activityListView;
 	private View rootView;
-	private Cursor itemCursor;
 	private int indexTab;
 	private static ActivityClass activity = new ActivityClass();
 	private SimpleCursorAdapter adapter;
@@ -37,6 +36,7 @@ public class ActivityListFragment extends Fragment {
 	private final int[] TO = { R.id.txtTitle, R.id.txtLocation,
 			R.id.txtDateTime };
 	private OnFragmeng2ActivityListener onFragmeng2ActivityListener;
+	private ActivityProvider activityProvider;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,10 +50,10 @@ public class ActivityListFragment extends Fragment {
 
 	@Override
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		try {
 			onFragmeng2ActivityListener = (OnFragmeng2ActivityListener) activity;
+			activityProvider = new ActivityProvider();
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnHeadlineSelectedListener");
@@ -70,13 +70,13 @@ public class ActivityListFragment extends Fragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		Cursor itemCursor = null;
 		try {
-			ActivityProvider activityProvider = new ActivityProvider();
 			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
 					null, getQuerySection(indexTab), null, getOrderBy());
 			int num = itemCursor.getCount();
 			Log.i(TAG, "ActivityProvider cursor" + num);
-			adapter = new SimpleCursorAdapter(LBSApplication.getContext(),
+			adapter = new SimpleCursorAdapter(LbsApplication.getContext(),
 					R.layout.row, itemCursor, FROM, TO,
 					CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 			adapter.setViewBinder(LIST_VIEW_BINDER);
@@ -89,8 +89,14 @@ public class ActivityListFragment extends Fragment {
 					showPopupwindows(id);
 				}
 			});
+			if (itemCursor.isClosed()) {
+				itemCursor.close();
+			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
+		} finally {
+
+			LbsApplication.getActivityData().closeDatabase();
 		}
 		if (ActivityListView.getActivityId() != 0) {
 			showPopupwindows(ActivityListView.getActivityId());
@@ -102,7 +108,6 @@ public class ActivityListFragment extends Fragment {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		LBSApplication.getActivityData().closeDatabase();
 	}
 
 	/*
@@ -156,8 +161,8 @@ public class ActivityListFragment extends Fragment {
 					.getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
 			View view = layoutInflater.inflate(R.layout.popupwindow, null);
 			final PopupWindow popupWindow = new PopupWindow(view,
-					LBSApplication.getScreenWidth() * 3 / 4,
-					LBSApplication.getScreenHeight() * 3 / 4, true);
+					LbsApplication.getScreenWidth() * 3 / 4,
+					LbsApplication.getScreenHeight() * 3 / 4, true);
 			bindPopupData(id, view, popupWindow);
 			popupWindow
 					.setBackgroundDrawable(new BitmapDrawable(getResources()));
@@ -170,6 +175,8 @@ public class ActivityListFragment extends Fragment {
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 
@@ -208,6 +215,7 @@ public class ActivityListFragment extends Fragment {
 	 */
 	private void bindPopupData(final long id, View view,
 			final PopupWindow popupwindow) {
+		Cursor detailCursor = null;
 		try {
 			TextView txtDes = (TextView) view.findViewById(R.id.txtDecription);
 			TextView txtTitle = (TextView) view
@@ -217,7 +225,6 @@ public class ActivityListFragment extends Fragment {
 					.findViewById(R.id.txtSpeakerTitle);
 			TextView txtDate = (TextView) view.findViewById(R.id.txtDate);
 			TextView txtPlace = (TextView) view.findViewById(R.id.txtPlace);
-			final ActivityProvider activityProvider = new ActivityProvider();
 			ImageView mapImageView = (ImageView) view
 					.findViewById(R.id.imageMap);
 			mapImageView.setOnClickListener(new View.OnClickListener() {
@@ -225,14 +232,14 @@ public class ActivityListFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					onFragmeng2ActivityListener.onArticleSelected(activity);
 					popupwindow.dismiss();
+					onFragmeng2ActivityListener.onArticleSelected(activity);
 				}
 			});
 			final Uri queryUri = Uri.parse(ActivityProvider.CONTENT_URI
 					.toString() + "/" + id);
-			Cursor detailCursor = activityProvider.query(queryUri, null, null,
-					null, getOrderBy());
+			detailCursor = activityProvider.query(queryUri, null, null, null,
+					getOrderBy());
 			if (detailCursor.moveToFirst()) {
 				activity.setActivityId((int) id);
 				activity.setActivityName(detailCursor.getString(detailCursor
@@ -270,7 +277,6 @@ public class ActivityListFragment extends Fragment {
 					activity.setActivityIsLike(false);
 				}
 			}
-			detailCursor.close();
 			final ImageView likeImageView = (ImageView) view
 					.findViewById(R.id.imageLike);
 			if (activity.isActivityIsLike()) {
@@ -278,7 +284,6 @@ public class ActivityListFragment extends Fragment {
 						R.drawable.ic_rate));
 			}
 			likeImageView.setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -302,8 +307,13 @@ public class ActivityListFragment extends Fragment {
 				}
 			});
 			txtDes.setMovementMethod(ScrollingMovementMethod.getInstance());
+			if (!detailCursor.isClosed()) {
+				detailCursor.close();
+			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 }

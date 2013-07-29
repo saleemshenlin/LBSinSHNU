@@ -76,12 +76,12 @@ public class HomeActivity extends BaseActivity {
 			View.inflate(this, R.layout.resultbar, actionbarView);
 			initResultBar("map");
 		}
-		if (hasDetail) {
-			activityLocate(activity);
-		}
 		if (results != null) {
 			LBSApplication.getmMapView().removeAllCallOut();
 			resultLocate(results);
+		}
+		if (hasDetail) {
+			activityLocate(activity);
 		}
 		LBSApplication.refreshMap();
 	}

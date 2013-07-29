@@ -44,9 +44,9 @@ public class BufferQueryResult extends BaseActivity {
 	private Query bufferQuery = new Query();
 	private SimpleCursorAdapter adapter;
 	private final String[] FROM = { ActivityData.C_NAME,
-			ActivityData.C_LOCATION, ActivityData.C_DATE };
+			ActivityData.C_LOCATION, ActivityData.C_DATE, ActivityData.C_ID };
 	private final int[] TO = { R.id.txtTitle, R.id.txtLocation,
-			R.id.txtDateTime };
+			R.id.txtDateTime, R.id.txtId };
 	private ListView queryList;
 	private ActivityClass activity = new ActivityClass();
 	public static List<Result> results = new ArrayList<Result>();
@@ -86,7 +86,11 @@ public class BufferQueryResult extends BaseActivity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					showPopupwindows(id);
+					TextView txtView = (TextView) view.findViewById(R.id.txtId);
+					Log.i(TAG, txtView.getText().toString());
+					long activityId = Long.parseLong(txtView.getText()
+							.toString());
+					showPopupwindows(activityId);
 				}
 			});
 		} catch (Exception e) {
@@ -141,6 +145,7 @@ public class BufferQueryResult extends BaseActivity {
 				R.layout.row, itemCursor, FROM, TO,
 				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		adapter.setViewBinder(LIST_VIEW_BINDER);
+		// itemCursor.close();
 		return adapter;
 	}
 

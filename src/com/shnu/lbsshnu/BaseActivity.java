@@ -264,7 +264,9 @@ public class BaseActivity extends Activity {
 			public void onClick(View v) {
 				LBSApplication.setSearch(false);
 				LBSApplication.clearCallout();
-				results.clear();
+				if (results != null) {
+					results.clear();
+				}
 				Intent intent = new Intent(LBSApplication.getContext(),
 						HomeActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -312,7 +314,7 @@ public class BaseActivity extends Activity {
 								setResult(LBSApplication.getBufferQueryCode(),
 										intent);
 								BaseActivity.this.overridePendingTransition(
-										R.anim.in_right2left,
+										R.anim.in_left2right,
 										R.anim.out_left2right);
 								finish();
 							}

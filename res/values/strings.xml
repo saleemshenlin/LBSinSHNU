@@ -32,5 +32,6 @@
     <string name="btnmap">地图</string>
     <string name="btnlist">列表</string>
     <string name="swtquery">查询结果</string>
+    <string name="widgettitle">地图小部件</string>
 
 </resources>

@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
@@ -43,7 +44,6 @@ public class LbsApplication extends Application {
 	private static int bufferQueryCode = 1;
 	private static boolean isStart = false;
 	private static LocationClient locationClient;
-	private static boolean isSearch = false;
 	private static String queryString = "";
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
@@ -157,6 +157,15 @@ public class LbsApplication extends Application {
 	private void importDataFromXML() {
 		FileIO fileIO = new FileIO();
 		fileIO.getDateFromXML();
+	}
+
+	/*
+	 * 开启服务
+	 */
+	public static void startServices(Context context) {
+		if (!LbsService.isRunFlag()) {
+			context.startService(new Intent(getContext(), LbsService.class));
+		}
 	}
 
 	@SuppressWarnings("static-access")
@@ -320,11 +329,4 @@ public class LbsApplication extends Application {
 		LbsApplication.isStart = isStart;
 	}
 
-	public static boolean isSearch() {
-		return isSearch;
-	}
-
-	public static void setSearch(boolean isSearch) {
-		LbsApplication.isSearch = isSearch;
-	}
 }

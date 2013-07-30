@@ -2,6 +2,7 @@ package com.shnu.lbsshnu;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -304,6 +305,9 @@ public class ActivityListFragment extends Fragment {
 								null, null);
 						Log.d(TAG, num + " rows changed");
 					}
+					Intent intent = new Intent();
+					intent.setAction(LbsService.NEW_STATUS_INTENT);
+					getActivity().sendBroadcast(intent);
 				}
 			});
 			txtDes.setMovementMethod(ScrollingMovementMethod.getInstance());

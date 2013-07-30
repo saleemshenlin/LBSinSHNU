@@ -29,6 +29,7 @@ public class BaseActivity extends Activity {
 	public static List<Result> results = new ArrayList<Result>();
 	public static boolean isPopUp = false;
 	public static boolean isSearch = false;
+	public static boolean flagSearch = false;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class BaseActivity extends Activity {
 	 * …Ë÷√slideractionbar
 	 */
 	public void initMainBar() {
-		LbsApplication.setSearch(false);
+		flagSearch = false;
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
 		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
@@ -198,7 +199,7 @@ public class BaseActivity extends Activity {
 	 */
 	@SuppressWarnings("static-access")
 	public void initSearchBar() {
-		LbsApplication.setSearch(true);
+		flagSearch = true;
 		actionbarView.removeAllViews();
 		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarView);
 		SearchManager searchManager = (SearchManager) getSystemService(LbsApplication
@@ -262,11 +263,11 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				LbsApplication.setSearch(false);
+				flagSearch = false;
 				isSearch = false;
 				LbsApplication.clearCallout();
-				if (results != null) {
-					results.clear();
+				if (!results.isEmpty()) {
+					results = new ArrayList<Result>();
 				}
 				Intent intent = new Intent(LbsApplication.getContext(),
 						HomeActivity.class);

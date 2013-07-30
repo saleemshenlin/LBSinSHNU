@@ -58,16 +58,18 @@ public class HomeActivity extends BaseActivity {
 		drawPointAndBuffer = new DrawPointAndBuffer();
 		initView();
 		openData();
+		LbsApplication.startServices(this);
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		Bundle bundle = getIntent().getExtras();
 		if (!simpleSideDrawer.isClosed()) {
 			simpleSideDrawer.toggleRightDrawer();
 		}
-		if (!LbsApplication.isSearch()) {
+		if (!flagSearch) {
 			actionbarView.removeAllViews();
 			View.inflate(this, R.layout.actionbar, actionbarView);
 			initMainBar();
@@ -82,6 +84,12 @@ public class HomeActivity extends BaseActivity {
 		}
 		if (hasDetail) {
 			activityLocate(activity);
+		}
+		if (bundle != null) {
+			if (bundle.getParcelable("activity") != null) {
+				ActivityClass activity = bundle.getParcelable("activity");
+				activityLocate(activity);
+			}
 		}
 		LbsApplication.refreshMap();
 		Log.d(TAG, "on resume!");
@@ -105,7 +113,7 @@ public class HomeActivity extends BaseActivity {
 			}
 			if (requestCode == 1) {
 				Bundle bundle = data.getExtras();
-				if (results.isEmpty() || bundle != null) {
+				if (results.isEmpty()) {
 					results = bundle.getParcelableArrayList("results");
 				}
 			}

@@ -28,10 +28,12 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
     </uses-permission>
     <uses-permission android:name="android.permission.READ_LOGS" >
     </uses-permission>
+    <uses-permission android:name="com.shnu.lbsshnu.RECEIVE_WIDGET_NOTIFICATIONS" />
 
     <application
         android:name="com.shnu.lbsshnu.LbsApplication"
@@ -67,12 +69,29 @@
             android:enabled="true"
             android:process=":remote" >
         </service>
+        <service android:name="com.shnu.lbsshnu.LbsService" >
+        </service>
 
         <provider
             android:name="com.shnu.lbsshnu.ActivityProvider"
             android:authorities="com.shnu.lbsshnu.activityprovider"
             android:exported="false" >
         </provider>
+
+        <receiver
+            android:name="com.shnu.lbsshnu.LbsWidget"
+            android:label="@string/widgettitle" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.shnu.lbsshnu.NEW_STATUS" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/lbswidgetinfo" />
+        </receiver>
 
         <meta-data
             android:name="android.app.default_searchable"

@@ -33,7 +33,6 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activityview);
-		intent = getIntent();
 		tabBundle = intent.getExtras();
 		initView();
 		if (tabBundle.getString("Tab") != null) {

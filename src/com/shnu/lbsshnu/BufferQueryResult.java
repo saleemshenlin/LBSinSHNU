@@ -1,6 +1,5 @@
 package com.shnu.lbsshnu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -48,9 +47,7 @@ public class BufferQueryResult extends BaseActivity {
 			R.id.txtDateTime, R.id.txtId };
 	private ListView queryList;
 	private ActivityClass activity = new ActivityClass();
-	public static List<Result> results = new ArrayList<Result>();
 
-	@SuppressWarnings("unused")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,9 +77,6 @@ public class BufferQueryResult extends BaseActivity {
 					}
 				}
 				queryList.setAdapter(sectionedAdapter);
-				if (itemCursor != null) {
-					itemCursor.close();
-				}
 			} else {
 				queryList.setAdapter(nullResultAdapter);
 			}
@@ -121,7 +115,6 @@ public class BufferQueryResult extends BaseActivity {
 			bufferAnalystParam.setEndType(BufferEndType.ROUND);
 			bufferAnalystParam.setLeftDistance(100);
 			bufferAnalystParam.setRightDistance(100);
-
 			Geometry geoForBuffer = new GeoPoint(
 					LbsApplication.getLastlocationPoint2d());
 			PrjCoordSys prj = LbsApplication.getmMapControl().getMap()
@@ -147,7 +140,9 @@ public class BufferQueryResult extends BaseActivity {
 			int id = itemCursor.getInt(columnIndex);
 			int num = sum;
 			Result result = new Result(id, num);
-			results.add(result);
+			if (!isSearch) {
+				results.add(result);
+			}
 		}
 		adapter = new SimpleCursorAdapter(LbsApplication.getContext(),
 				R.layout.row, itemCursor, FROM, TO,

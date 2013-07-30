@@ -42,9 +42,10 @@ public class LbsApplication extends Application {
 	private static ActivityData activityData;
 	private static int requestCode = 0;
 	private static int bufferQueryCode = 1;
-	private static boolean isStart = false;
+	private static boolean isLocateStart = false;
 	private static LocationClient locationClient;
 	private static String queryString = "";
+
 	Layer mWifiLayerS;// 小比例尺wifi层
 	Layer mWifiLayerL;// 大比例尺wifi层
 
@@ -321,12 +322,12 @@ public class LbsApplication extends Application {
 		LbsApplication.queryString = queryString;
 	}
 
-	public static boolean isStart() {
-		return isStart;
+	public static boolean isLocateStart() {
+		return isLocateStart;
 	}
 
-	public static void setStart(boolean isStart) {
-		LbsApplication.isStart = isStart;
+	public static void setLocateStart(boolean isStart) {
+		LbsApplication.isLocateStart = isStart;
 	}
 
 }

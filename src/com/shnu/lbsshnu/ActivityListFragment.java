@@ -71,8 +71,8 @@ public class ActivityListFragment extends Fragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Cursor itemCursor = null;
 		try {
+			Cursor itemCursor = null;
 			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
 					null, getQuerySection(indexTab), null, getOrderBy());
 			int num = itemCursor.getCount();
@@ -96,7 +96,6 @@ public class ActivityListFragment extends Fragment {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		} finally {
-
 			LbsApplication.getActivityData().closeDatabase();
 		}
 		if (ActivityListView.getActivityId() != 0) {
@@ -176,8 +175,6 @@ public class ActivityListFragment extends Fragment {
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
-		} finally {
-			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 

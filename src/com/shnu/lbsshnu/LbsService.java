@@ -9,7 +9,7 @@ public class LbsService extends Service {
 	public static final String NEW_STATUS_INTENT = "com.shnu.lbsshnu.NEW_STATUS";
 	static final String TAG = "LbsService";
 	private static boolean runFlag = false;
-	private final int DELAY = 60000;
+	private final int DELAY = 3600000;
 	private Updater updater;
 	LbsApplication lbsApplication;
 

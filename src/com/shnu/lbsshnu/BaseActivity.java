@@ -26,10 +26,11 @@ public class BaseActivity extends Activity {
 	RelativeLayout locationImageView;
 	LinearLayout actionbarView;
 	Handler handler;
-	public static List<Result> results = new ArrayList<Result>();
-	public static boolean isPopUp = false;
-	public static boolean isSearch = false;
-	public static boolean flagSearch = false;
+	static List<Result> results = new ArrayList<Result>();
+	static boolean isPopUp = false;
+	static boolean isSearch = false;
+	static boolean flagSearch = false;
+	static boolean hasDetail;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,17 +118,24 @@ public class BaseActivity extends Activity {
 						if (isChecked) {
 							LbsApplication.getLocationApi().startLocate(
 									LbsApplication.getLocationClient());
-							LbsApplication.setStart(true);
+							LbsApplication.setLocateStart(true);
 						} else {
 							LbsApplication.getLocationApi().stopLocate(
 									LbsApplication.getLocationClient());
-							LbsApplication.setStart(false);
+							LbsApplication.setLocateStart(false);
 						}
 						LbsApplication.clearTrackingLayer();
 						LbsApplication.refreshMap();
 					}
 
 				});
+		if (LbsApplication.isLocateStart()) {
+			LbsApplication.setLocateStart(true);
+			locationSwitch.setChecked(true);
+		} else {
+			LbsApplication.setLocateStart(false);
+			locationSwitch.setChecked(false);
+		}
 	}
 
 	/*

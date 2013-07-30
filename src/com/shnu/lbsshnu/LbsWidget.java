@@ -21,10 +21,9 @@ public class LbsWidget extends AppWidgetProvider {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		Log.d(TAG, "onUpdate");
 		ActivityProvider activityProvider = new ActivityProvider();
+		Cursor cursor = activityProvider.query(ActivityProvider.CONTENT_URI,
+				null, getSelection(), null, getSortOrder());
 		try {
-			Cursor cursor = activityProvider.query(
-					ActivityProvider.CONTENT_URI, null, getSelection(), null,
-					getSortOrder());
 			if (cursor.moveToFirst()) {
 				activity = getActivityClass(cursor);
 				CharSequence title = activity.getActivityName();
@@ -62,12 +61,13 @@ public class LbsWidget extends AppWidgetProvider {
 					appWidgetManager.updateAppWidget(appWidgetId, views);
 				}
 			}
-			if (cursor.isClosed()) {
+			if (!cursor.isClosed()) {
 				cursor.close();
 			}
-			LbsApplication.getActivityData().closeDatabase();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString() + " " + e.getMessage());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 
@@ -113,6 +113,7 @@ public class LbsWidget extends AppWidgetProvider {
 	private void setWidgetDetail(Context context, RemoteViews views,
 			ActivityClass activity) {
 		Intent intent = new Intent(context, ActivityListView.class);
+		intent.setAction("Form_Widget");
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("activity", activity);
 		intent.putExtras(bundle);
@@ -124,6 +125,7 @@ public class LbsWidget extends AppWidgetProvider {
 	private void setWidgetLocation(Context context, RemoteViews views,
 			ActivityClass activity) {
 		Intent intent = new Intent(context, HomeActivity.class);
+		intent.setAction("Form_Widget");
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("activity", activity);
 		intent.putExtras(bundle);

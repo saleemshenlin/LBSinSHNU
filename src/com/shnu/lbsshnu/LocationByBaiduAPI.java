@@ -36,12 +36,12 @@ public class LocationByBaiduAPI {
 	 * 开启定位
 	 */
 	public void startLocate(LocationClient locationClient) {
-		if (!LbsApplication.isStart()) {
+		if (!LbsApplication.isLocateStart()) {
 			setLocationOption(locationClient);
 			locationClient.start();
 			// Log.d(TAG, "version:" + locationClient.getVersion());
 			Log.d(TAG, "start to locate");
-			LbsApplication.setStart(true);
+			LbsApplication.setLocateStart(true);
 		}
 	}
 
@@ -49,10 +49,10 @@ public class LocationByBaiduAPI {
 	 * 关闭定位
 	 */
 	public void stopLocate(LocationClient locationClient) {
-		if (LbsApplication.isStart()) {
+		if (LbsApplication.isLocateStart()) {
 			locationClient.stop();
 			Log.d(TAG, "stop to locate");
-			LbsApplication.setStart(false);
+			LbsApplication.setLocateStart(false);
 		}
 	}
 
@@ -61,7 +61,6 @@ public class LocationByBaiduAPI {
 	 */
 	public void drawLocationPoint(Point2D location, MapView mMapView,
 			Context context, float radius) {
-		LbsApplication.clearCallout();
 		LbsApplication.clearTrackingLayer();
 		double mapScale = LbsApplication.getmMapControl().getMap().getScale();
 		GeoCircle mGeoCircle = new GeoCircle(location, radius * mapScale * 0.02);
@@ -83,10 +82,12 @@ public class LocationByBaiduAPI {
 	}
 
 	/*
-	 * 判读是否在屏幕范围内
+	 * 判读是否在地图范围内 左: 121.412490774567; 上: 31.1651384499396; 右: 121.426210646701;
+	 * 下: 31.1566896665659; 宽: 0.01371987213399; 高: 0.00844878337370147
 	 */
 	public boolean isLocInMap(Point2D point2d, MapView mMapView) {
-		Rectangle2D rcMap = mMapView.getMapControl().getMap().getViewBounds();
+		Rectangle2D rcMap = new Rectangle2D(121.412490774567, 31.1566896665659,
+				121.426210646701, 31.165138449939);
 		if (point2d.getX() < rcMap.getLeft()
 				|| point2d.getX() > rcMap.getRight()) {
 			return false;
@@ -97,5 +98,4 @@ public class LocationByBaiduAPI {
 		}
 		return true;
 	}
-
 }

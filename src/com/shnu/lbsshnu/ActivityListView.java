@@ -25,14 +25,19 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	private static int activityId = 0;
 	private static final String TAG = "ActivityListView";
 	private TabFragmentPagerAdapter tabFragmentPagerAdapter;
-	Intent intent;
+	static Intent intent;
 	static Bundle tabBundle;
+	boolean isFromWidget = false;
 	ActionBar actionBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activityview);
+		intent = getIntent();
+		if (intent.getAction() != null) {
+			isFromWidget = true;
+		}
 		tabBundle = intent.getExtras();
 		initView();
 		if (tabBundle.getString("Tab") != null) {
@@ -185,17 +190,31 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	 */
 	public void onArticleSelected(ActivityClass activity) {
 		try {
-			Intent intent = new Intent(this, HomeActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			Log.i(TAG, activity.toString());
-			Bundle bundle = new Bundle();
-			bundle.putParcelable("activity", activity);
-			intent.putExtras(bundle);
-			setResult(LbsApplication.getRequestCode(), intent);
-			finish();
-			this.overridePendingTransition(R.anim.in_left2right,
-					R.anim.out_left2right);
+			if (isFromWidget) {
+				Intent intent = new Intent(this, HomeActivity.class);
+				Log.i(TAG, activity.toString());
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				Bundle bundle = new Bundle();
+				bundle.putParcelable("activity", activity);
+				intent.putExtras(bundle);
+				BaseActivity.hasDetail = true;
+				startActivity(intent);
+				this.overridePendingTransition(R.anim.in_left2right,
+						R.anim.out_left2right);
+			} else {
+				Intent intent = new Intent(this, HomeActivity.class);
+				Log.i(TAG, activity.toString());
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				Bundle bundle = new Bundle();
+				bundle.putParcelable("activity", activity);
+				intent.putExtras(bundle);
+				setResult(LbsApplication.getRequestCode(), intent);
+				finish();
+				this.overridePendingTransition(R.anim.in_left2right,
+						R.anim.out_left2right);
+			}
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage().toString());
 		}

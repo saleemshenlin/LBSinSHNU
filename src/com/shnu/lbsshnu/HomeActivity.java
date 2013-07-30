@@ -47,9 +47,9 @@ public class HomeActivity extends BaseActivity {
 	private TextView geoCodeTextView;
 	private Button detailButton;
 	private ActivityClass activity;
-	private static boolean hasDetail;
 	private long exitTime = 0;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,13 +59,19 @@ public class HomeActivity extends BaseActivity {
 		initView();
 		openData();
 		LbsApplication.startServices(this);
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			if (bundle.getParcelable("activity") != null) {
+				activity = bundle.getParcelable("activity");
+			}
+			activityLocate(activity);
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		Bundle bundle = getIntent().getExtras();
 		if (!simpleSideDrawer.isClosed()) {
 			simpleSideDrawer.toggleRightDrawer();
 		}
@@ -85,16 +91,11 @@ public class HomeActivity extends BaseActivity {
 		if (hasDetail) {
 			activityLocate(activity);
 		}
-		if (bundle != null) {
-			if (bundle.getParcelable("activity") != null) {
-				ActivityClass activity = bundle.getParcelable("activity");
-				activityLocate(activity);
-			}
-		}
 		LbsApplication.refreshMap();
 		Log.d(TAG, "on resume!");
 	}
 
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 	}
@@ -189,9 +190,6 @@ public class HomeActivity extends BaseActivity {
 						new Rectangle2D(121.412490774567, 31.1566896665659,
 								121.426210646701, 31.1651384499396));
 		LbsApplication.getmMapControl().getMap().setViewBoundsLocked(true);
-		// 左: 121.412490774567; 上: 31.1651384499396; 右: 121.426210646701; 下:
-		// 31.1566896665659; 宽: 0.01371987213399; 高: 0.00844878337370147
-
 		LbsApplication.setmTrackingLayer(LbsApplication.getmMapControl()
 				.getMap().getTrackingLayer());
 		LbsApplication.getmMapControl().setMapParamChangedListener(
@@ -232,17 +230,19 @@ public class HomeActivity extends BaseActivity {
 			detailButton.setVisibility(View.GONE);
 		}
 		if (!isPopUp) {
-			new GeoCoding().execute();
-			accuracyTextView.setText("我的位置(精度:"
-					+ LbsApplication.save2Point(LbsApplication
-							.getLocationAccuracy()) + "米)");
-			geoCodeTextView.setText("上海师范大学");
-			locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
-					mapRelativeLayout);
-			isPopUp = true;
-			if (LbsApplication.getLastlocationPoint2d() != null)
-				LbsApplication.getmMapControl().getMap()
-						.setCenter(LbsApplication.getLastlocationPoint2d());
+			if (!LbsApplication.isLocateStart()) {
+				new GeoCoding().execute();
+				accuracyTextView.setText("我的位置(精度:"
+						+ LbsApplication.save2Point(LbsApplication
+								.getLocationAccuracy()) + "米)");
+				geoCodeTextView.setText("上海师范大学");
+				locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
+						mapRelativeLayout);
+				isPopUp = true;
+				if (LbsApplication.getLastlocationPoint2d() != null)
+					LbsApplication.getmMapControl().getMap()
+							.setCenter(LbsApplication.getLastlocationPoint2d());
+			}
 		} else {
 			LbsApplication.clearCallout();
 			locationViewPopup(-LbsApplication.Dp2Px(this, 50), 0,
@@ -413,8 +413,15 @@ public class HomeActivity extends BaseActivity {
 				LbsApplication.setLastlocationPoint2d(new Point2D(location
 						.getLongitude(), location.getLatitude()));
 				LbsApplication.setLocationAccuracy(location.getRadius());
-				drawPointAndBuffer = new DrawPointAndBuffer();
-				drawPointAndBuffer.execute("");
+				if (!LbsApplication.getLocationApi().isLocInMap(
+						LbsApplication.getLastlocationPoint2d(),
+						LbsApplication.getmMapView())) {
+					LbsApplication.setLocateStart(false);
+					locationSwitch.setChecked(false);
+				} else {
+					drawPointAndBuffer = new DrawPointAndBuffer();
+					drawPointAndBuffer.execute("");
+				}
 				Log.i(TAG, sb.toString());
 			}
 		}
@@ -557,4 +564,5 @@ public class HomeActivity extends BaseActivity {
 		}
 		LbsApplication.refreshMap();
 	}
+
 }

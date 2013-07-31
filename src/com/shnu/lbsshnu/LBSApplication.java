@@ -31,7 +31,6 @@ public class LbsApplication extends Application {
 	private static int SCREENWIDTH;
 	private static int SCREENHEIGHT;
 	private static double SCREENDPI;
-	private static String SDCARD;
 	private static Context CONTEXT;
 	private static LocationByBaiduAPI LOCATIONAPI = new LocationByBaiduAPI();
 	private static Point2D LASTLOCATION;
@@ -56,8 +55,9 @@ public class LbsApplication extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		setEnvironment();
 		CONTEXT = getApplicationContext();
+		importMapDataFromAsset();
+		setEnvironment();
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
@@ -78,12 +78,12 @@ public class LbsApplication extends Application {
 	 * 设置supermap环境
 	 */
 	private void setEnvironment() {
-		SDCARD = android.os.Environment.getExternalStorageDirectory()
-				.toString();
-		Environment.setLicensePath(SDCARD + getString(R.string.license_path));
-		Environment.setTemporaryPath(SDCARD + getString(R.string.temp_path));
-		Environment.setWebCacheDirectory(SDCARD
-				+ getString(R.string.cache_path));
+		Environment.setLicensePath(getContext().getExternalFilesDir(
+				getString(R.string.license_path)).toString());
+		Environment.setTemporaryPath(getContext().getExternalFilesDir(
+				getString(R.string.temp_path)).toString());
+		Environment.setWebCacheDirectory(getContext().getExternalFilesDir(
+				getString(R.string.cache_path)).toString());
 		Environment.initialization(this);
 		Log.i(TAG, "LBSApplication setEnvironment!");
 	}
@@ -182,6 +182,14 @@ public class LbsApplication extends Application {
 	}
 
 	/*
+	 * 调用FileIO导入地图数据
+	 */
+	private void importMapDataFromAsset() {
+		FileIO fileIO = new FileIO();
+		fileIO.copyMapData(getContext());
+	}
+
+	/*
 	 * 更新課程日期
 	 */
 	private void updateCourseDate() {
@@ -245,10 +253,6 @@ public class LbsApplication extends Application {
 
 	public static Context getContext() {
 		return CONTEXT;
-	}
-
-	public static String getSdCard() {
-		return SDCARD;
 	}
 
 	public static Workspace getmWorkspace() {

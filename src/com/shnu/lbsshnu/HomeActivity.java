@@ -160,8 +160,18 @@ public class HomeActivity extends BaseActivity {
 		// 打开工作空间
 		LbsApplication.setmWorkspace(new Workspace());
 		WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
-		info.setServer(LbsApplication.getSdCard()
-				+ getString(R.string.data_path));
+		info.setServer(LbsApplication
+				.getContext()
+				.getExternalFilesDir(
+						getString(R.string.data_path)
+								+ getString(R.string.dataname)).toString());
+		Log.d(TAG,
+				LbsApplication
+						.getContext()
+						.getExternalFilesDir(
+								getString(R.string.data_path)
+										+ getString(R.string.dataname))
+						.toString());
 		info.setType(WorkspaceType.SMWU);
 		LbsApplication.getmWorkspace().open(info);
 
@@ -173,8 +183,9 @@ public class HomeActivity extends BaseActivity {
 				.setWorkspace(LbsApplication.getmWorkspace());
 		LbsApplication.getmMapControl().getMap()
 				.setMapDPI(LbsApplication.getScreenDPI());
+		Log.d(TAG, "add Map: " + LbsApplication.getmWorkspace());
 		String mapName = LbsApplication.getmWorkspace().getMaps().get(0);
-		Log.i(TAG, "add Map: " + mapName);
+		Log.d(TAG, "add Map: " + mapName);
 		LbsApplication.getmMapControl().getMap().open(mapName);
 		LbsApplication.setMlayers(LbsApplication.getmMapControl().getMap()
 				.getLayers());

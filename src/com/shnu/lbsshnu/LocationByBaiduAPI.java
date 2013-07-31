@@ -66,8 +66,8 @@ public class LocationByBaiduAPI {
 		LbsApplication.clearTrackingLayer();
 		double mapScale = LbsApplication.getmMapControl().getMap().getScale();
 		GeoCircle mGeoCircle = new GeoCircle(location, radius * mapScale * 0.02);
-		GeoRegion mGeoRegion = new GeoCircle(location, radius * mapScale
-				* 0.005).convertToRegion(100);
+		GeoRegion mGeoRegion = new GeoCircle(location, 10 * mapScale * 0.005)
+				.convertToRegion(100);
 		GeoStyle mGeoStyle = new GeoStyle();
 		GeoStyle mGeoStyle_P = new GeoStyle();
 		mGeoStyle.setFillOpaqueRate(10);

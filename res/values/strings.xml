@@ -7,10 +7,11 @@
     <string name="searchview">搜索</string>
     <string name="userpref">userpref</string>
     <string name="actionmore">actionmore</string>
-    <string name="data_path">/SuperMap/MapData/MapData.smwu</string>
-    <string name="license_path">/SuperMap/license/</string>
-    <string name="temp_path">/SuperMap/temp/</string>
-    <string name="cache_path">/SuperMap/WebCache/</string>
+    <string name="data_path">data</string>
+    <string name="license_path">license</string>
+    <string name="temp_path">temp</string>
+    <string name="cache_path">cache</string>
+    <string name="dataname">/MapData.smwu</string>
     <string name="actionlocation">定位</string>
     <string name="detail">详情</string>
     <string name="location">我的位置(精度：10米)</string>

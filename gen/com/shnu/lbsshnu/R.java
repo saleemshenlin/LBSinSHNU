@@ -144,37 +144,38 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
-        public static final int actionlocation=0x7f07000a;
+        public static final int actionlocation=0x7f07000b;
         public static final int actionmore=0x7f070005;
-        public static final int app_label=0x7f07001a;
+        public static final int app_label=0x7f07001b;
         public static final int app_name=0x7f070000;
-        public static final int btnlist=0x7f07001d;
-        public static final int btnmap=0x7f07001c;
+        public static final int btnlist=0x7f07001e;
+        public static final int btnmap=0x7f07001d;
         public static final int cache_path=0x7f070009;
         public static final int data_path=0x7f070006;
-        public static final int detail=0x7f07000b;
-        public static final int detailtitle=0x7f070017;
-        public static final int geocoding=0x7f07000d;
+        public static final int dataname=0x7f07000a;
+        public static final int detail=0x7f07000c;
+        public static final int detailtitle=0x7f070018;
+        public static final int geocoding=0x7f07000e;
         public static final int hello_world=0x7f070002;
         public static final int license_path=0x7f070007;
-        public static final int location=0x7f07000c;
-        public static final int querysurrounding=0x7f07000e;
-        public static final int search_hint=0x7f070019;
+        public static final int location=0x7f07000d;
+        public static final int querysurrounding=0x7f07000f;
+        public static final int search_hint=0x7f07001a;
         public static final int searchview=0x7f070003;
-        public static final int swtlocation=0x7f070010;
-        public static final int swtquery=0x7f07001e;
-        public static final int swtwifi=0x7f07000f;
+        public static final int swtlocation=0x7f070011;
+        public static final int swtquery=0x7f07001f;
+        public static final int swtwifi=0x7f070010;
         public static final int temp_path=0x7f070008;
-        public static final int txtactivity=0x7f070011;
-        public static final int txtbattitle=0x7f07001b;
-        public static final int txtcourse=0x7f070014;
-        public static final int txtdecription=0x7f070018;
-        public static final int txtlecture=0x7f070012;
-        public static final int txtlike=0x7f070015;
-        public static final int txtplay=0x7f070013;
-        public static final int txtsetting=0x7f070016;
+        public static final int txtactivity=0x7f070012;
+        public static final int txtbattitle=0x7f07001c;
+        public static final int txtcourse=0x7f070015;
+        public static final int txtdecription=0x7f070019;
+        public static final int txtlecture=0x7f070013;
+        public static final int txtlike=0x7f070016;
+        public static final int txtplay=0x7f070014;
+        public static final int txtsetting=0x7f070017;
         public static final int userpref=0x7f070004;
-        public static final int widgettitle=0x7f07001f;
+        public static final int widgettitle=0x7f070020;
     }
     public static final class style {
         /** 

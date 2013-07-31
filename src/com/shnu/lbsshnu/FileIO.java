@@ -1,10 +1,16 @@
 package com.shnu.lbsshnu;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
@@ -92,4 +98,74 @@ public class FileIO {
 		}
 
 	}
+
+	/*
+	 * copy地图数据到sdcard
+	 */
+	public void copyMapData(Context context) {
+		createPath(context, "temp");
+		createPath(context, "cache");
+		AssetManager assetManager = context.getAssets();
+		String[] files = null;
+		try {
+			files = assetManager.list("");
+		} catch (IOException e) {
+			Log.e(TAG, e.toString());
+		}
+		for (String filename : files) {
+			if (filename.equals("MapData.smwu")
+					|| filename.equals("MapData.udb")
+					|| filename.equals("MapData.udd")
+					|| filename.equals("imobile-GISGame.slm")) {
+				InputStream in = null;
+				OutputStream out = null;
+				try {
+					in = assetManager.open(filename);
+					File outFile = null;
+					if (filename.equals("imobile-GISGame.slm")) {
+						outFile = new File(
+								context.getExternalFilesDir("license"),
+								filename);
+					} else {
+						outFile = new File(context.getExternalFilesDir("data"),
+								filename);
+					}
+					if (!outFile.exists()) {
+						out = new FileOutputStream(outFile);
+						copyFile(in, out);
+						in.close();
+						in = null;
+						out.flush();
+						out.close();
+						out = null;
+					}
+				} catch (IOException e) {
+					Log.e(TAG, e.toString());
+				}
+			}
+		}
+	}
+
+	private void copyFile(InputStream in, OutputStream out) throws IOException {
+		byte[] buffer = new byte[1024];
+		int read;
+		while ((read = in.read(buffer)) != -1) {
+			out.write(buffer, 0, read);
+		}
+	}
+
+	/**
+	 * 创建Environment目录
+	 */
+	private static void createPath(Context context, String path) {
+		try {
+			File file = new File(context.getExternalFilesDir(null), path);
+			if (!file.exists()) {
+				file.mkdir();
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+	}
+
 }

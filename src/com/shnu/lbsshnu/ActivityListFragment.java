@@ -131,7 +131,11 @@ public class ActivityListFragment extends Fragment {
 					+ ActivityData.C_TYPE + " = 1";
 			return sql;
 		case 2:
-			sql = ActivityData.C_TYPE + " = 3";
+			sql = ActivityData.C_DATE + " > (SELECT DATE('now')) and "
+					+ ActivityData.C_DATE
+					+ " < (SELECT DATE('now', '+7 day')) and "
+					+ ActivityData.C_TIME + " > (SELECT TIME('now')) and "
+					+ ActivityData.C_TYPE + " = 3";
 			return sql;
 		case 3:
 			sql = ActivityData.C_DATE + " > (SELECT DATE('now')) and "

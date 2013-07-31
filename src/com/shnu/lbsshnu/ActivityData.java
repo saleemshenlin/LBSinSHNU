@@ -1,12 +1,20 @@
 package com.shnu.lbsshnu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+@SuppressLint("SimpleDateFormat")
 public class ActivityData {
 	static final String TAG = "DbHelper";
 	static final int VERSION = 1;
@@ -128,12 +136,59 @@ public class ActivityData {
 			if (num < 1) {
 				return true;
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 		} finally {
 			db.close();
 		}
 		return result;
+	}
+
+	/*
+	 * 更新数据课程数，找到所有数据的时间最早的一条数据 获取它的 日期和现 在日清对比，若大于7天则更新所有课程数据日期加7天
+	 */
+	public void updateCourseDate() throws ParseException {
+		boolean update = false;
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		Calendar c = Calendar.getInstance();
+		long DAY = 24 * 3600 * 1000;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = c.getTime();
+		try {
+			db = this.dbHelper.getReadableDatabase();
+			String sql = "select * from " + TABLE + " where " + C_TYPE
+					+ " = 3 ORDER BY " + C_DATE + " ASC";
+			cursor = db.rawQuery(sql, null);
+			if (cursor.moveToFirst()) {
+				Date courseDate = df.parse(cursor.getString(cursor
+						.getColumnIndex(C_DATE)));
+				int lackDays = (int) Math.abs(((nowDate.getTime() - courseDate
+						.getTime()) / DAY));
+				update = lackDays >= 7;
+				if (update) {
+					for (int i = 0; i < cursor.getCount(); i++) {
+						ContentValues contentValues = new ContentValues();
+						Date oleDate = df.parse(cursor.getString(cursor
+								.getColumnIndex(C_DATE)));
+						int id = cursor.getInt(cursor.getColumnIndex(C_ID));
+						String newDate = df.format(new Date(oleDate.getTime()
+								+ lackDays * DAY));
+						contentValues.put(C_DATE, newDate);
+						int row = db.updateWithOnConflict(TABLE, contentValues,
+								C_ID + " = '" + id + "'", null,
+								SQLiteDatabase.CONFLICT_IGNORE);
+						Log.d("Update " + id, row + "row is changed");
+						cursor.moveToNext();
+					}
+				}
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			db.close();
+		}
 	}
 
 	public DbHelper getDbHelper() {

@@ -1,6 +1,7 @@
 package com.shnu.lbsshnu;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import android.app.Activity;
 import android.app.Application;
@@ -63,6 +64,7 @@ public class LbsApplication extends Application {
 		LbsApplication.LASTLOCATION = new Point2D();
 		LbsApplication.LOCATIONACCUCRACY = (float) 10;
 		importDataFromXML();
+		updateCourseDate();
 	}
 
 	@Override
@@ -177,6 +179,18 @@ public class LbsApplication extends Application {
 	private void importDataFromXML() {
 		FileIO fileIO = new FileIO();
 		fileIO.getDateFromXML();
+	}
+
+	/*
+	 * 更新課程日期
+	 */
+	private void updateCourseDate() {
+		try {
+			LbsApplication.getActivityData().updateCourseDate();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*

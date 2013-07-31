@@ -25,8 +25,10 @@ public class LocationByBaiduAPI {
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
 		option.setScanSpan(1000);
-		if (LbsApplication.isNetWork()) {
+		if (LbsApplication.isLocateStart()) {
 			option.setPriority(LocationClientOption.NetWorkFirst);
+		} else {
+			option.setPriority(LocationClientOption.GpsFirst);
 		}
 		option.disableCache(true);
 		locationClient.setLocOption(option);

@@ -47,6 +47,7 @@ public class BufferQueryResult extends BaseActivity {
 			R.id.txtDateTime, R.id.txtId };
 	private ListView queryList;
 	private ActivityClass activity = new ActivityClass();
+	private NullResultAdapter nullResultAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,47 +58,14 @@ public class BufferQueryResult extends BaseActivity {
 		initResultBar("list");
 		QER_STRING = getIntent().getStringExtra("QueryString");
 		queryList = (ListView) findViewById(R.id.listResult);
-		NullResultAdapter nullResultAdapter = new NullResultAdapter(
-				LbsApplication.getContext());
-		try {
-			List<Place> places = bufferQuery.queryByBuffer(addQueryBuffer());
-			if (places != null) {
-				Cursor itemCursor = null;
-				for (Place place : places) {
-					String caption = place.buildingName;
-					String distance = place.distance + "m";
-					String selection = getQuerySection(place);
-					SimpleCursorAdapter adapter = getQueryResult(selection,
-							itemCursor);
-					if (adapter.getCount() > 0) {
-						sectionedAdapter.addSection(caption, distance, adapter);
-					} else {
-						sectionedAdapter.addSection(caption, distance,
-								nullResultAdapter);
-					}
-				}
-				queryList.setAdapter(sectionedAdapter);
-			} else {
-				queryList.setAdapter(nullResultAdapter);
-			}
-			queryList.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					TextView txtView = (TextView) view.findViewById(R.id.txtId);
-					Log.i(TAG, txtView.getText().toString());
-					long activityId = Long.parseLong(txtView.getText()
-							.toString());
-					showPopupwindows(activityId);
-				}
-			});
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		} finally {
-			LbsApplication.getActivityData().closeDatabase();
+		nullResultAdapter = new NullResultAdapter(LbsApplication.getContext());
+		if (getIntent().getAction() != null) {
+			Log.d(TAG, getIntent().getAction());
+			queryViaLocation();
+		} else {
+			queryViaNormal();
+			resultSwitch.setEnabled(false);
 		}
-
 	}
 
 	@Override
@@ -155,6 +123,20 @@ public class BufferQueryResult extends BaseActivity {
 	private String getQuerySection(Place place) {
 		String sql = null;
 		sql = ActivityData.C_BUILDING + " = " + place.buildingNum + " and ";
+		sql = sql + ActivityData.C_DATE + " > (SELECT DATE('now')) and "
+				+ ActivityData.C_DATE
+				+ " < (SELECT DATE('now', '+7 day')) and ";
+		sql = sql + "( " + ActivityData.C_NAME + " Like '%" + QER_STRING
+				+ "%' OR " + ActivityData.C_SPEAKER + " Like '%" + QER_STRING
+				+ "%' OR " + ActivityData.C_SPEAKERTITLE + " Like '%"
+				+ QER_STRING + "%' OR " + ActivityData.C_DESCRIPTION
+				+ " Like '%" + QER_STRING + "%' )";
+		return sql;
+	}
+
+	private String getQuerySection(int num) {
+		String sql = null;
+		sql = ActivityData.C_TYPE + " = " + num + " and ";
 		sql = sql + ActivityData.C_DATE + " > (SELECT DATE('now')) and "
 				+ ActivityData.C_DATE
 				+ " < (SELECT DATE('now', '+7 day')) and ";
@@ -335,6 +317,85 @@ public class BufferQueryResult extends BaseActivity {
 		}
 	}
 
+	private void queryViaLocation() {
+		try {
+			List<Place> places = bufferQuery.queryByBuffer(addQueryBuffer());
+			if (!places.isEmpty()) {
+				Cursor itemCursor = null;
+				for (Place place : places) {
+					String caption = place.buildingName;
+					String distance = place.distance + "m";
+					String selection = getQuerySection(place);
+					SimpleCursorAdapter adapter = getQueryResult(selection,
+							itemCursor);
+					if (adapter.getCount() > 0) {
+						sectionedAdapter.addSection(caption, distance, adapter);
+					} else {
+						sectionedAdapter.addSection(caption, distance,
+								nullResultAdapter);
+					}
+				}
+				queryList.setAdapter(sectionedAdapter);
+			} else {
+				queryList.setAdapter(nullResultAdapter);
+			}
+			queryList.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					TextView txtView = (TextView) view.findViewById(R.id.txtId);
+					Log.i(TAG, txtView.getText().toString());
+					long activityId = Long.parseLong(txtView.getText()
+							.toString());
+					showPopupwindows(activityId);
+				}
+			});
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
+		}
+
+	}
+
+	private void queryViaNormal() {
+		try {
+			String[] items = { "电影演出", "学术讲座", "精品课程" };
+			Cursor itemCursor = null;
+			for (int i = 1; i <= items.length; i++) {
+				String caption = items[i - 1];
+				String distance = "";
+				String selection = getQuerySection(i);
+				SimpleCursorAdapter adapter = getQueryResult(selection,
+						itemCursor);
+				if (adapter.getCount() > 0) {
+					sectionedAdapter.addSection(caption, distance, adapter);
+				} else {
+					sectionedAdapter.addSection(caption, distance,
+							nullResultAdapter);
+				}
+			}
+			queryList.setAdapter(sectionedAdapter);
+			queryList.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					TextView txtView = (TextView) view.findViewById(R.id.txtId);
+					Log.i(TAG, txtView.getText().toString());
+					long activityId = Long.parseLong(txtView.getText()
+							.toString());
+					showPopupwindows(activityId);
+				}
+			});
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			LbsApplication.getActivityData().closeDatabase();
+		}
+	}
+
 	public static List<Result> getResults() {
 		return results;
 	}
@@ -375,6 +436,7 @@ public class BufferQueryResult extends BaseActivity {
 			}
 			return (result);
 		}
+
 	}
 
 }

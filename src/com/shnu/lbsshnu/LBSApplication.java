@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
@@ -45,6 +46,7 @@ public class LbsApplication extends Application {
 	private static boolean isLocateStart = false;
 	private static LocationClient locationClient;
 	private static String queryString = "";
+	public static String QUERY_WITH_LOCATION_FLAG = "QUERY_WITH_LOCATION";
 
 	Layer mWifiLayerS;// Ð¡±ÈÀý³ßwifi²ã
 	Layer mWifiLayerL;// ´ó±ÈÀý³ßwifi²ã
@@ -104,8 +106,7 @@ public class LbsApplication extends Application {
 	}
 
 	/*
-	 * 
-	 * /* ÅÐ¶ÏÊÇ·ñÁªÍø
+	 * ÅÐ¶ÏÊÇ·ñÁªÍø
 	 */
 	public static boolean isNetWork() {
 		ConnectivityManager cwjManager = (ConnectivityManager) CONTEXT
@@ -123,17 +124,33 @@ public class LbsApplication extends Application {
 	}
 
 	/*
+	 * ÅÐ¶ÏGPSÊÇ·ñ´ò¿ª
+	 */
+	public static boolean isGPSOpen() {
+		LocationManager locationManager = ((LocationManager) getContext()
+				.getSystemService(Context.LOCATION_SERVICE));
+		boolean isOpen = locationManager
+				.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		return isOpen;
+	}
+
+	/*
 	 * Ë¢ÐÂµØÍ¼
 	 */
 	public static void refreshMap() {
-		mMapControl.getMap().refresh();
+		if (mMapControl != null) {
+			mMapControl.getMap().refresh();
+		}
+
 	}
 
 	/*
 	 * Çå³ý¸ú×Ù²ã
 	 */
 	public static void clearTrackingLayer() {
-		mTrackingLayer.clear();
+		if (mTrackingLayer != null) {
+			mTrackingLayer.clear();
+		}
 		refreshMap();
 	}
 
@@ -141,7 +158,9 @@ public class LbsApplication extends Application {
 	 * Çå³ýµã±ê×¢
 	 */
 	public static void clearCallout() {
-		LbsApplication.mMapView.removeAllCallOut();
+		if (mMapView != null) {
+			mMapView.removeAllCallOut();
+		}
 	}
 
 	/*
@@ -169,6 +188,9 @@ public class LbsApplication extends Application {
 		}
 	}
 
+	/*
+	 * Òþ²ØÐéÄâ¼üÅÌ
+	 */
 	@SuppressWarnings("static-access")
 	public static void hideIme(Activity context) {
 		if (context == null)
@@ -181,6 +203,9 @@ public class LbsApplication extends Application {
 		}
 	}
 
+	/*
+	 * ÅÐ¶ÏÐéÄâ¼üÅÌÊÇ·ñ´ò¿ª
+	 */
 	@SuppressWarnings("static-access")
 	public static boolean isImeShow(Context context) {
 		InputMethodManager imm = (InputMethodManager) context

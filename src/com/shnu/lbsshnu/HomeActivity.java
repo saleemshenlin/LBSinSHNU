@@ -49,12 +49,11 @@ public class HomeActivity extends BaseActivity {
 	private ActivityClass activity;
 	private long exitTime = 0;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initLocationAPi();
 		setContentView(R.layout.homeactivity);
+		initLocationAPi();
 		drawPointAndBuffer = new DrawPointAndBuffer();
 		initView();
 		openData();
@@ -128,8 +127,10 @@ public class HomeActivity extends BaseActivity {
 		LbsApplication.setLocationClient(getApplicationContext());
 		LbsApplication.getLocationClient().registerLocationListener(
 				baiduLocationListener);
-		LbsApplication.getLocationApi().startLocate(
-				LbsApplication.getLocationClient());
+		if (LbsApplication.isNetWork() || LbsApplication.isGPSOpen()) {
+			LbsApplication.getLocationApi().startLocate(
+					LbsApplication.getLocationClient());
+		}
 	}
 
 	/*
@@ -230,7 +231,7 @@ public class HomeActivity extends BaseActivity {
 			detailButton.setVisibility(View.GONE);
 		}
 		if (!isPopUp) {
-			if (!LbsApplication.isLocateStart()) {
+			if (LbsApplication.isLocateStart()) {
 				new GeoCoding().execute();
 				accuracyTextView.setText("我的位置(精度:"
 						+ LbsApplication.save2Point(LbsApplication
@@ -242,6 +243,9 @@ public class HomeActivity extends BaseActivity {
 				if (LbsApplication.getLastlocationPoint2d() != null)
 					LbsApplication.getmMapControl().getMap()
 							.setCenter(LbsApplication.getLastlocationPoint2d());
+			} else {
+				Toast.makeText(this, "请先开启定位功能，才能获取当前位置", Toast.LENGTH_SHORT)
+						.show();
 			}
 		} else {
 			LbsApplication.clearCallout();

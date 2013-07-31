@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -17,12 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class BaseActivity extends Activity {
 	LbsApplication lbsApplication;
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
 	Switch locationSwitch;
+	Switch resultSwitch;
 	RelativeLayout locationImageView;
 	LinearLayout actionbarView;
 	Handler handler;
@@ -118,22 +121,32 @@ public class BaseActivity extends Activity {
 						if (isChecked) {
 							LbsApplication.getLocationApi().startLocate(
 									LbsApplication.getLocationClient());
-							LbsApplication.setLocateStart(true);
 						} else {
 							LbsApplication.getLocationApi().stopLocate(
 									LbsApplication.getLocationClient());
-							LbsApplication.setLocateStart(false);
 						}
 						LbsApplication.clearTrackingLayer();
-						LbsApplication.refreshMap();
 					}
 
 				});
+		locationSwitch.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					if (!LbsApplication.isNetWork()
+							&& !LbsApplication.isGPSOpen()) {
+						Toast.makeText(BaseActivity.this, "请先打开网络连接或GPS！",
+								Toast.LENGTH_SHORT).show();
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 		if (LbsApplication.isLocateStart()) {
-			LbsApplication.setLocateStart(true);
 			locationSwitch.setChecked(true);
 		} else {
-			LbsApplication.setLocateStart(false);
 			locationSwitch.setChecked(false);
 		}
 	}
@@ -224,6 +237,8 @@ public class BaseActivity extends Activity {
 				LbsApplication.setQueryString(query);
 				Intent intent = new Intent(getApplicationContext(),
 						BufferQueryResult.class);
+				if (LbsApplication.isLocateStart())
+					intent.setAction(LbsApplication.QUERY_WITH_LOCATION_FLAG);
 				intent.putExtra("QueryString", query);
 				startActivityForResult(intent,
 						LbsApplication.getBufferQueryCode());
@@ -265,7 +280,7 @@ public class BaseActivity extends Activity {
 	 */
 	public void initResultBar(final String flag) {
 		ImageView backImageView = (ImageView) findViewById(R.id.imgBackHome);
-		final Switch resultSwitch = (Switch) findViewById(R.id.swtQuery);
+		resultSwitch = (Switch) findViewById(R.id.swtQuery);
 		resultSwitch.setTextColor(Color.parseColor("#000000"));
 		backImageView.setOnClickListener(new View.OnClickListener() {
 
@@ -299,6 +314,8 @@ public class BaseActivity extends Activity {
 								Intent intent = new Intent(
 										getApplicationContext(),
 										BufferQueryResult.class);
+								if (LbsApplication.isLocateStart())
+									intent.setAction(LbsApplication.QUERY_WITH_LOCATION_FLAG);
 								intent.putExtra("QueryString",
 										LbsApplication.getQueryString());
 								startActivityForResult(intent,

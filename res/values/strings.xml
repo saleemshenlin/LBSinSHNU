@@ -34,5 +34,8 @@
     <string name="btnlist">列表</string>
     <string name="swtquery">查询结果</string>
     <string name="widgettitle">地图小部件</string>
+    <string name="swtphoto">美丽校园</string>
+    <string name="widgetitle">请先设置“我关注的”活动</string>
+    <string name="txtsplash">正在加载数据&#8230;</string>
 
 </resources>

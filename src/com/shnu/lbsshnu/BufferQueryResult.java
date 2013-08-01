@@ -226,6 +226,7 @@ public class BufferQueryResult extends BaseActivity {
 
 	private void bindPopupData(final long id, View view,
 			final PopupWindow popupwindow) {
+		Cursor detailCursor = null;
 		try {
 			TextView txtDes = (TextView) view.findViewById(R.id.txtDecription);
 			TextView txtTitle = (TextView) view
@@ -241,8 +242,8 @@ public class BufferQueryResult extends BaseActivity {
 			mapImageView.setVisibility(View.GONE);
 			final Uri queryUri = Uri.parse(ActivityProvider.CONTENT_URI
 					.toString() + "/" + id);
-			Cursor detailCursor = activityProvider.query(queryUri, null, null,
-					null, getOrderBy());
+			detailCursor = activityProvider.query(queryUri, null, null, null,
+					getOrderBy());
 			if (detailCursor.moveToFirst()) {
 				activity.setActivityId((int) id);
 				activity.setActivityName(detailCursor.getString(detailCursor
@@ -280,7 +281,6 @@ public class BufferQueryResult extends BaseActivity {
 					activity.setActivityIsLike(false);
 				}
 			}
-			detailCursor.close();
 			final ImageView likeImageView = (ImageView) view
 					.findViewById(R.id.imageLike);
 			if (activity.isActivityIsLike()) {
@@ -314,14 +314,19 @@ public class BufferQueryResult extends BaseActivity {
 			txtDes.setMovementMethod(ScrollingMovementMethod.getInstance());
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
+		} finally {
+			if (detailCursor != null) {
+				detailCursor.close();
+			}
+			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 
 	private void queryViaLocation() {
+		Cursor itemCursor = null;
 		try {
 			List<Place> places = bufferQuery.queryByBuffer(addQueryBuffer());
 			if (!places.isEmpty()) {
-				Cursor itemCursor = null;
 				for (Place place : places) {
 					String caption = place.buildingName;
 					String distance = place.distance + "m";
@@ -354,15 +359,18 @@ public class BufferQueryResult extends BaseActivity {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		} finally {
+			if (itemCursor != null) {
+				itemCursor.close();
+			}
 			LbsApplication.getActivityData().closeDatabase();
 		}
 
 	}
 
 	private void queryViaNormal() {
+		Cursor itemCursor = null;
 		try {
 			String[] items = { "电影演出", "学术讲座", "精品课程" };
-			Cursor itemCursor = null;
 			for (int i = 1; i <= items.length; i++) {
 				String caption = items[i - 1];
 				String distance = "";
@@ -392,6 +400,8 @@ public class BufferQueryResult extends BaseActivity {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		} finally {
+			if (itemCursor != null)
+				itemCursor.close();
 			LbsApplication.getActivityData().closeDatabase();
 		}
 	}

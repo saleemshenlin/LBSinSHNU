@@ -112,10 +112,12 @@ public class ActivityData {
 					result = true;
 				}
 			}
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 			db.close();
 		}
 		return result;
@@ -139,6 +141,9 @@ public class ActivityData {
 		} catch (SQLException e) {
 			// TODO: handle exception
 		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 			db.close();
 		}
 		return result;
@@ -183,10 +188,12 @@ public class ActivityData {
 					}
 				}
 			}
-			cursor.close();
 		} catch (SQLException e) {
 			Log.e(TAG, e.toString());
 		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 			db.close();
 		}
 	}

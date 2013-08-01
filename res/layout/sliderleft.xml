@@ -21,7 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/repeat_bg"
             android:orientation="vertical" >
 
@@ -40,6 +41,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/repeat_bg"
             android:orientation="vertical" >
@@ -51,6 +53,25 @@
                 android:layout_gravity="right"
                 android:layout_margin="8dp"
                 android:text="@string/swtwifi"
+                android:textColor="#ccc"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/repeat_bg"
+            android:orientation="vertical" >
+
+            <Switch
+                android:id="@+id/swtPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="right"
+                android:layout_margin="8dp"
+                android:text="@string/swtphoto"
                 android:textColor="#ccc"
                 android:textSize="18sp" />
         </LinearLayout>

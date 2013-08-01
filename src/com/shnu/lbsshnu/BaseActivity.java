@@ -12,6 +12,9 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,15 +23,23 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.supermap.data.DatasetVector;
+
 public class BaseActivity extends Activity {
 	LbsApplication lbsApplication;
+	RelativeLayout mapRelativeLayout;
 	SimpleSideDrawer simpleSideDrawer;
 	Switch wifiLayerSwitch;
 	Switch locationSwitch;
 	Switch resultSwitch;
-	RelativeLayout locationImageView;
-	LinearLayout actionbarView;
+	Switch photoSwitch;
+	RelativeLayout locationRelLayout;
+	LinearLayout actionbarLinLayout;
+	LinearLayout searchLinLayout;
 	Handler handler;
+	ImageView userImageView;
+	ImageView moreImageView;
+	Query queryViaSuperMap;
 	static List<Result> results = new ArrayList<Result>();
 	static boolean isPopUp = false;
 	static boolean isSearch = false;
@@ -53,10 +64,10 @@ public class BaseActivity extends Activity {
 		simpleSideDrawer = new SimpleSideDrawer(this);
 		simpleSideDrawer.setLeftBehindContentView(R.layout.sliderleft);
 		simpleSideDrawer.setRightBehindContentView(R.layout.sliderright);
-		ImageView userImageView = (ImageView) findViewById(R.id.imgUser);
-		ImageView moreImageView = (ImageView) findViewById(R.id.imgMore);
-		LinearLayout searchImageView = (LinearLayout) findViewById(R.id.lnySearch);
-		searchImageView.setOnClickListener(new View.OnClickListener() {
+		userImageView = (ImageView) findViewById(R.id.imgUser);
+		moreImageView = (ImageView) findViewById(R.id.imgMore);
+		searchLinLayout = (LinearLayout) findViewById(R.id.lnySearch);
+		searchLinLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -77,14 +88,15 @@ public class BaseActivity extends Activity {
 			}
 		});
 		initActivityRightSilder();
-		initWifiLayer();
-		initLocation();
+		initWifiSwitch();
+		initLocationSwitch();
+		initPhotoSwitch();
 	}
 
 	/*
 	 * 设置wifi层
 	 */
-	public void initWifiLayer() {
+	public void initWifiSwitch() {
 		wifiLayerSwitch = (Switch) findViewById(R.id.swtWifi);
 		wifiLayerSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,11 +109,18 @@ public class BaseActivity extends Activity {
 							lbsApplication.mWifiLayerL.setVisible(true);
 							lbsApplication.mWifiLayerS.setVisible(true);
 							LbsApplication.refreshMap();
+							Toast.makeText(BaseActivity.this,
+									"打开WLAN层，显示校园内免费WIFI点", Toast.LENGTH_SHORT)
+									.show();
 						} else {
 							lbsApplication.mWifiLayerL.setVisible(false);
 							lbsApplication.mWifiLayerS.setVisible(false);
 							LbsApplication.refreshMap();
+							Toast.makeText(BaseActivity.this,
+									"关闭WLAN层，隐藏校园内免费WIFI点", Toast.LENGTH_SHORT)
+									.show();
 						}
+						simpleSideDrawer.toggleLeftDrawer();
 					}
 				});
 	}
@@ -109,7 +128,7 @@ public class BaseActivity extends Activity {
 	/*
 	 * 设置是否开启定位
 	 */
-	public void initLocation() {
+	public void initLocationSwitch() {
 		locationSwitch = (Switch) findViewById(R.id.swtLocation);
 		locationSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -121,6 +140,8 @@ public class BaseActivity extends Activity {
 						if (isChecked) {
 							LbsApplication.getLocationApi().startLocate(
 									LbsApplication.getLocationClient());
+							Toast.makeText(BaseActivity.this, "开启定位模块",
+									Toast.LENGTH_SHORT).show();
 						} else {
 							LbsApplication.getLocationApi().stopLocate(
 									LbsApplication.getLocationClient());
@@ -221,8 +242,8 @@ public class BaseActivity extends Activity {
 	@SuppressWarnings("static-access")
 	public void initSearchBar() {
 		flagSearch = true;
-		actionbarView.removeAllViews();
-		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarView);
+		actionbarLinLayout.removeAllViews();
+		View.inflate(BaseActivity.this, R.layout.searchbar, actionbarLinLayout);
 		SearchManager searchManager = (SearchManager) getSystemService(LbsApplication
 				.getContext().SEARCH_SERVICE);
 		SearchView searchView = (SearchView) findViewById(R.id.bufferSearch);
@@ -267,9 +288,9 @@ public class BaseActivity extends Activity {
 			public void onClick(View v) {
 				if (LbsApplication.isImeShow(lbsApplication.getContext()))
 					LbsApplication.hideIme(BaseActivity.this);
-				actionbarView.removeAllViews();
+				actionbarLinLayout.removeAllViews();
 				View.inflate(BaseActivity.this, R.layout.actionbar,
-						actionbarView);
+						actionbarLinLayout);
 				initMainBar();
 			}
 		});
@@ -351,5 +372,85 @@ public class BaseActivity extends Activity {
 		if (flag.equals("map")) {
 			resultSwitch.setChecked(false);
 		}
+	}
+
+	/*
+	 * 设置美丽校园图层
+	 */
+	public void initPhotoSwitch() {
+		photoSwitch = (Switch) findViewById(R.id.swtPhoto);
+		photoSwitch
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						if (isChecked) {
+							if (!isPopUp) {
+								LbsApplication.clearCallout();
+								locationViewPopup(0, -LbsApplication.Dp2Px(
+										BaseActivity.this, 50),
+										mapRelativeLayout);
+								isPopUp = true;
+							}
+							userImageView
+									.setImageResource(R.drawable.ic_action_back);
+							searchLinLayout.setVisibility(View.GONE);
+							moreImageView.setVisibility(View.GONE);
+							locationRelLayout.setVisibility(View.GONE);
+							final DatasetVector mDatasetVector = (DatasetVector) LbsApplication
+									.getmMapControl().getMap().getLayers()
+									.get(16).getDataset();
+							queryViaSuperMap = new Query();
+							queryViaSuperMap.addPhotoBubble(mDatasetVector,
+									BaseActivity.this);
+							Toast.makeText(BaseActivity.this, "打开美丽校园，欣赏校园美景",
+									Toast.LENGTH_SHORT).show();
+						} else {
+							userImageView
+									.setImageResource(R.drawable.ic_action_user);
+							searchLinLayout.setVisibility(View.VISIBLE);
+							moreImageView.setVisibility(View.VISIBLE);
+							locationRelLayout.setVisibility(View.VISIBLE);
+							LbsApplication.clearCallout();
+							Toast.makeText(BaseActivity.this, "关闭美丽校园，体验其他服务",
+									Toast.LENGTH_SHORT).show();
+						}
+						LbsApplication.refreshMap();
+						simpleSideDrawer.toggleLeftDrawer();
+					}
+				});
+	}
+
+	/*
+	 * 定位详细框上移
+	 */
+	public void locationViewPopup(final float p1, final float p2,
+			final RelativeLayout view) {
+		TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
+		animation.setInterpolator(new AnticipateOvershootInterpolator());
+		animation.setDuration(500);
+		animation.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				locationRelLayout.setEnabled(false);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				view.setVisibility(View.GONE);
+				view.clearAnimation();
+				view.getLayoutParams().height = view.getBottom()
+						+ (int) (p2 - p1);
+				view.setVisibility(View.VISIBLE);
+				locationRelLayout.setEnabled(true);
+			}
+		});
+		view.startAnimation(animation);
 	}
 }

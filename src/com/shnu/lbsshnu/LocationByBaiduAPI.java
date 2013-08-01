@@ -25,7 +25,7 @@ public class LocationByBaiduAPI {
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
 		option.setScanSpan(1000);
-		if (LbsApplication.isLocateStart()) {
+		if (LbsApplication.isNetWork()) {
 			option.setPriority(LocationClientOption.NetWorkFirst);
 		} else {
 			option.setPriority(LocationClientOption.GpsFirst);
@@ -66,7 +66,7 @@ public class LocationByBaiduAPI {
 		LbsApplication.clearTrackingLayer();
 		double mapScale = LbsApplication.getmMapControl().getMap().getScale();
 		GeoCircle mGeoCircle = new GeoCircle(location, radius * mapScale * 0.02);
-		GeoRegion mGeoRegion = new GeoCircle(location, 10 * mapScale * 0.005)
+		GeoRegion mGeoRegion = new GeoCircle(location, 15 * mapScale * 0.005)
 				.convertToRegion(100);
 		GeoStyle mGeoStyle = new GeoStyle();
 		GeoStyle mGeoStyle_P = new GeoStyle();

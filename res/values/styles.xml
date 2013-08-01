@@ -45,7 +45,7 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="MyTheme.NoActionBar.CustomBackground" parent="@android:Theme.Holo.NoActionBar">
+    <style name="MyTheme.NoActionBar.CustomBackground" parent="@android:Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/bg_welcome</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowContentOverlay">@null</item>

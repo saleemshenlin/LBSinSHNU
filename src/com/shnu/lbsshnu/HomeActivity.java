@@ -9,12 +9,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,13 +38,11 @@ public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
 	private DrawPointAndBuffer drawPointAndBuffer;
 	private LocationListener baiduLocationListener = new LocationListener();
-	private Query queryViaSuperMap;
-	private RelativeLayout mapRelativeLayout;
-	private RelativeLayout locationImageView;
 	private TextView accuracyTextView;
 	private TextView geoCodeTextView;
 	private Button detailButton;
 	private ActivityClass activity;
+	private ProgressBar prbMapLoad;
 	private long exitTime = 0;
 
 	@Override
@@ -56,15 +52,8 @@ public class HomeActivity extends BaseActivity {
 		initLocationAPi();
 		drawPointAndBuffer = new DrawPointAndBuffer();
 		initView();
-		openData();
+		new OpenMapData().execute();
 		LbsApplication.startServices(this);
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			if (bundle.getParcelable("activity") != null) {
-				activity = bundle.getParcelable("activity");
-			}
-			activityLocate(activity);
-		}
 	}
 
 	@Override
@@ -75,12 +64,12 @@ public class HomeActivity extends BaseActivity {
 			simpleSideDrawer.toggleRightDrawer();
 		}
 		if (!flagSearch) {
-			actionbarView.removeAllViews();
-			View.inflate(this, R.layout.actionbar, actionbarView);
+			actionbarLinLayout.removeAllViews();
+			View.inflate(this, R.layout.actionbar, actionbarLinLayout);
 			initMainBar();
 		} else {
-			actionbarView.removeAllViews();
-			View.inflate(this, R.layout.resultbar, actionbarView);
+			actionbarLinLayout.removeAllViews();
+			View.inflate(this, R.layout.resultbar, actionbarLinLayout);
 			initResultBar("map");
 		}
 		if (!results.isEmpty() && !isSearch) {
@@ -88,6 +77,10 @@ public class HomeActivity extends BaseActivity {
 			resultLocate(results);
 		}
 		if (hasDetail) {
+			if (activity == null) {
+				Bundle bundle = getIntent().getExtras();
+				activity = bundle.getParcelable("activity");
+			}
 			activityLocate(activity);
 		}
 		LbsApplication.refreshMap();
@@ -138,10 +131,11 @@ public class HomeActivity extends BaseActivity {
 	 */
 	private void initView() {
 		handler = new Handler();
-		locationImageView = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
+		locationRelLayout = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
 		mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
-		actionbarView = (LinearLayout) findViewById(R.id.actionbar);
-		locationImageView.setOnClickListener(new View.OnClickListener() {
+		actionbarLinLayout = (LinearLayout) findViewById(R.id.actionbar);
+		prbMapLoad = (ProgressBar) findViewById(R.id.prbMap);
+		locationRelLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onLocated(false);
@@ -156,63 +150,85 @@ public class HomeActivity extends BaseActivity {
 	/*
 	 * 从SDcard添加底图数据
 	 */
-	private void openData() {
-		// 打开工作空间
-		LbsApplication.setmWorkspace(new Workspace());
-		WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
-		info.setServer(LbsApplication
-				.getContext()
-				.getExternalFilesDir(
-						getString(R.string.data_path)
-								+ getString(R.string.dataname)).toString());
-		Log.d(TAG,
-				LbsApplication
-						.getContext()
-						.getExternalFilesDir(
-								getString(R.string.data_path)
-										+ getString(R.string.dataname))
-						.toString());
-		info.setType(WorkspaceType.SMWU);
-		LbsApplication.getmWorkspace().open(info);
+	class OpenMapData extends AsyncTask<String, Integer, String> {
 
-		LbsApplication.setmMapView((MapView) findViewById(R.id.mapView));
-		LbsApplication.setmMapControl(LbsApplication.getmMapView()
-				.getMapControl());
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			Toast.makeText(HomeActivity.this, result, Toast.LENGTH_SHORT)
+					.show();
+			prbMapLoad.setVisibility(View.GONE);
+			Bundle bundle = getIntent().getExtras();
+			if (bundle != null) {
+				if (bundle.getParcelable("activity") != null) {
+					activity = bundle.getParcelable("activity");
+				}
+				activityLocate(activity);
+			}
+		}
 
-		LbsApplication.getmMapControl().getMap()
-				.setWorkspace(LbsApplication.getmWorkspace());
-		LbsApplication.getmMapControl().getMap()
-				.setMapDPI(LbsApplication.getScreenDPI());
-		Log.d(TAG, "add Map: " + LbsApplication.getmWorkspace());
-		String mapName = LbsApplication.getmWorkspace().getMaps().get(0);
-		Log.d(TAG, "add Map: " + mapName);
-		LbsApplication.getmMapControl().getMap().open(mapName);
-		LbsApplication.setMlayers(LbsApplication.getmMapControl().getMap()
-				.getLayers());
-		lbsApplication.mWifiLayerS = LbsApplication.getMlayers().get(2);
-		lbsApplication.mWifiLayerL = LbsApplication.getMlayers().get(3);
-		lbsApplication.mWifiLayerL.setVisible(false);
-		lbsApplication.mWifiLayerS.setVisible(false);
-		LbsApplication.getmMapControl().getMap().setScale(1 / 1200);
-		LbsApplication.getmMapControl().getMap().setAntialias(true);
-		LbsApplication
-				.getmMapControl()
-				.getMap()
-				.setLockedViewBounds(
-						new Rectangle2D(121.412490774567, 31.1566896665659,
-								121.426210646701, 31.1651384499396));
-		LbsApplication.getmMapControl().getMap().setViewBoundsLocked(true);
-		LbsApplication.setmTrackingLayer(LbsApplication.getmMapControl()
-				.getMap().getTrackingLayer());
-		LbsApplication.getmMapControl().setMapParamChangedListener(
-				mapParameterChangedListener);
-		Log.i(TAG, "Max:"
-				+ LbsApplication.getmMapControl().getMap().getMaxScale()
-				+ " Min:"
-				+ LbsApplication.getmMapControl().getMap().getMinScale()
-				+ " Dpi:"
-				+ LbsApplication.getmMapControl().getMap().getMapDPI());
-		LbsApplication.refreshMap();
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+			Toast.makeText(HomeActivity.this, "正在努力家在地图中...",
+					Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			publishProgress(1);
+			LbsApplication.setmWorkspace(new Workspace());
+			WorkspaceConnectionInfo info = new WorkspaceConnectionInfo();
+			info.setServer(LbsApplication
+					.getContext()
+					.getExternalFilesDir(
+							getString(R.string.data_path)
+									+ getString(R.string.dataname)).toString());
+			info.setType(WorkspaceType.SMWU);
+			LbsApplication.getmWorkspace().open(info);
+			LbsApplication.setmMapView((MapView) findViewById(R.id.mapView));
+			LbsApplication.setmMapControl(LbsApplication.getmMapView()
+					.getMapControl());
+
+			LbsApplication.getmMapControl().getMap()
+					.setWorkspace(LbsApplication.getmWorkspace());
+			LbsApplication.getmMapControl().getMap()
+					.setMapDPI(LbsApplication.getScreenDPI());
+			Log.d(TAG, "add Map: " + LbsApplication.getmWorkspace());
+			String mapName = LbsApplication.getmWorkspace().getMaps().get(0);
+			Log.d(TAG, "add Map: " + mapName);
+			LbsApplication.getmMapControl().getMap().open(mapName);
+			LbsApplication.setMlayers(LbsApplication.getmMapControl().getMap()
+					.getLayers());
+			lbsApplication.mWifiLayerS = LbsApplication.getMlayers().get(2);
+			lbsApplication.mWifiLayerL = LbsApplication.getMlayers().get(3);
+			lbsApplication.mWifiLayerL.setVisible(false);
+			lbsApplication.mWifiLayerS.setVisible(false);
+			LbsApplication.getmMapControl().getMap().setScale(1 / 1200);
+			LbsApplication.getmMapControl().getMap().setAntialias(true);
+			LbsApplication
+					.getmMapControl()
+					.getMap()
+					.setLockedViewBounds(
+							new Rectangle2D(121.412490774567, 31.1566896665659,
+									121.426210646701, 31.1651384499396));
+			LbsApplication.getmMapControl().getMap().setViewBoundsLocked(true);
+			LbsApplication.setmTrackingLayer(LbsApplication.getmMapControl()
+					.getMap().getTrackingLayer());
+			LbsApplication.getmMapControl().setMapParamChangedListener(
+					mapParameterChangedListener);
+			Log.i(TAG, "Max:"
+					+ LbsApplication.getmMapControl().getMap().getMaxScale()
+					+ " Min:"
+					+ LbsApplication.getmMapControl().getMap().getMinScale()
+					+ " Dpi:"
+					+ LbsApplication.getmMapControl().getMap().getMapDPI());
+			LbsApplication.refreshMap();
+			return "地图加载完毕,开始体验";
+		}
+
 	}
 
 	/*
@@ -268,45 +284,6 @@ public class HomeActivity extends BaseActivity {
 		Log.d(TAG, "locationPoint2d:"
 				+ LbsApplication.getLastlocationPoint2d().getX() + " , "
 				+ LbsApplication.getLastlocationPoint2d().getY());
-	}
-
-	/*
-	 * 定位详细框上移
-	 */
-	private void locationViewPopup(final float p1, final float p2,
-			final RelativeLayout view) {
-		TranslateAnimation animation = new TranslateAnimation(0, 0, p1, p2);
-		animation.setInterpolator(new AnticipateOvershootInterpolator());
-		animation.setDuration(500);
-		animation.setAnimationListener(new Animation.AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation animation) {
-				Log.i(TAG,
-						"Left: " + view.getLeft() + "Top: " + view.getTop()
-								+ "Right: " + view.getRight() + "Bottom: "
-								+ view.getBottom());
-				locationImageView.setEnabled(false);
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-			}
-
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				view.setVisibility(View.GONE);
-				view.clearAnimation();
-				view.getLayoutParams().height = view.getBottom()
-						+ (int) (p2 - p1);
-				view.setVisibility(View.VISIBLE);
-				Log.i(TAG,
-						"Left: " + view.getLeft() + "Top: " + view.getTop()
-								+ "Right: " + view.getRight() + "Bottom: "
-								+ view.getBottom());
-				locationImageView.setEnabled(true);
-			}
-		});
-		view.startAnimation(animation);
 	}
 
 	/*

@@ -21,9 +21,10 @@ public class LbsWidget extends AppWidgetProvider {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		Log.d(TAG, "onUpdate");
 		ActivityProvider activityProvider = new ActivityProvider();
-		Cursor cursor = activityProvider.query(ActivityProvider.CONTENT_URI,
-				null, getSelection(), null, getSortOrder());
+		Cursor cursor = null;
 		try {
+			cursor = activityProvider.query(ActivityProvider.CONTENT_URI, null,
+					getSelection(), null, getSortOrder());
 			if (cursor.moveToFirst()) {
 				activity = getActivityClass(cursor);
 				CharSequence title = activity.getActivityName();
@@ -61,12 +62,12 @@ public class LbsWidget extends AppWidgetProvider {
 					appWidgetManager.updateAppWidget(appWidgetId, views);
 				}
 			}
-			if (!cursor.isClosed()) {
-				cursor.close();
-			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString() + " " + e.getMessage());
 		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
@@ -119,7 +120,7 @@ public class LbsWidget extends AppWidgetProvider {
 		intent.putExtras(bundle);
 		views.setOnClickPendingIntent(R.id.imgWDetail, PendingIntent
 				.getActivity(context, LbsApplication.getRequestCode(), intent,
-						PendingIntent.FLAG_UPDATE_CURRENT));
+						PendingIntent.FLAG_CANCEL_CURRENT));
 	}
 
 	private void setWidgetLocation(Context context, RemoteViews views,

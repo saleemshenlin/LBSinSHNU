@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -71,8 +72,8 @@ public class ActivityListFragment extends Fragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		Cursor itemCursor = null;
 		try {
-			Cursor itemCursor = null;
 			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
 					null, getQuerySection(indexTab), null, getOrderBy());
 			int num = itemCursor.getCount();
@@ -90,12 +91,12 @@ public class ActivityListFragment extends Fragment {
 					showPopupwindows(id);
 				}
 			});
-			if (itemCursor.isClosed()) {
-				itemCursor.close();
-			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		} finally {
+			if (itemCursor.isClosed()) {
+				itemCursor.close();
+			}
 			LbsApplication.getActivityData().closeDatabase();
 		}
 		if (ActivityListView.getActivityId() != 0) {
@@ -166,7 +167,7 @@ public class ActivityListFragment extends Fragment {
 			View view = layoutInflater.inflate(R.layout.popupwindow, null);
 			final PopupWindow popupWindow = new PopupWindow(view,
 					LbsApplication.getScreenWidth() * 3 / 4,
-					LbsApplication.getScreenHeight() * 3 / 4, true);
+					LayoutParams.WRAP_CONTENT, true);
 			bindPopupData(id, view, popupWindow);
 			popupWindow
 					.setBackgroundDrawable(new BitmapDrawable(getResources()));
@@ -312,12 +313,12 @@ public class ActivityListFragment extends Fragment {
 				}
 			});
 			txtDes.setMovementMethod(ScrollingMovementMethod.getInstance());
-			if (!detailCursor.isClosed()) {
-				detailCursor.close();
-			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		} finally {
+			if (detailCursor != null) {
+				detailCursor.close();
+			}
 			LbsApplication.getActivityData().closeDatabase();
 		}
 	}

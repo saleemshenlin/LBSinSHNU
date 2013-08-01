@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/popup_bg"
     android:gravity="center"
@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/popupLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/downbutton_corner"
         android:gravity="center"
@@ -122,12 +122,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/repeat_bg"
+                android:maxHeight="240dp"
+                android:minHeight="180dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:scrollbars="vertical"
                 android:text="@string/txtdecription"
                 android:textColor="#fff"
                 android:textSize="14sp" />
+
         </LinearLayout>
     </LinearLayout>
 

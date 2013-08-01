@@ -1,7 +1,6 @@
 package com.shnu.lbsshnu;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 
 import android.app.Activity;
 import android.app.Application;
@@ -56,15 +55,12 @@ public class LbsApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		CONTEXT = getApplicationContext();
-		importMapDataFromAsset();
-		setEnvironment();
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
+		initEnvironment();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
 		LbsApplication.LASTLOCATION = new Point2D();
 		LbsApplication.LOCATIONACCUCRACY = (float) 10;
-		importDataFromXML();
-		updateCourseDate();
 	}
 
 	@Override
@@ -72,20 +68,6 @@ public class LbsApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onTerminate();
 		Log.e(TAG, "LBSApplication onTerminate");
-	}
-
-	/*
-	 * 设置supermap环境
-	 */
-	private void setEnvironment() {
-		Environment.setLicensePath(getContext().getExternalFilesDir(
-				getString(R.string.license_path)).toString());
-		Environment.setTemporaryPath(getContext().getExternalFilesDir(
-				getString(R.string.temp_path)).toString());
-		Environment.setWebCacheDirectory(getContext().getExternalFilesDir(
-				getString(R.string.cache_path)).toString());
-		Environment.initialization(this);
-		Log.i(TAG, "LBSApplication setEnvironment!");
 	}
 
 	/*
@@ -97,6 +79,22 @@ public class LbsApplication extends Application {
 		setScreenWidth(dm.widthPixels);
 		setScreenHeight(dm.heightPixels);
 		setScreenDPI(dm.densityDpi);
+	}
+
+	/*
+	 * 
+	 */
+	public void initEnvironment() {
+		Environment.setLicensePath(LbsApplication.getContext()
+				.getExternalFilesDir(getString(R.string.license_path))
+				.toString());
+		Environment.setTemporaryPath(LbsApplication.getContext()
+				.getExternalFilesDir(getString(R.string.temp_path)).toString());
+		Environment
+				.setWebCacheDirectory(LbsApplication.getContext()
+						.getExternalFilesDir(getString(R.string.cache_path))
+						.toString());
+		Environment.initialization(LbsApplication.getContext());
 	}
 
 	/*
@@ -174,31 +172,25 @@ public class LbsApplication extends Application {
 	}
 
 	/*
-	 * 调用FileIO导入数据
-	 */
-	private void importDataFromXML() {
-		FileIO fileIO = new FileIO();
-		fileIO.getDateFromXML();
-	}
-
-	/*
 	 * 调用FileIO导入地图数据
 	 */
-	private void importMapDataFromAsset() {
+	public void importMapDataFromAsset() {
 		FileIO fileIO = new FileIO();
 		fileIO.copyMapData(getContext());
 	}
 
 	/*
-	 * 更新課程日期
+	 * 设置supermap环境
 	 */
-	private void updateCourseDate() {
-		try {
-			LbsApplication.getActivityData().updateCourseDate();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void setEnvironment() {
+		Environment.setLicensePath(getContext().getExternalFilesDir(
+				getString(R.string.license_path)).toString());
+		Environment.setTemporaryPath(getContext().getExternalFilesDir(
+				getString(R.string.temp_path)).toString());
+		Environment.setWebCacheDirectory(getContext().getExternalFilesDir(
+				getString(R.string.cache_path)).toString());
+		Environment.initialization(this);
+		Log.i(TAG, "LBSApplication setEnvironment!");
 	}
 
 	/*

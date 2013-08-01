@@ -33,8 +33,8 @@ public class LbsWidget extends AppWidgetProvider {
 				int type = activity.getActivityType();
 				for (int appWidgetId : appWidgetIds) {
 					Log.d(TAG, "Updating widget: " + appWidgetId);
-					if (title.length() > 12) {
-						title = title.subSequence(0, 12) + "...";
+					if (title.length() > 10) {
+						title = title.subSequence(0, 10) + "...";
 					}
 					RemoteViews views = new RemoteViews(
 							context.getPackageName(), R.layout.lbswidget);

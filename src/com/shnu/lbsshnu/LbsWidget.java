@@ -33,11 +33,11 @@ public class LbsWidget extends AppWidgetProvider {
 				int type = activity.getActivityType();
 				for (int appWidgetId : appWidgetIds) {
 					Log.d(TAG, "Updating widget: " + appWidgetId);
+					if (title.length() > 12) {
+						title = title.subSequence(0, 12) + "...";
+					}
 					RemoteViews views = new RemoteViews(
 							context.getPackageName(), R.layout.lbswidget);
-					if (title.length() > 10) {
-						title = title.subSequence(0, 10) + "...";
-					}
 					views.setTextViewText(R.id.txtWTitle, title);
 					views.setTextViewText(R.id.txtWDateTime, date + " " + time);
 					switch (type) {
@@ -59,6 +59,16 @@ public class LbsWidget extends AppWidgetProvider {
 					Log.e(TAG, title + " , " + date + " , " + time);
 					setWidgetDetail(context, views, activity);
 					setWidgetLocation(context, views, activity);
+					appWidgetManager.updateAppWidget(appWidgetId, views);
+				}
+			} else {
+				for (int appWidgetId : appWidgetIds) {
+					RemoteViews views = new RemoteViews(
+							context.getPackageName(), R.layout.lbswidget);
+					views.setTextViewText(R.id.txtWTitle, "请先设置我所关注的活动");
+					views.setTextViewText(R.id.txtWDateTime, "");
+					views.setImageViewResource(R.id.imgWLocation,
+							R.drawable.ic_info);
 					appWidgetManager.updateAppWidget(appWidgetId, views);
 				}
 			}

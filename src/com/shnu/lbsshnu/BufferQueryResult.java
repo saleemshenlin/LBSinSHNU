@@ -217,7 +217,7 @@ public class BufferQueryResult extends BaseActivity {
 			popupWindow.setAnimationStyle(R.anim.popupanimation);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
-			popupWindow.setAnimationStyle(R.style.PopupAnimation);
+			popupWindow.setAnimationStyle(R.style.popupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -391,10 +391,11 @@ public class BufferQueryResult extends BaseActivity {
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					TextView txtView = (TextView) view.findViewById(R.id.txtId);
-					Log.i(TAG, txtView.getText().toString());
-					long activityId = Long.parseLong(txtView.getText()
-							.toString());
-					showPopupwindows(activityId);
+					if (txtView != null) {
+						long activityId = Long.parseLong(txtView.getText()
+								.toString());
+						showPopupwindows(activityId);
+					}
 				}
 			});
 		} catch (Exception e) {

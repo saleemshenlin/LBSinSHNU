@@ -168,7 +168,7 @@ public class ActivityListFragment extends Fragment {
 			final PopupWindow popupWindow = new PopupWindow(view,
 					LbsApplication.getScreenWidth() * 3 / 4,
 					LayoutParams.WRAP_CONTENT, true);
-			bindPopupData(id, view, popupWindow);
+			bindPopupData(id, view, popupWindow, !ActivityListView.isFromWidget);
 			popupWindow
 					.setBackgroundDrawable(new BitmapDrawable(getResources()));
 			popupWindow.showAtLocation(rootView, Gravity.CENTER
@@ -176,7 +176,7 @@ public class ActivityListFragment extends Fragment {
 			popupWindow.setAnimationStyle(R.anim.popupanimation);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
-			popupWindow.setAnimationStyle(R.style.PopupAnimation);
+			popupWindow.setAnimationStyle(R.style.popupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -217,7 +217,7 @@ public class ActivityListFragment extends Fragment {
 	 * popupwindow°óÊý¾Ý
 	 */
 	private void bindPopupData(final long id, View view,
-			final PopupWindow popupwindow) {
+			final PopupWindow popupwindow, boolean hasImgMapView) {
 		Cursor detailCursor = null;
 		try {
 			TextView txtDes = (TextView) view.findViewById(R.id.txtDecription);
@@ -230,15 +230,19 @@ public class ActivityListFragment extends Fragment {
 			TextView txtPlace = (TextView) view.findViewById(R.id.txtPlace);
 			ImageView mapImageView = (ImageView) view
 					.findViewById(R.id.imageMap);
-			mapImageView.setOnClickListener(new View.OnClickListener() {
+			if (hasImgMapView) {
+				mapImageView.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					popupwindow.dismiss();
-					onFragmeng2ActivityListener.onArticleSelected(activity);
-				}
-			});
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						popupwindow.dismiss();
+						onFragmeng2ActivityListener.onArticleSelected(activity);
+					}
+				});
+			} else {
+				mapImageView.setVisibility(View.GONE);
+			}
 			final Uri queryUri = Uri.parse(ActivityProvider.CONTENT_URI
 					.toString() + "/" + id);
 			detailCursor = activityProvider.query(queryUri, null, null, null,

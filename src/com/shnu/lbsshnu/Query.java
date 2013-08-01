@@ -194,7 +194,7 @@ public class Query {
 			popupWindow.setAnimationStyle(R.anim.popupanimation);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
-			popupWindow.setAnimationStyle(R.style.PopupAnimation);
+			popupWindow.setAnimationStyle(R.style.popupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
 			Log.e("imgPopup", e.toString());

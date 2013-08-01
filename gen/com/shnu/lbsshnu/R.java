@@ -31,50 +31,49 @@ public final class R {
     }
     public static final class drawable {
         public static final int bg_welcome=0x7f020000;
-        public static final int butten_pressed=0x7f020001;
-        public static final int butten_unpress=0x7f020002;
-        public static final int dark_dot=0x7f020003;
-        public static final int dot=0x7f020004;
-        public static final int downbutton_corner=0x7f020005;
-        public static final int guide_350_01=0x7f020006;
-        public static final int guide_350_02=0x7f020007;
-        public static final int guide_350_03=0x7f020008;
-        public static final int guide_350_04=0x7f020009;
-        public static final int ic_action_arrow=0x7f02000a;
-        public static final int ic_action_back=0x7f02000b;
-        public static final int ic_action_back_w=0x7f02000c;
-        public static final int ic_action_ball=0x7f02000d;
-        public static final int ic_action_book=0x7f02000e;
-        public static final int ic_action_location=0x7f02000f;
-        public static final int ic_action_mic=0x7f020010;
-        public static final int ic_action_more=0x7f020011;
-        public static final int ic_action_more_w=0x7f020012;
-        public static final int ic_action_play=0x7f020013;
-        public static final int ic_action_search=0x7f020014;
-        public static final int ic_action_setting=0x7f020015;
-        public static final int ic_action_user=0x7f020016;
-        public static final int ic_actiuon_back=0x7f020017;
-        public static final int ic_book_pin=0x7f020018;
-        public static final int ic_img_pin=0x7f020019;
-        public static final int ic_launcher=0x7f02001a;
-        public static final int ic_map=0x7f02001b;
-        public static final int ic_mic_pin=0x7f02001c;
-        public static final int ic_play_pin=0x7f02001d;
-        public static final int ic_rate=0x7f02001e;
-        public static final int ic_select_pin=0x7f02001f;
-        public static final int ic_unrate=0x7f020020;
-        public static final int ic_unselect_pin=0x7f020021;
-        public static final int loading=0x7f020022;
-        public static final int photo_1=0x7f020023;
-        public static final int photo_2=0x7f020024;
-        public static final int photo_3=0x7f020025;
-        public static final int photo_4=0x7f020026;
-        public static final int photo_5=0x7f020027;
-        public static final int popup_bg=0x7f020028;
-        public static final int repeat_bg=0x7f020029;
-        public static final int sliderbg=0x7f02002a;
-        public static final int whats_new_start_btn=0x7f02002b;
-        public static final int white_dot=0x7f02002c;
+        public static final int dark_dot=0x7f020001;
+        public static final int dot=0x7f020002;
+        public static final int downbutton_corner=0x7f020003;
+        public static final int guide_1=0x7f020004;
+        public static final int guide_2=0x7f020005;
+        public static final int guide_3=0x7f020006;
+        public static final int guide_4=0x7f020007;
+        public static final int ic_action_arrow=0x7f020008;
+        public static final int ic_action_back=0x7f020009;
+        public static final int ic_action_back_w=0x7f02000a;
+        public static final int ic_action_ball=0x7f02000b;
+        public static final int ic_action_book=0x7f02000c;
+        public static final int ic_action_location=0x7f02000d;
+        public static final int ic_action_mic=0x7f02000e;
+        public static final int ic_action_more=0x7f02000f;
+        public static final int ic_action_more_w=0x7f020010;
+        public static final int ic_action_play=0x7f020011;
+        public static final int ic_action_search=0x7f020012;
+        public static final int ic_action_setting=0x7f020013;
+        public static final int ic_action_user=0x7f020014;
+        public static final int ic_actiuon_back=0x7f020015;
+        public static final int ic_book_pin=0x7f020016;
+        public static final int ic_img_pin=0x7f020017;
+        public static final int ic_info=0x7f020018;
+        public static final int ic_launcher=0x7f020019;
+        public static final int ic_map=0x7f02001a;
+        public static final int ic_mic_pin=0x7f02001b;
+        public static final int ic_play_pin=0x7f02001c;
+        public static final int ic_rate=0x7f02001d;
+        public static final int ic_unrate=0x7f02001e;
+        public static final int loading=0x7f02001f;
+        public static final int photo_1=0x7f020020;
+        public static final int photo_2=0x7f020021;
+        public static final int photo_3=0x7f020022;
+        public static final int photo_4=0x7f020023;
+        public static final int photo_5=0x7f020024;
+        public static final int popup_bg=0x7f020025;
+        public static final int repeat_bg=0x7f020026;
+        public static final int sliderbg=0x7f020027;
+        public static final int start_btn=0x7f020028;
+        public static final int start_button_p=0x7f020029;
+        public static final int start_button_u=0x7f02002a;
+        public static final int white_dot=0x7f02002b;
     }
     public static final class id {
         public static final int actionLociton=0x7f0a000e;
@@ -92,7 +91,7 @@ public final class R {
         public static final int imgBackHome=0x7f0a0028;
         public static final int imgMore=0x7f0a0002;
         public static final int imgSearchBack=0x7f0a002e;
-        public static final int imgSplash=0x7f0a0042;
+        public static final int imgSplash=0x7f0a0043;
         public static final int imgStart=0x7f0a0008;
         public static final int imgUser=0x7f0a0000;
         public static final int imgWDetail=0x7f0a0017;
@@ -115,8 +114,9 @@ public final class R {
         public static final int pager=0x7f0a0005;
         public static final int popupLinearLayout=0x7f0a001d;
         public static final int popupPhoto=0x7f0a001e;
-        public static final int prbLoad=0x7f0a0043;
+        public static final int prbLoad=0x7f0a0044;
         public static final int prbMap=0x7f0a000c;
+        public static final int relativeLayout1=0x7f0a0042;
         public static final int swtLocation=0x7f0a0031;
         public static final int swtPhoto=0x7f0a0033;
         public static final int swtQuery=0x7f0a0029;
@@ -144,7 +144,7 @@ public final class R {
         public static final int txtTitle=0x7f0a002a;
         public static final int txtWDateTime=0x7f0a0016;
         public static final int txtWTitle=0x7f0a0015;
-        public static final int userpref=0x7f0a0044;
+        public static final int userpref=0x7f0a0045;
         public static final int viewpager=0x7f0a0006;
     }
     public static final class layout {
@@ -227,15 +227,13 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f080000;
         public static final int AppTheme=0x7f080001;
-        public static final int MyTheme_NoActionBar_CustomBackground=0x7f080008;
-        public static final int PopupAnimation=0x7f08000a;
         public static final int behindMenuItemLabel=0x7f080007;
         public static final int behindMenuItemTitle=0x7f080006;
         public static final int behindMenuScrollContent=0x7f080005;
-        public static final int homeActivity=0x7f080002;
         public static final int leftBehindMenuScroll=0x7f080003;
+        public static final int popupAnimation=0x7f080008;
         public static final int rightBehindMenuScroll=0x7f080004;
-        public static final int searchTheme=0x7f080009;
+        public static final int translucentActivity=0x7f080002;
     }
     public static final class xml {
         public static final int data=0x7f050000;

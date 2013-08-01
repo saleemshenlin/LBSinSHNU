@@ -40,6 +40,7 @@ public class BaseActivity extends Activity {
 	ImageView userImageView;
 	ImageView moreImageView;
 	Query queryViaSuperMap;
+	static ActivityClass activity;
 	static List<Result> results = new ArrayList<Result>();
 	static boolean isPopUp = false;
 	static boolean isSearch = false;
@@ -71,6 +72,14 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				if (isPopUp) {
+					LbsApplication.clearCallout();
+					locationViewPopup(
+							-LbsApplication.Dp2Px(BaseActivity.this, 50), 0,
+							mapRelativeLayout);
+					isPopUp = false;
+					hasDetail = false;
+				}
 				initSearchBar();
 			}
 		});
@@ -387,12 +396,13 @@ public class BaseActivity extends Activity {
 							boolean isChecked) {
 						// TODO Auto-generated method stub
 						if (isChecked) {
-							if (!isPopUp) {
+							if (isPopUp) {
 								LbsApplication.clearCallout();
-								locationViewPopup(0, -LbsApplication.Dp2Px(
-										BaseActivity.this, 50),
+								locationViewPopup(-LbsApplication.Dp2Px(
+										BaseActivity.this, 50), 0,
 										mapRelativeLayout);
-								isPopUp = true;
+								isPopUp = false;
+								hasDetail = false;
 							}
 							userImageView
 									.setImageResource(R.drawable.ic_action_back);

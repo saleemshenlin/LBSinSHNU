@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root xmlns:xsi="http://www-w3-org/2001/XMLSchema-instance">
 	<row>
 		<id>1</id>
@@ -45,7 +45,7 @@
 	<row>
 		<id>4</id>
 		<name>希腊罗马轶史与明末中国</name>
-		<date>2013-07-3</date>
+		<date>2013-07-03</date>
 		<time>9:00:00</time>
 		<location>文苑楼811</location>
 		<building>2</building>
@@ -73,7 +73,7 @@
 	<row>
 		<id>6</id>
 		<name>三面玛利亚：谈高一志译《圣母行实》里的奇迹故事</name>
-		<date>2013-08-3</date>
+		<date>2013-08-03</date>
 		<time>13:30:00</time>
 		<location>文苑楼813</location>
 		<building>2</building>
@@ -87,7 +87,7 @@
 	<row>
 		<id>7</id>
 		<name>天堂的路要怎么走：谈马若瑟著《梦美土记》</name>
-		<date>2013-08-6</date>
+		<date>2013-08-06</date>
 		<time>9:00:00</time>
 		<location>文苑楼508</location>
 		<building>2</building>
@@ -171,7 +171,7 @@
 	<row>
 		<id>13</id>
 		<name>马克思主义与生态文明</name>
-		<date>2013-09-5</date>
+		<date>2013-09-05</date>
 		<time>9:00:00</time>
 		<location>文苑楼508</location>
 		<building>2</building>
@@ -255,7 +255,7 @@
 	<row>
 		<id>19</id>
 		<name>评弹的历史研究 </name>
-		<date>2013-08-3</date>
+		<date>2013-08-03</date>
 		<time>9:00:00</time>
 		<location>旅游学院414</location>
 		<building>44</building>
@@ -437,7 +437,7 @@
 	<row>
 		<id>32</id>
 		<name>二十一世纪法国作者电影的风格与走向</name>
-		<date>2013-08-4</date>
+		<date>2013-08-04</date>
 		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
@@ -521,7 +521,7 @@
 	<row>
 		<id>38</id>
 		<name>鲁迅笔下的爱情主题——理解《伤逝》</name>
-		<date>2013-09-5</date>
+		<date>2013-09-05</date>
 		<time>13:30:00</time>
 		<location>会议中心201</location>
 		<building>28</building>
@@ -633,7 +633,7 @@
 	<row>
 		<id>46</id>
 		<name>翻译佛经对汉语词汇的影响 </name>
-		<date>2013-08-5</date>
+		<date>2013-08-05</date>
 		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
@@ -718,7 +718,7 @@
 	<row>
 		<id>52</id>
 		<name>中非合作论坛的机遇与挑战</name>
-		<date>2013-09-5</date>
+		<date>2013-09-05</date>
 		<time>13:30:00</time>
 		<location>商学院304</location>
 		<building>32</building>
@@ -915,7 +915,7 @@
 	<row>
 		<id>66</id>
 		<name>宋代主流国防观演变及其影响</name>
-		<date>2013-09-6</date>
+		<date>2013-09-06</date>
 		<time>13:30:00</time>
 		<location>生环学院404</location>
 		<building>34</building>
@@ -1013,7 +1013,7 @@
 	<row>
 		<id>73</id>
 		<name>史学方法在中学历史课程中的价值与运用</name>
-		<date>2013-08-5</date>
+		<date>2013-08-05</date>
 		<time>13:30:00</time>
 		<location>数理学院201</location>
 		<building>43</building>
@@ -1237,7 +1237,7 @@
 	<row>
 		<id>89</id>
 		<name>NPO在台湾九二一地震中的角色</name>
-		<date>2013-08-3</date>
+		<date>2013-08-03</date>
 		<time>9:00:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
@@ -1349,7 +1349,7 @@
 	<row>
 		<id>97</id>
 		<name>现当代西方戏剧面面观</name>
-		<date>2013-09-6</date>
+		<date>2013-09-06</date>
 		<time>13:30:00</time>
 		<location>教苑楼401</location>
 		<building>25</building>
@@ -1475,7 +1475,7 @@
 	<row>
 		<id>106</id>
 		<name>闲来垂钓碧溪上</name>
-		<date>2013-08-4</date>
+		<date>2013-08-04</date>
 		<time>9:00:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
@@ -1587,7 +1587,7 @@
 	<row>
 		<id>114</id>
 		<name>季风亚洲与多元文化</name>
-		<date>2013-09-5</date>
+		<date>2013-09-05</date>
 		<time>13:30:00</time>
 		<location>外国语新大楼303</location>
 		<building>5</building>
@@ -1727,7 +1727,7 @@
 	<row>
 		<id>124</id>
 		<name>从病人话语到医生话语——英国近代医患关系的历史考察</name>
-		<date>2013-08-3</date>
+		<date>2013-08-03</date>
 		<time>9:00:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
@@ -1839,7 +1839,7 @@
 	<row>
 		<id>132</id>
 		<name>欧洲近代思想家对“公民社会”的理解</name>
-		<date>2013-09-3</date>
+		<date>2013-09-03</date>
 		<time>9:00:00</time>
 		<location>美术学院202</location>
 		<building>14</building>
@@ -1996,7 +1996,7 @@
 	<row>
 		<id>143</id>
 		<name>《一场风花雪月的事》</name>
-		<date>2013-08-6</date>
+		<date>2013-08-04</date>
 		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
@@ -2114,7 +2114,7 @@
 	<row>
 		<id>151</id>
 		<name>《在路上》</name>
-		<date>2013-09-3</date>
+		<date>2013-09-03</date>
 		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
@@ -2129,7 +2129,7 @@
 	<row>
 		<id>152</id>
 		<name>《白雪公主与猎人》</name>
-		<date>2013-09-5</date>
+		<date>2013-09-05</date>
 		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>
@@ -2276,7 +2276,7 @@
 	<row>
 		<id>162</id>
 		<name>弗拉门戈舞剧《卡门》</name>
-		<date>2013-08-5</date>
+		<date>2013-08-05</date>
 		<time>18:30:00</time>
 		<location>东部礼堂</location>
 		<building>26</building>

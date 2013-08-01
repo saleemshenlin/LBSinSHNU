@@ -27,7 +27,7 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	private TabFragmentPagerAdapter tabFragmentPagerAdapter;
 	static Intent intent;
 	static Bundle tabBundle;
-	boolean isFromWidget = false;
+	static boolean isFromWidget = false;
 	ActionBar actionBar;
 
 	@Override
@@ -190,31 +190,17 @@ public class ActivityListView extends FragmentActivity implements TabListener,
 	 */
 	public void onArticleSelected(ActivityClass activity) {
 		try {
-			if (isFromWidget) {
-				Intent intent = new Intent(this, HomeActivity.class);
-				Log.i(TAG, activity.toString());
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("activity", activity);
-				intent.putExtras(bundle);
-				BaseActivity.hasDetail = true;
-				startActivity(intent);
-				this.overridePendingTransition(R.anim.in_left2right,
-						R.anim.out_left2right);
-			} else {
-				Intent intent = new Intent(this, HomeActivity.class);
-				Log.i(TAG, activity.toString());
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("activity", activity);
-				intent.putExtras(bundle);
-				setResult(LbsApplication.getRequestCode(), intent);
-				finish();
-				this.overridePendingTransition(R.anim.in_left2right,
-						R.anim.out_left2right);
-			}
+			Intent intent = new Intent(this, HomeActivity.class);
+			Log.i(TAG, activity.toString());
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			Bundle bundle = new Bundle();
+			bundle.putParcelable("activity", activity);
+			intent.putExtras(bundle);
+			setResult(LbsApplication.getRequestCode(), intent);
+			finish();
+			this.overridePendingTransition(R.anim.in_left2right,
+					R.anim.out_left2right);
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage().toString());
 		}

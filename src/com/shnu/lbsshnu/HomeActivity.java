@@ -41,7 +41,6 @@ public class HomeActivity extends BaseActivity {
 	private TextView accuracyTextView;
 	private TextView geoCodeTextView;
 	private Button detailButton;
-	private ActivityClass activity;
 	private ProgressBar prbMapLoad;
 	private long exitTime = 0;
 
@@ -77,10 +76,6 @@ public class HomeActivity extends BaseActivity {
 			resultLocate(results);
 		}
 		if (hasDetail) {
-			if (activity == null) {
-				Bundle bundle = getIntent().getExtras();
-				activity = bundle.getParcelable("activity");
-			}
 			activityLocate(activity);
 		}
 		LbsApplication.refreshMap();
@@ -172,7 +167,7 @@ public class HomeActivity extends BaseActivity {
 		protected void onProgressUpdate(Integer... values) {
 			// TODO Auto-generated method stub
 			super.onProgressUpdate(values);
-			Toast.makeText(HomeActivity.this, "正在努力家在地图中...",
+			Toast.makeText(HomeActivity.this, "正在努力加载地图中...",
 					Toast.LENGTH_SHORT).show();
 		}
 
@@ -447,6 +442,7 @@ public class HomeActivity extends BaseActivity {
 	 */
 	private void activityLocate(final ActivityClass activity) {
 		hasDetail = false;
+		LbsApplication.clearCallout();
 		Layer mLayer = null;
 		mLayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
 		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
@@ -480,7 +476,6 @@ public class HomeActivity extends BaseActivity {
 			mCallOut.setContentView(image);
 			detailButton.setVisibility(View.VISIBLE);
 			if (!isPopUp) {
-				LbsApplication.clearCallout();
 				locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
 						mapRelativeLayout);
 				isPopUp = true;
@@ -503,12 +498,6 @@ public class HomeActivity extends BaseActivity {
 			detailButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					locationViewPopup(-LbsApplication.Dp2Px(
-							LbsApplication.getContext(), 50), 0,
-							mapRelativeLayout);
-					isPopUp = false;
-					LbsApplication.clearCallout();
-					LbsApplication.refreshMap();
 					Intent intent = new Intent(LbsApplication.getContext(),
 							ActivityListView.class);
 					Bundle bundle = new Bundle();
@@ -546,7 +535,7 @@ public class HomeActivity extends BaseActivity {
 				mCallOut.setStyle(CalloutAlignment.BOTTOM);
 				mCallOut.setCustomize(true);
 				ImageView image = new ImageView(this);
-				image.setBackgroundResource(R.drawable.ic_unselect_pin);
+				image.setBackgroundResource(R.drawable.ic_info);
 				mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
 				mCallOut.setContentView(image);
 				LbsApplication.getmMapView().addCallout(mCallOut, resultName);

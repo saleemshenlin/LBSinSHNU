@@ -72,7 +72,33 @@ public class ActivityListFragment extends Fragment {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		initList();
+		Cursor itemCursor = null;
+		try {
+			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
+					null, getQuerySection(indexTab), null, getOrderBy());
+			int num = itemCursor.getCount();
+			Log.i(TAG, "ActivityProvider cursor" + num);
+			adapter = new SimpleCursorAdapter(LbsApplication.getContext(),
+					R.layout.row, itemCursor, FROM, TO,
+					CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			adapter.setViewBinder(LIST_VIEW_BINDER);
+			activityListView.setAdapter(adapter);
+			activityListView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					showPopupwindows(id);
+				}
+			});
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			if (itemCursor.isClosed()) {
+				itemCursor.close();
+			}
+			LbsApplication.getActivityData().closeDatabase();
+		}
 		if (ActivityListView.getActivityId() != 0) {
 			showPopupwindows(ActivityListView.getActivityId());
 			ActivityListView.setActivityId(0);
@@ -301,36 +327,4 @@ public class ActivityListFragment extends Fragment {
 		}
 	}
 
-	/*
-	 * 初始化列表
-	 */
-	public void initList() {
-		Cursor itemCursor = null;
-		try {
-			itemCursor = activityProvider.query(ActivityProvider.CONTENT_URI,
-					null, getQuerySection(indexTab), null, getOrderBy());
-			int num = itemCursor.getCount();
-			Log.i(TAG, "ActivityProvider cursor" + num);
-			adapter = new SimpleCursorAdapter(LbsApplication.getContext(),
-					R.layout.row, itemCursor, FROM, TO,
-					CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-			adapter.setViewBinder(LIST_VIEW_BINDER);
-			activityListView.setAdapter(adapter);
-			activityListView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					showPopupwindows(id);
-				}
-			});
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		} finally {
-			if (itemCursor != null) {
-				itemCursor.close();
-			}
-			LbsApplication.getActivityData().closeDatabase();
-		}
-	}
 }

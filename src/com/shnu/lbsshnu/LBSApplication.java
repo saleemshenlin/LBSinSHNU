@@ -31,7 +31,7 @@ public class LbsApplication extends Application {
 	private static int SCREENHEIGHT;
 	private static double SCREENDPI;
 	private static Context CONTEXT;
-	private static LocationByBaiduAPI LOCATIONAPI = new LocationByBaiduAPI();
+	private static LocationAPI LOCATIONAPI = new LocationAPI();
 	private static Point2D LASTLOCATION;
 	private static float LOCATIONACCUCRACY;
 	private static Workspace mWorkspace;
@@ -227,11 +227,11 @@ public class LbsApplication extends Application {
 		return imm.isActive();
 	}
 
-	public static LocationByBaiduAPI getLocationApi() {
+	public static LocationAPI getLocationApi() {
 		return LOCATIONAPI;
 	}
 
-	public static void setLocationApi(LocationByBaiduAPI locationApi) {
+	public static void setLocationApi(LocationAPI locationApi) {
 		LbsApplication.LOCATIONAPI = locationApi;
 	}
 

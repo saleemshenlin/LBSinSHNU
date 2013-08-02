@@ -13,7 +13,7 @@ import com.supermap.data.Point2D;
 import com.supermap.data.Rectangle2D;
 import com.supermap.mapping.MapView;
 
-public class LocationByBaiduAPI {
+public class LocationAPI {
 	private final static String TAG = "BaiduAPI";
 
 	/*
@@ -59,15 +59,17 @@ public class LocationByBaiduAPI {
 	}
 
 	/*
-	 * 在地图上画定位点和精度范围半径=精度(单位：米)*地图scale*0.02
+	 * 在地图上画定位点和精度buffer,范围半径=精度*5.577531914893617E-4（地图第三级mapscale）*0.02
 	 */
 	public void drawLocationPoint(Point2D location, MapView mMapView,
 			Context context, float radius) {
 		LbsApplication.clearTrackingLayer();
-		double mapScale = LbsApplication.getmMapControl().getMap().getScale();
-		GeoCircle mGeoCircle = new GeoCircle(location, radius * mapScale * 0.02);
-		GeoRegion mGeoRegion = new GeoCircle(location, 15 * mapScale * 0.005)
-				.convertToRegion(100);
+		// double mapScale =
+		// LbsApplication.getmMapControl().getMap().getScale();
+		GeoCircle mGeoCircle = new GeoCircle(location,
+				radius * 5.577531914893617E-4 * 0.02);
+		GeoRegion mGeoRegion = new GeoCircle(location,
+				15 * 5.577531914893617E-4 * 0.005).convertToRegion(100);
 		GeoStyle mGeoStyle = new GeoStyle();
 		GeoStyle mGeoStyle_P = new GeoStyle();
 		mGeoStyle.setFillOpaqueRate(10);

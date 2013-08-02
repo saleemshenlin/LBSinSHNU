@@ -233,7 +233,7 @@ public final class R {
         public static final int leftBehindMenuScroll=0x7f080003;
         public static final int popupAnimation=0x7f080008;
         public static final int rightBehindMenuScroll=0x7f080004;
-        public static final int translucentActivity=0x7f080002;
+        public static final int splashTheme=0x7f080002;
     }
     public static final class xml {
         public static final int data=0x7f050000;

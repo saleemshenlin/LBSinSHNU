@@ -4,8 +4,9 @@
 
     <style name="AppTheme" parent="AppBaseTheme"></style>
 
-    <style name="translucentActivity">
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="splashTheme" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/bg_welcome</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="leftBehindMenuScroll">

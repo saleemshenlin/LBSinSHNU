@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -208,7 +209,7 @@ public class BufferQueryResult extends BaseActivity {
 			View rootView = layoutInflater.inflate(R.layout.queryresult, null);
 			final PopupWindow popupWindow = new PopupWindow(view,
 					LbsApplication.getScreenWidth() * 3 / 4,
-					LbsApplication.getScreenHeight() * 3 / 4, true);
+					LayoutParams.WRAP_CONTENT, true);
 			bindPopupData(id, view, popupWindow);
 			popupWindow
 					.setBackgroundDrawable(new BitmapDrawable(getResources()));

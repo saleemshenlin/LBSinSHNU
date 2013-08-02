@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/repeat_bg" >
+                android:background="@drawable/rp_bg_slider" >
 
                 <TextView
                     android:id="@+id/txtActivityTitle"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/repeat_bg"
+                android:background="@drawable/rp_bg_slider"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/repeat_bg"
+                android:background="@drawable/rp_bg_slider"
                 android:minHeight="32dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/repeat_bg"
+                android:background="@drawable/rp_bg_slider"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -110,7 +110,7 @@
                 android:layout_height="32dp"
                 android:layout_marginBottom="1dp"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/repeat_bg"
+                android:background="@drawable/rp_bg_slider"
                 android:paddingLeft="8dp"
                 android:paddingTop="6dp"
                 android:text="@string/detailtitle"
@@ -121,7 +121,7 @@
                 android:id="@+id/txtDecription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/repeat_bg"
+                android:background="@drawable/rp_bg_slider"
                 android:maxHeight="240dp"
                 android:minHeight="180dp"
                 android:paddingLeft="8dp"

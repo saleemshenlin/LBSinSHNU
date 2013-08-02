@@ -3,12 +3,14 @@
     android:id="@+id/activitylistview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/rp_bg_list"
     android:orientation="vertical" >
 
     <ListView
         android:id="@+id/activityList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/rp_bg_list" >
     </ListView>
 
 </LinearLayout>

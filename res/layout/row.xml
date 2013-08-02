@@ -2,17 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp" >
+    android:layout_marginTop="-1dp"
+    android:background="@drawable/bg_row"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/row_top"
+        android:orientation="vertical" >
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:paddingTop="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="@string/app_name"
         android:textColor="#000"
         android:textSize="18sp"
@@ -22,11 +30,11 @@
         android:id="@+id/txtLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
-        android:paddingBottom="1dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:paddingTop="1dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="@string/app_name"
         android:textColor="#666"
         android:textSize="12sp" />
@@ -35,11 +43,11 @@
         android:id="@+id/txtDateTime"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
-        android:paddingBottom="1dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:paddingTop="1dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="@string/app_name"
         android:textColor="#666"
         android:textSize="12sp" />
@@ -50,5 +58,12 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/row_bottom"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </LinearLayout>

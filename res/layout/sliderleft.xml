@@ -9,7 +9,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="@drawable/repeat_bg" >
+            android:background="@drawable/rp_bg_slider" >
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -23,7 +23,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/repeat_bg"
+            android:background="@drawable/rp_bg_slider"
             android:orientation="vertical" >
 
             <Switch
@@ -42,7 +42,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/repeat_bg"
+            android:background="@drawable/rp_bg_slider"
             android:orientation="vertical" >
 
             <Switch
@@ -61,7 +61,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/repeat_bg"
+            android:background="@drawable/rp_bg_slider"
             android:orientation="vertical" >
 
             <Switch

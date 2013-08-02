@@ -227,11 +227,9 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f080000;
         public static final int AppTheme=0x7f080001;
-        public static final int behindMenuItemLabel=0x7f080007;
-        public static final int behindMenuItemTitle=0x7f080006;
-        public static final int behindMenuScrollContent=0x7f080005;
+        public static final int behindMenuItemLabel=0x7f080005;
         public static final int leftBehindMenuScroll=0x7f080003;
-        public static final int popupAnimation=0x7f080008;
+        public static final int popupAnimation=0x7f080006;
         public static final int rightBehindMenuScroll=0x7f080004;
         public static final int splashTheme=0x7f080002;
     }

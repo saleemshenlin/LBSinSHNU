@@ -165,7 +165,8 @@ public class BaseActivity extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					if (!LbsApplication.isNetWork()
-							&& !LbsApplication.isGPSOpen()) {
+							&& !LbsApplication.isGPSOpen()
+							&& !LbsApplication.isLocateStart()) {
 						Toast.makeText(BaseActivity.this, "请先打开网络连接或GPS！",
 								Toast.LENGTH_SHORT).show();
 						return true;

@@ -149,7 +149,7 @@ public class BaseActivity extends Activity {
 						if (isChecked) {
 							LbsApplication.getLocationApi().startLocate(
 									LbsApplication.getLocationClient());
-							Toast.makeText(BaseActivity.this, "开启定位模块",
+							Toast.makeText(BaseActivity.this, "定位模块已开启",
 									Toast.LENGTH_SHORT).show();
 						} else {
 							LbsApplication.getLocationApi().stopLocate(
@@ -265,12 +265,12 @@ public class BaseActivity extends Activity {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				LbsApplication.setQueryString(query);
+				LbsApplication.setQueryString(query.trim());
 				Intent intent = new Intent(getApplicationContext(),
 						BufferQueryResult.class);
 				if (LbsApplication.isLocateStart())
 					intent.setAction(LbsApplication.QUERY_WITH_LOCATION_FLAG);
-				intent.putExtra("QueryString", query);
+				intent.putExtra("QueryString", query.trim());
 				startActivityForResult(intent,
 						LbsApplication.getBufferQueryCode());
 				BaseActivity.this.overridePendingTransition(
@@ -420,7 +420,7 @@ public class BaseActivity extends Activity {
 									Toast.LENGTH_SHORT).show();
 						} else {
 							userImageView
-									.setImageResource(R.drawable.ic_action_user);
+									.setImageResource(R.drawable.ic_action_left);
 							searchLinLayout.setVisibility(View.VISIBLE);
 							moreImageView.setVisibility(View.VISIBLE);
 							locationRelLayout.setVisibility(View.VISIBLE);

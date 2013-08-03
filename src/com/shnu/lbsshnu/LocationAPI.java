@@ -25,11 +25,7 @@ public class LocationAPI {
 		option.setCoorType("gcj02"); // 设置坐标类型gcj02
 		option.setServiceName("com.baidu.location.service_v2.9");
 		option.setScanSpan(1000);
-		if (LbsApplication.isNetWork()) {
-			option.setPriority(LocationClientOption.NetWorkFirst);
-		} else {
-			option.setPriority(LocationClientOption.GpsFirst);
-		}
+		option.setPriority(LocationClientOption.GpsFirst);
 		option.disableCache(true);
 		locationClient.setLocOption(option);
 	}
@@ -40,6 +36,11 @@ public class LocationAPI {
 	public void startLocate(LocationClient locationClient) {
 		if (!LbsApplication.isLocateStart()) {
 			setLocationOption(locationClient);
+			if (LbsApplication.isNetWork()) {
+				locationClient.requestLocation();
+			} else {
+				locationClient.requestOfflineLocation();
+			}
 			locationClient.start();
 			// Log.d(TAG, "version:" + locationClient.getVersion());
 			Log.d(TAG, "start to locate");

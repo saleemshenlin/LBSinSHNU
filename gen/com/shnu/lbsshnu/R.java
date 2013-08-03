@@ -46,14 +46,14 @@ public final class R {
         public static final int ic_action_back_w=0x7f02000d;
         public static final int ic_action_ball=0x7f02000e;
         public static final int ic_action_book=0x7f02000f;
-        public static final int ic_action_location=0x7f020010;
-        public static final int ic_action_mic=0x7f020011;
-        public static final int ic_action_more=0x7f020012;
+        public static final int ic_action_left=0x7f020010;
+        public static final int ic_action_location=0x7f020011;
+        public static final int ic_action_mic=0x7f020012;
         public static final int ic_action_more_w=0x7f020013;
         public static final int ic_action_play=0x7f020014;
-        public static final int ic_action_search=0x7f020015;
-        public static final int ic_action_setting=0x7f020016;
-        public static final int ic_action_user=0x7f020017;
+        public static final int ic_action_right=0x7f020015;
+        public static final int ic_action_search=0x7f020016;
+        public static final int ic_action_setting=0x7f020017;
         public static final int ic_actiuon_back=0x7f020018;
         public static final int ic_book_pin=0x7f020019;
         public static final int ic_img_pin=0x7f02001a;
@@ -79,7 +79,8 @@ public final class R {
         public static final int start_btn=0x7f02002e;
         public static final int start_button_p=0x7f02002f;
         public static final int start_button_u=0x7f020030;
-        public static final int white_dot=0x7f020031;
+        public static final int welcome_title=0x7f020031;
+        public static final int white_dot=0x7f020032;
     }
     public static final class id {
         public static final int actionLociton=0x7f0a000e;
@@ -97,7 +98,6 @@ public final class R {
         public static final int imgBackHome=0x7f0a0028;
         public static final int imgMore=0x7f0a0002;
         public static final int imgSearchBack=0x7f0a002e;
-        public static final int imgSplash=0x7f0a0043;
         public static final int imgStart=0x7f0a0008;
         public static final int imgUser=0x7f0a0000;
         public static final int imgWDetail=0x7f0a0017;
@@ -120,9 +120,8 @@ public final class R {
         public static final int pager=0x7f0a0005;
         public static final int popupLinearLayout=0x7f0a001d;
         public static final int popupPhoto=0x7f0a001e;
-        public static final int prbLoad=0x7f0a0044;
+        public static final int prbLoad=0x7f0a0042;
         public static final int prbMap=0x7f0a000c;
-        public static final int relativeLayout1=0x7f0a0042;
         public static final int swtLocation=0x7f0a0031;
         public static final int swtPhoto=0x7f0a0033;
         public static final int swtQuery=0x7f0a0029;
@@ -150,7 +149,6 @@ public final class R {
         public static final int txtTitle=0x7f0a002a;
         public static final int txtWDateTime=0x7f0a0016;
         public static final int txtWTitle=0x7f0a0015;
-        public static final int userpref=0x7f0a0045;
         public static final int viewpager=0x7f0a0006;
     }
     public static final class layout {

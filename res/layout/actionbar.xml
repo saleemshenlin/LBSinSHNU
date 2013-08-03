@@ -13,7 +13,7 @@
         android:clickable="true"
         android:contentDescription="@string/app_name"
         android:padding="8dp"
-        android:src="@drawable/ic_action_user" />
+        android:src="@drawable/ic_action_left" />
 
     <LinearLayout
         android:id="@+id/lnySearch"
@@ -39,6 +39,6 @@
         android:clickable="true"
         android:contentDescription="@string/app_name"
         android:padding="8dp"
-        android:src="@drawable/ic_action_more" />
+        android:src="@drawable/ic_action_right" />
 
 </LinearLayout>

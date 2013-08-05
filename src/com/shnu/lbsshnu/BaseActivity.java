@@ -107,13 +107,13 @@ public class BaseActivity extends Activity {
 	 */
 	public void initWifiSwitch() {
 		wifiLayerSwitch = (Switch) findViewById(R.id.swtWifi);
+		wifiLayerSwitch.setTextColor(Color.WHITE);
 		wifiLayerSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
-						// TODO Auto-generated method stub
 						if (isChecked) {
 							lbsApplication.mWifiLayerL.setVisible(true);
 							lbsApplication.mWifiLayerS.setVisible(true);
@@ -139,6 +139,7 @@ public class BaseActivity extends Activity {
 	 */
 	public void initLocationSwitch() {
 		locationSwitch = (Switch) findViewById(R.id.swtLocation);
+		locationSwitch.setTextColor(Color.WHITE);
 		locationSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -391,6 +392,7 @@ public class BaseActivity extends Activity {
 	 */
 	public void initPhotoSwitch() {
 		photoSwitch = (Switch) findViewById(R.id.swtPhoto);
+		photoSwitch.setTextColor(Color.WHITE);
 		photoSwitch
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 

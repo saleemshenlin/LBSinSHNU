@@ -77,8 +77,8 @@ public class LbsWidget extends AppWidgetProvider {
 		} finally {
 			if (cursor != null) {
 				cursor.close();
+				LbsApplication.getActivityData().closeDatabase();
 			}
-			LbsApplication.getActivityData().closeDatabase();
 		}
 	}
 

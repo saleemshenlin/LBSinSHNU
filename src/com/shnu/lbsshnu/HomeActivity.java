@@ -65,10 +65,12 @@ public class HomeActivity extends BaseActivity {
 		if (!flagSearch) {
 			actionbarLinLayout.removeAllViews();
 			View.inflate(this, R.layout.actionbar, actionbarLinLayout);
+			locationRelLayout.setVisibility(View.VISIBLE);
 			initMainBar();
 		} else {
 			actionbarLinLayout.removeAllViews();
 			View.inflate(this, R.layout.resultbar, actionbarLinLayout);
+			locationRelLayout.setVisibility(View.GONE);
 			initResultBar("map");
 		}
 		if (!results.isEmpty() && !isSearch) {

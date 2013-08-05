@@ -289,12 +289,14 @@ public class ActivityListFragment extends Fragment {
 			if (activity.isActivityIsLike()) {
 				likeImageView.setImageDrawable(getResources().getDrawable(
 						R.drawable.ic_rate));
+				LbsApplication.setActivityLike(true);
 			}
 			likeImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if (activity.isActivityIsLike()) {
+					if (LbsApplication.isActivityLike()) {
+						LbsApplication.setActivityLike(false);
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_unrate));
 						ContentValues values = new ContentValues();
@@ -303,6 +305,7 @@ public class ActivityListFragment extends Fragment {
 								null, null);
 						Log.d(TAG, num + " rows changed");
 					} else {
+						LbsApplication.setActivityLike(true);
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_rate));
 						ContentValues values = new ContentValues();

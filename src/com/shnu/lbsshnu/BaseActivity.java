@@ -154,6 +154,8 @@ public class BaseActivity extends Activity {
 						} else {
 							LbsApplication.getLocationApi().stopLocate(
 									LbsApplication.getLocationClient());
+							Toast.makeText(BaseActivity.this, "定位模块已关闭",
+									Toast.LENGTH_SHORT).show();
 						}
 						LbsApplication.clearTrackingLayer();
 					}

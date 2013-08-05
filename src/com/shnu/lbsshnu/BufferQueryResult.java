@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -137,15 +138,20 @@ public class BufferQueryResult extends BaseActivity {
 
 	private String getQuerySection(int num) {
 		String sql = null;
-		sql = ActivityData.C_TYPE + " = " + num + " and ";
-		sql = sql + ActivityData.C_DATE + " > (SELECT DATE('now')) and "
-				+ ActivityData.C_DATE
-				+ " < (SELECT DATE('now', '+7 day')) and ";
-		sql = sql + "( " + ActivityData.C_NAME + " Like '%" + QER_STRING
-				+ "%' OR " + ActivityData.C_SPEAKER + " Like '%" + QER_STRING
-				+ "%' OR " + ActivityData.C_SPEAKERTITLE + " Like '%"
-				+ QER_STRING + "%' OR " + ActivityData.C_DESCRIPTION
-				+ " Like '%" + QER_STRING + "%' )";
+		if (num == 0) {
+			sql = ActivityData.C_ISLIKE + " = 1";
+		} else {
+			sql = ActivityData.C_TYPE + " = " + num + " and ";
+			sql = sql + ActivityData.C_DATE + " > (SELECT DATE('now')) and "
+					+ ActivityData.C_DATE
+					+ " < (SELECT DATE('now', '+7 day')) and ";
+			sql = sql + "( " + ActivityData.C_NAME + " Like '%" + QER_STRING
+					+ "%' OR " + ActivityData.C_SPEAKER + " Like '%"
+					+ QER_STRING + "%' OR " + ActivityData.C_SPEAKERTITLE
+					+ " Like '%" + QER_STRING + "%' OR "
+					+ ActivityData.C_DESCRIPTION + " Like '%" + QER_STRING
+					+ "%' )";
+		}
 		return sql;
 	}
 
@@ -293,7 +299,8 @@ public class BufferQueryResult extends BaseActivity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if (activity.isActivityIsLike()) {
+					if (LbsApplication.isActivityLike()) {
+						LbsApplication.setActivityLike(false);
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_unrate));
 						ContentValues values = new ContentValues();
@@ -302,6 +309,7 @@ public class BufferQueryResult extends BaseActivity {
 								null, null);
 						Log.d(TAG, num + " rows changed");
 					} else {
+						LbsApplication.setActivityLike(true);
 						likeImageView.setImageDrawable(getResources()
 								.getDrawable(R.drawable.ic_rate));
 						ContentValues values = new ContentValues();
@@ -309,6 +317,9 @@ public class BufferQueryResult extends BaseActivity {
 						int num = activityProvider.update(queryUri, values,
 								null, null);
 						Log.d(TAG, num + " rows changed");
+						Intent intent = new Intent();
+						intent.setAction(LbsService.NEW_STATUS_INTENT);
+						BufferQueryResult.this.sendBroadcast(intent);
 					}
 				}
 			});
@@ -371,9 +382,9 @@ public class BufferQueryResult extends BaseActivity {
 	private void queryViaNormal() {
 		Cursor itemCursor = null;
 		try {
-			String[] items = { "电影演出", "学术讲座", "精品课程" };
-			for (int i = 1; i <= items.length; i++) {
-				String caption = items[i - 1];
+			String[] items = { "我关注的", "电影演出", "学术讲座", "精品课程" };
+			for (int i = 0; i < items.length; i++) {
+				String caption = items[i];
 				String distance = "";
 				String selection = getQuerySection(i);
 				SimpleCursorAdapter adapter = getQueryResult(selection,

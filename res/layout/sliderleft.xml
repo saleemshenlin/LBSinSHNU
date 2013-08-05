@@ -36,7 +36,9 @@
                 android:layout_margin="8dp"
                 android:text="@string/swtlocation"
                 android:textColor="#fff"
+                android:textColorHint="#fff"
                 android:textSize="18sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -55,7 +57,9 @@
                 android:layout_margin="8dp"
                 android:text="@string/swtwifi"
                 android:textColor="#fff"
+                android:textColorHint="#fff"
                 android:textSize="18sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +78,9 @@
                 android:layout_margin="8dp"
                 android:text="@string/swtphoto"
                 android:textColor="#fff"
+                android:textColorHint="#fff"
                 android:textSize="18sp" />
+
         </LinearLayout>
     </LinearLayout>
 

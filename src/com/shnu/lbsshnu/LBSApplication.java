@@ -43,6 +43,7 @@ public class LbsApplication extends Application {
 	private static int requestCode = 0;
 	private static int bufferQueryCode = 1;
 	private static boolean isLocateStart = false;
+	private static boolean isActivityLike = false;
 	private static LocationClient locationClient;
 	private static String queryString = "";
 	public static String QUERY_WITH_LOCATION_FLAG = "QUERY_WITH_LOCATION";
@@ -363,6 +364,14 @@ public class LbsApplication extends Application {
 
 	public static void setLocateStart(boolean isStart) {
 		LbsApplication.isLocateStart = isStart;
+	}
+
+	public static boolean isActivityLike() {
+		return isActivityLike;
+	}
+
+	public static void setActivityLike(boolean isActivityLike) {
+		LbsApplication.isActivityLike = isActivityLike;
 	}
 
 }

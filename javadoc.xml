@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam=" -encoding UTF-8 -charset UTF-8&#13;&#10;-encoding gbk" author="true" classpath="libs/android-support-v4.jar;libs/com.supermap.mapping.jar;libs/locSDK_3.3.jar;libs/com.supermap.navigation.jar;libs/com.supermap.analyst.jar;libs/com.supermap.data.jar;libs/com.supermap.services.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.shnu.lbsshnu" source="1.7" sourcepath="src;gen" splitindex="true" use="true" version="true">
+            <link href="file:/D:/gitHub/LBSinSHNU/doc/"/>
+            <link href="file:/D:/adt-bundle-windows-x86-20130219/adt-bundle-windows-x86-20130219/sdk/docs/reference"/>
+        </javadoc>
+    </target>
+</project>

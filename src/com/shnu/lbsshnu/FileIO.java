@@ -15,10 +15,13 @@ import android.content.res.XmlResourceParser;
 import android.util.Log;
 
 public class FileIO {
+	/**
+	 * Log.()标签
+	 */
 	private static final String TAG = "FileIO";
 
-	/*
-	 * 从data.xml获取数据
+	/**
+	 * 从Data.xml获取数据存入sqlite
 	 */
 	public void getDateFromXML() {
 		if (!LbsApplication.getActivityData().tableIsNull()) {
@@ -99,7 +102,7 @@ public class FileIO {
 
 	}
 
-	/*
+	/**
 	 * copy地图数据到sdcard
 	 */
 	public void copyMapData(Context context) {
@@ -145,7 +148,12 @@ public class FileIO {
 			}
 		}
 	}
-
+	/**
+	 * 复制文件到sdcard中
+	 * @param in
+	 * @param out
+	 * @throws IOException
+	 */
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int read;
@@ -155,7 +163,9 @@ public class FileIO {
 	}
 
 	/**
-	 * 创建Environment目录
+	 * 创建存储地图数据的路径
+	 * @param context
+	 * @param path
 	 */
 	private static void createPath(Context context, String path) {
 		try {

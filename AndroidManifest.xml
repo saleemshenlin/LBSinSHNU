@@ -73,11 +73,11 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.shnu.lbsshnu.ActivityListView"
+            android:name="com.shnu.lbsshnu.EventListView"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
         <activity
-            android:name="com.shnu.lbsshnu.BufferQueryResult"
+            android:name="com.shnu.lbsshnu.ResultActivity"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
 
@@ -90,14 +90,14 @@
         </service>
 
         <provider
-            android:name="com.shnu.lbsshnu.ActivityProvider"
-            android:authorities="com.shnu.lbsshnu.activityprovider"
+            android:name="com.shnu.lbsshnu.EventProvider"
+            android:authorities="com.shnu.lbsshnu.eventprovider"
             android:exported="false" >
         </provider>
 
         <receiver
             android:name="com.shnu.lbsshnu.LbsWidget"
-            android:label="@string/widgettitle" >
+            android:label="@string/widget_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -112,7 +112,7 @@
 
         <meta-data
             android:name="android.app.default_searchable"
-            android:value="com.shnu.lbsshnu.ActivityProvider" >
+            android:value="com.shnu.lbsshnu.EventProvider" >
         </meta-data>
     </application>
 

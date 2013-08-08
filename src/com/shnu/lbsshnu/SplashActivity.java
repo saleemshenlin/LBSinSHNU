@@ -2,7 +2,6 @@ package com.shnu.lbsshnu;
 
 import java.text.ParseException;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -13,7 +12,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class SplashActivity extends Activity {
+/**
+ * 应用首页
+ * 
+ */
+public class SplashActivity extends BaseActivity {
 	boolean isFirstIn = false;
 
 	private static final int GO_HOME = 1000;
@@ -45,12 +48,14 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splashview);
-		prbLoad = (ProgressBar) findViewById(R.id.prbLoad);
-		// 加载数据
+		prbLoad = (ProgressBar) findViewById(R.id.prbLoadData);
 		new InitDataBaseData().execute();
 		new InitSuperMapData().execute();
 	}
 
+	/**
+	 * 通过SharedPreferences记录是否属于首次打开，首次打开进入GuideActivity 不是首次进入HomeActivity
+	 */
 	private void init() {
 		SharedPreferences preferences = getSharedPreferences(
 				SHAREDPREFERENCES_NAME, MODE_PRIVATE);
@@ -63,20 +68,26 @@ public class SplashActivity extends Activity {
 
 	}
 
+	/**
+	 * 不是首次进入HomeActivity
+	 */
 	private void goHome() {
 		Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
 		SplashActivity.this.startActivity(intent);
 		SplashActivity.this.finish();
 	}
 
+	/**
+	 * 首次打开进入GuideActivity
+	 */
 	private void goGuide() {
 		Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
 		SplashActivity.this.startActivity(intent);
 		SplashActivity.this.finish();
 	}
 
-	/*
-	 * 载入地图数据
+	/**
+	 * 在首次加载时多线程载入地图数据
 	 */
 	class InitSuperMapData extends AsyncTask<String, Integer, String> {
 
@@ -89,7 +100,7 @@ public class SplashActivity extends Activity {
 
 	}
 
-	/*
+	/**
 	 * 调用FileIO导入数据、更新課程日期，防止无响应采用多线程
 	 */
 	class InitDataBaseData extends AsyncTask<String, Integer, String> {

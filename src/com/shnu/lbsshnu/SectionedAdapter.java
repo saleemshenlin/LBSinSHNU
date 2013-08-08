@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 
-// 自定义一个类，这个类呢包含多个adapter就可以了，想用那种就用那种。
+/**
+ * 自定义一个类，这个类可以將多个adapter包含在一个adapter。 用于缓冲区查询的list绑定多个adapter
+ */
 abstract public class SectionedAdapter extends BaseAdapter {
 	abstract protected View getHeaderView(String caption, String distance,
 			int index, View convertView, ViewGroup parent);

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="#ccc" >
+
+    <ImageView
+        android:id="@+id/imgBackHome"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/app_name"
+        android:padding="8dp"
+        android:src="@drawable/ic_action_back" />
+
+    <Switch
+        android:id="@+id/swtQuery"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginRight="48dp"
+        android:checked="true"
+        android:text="@string/query_result"
+        android:textOff="地图"
+        android:textOn="列表" />
+
+</LinearLayout>

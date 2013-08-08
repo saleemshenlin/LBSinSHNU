@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity" 
-    android:background="@drawable/bg_welcome">
+    android:background="@drawable/bg_view_welcome">
     
     <ProgressBar
-        android:id="@+id/prbLoad"
+        android:id="@+id/prbLoadData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

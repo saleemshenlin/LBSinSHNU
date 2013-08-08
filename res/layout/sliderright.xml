@@ -12,27 +12,27 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/txtActivity"
+                android:id="@+id/txtEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtactivity"
+                android:text="@string/event"
                 android:textColor="#ccc"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLecture"
+            android:id="@+id/lnlSpeech"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgSpeech"
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -40,10 +40,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_action_mic" />
+                android:src="@drawable/ic_speech" />
 
             <TextView
-                android:id="@+id/txtLecture"
+                android:id="@+id/txtSpeech"
                 android:layout_width="0dip"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
@@ -51,21 +51,21 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtlecture"
+                android:text="@string/speech"
                 android:textColor="#ccc"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearPlay"
+            android:id="@+id/lnlPlay"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/imgPlay"
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -73,7 +73,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_action_play" />
+                android:src="@drawable/ic_play" />
 
             <TextView
                 android:id="@+id/txtPlay"
@@ -84,21 +84,21 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtplay"
+                android:text="@string/play"
                 android:textColor="#ccc"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearCourse"
+            android:id="@+id/lnlCourse"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imgCourse"
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -106,7 +106,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_action_book" />
+                android:src="@drawable/ic_course" />
 
             <TextView
                 android:id="@+id/txtCourse"
@@ -117,21 +117,21 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtcourse"
+                android:text="@string/course"
                 android:textColor="#ccc"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLike"
+            android:id="@+id/lnlLike"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageLike"
+                android:id="@+id/imgLike"
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -139,7 +139,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_rate" />
+                android:src="@drawable/ic_action_like" />
 
             <TextView
                 android:id="@+id/txtLike"
@@ -150,22 +150,22 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtlike"
+                android:text="@string/like"
                 android:textColor="#ccc"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearSetting"
+            android:id="@+id/lnlAbout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgAbout"
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -173,10 +173,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_action_setting" />
+                android:src="@drawable/ic_about" />
 
             <TextView
-                android:id="@+id/txtSetting"
+                android:id="@+id/txtAbout"
                 android:layout_width="0dip"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
@@ -184,7 +184,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical|left"
-                android:text="@string/txtsetting"
+                android:text="@string/about"
                 android:textColor="#ccc"
                 android:textSize="12sp"
                 android:textStyle="bold" />

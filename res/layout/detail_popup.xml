@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_popup_photo"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="2dp" >
+
+    <LinearLayout
+        android:id="@+id/lnlDetailPopupBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_popup_detail"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000"
+            android:orientation="vertical"
+            android:padding="2dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_slider_repeat" >
+
+                <TextView
+                    android:id="@+id/txtEventTitle"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="12"
+                    android:text="@string/app_name"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right" >
+
+                    <ImageView
+                        android:id="@+id/imgEventMap"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="right"
+                        android:contentDescription="@string/app_name"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_action_map" />
+
+                    <ImageView
+                        android:id="@+id/imgEventLike"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="right"
+                        android:contentDescription="@string/app_name"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_action_unlike" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtEventSpeaker"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_slider_repeat"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:text="@string/detail_title"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtEventSpeakerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_slider_repeat"
+                android:minHeight="32dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:text="@string/detail_title"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtEventDate"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_slider_repeat"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:text="@string/detail_title"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtEventPlace"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_slider_repeat"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:text="@string/detail_title"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtEventDecription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_slider_repeat"
+                android:maxHeight="240dp"
+                android:minHeight="180dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:scrollbars="vertical"
+                android:text="@string/detail_title"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

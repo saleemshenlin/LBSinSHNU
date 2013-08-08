@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -19,37 +18,49 @@ import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetVector;
 import com.supermap.data.Point2D;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
 import com.supermap.mapping.CallOut;
-import com.supermap.mapping.CalloutAlignment;
-import com.supermap.mapping.Layer;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.MapView;
 
+/**
+ * HomeActivity，是应用的主界面，以地图为主体，用于将Event信息和查询结果信息在地图上显示。
+ */
 public class HomeActivity extends BaseActivity {
 	private static final String TAG = "HomeActivity";
-	private DrawPointAndBuffer drawPointAndBuffer;
-	private LocationListener baiduLocationListener = new LocationListener();
-	private TextView accuracyTextView;
-	private TextView geoCodeTextView;
-	private Button detailButton;
+	private Handler mHandler;
+	private DrawPointAndBuffer mDrawPointAndBuffer;
+	private LocationListener mLocationListener = new LocationListener();
+	/**
+	 * 显示定位精度单位：米
+	 */
+	private TextView txtAaccuracy;
+	/**
+	 * 显示反向地理编码结果
+	 */
+	private TextView txtGeocode;
+	/**
+	 * Event详情按钮点击进入Event详细页
+	 */
+	private Button btnDetail;
+	/**
+	 * 地图读取时显示进度条
+	 */
 	private ProgressBar prbMapLoad;
+	/*
+	 * “再点一次退出应用”两次点击的时间
+	 */
 	private long exitTime = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.homeactivity);
+		setContentView(R.layout.homeactivity_view);
 		initLocationAPi();
-		drawPointAndBuffer = new DrawPointAndBuffer();
 		initView();
 		new OpenMapData().execute();
 		LbsApplication.startServices(this);
@@ -57,28 +68,32 @@ public class HomeActivity extends BaseActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		if (!simpleSideDrawer.isClosed()) {
-			simpleSideDrawer.toggleRightDrawer();
+		// 判断Slider是否已打开，若打开关闭
+		if (!mSimpleSideDrawer.isClosed()) {
+			mSimpleSideDrawer.toggleRightDrawer();
 		}
-		if (!flagSearch) {
-			actionbarLinLayout.removeAllViews();
-			View.inflate(this, R.layout.actionbar, actionbarLinLayout);
-			locationRelLayout.setVisibility(View.VISIBLE);
-			initMainBar();
+		// 判断是否是查询状态，如果不是初始化MainActionbar，反之初始化ResultActionbar
+		if (!isSearch) {
+			lnlMainActionbar.removeAllViews();
+			View.inflate(this, R.layout.main_actionbar, lnlMainActionbar);
+			rllLocation.setVisibility(View.VISIBLE);
+			initActionbarAndSlider();
 		} else {
-			actionbarLinLayout.removeAllViews();
-			View.inflate(this, R.layout.resultbar, actionbarLinLayout);
-			locationRelLayout.setVisibility(View.GONE);
-			initResultBar("map");
+			lnlMainActionbar.removeAllViews();
+			View.inflate(this, R.layout.query_result_actionbar,
+					lnlMainActionbar);
+			rllLocation.setVisibility(View.GONE);
+			initResultActionbar(true);
 		}
-		if (!results.isEmpty() && !isSearch) {
+		// 判断是否要进行查询结果定位
+		if (!events.isEmpty() && isSearch) {
 			LbsApplication.getmMapView().removeAllCallOut();
-			resultLocate(results);
+			locateResultInMap(events);
 		}
+		// 判断是否要Event定位
 		if (hasDetail) {
-			activityLocate(activity);
+			locateEventInMap(mEvent);
 		}
 		LbsApplication.refreshMap();
 		Log.d(TAG, "on resume!");
@@ -89,85 +104,335 @@ public class HomeActivity extends BaseActivity {
 		super.onDestroy();
 	}
 
+	/**
+	 * 根据RequestCode (GET_EVENT/GET_QUERY),接受反馈结果
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (data != null) {
-			if (requestCode == 0) {
-				if (resultCode == 0) {
+			if (requestCode == LbsApplication.GET_EVENT) {
+				if (resultCode == LbsApplication.GET_EVENT) {
 					Bundle bundle = data.getExtras();
-					activity = bundle.getParcelable("activity");
+					mEvent = bundle.getParcelable("activity");
 					hasDetail = true;
 				}
 			}
-			if (requestCode == 1) {
+			if (requestCode == LbsApplication.GET_QUERY) {
 				Bundle bundle = data.getExtras();
-				if (results.isEmpty()) {
-					results = bundle.getParcelableArrayList("results");
+				if (events.isEmpty()) {
+					events = bundle.getParcelableArrayList("results");
 				}
 			}
 		}
 	}
 
-	/*
-	 * 初始化启动 定位api
+	/**
+	 * 当按两次back键两次按下的时间>2s,退出应用，
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	/**
+	 * 初始化启动 LocationAPI，首先判断网络和GPS是否打开，若打开则开启定位功能
 	 */
 	private void initLocationAPi() {
 		LbsApplication.setLocationClient(getApplicationContext());
 		LbsApplication.getLocationClient().registerLocationListener(
-				baiduLocationListener);
+				mLocationListener);
 		if (LbsApplication.isNetWork() || LbsApplication.isGPSOpen()) {
 			LbsApplication.getLocationApi().startLocate(
 					LbsApplication.getLocationClient());
 		}
 	}
 
-	/*
+	/**
 	 * 初始化View
 	 */
 	private void initView() {
-		handler = new Handler();
-		locationRelLayout = (RelativeLayout) findViewById(R.id.locationRelativeLayout);
-		mapRelativeLayout = (RelativeLayout) findViewById(R.id.mapViewRelativeLayout);
-		actionbarLinLayout = (LinearLayout) findViewById(R.id.actionbar);
-		prbMapLoad = (ProgressBar) findViewById(R.id.prbMap);
-		locationRelLayout.setOnClickListener(new View.OnClickListener() {
+		mHandler = new Handler();
+		rllLocation = (RelativeLayout) findViewById(R.id.rllLocation);
+		rllMapView = (RelativeLayout) findViewById(R.id.rllMapView);
+		lnlMainActionbar = (LinearLayout) findViewById(R.id.lnlActionbar);
+		prbMapLoad = (ProgressBar) findViewById(R.id.prbLoadMap);
+		rllLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onLocated(false);
+				onLocated();
 			}
 		});
-		accuracyTextView = (TextView) findViewById(R.id.txtAccuracy);
-		geoCodeTextView = (TextView) findViewById(R.id.txtAddress);
-		detailButton = (Button) findViewById(R.id.btnDetail);
-		initMainBar();
+		txtAaccuracy = (TextView) findViewById(R.id.txtLocationAccuracy);
+		txtGeocode = (TextView) findViewById(R.id.txtLocationAddress);
+		btnDetail = (Button) findViewById(R.id.btnDetail);
+		initActionbarAndSlider();
 	}
 
-	/*
-	 * 从SDcard添加底图数据
+	/**
+	 * 点击定位按钮进行定位和反向地理编码的查询，移动LocationDetail显示内容
 	 */
-	class OpenMapData extends AsyncTask<String, Integer, String> {
+	private void onLocated() {
+		// 在定位时，不显示详细按钮
+		btnDetail.setVisibility(View.GONE);
+		if (!isPopUp) {
+			if (LbsApplication.isLocateStart()) {
+				new GeoCoding().execute();
+				txtAaccuracy.setText("我的位置(精度:"
+						+ LbsApplication.save2Point(LbsApplication
+								.getLocationAccuracy()) + "米)");
+				txtGeocode.setText("上海师范大学");
+				mQuery.moveLocationDetail(0, -LbsApplication.Dp2Px(this, 50),
+						rllMapView, rllLocation);
+				isPopUp = true;
+				if (LbsApplication.getLastlocationPoint2d() != null)
+					LbsApplication.getmMapControl().getMap()
+							.setCenter(LbsApplication.getLastlocationPoint2d());
+			} else {
+				Toast.makeText(this, "请先开启定位功能，才能获取当前位置", Toast.LENGTH_SHORT)
+						.show();
+			}
+		} else {
+			LbsApplication.clearCallout();
+			mQuery.moveLocationDetail(-LbsApplication.Dp2Px(this, 50), 0,
+					rllMapView, rllLocation);
+			isPopUp = false;
+			hasDetail = false;
+		}
+		Log.d(TAG, "locationPoint2d:"
+				+ LbsApplication.getLastlocationPoint2d().getX() + " , "
+				+ LbsApplication.getLastlocationPoint2d().getY());
+	}
+
+	/**
+	 * 将根据Event所发生的位置在地图上定位，并在LocationDetail里显示Event的具体信息。
+	 * 
+	 * @param mEvent
+	 *            传入Event参数
+	 */
+	private void locateEventInMap(final Event mEvent) {
+		hasDetail = false;
+		LbsApplication.clearCallout();
+		CallOut mCallOut = mQuery.getCallOutViaBuildingId(
+				mEvent.getEventBuilding(), mEvent.getEventType(), this);
+		if (mCallOut != null) {
+			Point2D mPoint2d = new Point2D(mCallOut.getLocationX(),
+					mCallOut.getLocationY());
+			btnDetail.setVisibility(View.VISIBLE);
+			if (!isPopUp) {
+				mQuery.moveLocationDetail(0, -LbsApplication.Dp2Px(this, 50),
+						rllMapView, rllLocation);
+				isPopUp = true;
+			}
+			if (mEvent.getEventName().length() > 13) {
+				txtAaccuracy.setText(mEvent.getEventName().substring(0, 12)
+						+ "...");
+			} else {
+				txtAaccuracy.setText(mEvent.getEventName());
+			}
+			if (mEvent.getEventSpeakerTitle().length() > 10) {
+				txtGeocode.setText(mEvent.getEventSpeaker() + ", "
+						+ mEvent.getEventSpeakerTitle().substring(0, 10)
+						+ "...");
+			} else {
+				txtGeocode.setText(mEvent.getEventSpeaker() + ", "
+						+ mEvent.getEventSpeakerTitle());
+			}
+			btnDetail.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(LbsApplication.getContext(),
+							EventListView.class);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("activity", mEvent);
+					intent.putExtras(bundle);
+					startActivityForResult(intent, LbsApplication.GET_EVENT);
+					HomeActivity.this.overridePendingTransition(
+							R.anim.anim_in_right2left,
+							R.anim.anim_out_left2right);
+				}
+			});
+			LbsApplication.getmMapControl().getMap().setCenter(mPoint2d);
+			LbsApplication.getmMapView().addCallout(mCallOut);
+			LbsApplication.refreshMap();
+		}
+
+	}
+
+	/**
+	 * 将查询结果在地图上定位
+	 * 
+	 * @param events
+	 *            传入查询结果list
+	 */
+	private void locateResultInMap(List<Event> events) {
+		isSearch = true;
+		LbsApplication.clearCallout();
+		try {
+			for (Event event : events) {
+				CallOut mCallOut = mQuery.getCallOutViaBuildingId(
+						event.getEventBuilding(), 4, this);
+				LbsApplication.getmMapView().addCallout(mCallOut);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+		Point2D mPoint2d = LbsApplication.getLastlocationPoint2d();
+		LbsApplication.getmMapControl().getMap().setCenter(mPoint2d);
+		LbsApplication.refreshMap();
+	}
+
+	/**
+	 * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。 63 ：
+	 * 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：
+	 * 离线定位结果。通过requestOfflineLocaiton调用时对应的返回结果 67 ：
+	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
+	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
+	 * 
+	 * 通过定位API获取经纬度坐标和定位精度，更新LastlocationPoint2d和LocationAccuracy
+	 * 更新完执行DrawPointAndBuffer
+	 */
+	private class LocationListener implements BDLocationListener {
+		/**
+		 * 获取经纬度坐标
+		 */
+		@Override
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null)
+				return;
+			StringBuffer mStringBuffer = new StringBuffer(256);
+			mStringBuffer.append("time : ");
+			mStringBuffer.append(location.getTime());
+			mStringBuffer.append("\nerror code : ");
+			mStringBuffer.append(location.getLocType());
+			mStringBuffer.append("\nlatitude : ");
+			mStringBuffer.append(location.getLatitude());
+			mStringBuffer.append("\nlontitude : ");
+			mStringBuffer.append(location.getLongitude());
+			mStringBuffer.append("\nradius : ");
+			mStringBuffer.append(location.getRadius());
+			if (location.getLocType() == BDLocation.TypeGpsLocation) {
+				mStringBuffer.append("\nspeed : ");
+				mStringBuffer.append(location.getSpeed());
+				mStringBuffer.append("\nsatellite : ");
+				mStringBuffer.append(location.getSatelliteNumber());
+			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
+				mStringBuffer.append("\naddr : ");
+				mStringBuffer.append(location.getAddrStr());
+			}
+			if (LbsApplication.getLastlocationPoint2d().getX() != location
+					.getLongitude()
+					|| LbsApplication.getLastlocationPoint2d().getY() != location
+							.getLatitude()) {
+				LbsApplication.setLastlocationPoint2d(new Point2D(location
+						.getLongitude(), location.getLatitude()));
+				LbsApplication.setLocationAccuracy(location.getRadius());
+				if (!LbsApplication.getLocationApi().isLocInMap(
+						LbsApplication.getLastlocationPoint2d(),
+						LbsApplication.getmMapView())) {
+					LbsApplication.setLocateStart(false);
+					swtLocation.setChecked(false);
+				} else {
+					mDrawPointAndBuffer = new DrawPointAndBuffer();
+					mDrawPointAndBuffer.execute("");
+				}
+				Log.i(TAG, mStringBuffer.toString());
+			}
+		}
+
+		/**
+		 * 在线进行反向地理编码，在本应用中不需要使用
+		 */
+		@Override
+		public void onReceivePoi(BDLocation arg0) {
+
+		}
+
+	}
+
+	/**
+	 * 多线程绘制定位点和定位精度缓冲区 具体方法见LocationAPI的drawLocatio()方法 使用runnable进行UI交换
+	 */
+	private class DrawPointAndBuffer extends AsyncTask<String, Integer, String> {
+		@Override
+		protected String doInBackground(String... contexts) {
+			try {
+				mHandler.post(mRunnable);
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+				return null;
+			}
+			return "DrawPointAndBuffer ok";
+		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			Log.d(TAG, result);
+		}
+
+	}
+
+	/**
+	 * 在线程中与UI交互
+	 */
+	Runnable mRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			try {
+				LbsApplication.getLocationApi().drawLocation(
+						LbsApplication.getLastlocationPoint2d(),
+						LbsApplication.getmMapView(),
+						LbsApplication.getContext(),
+						LbsApplication.getLocationAccuracy());
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+				Log.e(TAG, "locationPoint2d:"
+						+ LbsApplication.getLastlocationPoint2d().getX()
+						+ " , "
+						+ LbsApplication.getLastlocationPoint2d().getY()
+						+ " , " + LbsApplication.getLocationAccuracy());
+			}
+		}
+	};
+
+	/**
+	 * 多线程加载离线地图，避免屏幕黑屏，加载时屏幕显示进度条
+	 */
+	private class OpenMapData extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			// 从Widget定位入口进入时，在加载完地图时再执行定位操作
+			Bundle mBundle = getIntent().getExtras();
+			if (mBundle != null) {
+				if (mBundle.getParcelable("activity") != null) {
+					mEvent = mBundle.getParcelable("activity");
+				}
+				locateEventInMap(mEvent);
+			}
+			prbMapLoad.setVisibility(View.GONE);
 			Toast.makeText(HomeActivity.this, result, Toast.LENGTH_SHORT)
 					.show();
-			prbMapLoad.setVisibility(View.GONE);
-			Bundle bundle = getIntent().getExtras();
-			if (bundle != null) {
-				if (bundle.getParcelable("activity") != null) {
-					activity = bundle.getParcelable("activity");
-				}
-				activityLocate(activity);
-			}
 		}
 
 		@Override
 		protected void onProgressUpdate(Integer... values) {
-			// TODO Auto-generated method stub
 			super.onProgressUpdate(values);
 			Toast.makeText(HomeActivity.this, "正在努力加载地图中...",
 					Toast.LENGTH_SHORT).show();
@@ -182,7 +447,7 @@ public class HomeActivity extends BaseActivity {
 					.getContext()
 					.getExternalFilesDir(
 							getString(R.string.data_path)
-									+ getString(R.string.dataname)).toString());
+									+ getString(R.string.data_name)).toString());
 			info.setType(WorkspaceType.SMWU);
 			LbsApplication.getmWorkspace().open(info);
 			LbsApplication.setmMapView((MapView) findViewById(R.id.mapView));
@@ -194,9 +459,9 @@ public class HomeActivity extends BaseActivity {
 			LbsApplication.getmMapControl().getMap()
 					.setMapDPI(LbsApplication.getScreenDPI());
 			Log.d(TAG, "add Map: " + LbsApplication.getmWorkspace());
-			String mapName = LbsApplication.getmWorkspace().getMaps().get(0);
-			Log.d(TAG, "add Map: " + mapName);
-			LbsApplication.getmMapControl().getMap().open(mapName);
+			String strMapName = LbsApplication.getmWorkspace().getMaps().get(0);
+			Log.d(TAG, "add Map: " + strMapName);
+			LbsApplication.getmMapControl().getMap().open(strMapName);
 			LbsApplication.setMlayers(LbsApplication.getmMapControl().getMap()
 					.getLayers());
 			lbsApplication.mWifiLayerS = LbsApplication.getMlayers().get(2);
@@ -215,7 +480,7 @@ public class HomeActivity extends BaseActivity {
 			LbsApplication.setmTrackingLayer(LbsApplication.getmMapControl()
 					.getMap().getTrackingLayer());
 			LbsApplication.getmMapControl().setMapParamChangedListener(
-					mapParameterChangedListener);
+					mMapParameterChangedListener);
 			Log.i(TAG, "Max:"
 					+ LbsApplication.getmMapControl().getMap().getMaxScale()
 					+ " Min:"
@@ -228,10 +493,10 @@ public class HomeActivity extends BaseActivity {
 
 	}
 
-	/*
-	 * 监听地图参数变化
+	/**
+	 * 监听地图变化
 	 */
-	MapParameterChangedListener mapParameterChangedListener = new MapParameterChangedListener() {
+	MapParameterChangedListener mMapParameterChangedListener = new MapParameterChangedListener() {
 
 		@Override
 		public void scaleChanged(double scale) {
@@ -246,90 +511,8 @@ public class HomeActivity extends BaseActivity {
 		}
 	};
 
-	/*
-	 * 定位后操作
-	 */
-	private void onLocated(boolean hasDetail) {
-
-		if (!hasDetail) {
-			detailButton.setVisibility(View.GONE);
-		}
-		if (!isPopUp) {
-			if (LbsApplication.isLocateStart()) {
-				new GeoCoding().execute();
-				accuracyTextView.setText("我的位置(精度:"
-						+ LbsApplication.save2Point(LbsApplication
-								.getLocationAccuracy()) + "米)");
-				geoCodeTextView.setText("上海师范大学");
-				locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
-						mapRelativeLayout);
-				isPopUp = true;
-				if (LbsApplication.getLastlocationPoint2d() != null)
-					LbsApplication.getmMapControl().getMap()
-							.setCenter(LbsApplication.getLastlocationPoint2d());
-			} else {
-				Toast.makeText(this, "请先开启定位功能，才能获取当前位置", Toast.LENGTH_SHORT)
-						.show();
-			}
-		} else {
-			LbsApplication.clearCallout();
-			locationViewPopup(-LbsApplication.Dp2Px(this, 50), 0,
-					mapRelativeLayout);
-			isPopUp = false;
-			hasDetail = false;
-		}
-		Log.d(TAG, "locationPoint2d:"
-				+ LbsApplication.getLastlocationPoint2d().getX() + " , "
-				+ LbsApplication.getLastlocationPoint2d().getY());
-	}
-
-	/*
-	 * 线程绘制location point & 精度buffer
-	 */
-	private class DrawPointAndBuffer extends AsyncTask<String, Integer, String> {
-		@Override
-		protected String doInBackground(String... contexts) {
-			try {
-				handler.post(runnableUi);
-			} catch (Exception e) {
-				Log.e(TAG, e.toString());
-				return null;
-			}
-			return "DrawPointAndBuffer ok";
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			Log.e(TAG, result);
-		}
-
-	}
-
-	Runnable runnableUi = new Runnable() {
-
-		@Override
-		public void run() {
-			try {
-				LbsApplication.getLocationApi().drawLocationPoint(
-						LbsApplication.getLastlocationPoint2d(),
-						LbsApplication.getmMapView(),
-						LbsApplication.getContext(),
-						LbsApplication.getLocationAccuracy());
-			} catch (Exception e) {
-				Log.e(TAG, e.toString());
-				Log.e(TAG, "locationPoint2d:"
-						+ LbsApplication.getLastlocationPoint2d().getX()
-						+ " , "
-						+ LbsApplication.getLastlocationPoint2d().getY()
-						+ " , " + LbsApplication.getLocationAccuracy());
-			}
-		}
-	};
-
-	/*
-	 * Geocoding 防止等待查询结果而未响应
+	/**
+	 * 多线程查询反向地理编码，防止因查询延迟和LocationDetail框popup发生卡顿 具体方法见Query.geoCode()
 	 */
 	private class GeoCoding extends AsyncTask<String, Integer, String> {
 		HomeActivity homeActivity = HomeActivity.this;
@@ -338,214 +521,26 @@ public class HomeActivity extends BaseActivity {
 		protected void onProgressUpdate(Integer... values) {
 			// TODO Auto-generated method stub
 			super.onProgressUpdate(values);
-			homeActivity.geoCodeTextView.setText("正在获取中……");
+			homeActivity.txtGeocode.setText("正在获取中……");
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			homeActivity.geoCodeTextView.setText("上海师范大学" + result);
+			homeActivity.txtGeocode.setText("上海师范大学" + result);
 		}
 
 		@Override
 		protected String doInBackground(String... params) {
-			String queryResult = "";
-			queryViaSuperMap = new Query();
+			String strResult = "";
 			try {
-				queryViaSuperMap = new Query();
-				queryResult = queryViaSuperMap.geoCode();
+				strResult = mQuery.geoCode();
 			} catch (Exception e) {
 				Log.e(TAG + " GeoCoding", e.toString());
 				return null;
 			}
-			return queryResult;
+			return strResult;
 		}
 	}
-
-	/**
-	 * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。 63 ：
-	 * 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：
-	 * 离线定位结果。通过requestOfflineLocaiton调用时对应的返回结果 67 ：
-	 * 离线定位失败。通过requestOfflineLocaiton调用时对应的返回结果 68 ： 网络连接失败时，查找本地离线定位时对应的返回结果
-	 * 161： 表示网络定位结果 162~167： 服务端定位失败。
-	 */
-	public class LocationListener implements BDLocationListener {
-		@Override
-		public void onReceiveLocation(BDLocation location) {
-			if (location == null)
-				return;
-			StringBuffer sb = new StringBuffer(256);
-			sb.append("time : ");
-			sb.append(location.getTime());
-			sb.append("\nerror code : ");
-			sb.append(location.getLocType());
-			sb.append("\nlatitude : ");
-			sb.append(location.getLatitude());
-			sb.append("\nlontitude : ");
-			sb.append(location.getLongitude());
-			sb.append("\nradius : ");
-			sb.append(location.getRadius());
-			if (location.getLocType() == BDLocation.TypeGpsLocation) {
-				sb.append("\nspeed : ");
-				sb.append(location.getSpeed());
-				sb.append("\nsatellite : ");
-				sb.append(location.getSatelliteNumber());
-			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
-				sb.append("\naddr : ");
-				sb.append(location.getAddrStr());
-			}
-			if (LbsApplication.getLastlocationPoint2d().getX() != location
-					.getLongitude()
-					|| LbsApplication.getLastlocationPoint2d().getY() != location
-							.getLatitude()) {
-				LbsApplication.setLastlocationPoint2d(new Point2D(location
-						.getLongitude(), location.getLatitude()));
-				LbsApplication.setLocationAccuracy(location.getRadius());
-				if (!LbsApplication.getLocationApi().isLocInMap(
-						LbsApplication.getLastlocationPoint2d(),
-						LbsApplication.getmMapView())) {
-					LbsApplication.setLocateStart(false);
-					locationSwitch.setChecked(false);
-				} else {
-					drawPointAndBuffer = new DrawPointAndBuffer();
-					drawPointAndBuffer.execute("");
-				}
-				Log.i(TAG, sb.toString());
-			}
-		}
-
-		@Override
-		public void onReceivePoi(BDLocation arg0) {
-
-		}
-
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
-	/*
-	 * 活动详情定位
-	 */
-	private void activityLocate(final ActivityClass activity) {
-		hasDetail = false;
-		LbsApplication.clearCallout();
-		Layer mLayer = null;
-		mLayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
-		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
-		try {
-			QueryParameter parameter = new QueryParameter();
-			parameter
-					.setAttributeFilter("Id=" + activity.getActivityBuilding());
-			parameter.setCursorType(CursorType.STATIC);
-
-			Recordset mRecordset = mDatasetVector.query(parameter);
-			mRecordset.moveFirst();
-			Point2D mPoint2d = mRecordset.getGeometry().getInnerPoint();
-			CallOut mCallOut = new CallOut(this);
-			mCallOut.setStyle(CalloutAlignment.BOTTOM);
-			mCallOut.setCustomize(true);
-			ImageView image = new ImageView(this);
-			mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
-			switch (activity.getActivityType()) {
-			case 1:
-				image.setBackgroundResource(R.drawable.ic_play_pin);
-				break;
-			case 2:
-				image.setBackgroundResource(R.drawable.ic_mic_pin);
-				break;
-			case 3:
-				image.setBackgroundResource(R.drawable.ic_book_pin);
-				break;
-			default:
-				break;
-			}
-			mCallOut.setContentView(image);
-			detailButton.setVisibility(View.VISIBLE);
-			if (!isPopUp) {
-				locationViewPopup(0, -LbsApplication.Dp2Px(this, 50),
-						mapRelativeLayout);
-				isPopUp = true;
-			}
-			if (activity.getActivityName().length() > 13) {
-				accuracyTextView.setText(activity.getActivityName().substring(
-						0, 12)
-						+ "...");
-			} else {
-				accuracyTextView.setText(activity.getActivityName());
-			}
-			if (activity.getActivitySpeakerTitle().length() > 10) {
-				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
-						+ activity.getActivitySpeakerTitle().substring(0, 10)
-						+ "...");
-			} else {
-				geoCodeTextView.setText(activity.getActivitySpeaker() + ", "
-						+ activity.getActivitySpeakerTitle());
-			}
-			detailButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(LbsApplication.getContext(),
-							ActivityListView.class);
-					Bundle bundle = new Bundle();
-					bundle.putParcelable("activity", activity);
-					intent.putExtras(bundle);
-					startActivityForResult(intent,
-							LbsApplication.getRequestCode());
-					HomeActivity.this.overridePendingTransition(
-							R.anim.in_right2left, R.anim.out_left2right);
-				}
-			});
-			LbsApplication.getmMapControl().getMap().setCenter(mPoint2d);
-			LbsApplication.getmMapView().addCallout(mCallOut);
-			LbsApplication.refreshMap();
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		}
-	}
-
-	public void resultLocate(List<Result> results) {
-		isSearch = true;
-		Layer mLayer = null;
-		mLayer = LbsApplication.getmMapControl().getMap().getLayers().get(14);
-		DatasetVector mDatasetVector = (DatasetVector) mLayer.getDataset();
-		try {
-			for (Result result : results) {
-				QueryParameter parameter = new QueryParameter();
-				parameter.setAttributeFilter("Id=" + result.getId());
-				parameter.setCursorType(CursorType.STATIC);
-				Recordset mRecordset = mDatasetVector.query(parameter);
-				mRecordset.moveFirst();
-				Point2D mPoint2d = mRecordset.getGeometry().getInnerPoint();
-				String resultName = result.getId() + "";
-				CallOut mCallOut = new CallOut(this);
-				mCallOut.setStyle(CalloutAlignment.BOTTOM);
-				mCallOut.setCustomize(true);
-				ImageView image = new ImageView(this);
-				image.setBackgroundResource(R.drawable.ic_info);
-				mCallOut.setLocation(mPoint2d.getX(), mPoint2d.getY());
-				mCallOut.setContentView(image);
-				LbsApplication.getmMapView().addCallout(mCallOut, resultName);
-			}
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		}
-		LbsApplication.refreshMap();
-	}
-
 }

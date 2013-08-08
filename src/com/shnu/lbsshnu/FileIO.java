@@ -14,6 +14,9 @@ import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
+/**
+ * 用于数据与文件间的交互
+ */
 public class FileIO {
 	/**
 	 * Log.()标签
@@ -28,69 +31,69 @@ public class FileIO {
 			return;
 		}
 
-		XmlResourceParser xrp = LbsApplication.getContext().getResources()
+		XmlResourceParser mXmlResourceParser = LbsApplication.getContext().getResources()
 				.getXml(R.xml.data);
-		int eventType;
-		StringBuffer sb = new StringBuffer();
-		ContentValues values = new ContentValues();
-		String rowTagName = "";
+		int intEventType;
+		StringBuffer mStringBuffer = new StringBuffer();
+		ContentValues mContentValues = new ContentValues();
+		String strRowName = "";
 		try {
-			eventType = xrp.getEventType();
-			while (eventType != XmlResourceParser.END_DOCUMENT) {
-				if (eventType == XmlResourceParser.START_TAG) {
+			intEventType = mXmlResourceParser.getEventType();
+			while (intEventType != XmlResourceParser.END_DOCUMENT) {
+				if (intEventType == XmlResourceParser.START_TAG) {
 					// Log.d(TAG, "^^^^^^ Start tag " + xrp.getName());
-					String tagName = xrp.getName().toString().trim();
+					String tagName = mXmlResourceParser.getName().toString().trim();
 					if (!tagName.equals("root")) {
-						sb.append(xrp.getName());
+						mStringBuffer.append(mXmlResourceParser.getName());
 						if (tagName.equals("row")) {
-							sb.append("(");
+							mStringBuffer.append("(");
 						} else {
-							sb.append(":");
-							rowTagName = tagName;
+							mStringBuffer.append(":");
+							strRowName = tagName;
 						}
 					}
-				} else if (eventType == XmlResourceParser.END_TAG) {
-					String tagName = xrp.getName().toString().trim();
+				} else if (intEventType == XmlResourceParser.END_TAG) {
+					String tagName = mXmlResourceParser.getName().toString().trim();
 					if (tagName.equals("row")) {
-						sb.append(")");
-						Log.d(TAG, sb.toString());
-						LbsApplication.getActivityData().insertOrIgnore(values);//
-						sb.delete(0, sb.length() - 1);
+						mStringBuffer.append(")");
+						Log.d(TAG, mStringBuffer.toString());
+						LbsApplication.getActivityData().insertOrIgnore(mContentValues);//
+						mStringBuffer.delete(0, mStringBuffer.length() - 1);
 					} else if (tagName.equals("root")) {
 						Log.d(TAG, "end");
 					} else {
-						sb.append(", ");
+						mStringBuffer.append(", ");
 					}
-				} else if (eventType == XmlResourceParser.TEXT) {
-					String tagText = xrp.getText().toString().trim();
-					sb.append(xrp.getText().toString().trim());
-					if (rowTagName.equals("id")) {
-						values.put(ActivityData.C_ID, tagText);
-					} else if (rowTagName.equals("name")) {
-						values.put(ActivityData.C_NAME, tagText);
-					} else if (rowTagName.equals("date")) {
-						values.put(ActivityData.C_DATE, tagText);
-					} else if (rowTagName.equals("time")) {
-						values.put(ActivityData.C_TIME, tagText);
-					} else if (rowTagName.equals("location")) {
-						values.put(ActivityData.C_LOCATION, tagText);
-					} else if (rowTagName.equals("building")) {
-						values.put(ActivityData.C_BUILDING, tagText);
-					} else if (rowTagName.equals("type")) {
-						values.put(ActivityData.C_TYPE, tagText);
-					} else if (rowTagName.equals("speaker")) {
-						values.put(ActivityData.C_SPEAKER, tagText);
-					} else if (rowTagName.equals("speakertitle")) {
-						values.put(ActivityData.C_SPEAKERTITLE, tagText);
-					} else if (rowTagName.equals("islike")) {
-						values.put(ActivityData.C_ISLIKE, tagText);
-					} else if (rowTagName.equals("price")) {
-						values.put(ActivityData.C_PRICE, tagText);
-					} else if (rowTagName.equals("description")) {
-						values.put(ActivityData.C_DESCRIPTION, tagText);
+				} else if (intEventType == XmlResourceParser.TEXT) {
+					String tagText = mXmlResourceParser.getText().toString().trim();
+					mStringBuffer.append(mXmlResourceParser.getText().toString().trim());
+					if (strRowName.equals("id")) {
+						mContentValues.put(EventData.C_ID, tagText);
+					} else if (strRowName.equals("name")) {
+						mContentValues.put(EventData.C_NAME, tagText);
+					} else if (strRowName.equals("date")) {
+						mContentValues.put(EventData.C_DATE, tagText);
+					} else if (strRowName.equals("time")) {
+						mContentValues.put(EventData.C_TIME, tagText);
+					} else if (strRowName.equals("location")) {
+						mContentValues.put(EventData.C_LOCATION, tagText);
+					} else if (strRowName.equals("building")) {
+						mContentValues.put(EventData.C_BUILDING, tagText);
+					} else if (strRowName.equals("type")) {
+						mContentValues.put(EventData.C_TYPE, tagText);
+					} else if (strRowName.equals("speaker")) {
+						mContentValues.put(EventData.C_SPEAKER, tagText);
+					} else if (strRowName.equals("speakertitle")) {
+						mContentValues.put(EventData.C_SPEAKERTITLE, tagText);
+					} else if (strRowName.equals("islike")) {
+						mContentValues.put(EventData.C_ISLIKE, tagText);
+					} else if (strRowName.equals("price")) {
+						mContentValues.put(EventData.C_PRICE, tagText);
+					} else if (strRowName.equals("description")) {
+						mContentValues.put(EventData.C_DESCRIPTION, tagText);
 					}
 				}
-				eventType = xrp.next();
+				intEventType = mXmlResourceParser.next();
 			}
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
@@ -103,15 +106,17 @@ public class FileIO {
 	}
 
 	/**
-	 * copy地图数据到sdcard
+	 * 从assets复制地图数据到sdcard
+	 * 
+	 * @param context
 	 */
 	public void copyMapData(Context context) {
 		createPath(context, "temp");
 		createPath(context, "cache");
-		AssetManager assetManager = context.getAssets();
+		AssetManager mAssetManager = context.getAssets();
 		String[] files = null;
 		try {
-			files = assetManager.list("");
+			files = mAssetManager.list("");
 		} catch (IOException e) {
 			Log.e(TAG, e.toString());
 		}
@@ -123,7 +128,7 @@ public class FileIO {
 				InputStream in = null;
 				OutputStream out = null;
 				try {
-					in = assetManager.open(filename);
+					in = mAssetManager.open(filename);
 					File outFile = null;
 					if (filename.equals("imobile-GISGame.slm")) {
 						outFile = new File(
@@ -148,30 +153,36 @@ public class FileIO {
 			}
 		}
 	}
+
 	/**
-	 * 复制文件到sdcard中
+	 * 文件流的复制
+	 * 
 	 * @param in
+	 *            assets中文件流
 	 * @param out
+	 *            sdcard中文件流
 	 * @throws IOException
 	 */
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
-		int read;
-		while ((read = in.read(buffer)) != -1) {
-			out.write(buffer, 0, read);
+		int intRead;
+		while ((intRead = in.read(buffer)) != -1) {
+			out.write(buffer, 0, intRead);
 		}
 	}
 
 	/**
 	 * 创建存储地图数据的路径
+	 * 
 	 * @param context
 	 * @param path
+	 *            创建地址
 	 */
 	private static void createPath(Context context, String path) {
 		try {
-			File file = new File(context.getExternalFilesDir(null), path);
-			if (!file.exists()) {
-				file.mkdir();
+			File mFile = new File(context.getExternalFilesDir(null), path);
+			if (!mFile.exists()) {
+				mFile.mkdir();
 			}
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

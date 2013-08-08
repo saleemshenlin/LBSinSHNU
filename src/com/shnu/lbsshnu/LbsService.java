@@ -5,10 +5,20 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+/**
+ * 用于更新Widget的服务
+ * 
+ */
 public class LbsService extends Service {
+	/**
+	 * 需要更新的intent的Action
+	 */
 	public static final String NEW_STATUS_INTENT = "com.shnu.lbsshnu.NEW_STATUS";
 	static final String TAG = "LbsService";
-	private static boolean runFlag = false;
+	private static boolean isRun = false;
+	/**
+	 * 设置更新时间为1小时
+	 */
 	private final int DELAY = 3600000;
 	private Updater updater;
 	LbsApplication lbsApplication;
@@ -49,15 +59,15 @@ public class LbsService extends Service {
 	}
 
 	public static boolean isRunFlag() {
-		return runFlag;
+		return isRun;
 	}
 
 	public static void setRunFlag(boolean runFlag) {
-		LbsService.runFlag = runFlag;
+		LbsService.isRun = runFlag;
 	}
 
-	/*
-	 * Thread that performs the actual update from the online service
+	/**
+	 * 每隔一个小时广播一次Widget更新
 	 */
 	private class Updater extends Thread {
 		Intent intent;

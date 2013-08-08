@@ -33,30 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
- * <p>
- * This class enables to add a NavDrawer simply.
- * </p>
- * <p>
- * How to use:
- * </p>
- * <p>
- * After calling setContentView method in onCreate method, call 2 methods
- * bellow.
- * </p>
- * <ul>
- * <li>- New SimpleNavDrawer instance</li>
- * <li>- Set a layout file which will be set in the NavDrawer.</li>
- * </ul>
- * 
- * <pre class="prettyprint">
- * public void onCreate(Bundle data) {
- * 	super.onCreate(data);
- * 	setContentView(R.layout.main);
- * 	SimpleNavDrawer nav = new SimpleNavDrawer(this);
- * 	nav.setLeftBehindContentView(R.layout.manu);
- * }
- * </pre>
- * 
+ * 左右sliderUI的实现，来源于Github 
  * @author Masahiko Adachi
  */
 @SuppressLint({ "DrawAllocation", "ViewConstructor" })

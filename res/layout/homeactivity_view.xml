@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="style/translucentActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/lnlActionbar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#666" >
+
+        <include layout="@layout/main_actionbar" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="50dp" >
+
+        <RelativeLayout
+            android:id="@+id/rllMapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.supermap.mapping.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </com.supermap.mapping.MapView>
+
+            <ProgressBar
+                android:id="@+id/prbLoadMap"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <RelativeLayout
+                android:id="@+id/rllLocation"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_above="@id/mapView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:background="#666" >
+
+                <ImageView
+                    android:id="@+id/imgLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="false"
+                    android:background="#ffffff"
+                    android:contentDescription="@string/app_name"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_action_location" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rllLocationDetail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/rllMapView"
+            android:layout_alignBottom="@id/rllMapView"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="-50dp"
+            android:background="#ccc" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:background="#fff" >
+
+                <LinearLayout
+                    android:id="@+id/lnlLocationDetail"
+                    android:layout_width="0dip"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtLocationAccuracy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/location"
+                        android:textColor="#333"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txtLocationAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/geocoding"
+                        android:textColor="#4c4c4c"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnDetail"
+                    android:layout_width="64dp"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="8dp"
+                    android:background="#ccc"
+                    android:text="@string/detail"
+                    android:textColor="#333" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

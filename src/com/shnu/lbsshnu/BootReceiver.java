@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+/**
+ * 用于开机启动LbsService
+ */
 public class BootReceiver extends BroadcastReceiver {
 
 	@Override

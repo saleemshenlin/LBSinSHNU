@@ -1,5 +1,6 @@
 package com.shnu.lbsshnu;
 
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -13,62 +14,68 @@ import android.widget.RemoteViews;
 
 public class LbsWidget extends AppWidgetProvider {
 	private static final String TAG = "LbsWidget";
-	private ActivityClass activity;
+	private Event mEvent;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		Log.d(TAG, "onUpdate");
-		ActivityProvider activityProvider = new ActivityProvider();
+		EventProvider mEventProvider = new EventProvider();
+		Query mQuery = new Query();
 		Cursor cursor = null;
 		try {
-			cursor = activityProvider.query(ActivityProvider.CONTENT_URI, null,
-					getSelection(), null, getSortOrder());
+			cursor = mEventProvider.query(EventProvider.CONTENT_URI, null,
+					mQuery.getSectionViaType(3), null, mQuery.getSortOrder());
 			if (cursor.moveToFirst()) {
-				activity = getActivityClass(cursor);
-				CharSequence title = activity.getActivityName();
-				CharSequence date = activity.getActivityDate();
-				CharSequence time = activity.getActivityTime();
-				int type = activity.getActivityType();
+				mEvent = new Event(cursor);
+				CharSequence charTitle = mEvent.getEventName();
+				CharSequence charDate = mEvent.getEventDate();
+				CharSequence charTime = mEvent.getEventTime();
+				int intEventType = mEvent.getEventType();
 				for (int appWidgetId : appWidgetIds) {
 					Log.d(TAG, "Updating widget: " + appWidgetId);
-					if (title.length() > 10) {
-						title = title.subSequence(0, 10) + "...";
+					if (charTitle.length() > 10) {
+						charTitle = charTitle.subSequence(0, 10) + "...";
 					}
-					RemoteViews views = new RemoteViews(
-							context.getPackageName(), R.layout.lbswidget);
-					views.setTextViewText(R.id.txtWTitle, title);
-					views.setTextViewText(R.id.txtWDateTime, date + " " + time);
-					switch (type) {
+					RemoteViews mRemoteViews = new RemoteViews(
+							context.getPackageName(), R.layout.widget);
+					mRemoteViews
+							.setTextViewText(R.id.txtWidgetTitle, charTitle);
+					mRemoteViews.setTextViewText(R.id.txtWidgetDateTime,
+							charDate + " " + charTime);
+					// 根据类型使用不同的icon_pin
+					switch (intEventType) {
 					case 1:
-						views.setImageViewResource(R.id.imgWLocation,
-								R.drawable.ic_play_pin);
+						mRemoteViews.setImageViewResource(
+								R.id.imgWidgetLocation, R.drawable.ic_pin_play);
 						break;
 					case 2:
-						views.setImageViewResource(R.id.imgWLocation,
-								R.drawable.ic_mic_pin);
+						mRemoteViews.setImageViewResource(
+								R.id.imgWidgetLocation,
+								R.drawable.ic_pin_speech);
 						break;
 					case 3:
-						views.setImageViewResource(R.id.imgWLocation,
-								R.drawable.ic_book_pin);
+						mRemoteViews.setImageViewResource(
+								R.id.imgWidgetLocation,
+								R.drawable.ic_pin_course);
 						break;
 					default:
 						break;
 					}
-					Log.e(TAG, title + " , " + date + " , " + time);
-					setWidgetDetail(context, views, activity);
-					setWidgetLocation(context, views, activity);
-					appWidgetManager.updateAppWidget(appWidgetId, views);
+					Log.e(TAG, charTitle + " , " + charDate + " , " + charTime);
+					setWidgetDetail(context, mRemoteViews, mEvent);
+					setWidgetLocation(context, mRemoteViews, mEvent);
+					appWidgetManager.updateAppWidget(appWidgetId, mRemoteViews);
 				}
 			} else {
 				for (int appWidgetId : appWidgetIds) {
 					RemoteViews views = new RemoteViews(
-							context.getPackageName(), R.layout.lbswidget);
-					views.setTextViewText(R.id.txtWTitle, "请先设置我所关注的活动");
-					views.setTextViewText(R.id.txtWDateTime, "");
-					views.setImageViewResource(R.id.imgWLocation,
-							R.drawable.ic_info);
+							context.getPackageName(), R.layout.widget);
+					views.setTextViewText(R.id.txtWidgetTitle, "请先设置我所关注的活动");
+					views.setTextViewText(R.id.txtWidgetDateTime, "");
+					views.setImageViewResource(R.id.imgWidgetLocation,
+							R.drawable.ic_pin_info);
 					appWidgetManager.updateAppWidget(appWidgetId, views);
 				}
 			}
@@ -99,74 +106,46 @@ public class LbsWidget extends AppWidgetProvider {
 		}
 	}
 
-	/*
-	 * where 条件
-	 */
-	private String getSelection() {
-		String sql = ActivityData.C_DATE + " > (SELECT DATE('now')) and "
-				+ ActivityData.C_ISLIKE + " = 1";
-		return sql;
-	}
-
-	/*
-	 * order by条件
-	 */
-	private String getSortOrder() {
-		String sql = null;
-		sql = ActivityData.C_DATE + " ASC";
-		return sql;
-	}
-
 	public LbsWidget() {
 		// TODO Auto-generated constructor stub
 	}
 
-	private void setWidgetDetail(Context context, RemoteViews views,
-			ActivityClass activity) {
-		Intent intent = new Intent(context, ActivityListView.class);
+	/**
+	 * 通过设置PendingIntent，在主应用地图上定位widget信息。
+	 * 
+	 * @param context
+	 * @param remoteViews
+	 * @param event
+	 */
+	private void setWidgetDetail(Context context, RemoteViews remoteViews,
+			Event event) {
+		Intent intent = new Intent(context, EventListView.class);
 		intent.setAction("Form_Widget");
 		Bundle bundle = new Bundle();
-		bundle.putParcelable("activity", activity);
+		bundle.putParcelable("activity", event);
 		intent.putExtras(bundle);
-		views.setOnClickPendingIntent(R.id.imgWDetail, PendingIntent
-				.getActivity(context, LbsApplication.getRequestCode(), intent,
+		remoteViews.setOnClickPendingIntent(R.id.imgWidgetDetail, PendingIntent
+				.getActivity(context, LbsApplication.GET_EVENT, intent,
 						PendingIntent.FLAG_CANCEL_CURRENT));
 	}
 
-	private void setWidgetLocation(Context context, RemoteViews views,
-			ActivityClass activity) {
+	/**
+	 * 通过设置PendingIntent，在主应用中显示详细信息。
+	 * 
+	 * @param context
+	 * @param remoteViews
+	 * @param event
+	 */
+	private void setWidgetLocation(Context context, RemoteViews remoteViews,
+			Event event) {
 		Intent intent = new Intent(context, HomeActivity.class);
 		intent.setAction("Form_Widget");
 		Bundle bundle = new Bundle();
-		bundle.putParcelable("activity", activity);
+		bundle.putParcelable("activity", event);
 		intent.putExtras(bundle);
-		views.setOnClickPendingIntent(R.id.imgWLocation, PendingIntent
-				.getActivity(context, LbsApplication.getRequestCode(), intent,
-						PendingIntent.FLAG_UPDATE_CURRENT));
+		remoteViews.setOnClickPendingIntent(R.id.imgWidgetLocation,
+				PendingIntent.getActivity(context, LbsApplication.GET_EVENT,
+						intent, PendingIntent.FLAG_UPDATE_CURRENT));
 	}
 
-	private ActivityClass getActivityClass(Cursor detailCursor) {
-		ActivityClass activity = new ActivityClass();
-		activity.setActivityId(detailCursor.getInt(detailCursor
-				.getColumnIndex(ActivityData.C_ID)));
-		activity.setActivityName(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_NAME)));
-		activity.setActivityDate(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_DATE)));
-		activity.setActivityTime(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_TIME)));
-		activity.setActivityLocation(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_LOCATION)));
-		activity.setActivityBuilding(detailCursor.getInt(detailCursor
-				.getColumnIndex(ActivityData.C_BUILDING)));
-		activity.setActivityType(detailCursor.getInt(detailCursor
-				.getColumnIndex(ActivityData.C_TYPE)));
-		activity.setActivitySpeaker(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_SPEAKER)));
-		activity.setActivitySpeakerTitle(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_SPEAKERTITLE)));
-		activity.setActivityDescription(detailCursor.getString(detailCursor
-				.getColumnIndex(ActivityData.C_DESCRIPTION)));
-		return activity;
-	}
 }

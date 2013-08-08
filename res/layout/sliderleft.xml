@@ -9,14 +9,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="@drawable/rp_bg_slider" >
+            android:background="@drawable/bg_slider_repeat" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/imgSliderLeftTitle"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/welcome_title" />
+                android:src="@drawable/bg_title_welcome" />
 
         </LinearLayout>
 
@@ -25,7 +25,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rp_bg_slider"
+            android:background="@drawable/bg_slider_repeat"
             android:orientation="vertical" >
 
             <Switch
@@ -46,7 +46,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rp_bg_slider"
+            android:background="@drawable/bg_slider_repeat"
             android:orientation="vertical" >
 
             <Switch
@@ -67,7 +67,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rp_bg_slider"
+            android:background="@drawable/bg_slider_repeat"
             android:orientation="vertical" >
 
             <Switch

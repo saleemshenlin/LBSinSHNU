@@ -10,10 +10,10 @@
         android:layout_height="48dp"
         android:contentDescription="@string/app_label"
         android:padding="8dp"
-        android:src="@drawable/ic_action_back_w" />
+        android:src="@drawable/ic_action_back_light" />
 
     <SearchView
-        android:id="@+id/bufferSearch"
+        android:id="@+id/sevQuery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

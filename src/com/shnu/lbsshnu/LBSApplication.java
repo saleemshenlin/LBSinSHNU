@@ -39,17 +39,28 @@ public class LbsApplication extends Application {
 	private static MapControl mMapControl;
 	private static TrackingLayer mTrackingLayer;
 	private static Layers mlayers;
-	private static ActivityData activityData;
-	private static int requestCode = 0;
-	private static int bufferQueryCode = 1;
+	private static EventData activityData;
 	private static boolean isLocateStart = false;
 	private static boolean isActivityLike = false;
 	private static LocationClient locationClient;
 	private static String queryString = "";
 	public static String QUERY_WITH_LOCATION_FLAG = "QUERY_WITH_LOCATION";
-
-	Layer mWifiLayerS;// 小比例尺wifi层
-	Layer mWifiLayerL;// 大比例尺wifi层
+	/**
+	 * startActivityForResult() 的RequestCod，代表Event在地图上定位
+	 */
+	public static int GET_EVENT = 0;
+	/**
+	 * startActivityForResult() 的RequestCod，代表 查询结果在地图上定位
+	 */
+	public static int GET_QUERY = 1;
+	/**
+	 * 小比例尺wifi层
+	 */
+	Layer mWifiLayerS;
+	/**
+	 * 大比例尺wifi层
+	 */
+	Layer mWifiLayerL;
 
 	@Override
 	public void onCreate() {
@@ -71,42 +82,19 @@ public class LbsApplication extends Application {
 		Log.e(TAG, "LBSApplication onTerminate");
 	}
 
-	/*
-	 * 获取屏幕分别率
-	 */
-	private void getScreenDesplay() {
-		DisplayMetrics dm = new DisplayMetrics();
-		dm = getResources().getDisplayMetrics();
-		setScreenWidth(dm.widthPixels);
-		setScreenHeight(dm.heightPixels);
-		setScreenDPI(dm.densityDpi);
-	}
-
-	/*
-	 * 
-	 */
-	public void initEnvironment() {
-		Environment.setLicensePath(LbsApplication.getContext()
-				.getExternalFilesDir(getString(R.string.license_path))
-				.toString());
-		Environment.setTemporaryPath(LbsApplication.getContext()
-				.getExternalFilesDir(getString(R.string.temp_path)).toString());
-		Environment
-				.setWebCacheDirectory(LbsApplication.getContext()
-						.getExternalFilesDir(getString(R.string.cache_path))
-						.toString());
-		Environment.initialization(LbsApplication.getContext());
-	}
-
-	/*
+	/**
 	 * Dp转像素
+	 * 
+	 * @param context
+	 * @param dp
+	 * @return int px
 	 */
 	public static int Dp2Px(Context context, int dp) {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dp * scale + 0.5f);
 	}
 
-	/*
+	/**
 	 * 判断是否联网
 	 */
 	public static boolean isNetWork() {
@@ -124,7 +112,7 @@ public class LbsApplication extends Application {
 		}
 	}
 
-	/*
+	/**
 	 * 判断GPS是否打开
 	 */
 	public static boolean isGPSOpen() {
@@ -135,7 +123,7 @@ public class LbsApplication extends Application {
 		return isOpen;
 	}
 
-	/*
+	/**
 	 * 刷新地图
 	 */
 	public static void refreshMap() {
@@ -145,7 +133,7 @@ public class LbsApplication extends Application {
 
 	}
 
-	/*
+	/**
 	 * 清除跟踪层
 	 */
 	public static void clearTrackingLayer() {
@@ -155,7 +143,7 @@ public class LbsApplication extends Application {
 		refreshMap();
 	}
 
-	/*
+	/**
 	 * 清除点标注
 	 */
 	public static void clearCallout() {
@@ -164,7 +152,7 @@ public class LbsApplication extends Application {
 		}
 	}
 
-	/*
+	/**
 	 * 保留2位小数
 	 */
 	public static String save2Point(float value) {
@@ -172,7 +160,7 @@ public class LbsApplication extends Application {
 		return df.format(value) + "";
 	}
 
-	/*
+	/**
 	 * 调用FileIO导入地图数据
 	 */
 	public void importMapDataFromAsset() {
@@ -180,22 +168,10 @@ public class LbsApplication extends Application {
 		fileIO.copyMapData(getContext());
 	}
 
-	/*
-	 * 设置supermap环境
-	 */
-	public void setEnvironment() {
-		Environment.setLicensePath(getContext().getExternalFilesDir(
-				getString(R.string.license_path)).toString());
-		Environment.setTemporaryPath(getContext().getExternalFilesDir(
-				getString(R.string.temp_path)).toString());
-		Environment.setWebCacheDirectory(getContext().getExternalFilesDir(
-				getString(R.string.cache_path)).toString());
-		Environment.initialization(this);
-		Log.i(TAG, "LBSApplication setEnvironment!");
-	}
-
-	/*
+	/**
 	 * 开启服务
+	 * 
+	 * @param context
 	 */
 	public static void startServices(Context context) {
 		if (!LbsService.isRunFlag()) {
@@ -203,23 +179,28 @@ public class LbsApplication extends Application {
 		}
 	}
 
-	/*
+	/**
 	 * 隐藏虚拟键盘
+	 * 
+	 * @param activity
 	 */
 	@SuppressWarnings("static-access")
-	public static void hideIme(Activity context) {
-		if (context == null)
+	public static void hideIme(Activity activity) {
+		if (activity == null)
 			return;
-		final View v = context.getWindow().peekDecorView();
+		final View v = activity.getWindow().peekDecorView();
 		if (v != null && v.getWindowToken() != null) {
-			InputMethodManager imm = (InputMethodManager) context
-					.getSystemService(context.INPUT_METHOD_SERVICE);
+			InputMethodManager imm = (InputMethodManager) activity
+					.getSystemService(activity.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 		}
 	}
 
-	/*
+	/**
 	 * 判断虚拟键盘是否打开
+	 * 
+	 * @param context
+	 * @return
 	 */
 	@SuppressWarnings("static-access")
 	public static boolean isImeShow(Context context) {
@@ -320,25 +301,9 @@ public class LbsApplication extends Application {
 		LbsApplication.SCREENDPI = screenDPI;
 	}
 
-	public static ActivityData getActivityData() {
-		activityData = new ActivityData(getContext());
+	public static EventData getActivityData() {
+		activityData = new EventData(getContext());
 		return activityData;
-	}
-
-	public static int getRequestCode() {
-		return requestCode;
-	}
-
-	public static void setRequestCode(int requestCode) {
-		LbsApplication.requestCode = requestCode;
-	}
-
-	public static int getBufferQueryCode() {
-		return bufferQueryCode;
-	}
-
-	public static void setBufferQueryCode(int bufferQueryCode) {
-		LbsApplication.bufferQueryCode = bufferQueryCode;
 	}
 
 	public static LocationClient getLocationClient() {
@@ -372,6 +337,33 @@ public class LbsApplication extends Application {
 
 	public static void setActivityLike(boolean isActivityLike) {
 		LbsApplication.isActivityLike = isActivityLike;
+	}
+
+	/**
+	 * 获取屏幕分别率
+	 */
+	private void getScreenDesplay() {
+		DisplayMetrics dm = new DisplayMetrics();
+		dm = getResources().getDisplayMetrics();
+		setScreenWidth(dm.widthPixels);
+		setScreenHeight(dm.heightPixels);
+		setScreenDPI(dm.densityDpi);
+	}
+
+	/**
+	 * 设置SuperMap环境
+	 */
+	private void initEnvironment() {
+		Environment.setLicensePath(LbsApplication.getContext()
+				.getExternalFilesDir(getString(R.string.license_path))
+				.toString());
+		Environment.setTemporaryPath(LbsApplication.getContext()
+				.getExternalFilesDir(getString(R.string.temp_path)).toString());
+		Environment
+				.setWebCacheDirectory(LbsApplication.getContext()
+						.getExternalFilesDir(getString(R.string.cache_path))
+						.toString());
+		Environment.initialization(LbsApplication.getContext());
 	}
 
 }

@@ -3,7 +3,6 @@ package com.shnu.lbsshnu;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -12,88 +11,102 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class GuideActivity extends Activity implements OnPageChangeListener {
-	private ViewPager vp;
-	private ViewPagerAdapter vpAdapter;
+/**
+ * 首次加载引导界面，通過ViewPager实现
+ */
+public class GuideActivity extends BaseActivity implements OnPageChangeListener {
+	private ViewPager mViewPager;
+	private ViewPagerAdapter mViewPagerAdapter;
 	private List<View> views;
 
-	// 底部小点图片
+	/**
+	 * 底部小点图片
+	 */
 	private ImageView[] dots;
 
-	// 记录当前选中位置
-	private int currentIndex;
+	/**
+	 * 记录当前选中位置
+	 */
+	private int intCurrentIndex;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.guide);
-
-		// 初始化页面
+		setContentView(R.layout.guide_view);
 		initViews();
-
-		// 初始化底部小点
 		initDots();
 
 	}
 
+	public void onPageScrollStateChanged(int arg0) {
+	}
+
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+	}
+
+	/**
+	 * 当新的页面被选中时调用，设置底部小点选中状态
+	 */
+	public void onPageSelected(int arg0) {
+		setCurrentDot(arg0);
+	}
+
+	/**
+	 * 初始化页面
+	 */
 	private void initViews() {
-		LayoutInflater inflater = LayoutInflater.from(this);
+		LayoutInflater mLayoutInflater = LayoutInflater.from(this);
 
 		views = new ArrayList<View>();
 		// 初始化引导图片列表
-		views.add(inflater.inflate(R.layout.guideimg_1, null));
-		views.add(inflater.inflate(R.layout.guideimg_2, null));
-		views.add(inflater.inflate(R.layout.guideimg_3, null));
-		views.add(inflater.inflate(R.layout.guideimg_4, null));
+		views.add(mLayoutInflater.inflate(R.layout.guide_pager_one, null));
+		views.add(mLayoutInflater.inflate(R.layout.guide_pager_two, null));
+		views.add(mLayoutInflater.inflate(R.layout.guide_pager_three, null));
+		views.add(mLayoutInflater.inflate(R.layout.guide_pager_four, null));
 
 		// 初始化Adapter
-		vpAdapter = new ViewPagerAdapter(views, this);
+		mViewPagerAdapter = new ViewPagerAdapter(views, this);
 
-		vp = (ViewPager) findViewById(R.id.viewpager);
-		vp.setAdapter(vpAdapter);
+		mViewPager = (ViewPager) findViewById(R.id.viewpager);
+		mViewPager.setAdapter(mViewPagerAdapter);
 		// 绑定回调
-		vp.setOnPageChangeListener(this);
+		mViewPager.setOnPageChangeListener(this);
 	}
 
+	/**
+	 * 初始化底部小点
+	 */
 	private void initDots() {
-		LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
+		LinearLayout lnlGuide = (LinearLayout) findViewById(R.id.lnlGuide);
 
 		dots = new ImageView[views.size()];
 
 		// 循环取得小点图片
 		for (int i = 0; i < views.size(); i++) {
-			dots[i] = (ImageView) ll.getChildAt(i);
+			dots[i] = (ImageView) lnlGuide.getChildAt(i);
 			dots[i].setEnabled(true);// 都设为灰色
 		}
 
-		currentIndex = 0;
-		dots[currentIndex].setEnabled(false);// 设置为白色，即选中状态
+		intCurrentIndex = 0;
+		dots[intCurrentIndex].setEnabled(false);// 设置为白色，即选中状态
 	}
 
+	/**
+	 * 设置当前Dot
+	 * 
+	 * @param position
+	 *            当前位置
+	 */
 	private void setCurrentDot(int position) {
 		if (position < 0 || position > views.size() - 1
-				|| currentIndex == position) {
+				|| intCurrentIndex == position) {
 			return;
 		}
 
 		dots[position].setEnabled(false);
-		dots[currentIndex].setEnabled(true);
+		dots[intCurrentIndex].setEnabled(true);
 
-		currentIndex = position;
-	}
-
-	// 当滑动状态改变时调用
-	public void onPageScrollStateChanged(int arg0) {
-	}
-
-	// 当当前页面被滑动时调用
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-	}
-
-	// 当新的页面被选中时调用
-	public void onPageSelected(int arg0) {
-		// 设置底部小点选中状态
-		setCurrentDot(arg0);
+		intCurrentIndex = position;
 	}
 
 }

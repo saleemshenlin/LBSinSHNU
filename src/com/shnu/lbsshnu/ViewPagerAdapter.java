@@ -13,6 +13,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * GuideActivity的ViewPagerAdapter
+ */
 public class ViewPagerAdapter extends PagerAdapter {
 
 	// 界面列表
@@ -26,17 +29,18 @@ public class ViewPagerAdapter extends PagerAdapter {
 		this.activity = activity;
 	}
 
-	// 销毁arg1位置的界面
 	@Override
-	public void destroyItem(View arg0, int arg1, Object arg2) {
-		((ViewPager) arg0).removeView(views.get(arg1));
+	public void destroyItem(View view, int position, Object object) {
+		((ViewPager) view).removeView(views.get(position));
 	}
 
 	@Override
 	public void finishUpdate(View arg0) {
 	}
 
-	// 获得当前界面数
+	/**
+	 * 获得当前界面数
+	 */
 	@Override
 	public int getCount() {
 		if (views != null) {
@@ -45,12 +49,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 		return 0;
 	}
 
-	// 初始化arg1位置的界面
+	/**
+	 * 初始化position位置的界面
+	 */
 	@Override
-	public Object instantiateItem(View arg0, int arg1) {
-		((ViewPager) arg0).addView(views.get(arg1), 0);
-		if (arg1 == views.size() - 1) {
-			ImageView mStartWeiboImageButton = (ImageView) arg0
+	public Object instantiateItem(View view, int position) {
+		((ViewPager) view).addView(views.get(position), 0);
+		if (position == views.size() - 1) {
+			ImageView mStartWeiboImageButton = (ImageView) view
 					.findViewById(R.id.imgStart);
 			mStartWeiboImageButton
 					.setOnClickListener(new View.OnClickListener() {
@@ -65,34 +71,15 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 					});
 		}
-		return views.get(arg1);
-	}
-
-	private void goHome() {
-		// 跳转
-		Intent intent = new Intent(activity, HomeActivity.class);
-		activity.startActivity(intent);
-		activity.finish();
+		return views.get(position);
 	}
 
 	/**
-	 * 
-	 * method desc：设置已经引导过了，下次启动不用再次引导
+	 * 判断是否由对象生成界面
 	 */
-	private void setGuided() {
-		SharedPreferences preferences = activity.getSharedPreferences(
-				SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
-		Editor editor = preferences.edit();
-		// 存入数据
-		editor.putBoolean("isFirstIn", false);
-		// 提交修改
-		editor.commit();
-	}
-
-	// 判断是否由对象生成界面
 	@Override
-	public boolean isViewFromObject(View arg0, Object arg1) {
-		return (arg0 == arg1);
+	public boolean isViewFromObject(View view, Object object) {
+		return (view == object);
 	}
 
 	@Override
@@ -106,6 +93,28 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	@Override
 	public void startUpdate(View arg0) {
+	}
+
+	/**
+	 * 进入HomeActivity
+	 */
+	private void goHome() {
+		Intent intent = new Intent(activity, HomeActivity.class);
+		activity.startActivity(intent);
+		activity.finish();
+	}
+
+	/**
+	 * method desc：设置已经引导过了，下次启动不用再次引导
+	 */
+	private void setGuided() {
+		SharedPreferences preferences = activity.getSharedPreferences(
+				SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		// 存入数据
+		editor.putBoolean("isFirstIn", false);
+		// 提交修改
+		editor.commit();
 	}
 
 }

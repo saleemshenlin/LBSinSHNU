@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.method.ScrollingMovementMethod;
@@ -44,26 +43,39 @@ import com.supermap.mapping.CalloutAlignment;
 import com.supermap.mapping.Layer;
 
 /**
- * 存放应用的查询和popup
+ * 类Query<br>
+ * 用于在各类有关地图和Event的查询
  */
 public class Query {
+	/**
+	 * 定义一个标签,在LogCat内表示EventData
+	 */
 	private static final String TAG = "Query";
 	/**
-	 * 缓冲区半径 100米
+	 * 用于缓存区查询时，表示半径 100米
 	 */
 	private static final int QUERY_RADIUS = 100;
 	/**
-	 * 建立接口，用于Fragment和FragmentActivity间交互数据
+	 * 用于实例化接口OnFragmengToActivityListener
 	 */
-	protected static final OnFragmengToActivityListener OnFragmeng2ActivityListener = null;
 	public OnFragmengToActivityListener onFragmengToActivityListener;
+	/**
+	 * 用于实例化类EventProvider
+	 */
 	private EventProvider mEventProvider = new EventProvider();
+	/**
+	 * 用于实例化类Event
+	 */
 	private Event mEvent = null;
 
 	/**
-	 * 反向地理编码的具体实现方法 遍历图层 通过Geometrist.canContain判断是否包含当前位置
+	 * 用于HomeActivity中的反向地里编码查询<br>
+	 * 具体实现方法：<br>
+	 * 1)获取当前坐标<br>
+	 * 2)遍历图层通过Geometrist.canContain判断是否包含当前位置 <br>
+	 * 3)返回结果位置的Name字段信息
 	 * 
-	 * @return
+	 * @return String 返回结果位置的Name字段信息
 	 */
 	public String geoCode() {
 		Layer mlayer = null;
@@ -96,11 +108,16 @@ public class Query {
 	}
 
 	/**
-	 * 根据绘制好的缓存区进行查询，并将结果按与当前位置的距离从小到大排列存放到list中
-	 * 遍历图层，Geometrist.canContain判断缓冲区内包含哪里地点
+	 * 用于查询缓冲区内的的结果<br>
+	 * 具体实现方法：<br>
+	 * 1)获取缓冲区 GeoRegion geoRegion<br>
+	 * 2)遍历图层，通过Geometrist.canContain缓冲区结果对比<br>
+	 * 3)将结果按与当前位置的距离从小到大排列存放到List<Place><br>
+	 * 4)返回List<Place><br>
 	 * 
 	 * @param geoRegion
-	 * @return List<Place>
+	 *            已经绘制好的缓冲区
+	 * @return List<Place> 缓冲区查询结果
 	 */
 	public List<Place> queryViaBuffer(GeoRegion geoRegion) {
 		List<Place> locationPlaces = new ArrayList<Place>();
@@ -142,9 +159,13 @@ public class Query {
 	}
 
 	/**
-	 * 初始化美丽校园层的callout 点击callout显示PhotoPopup
+	 * 用于初始化美丽校园层的CallOut<br>
+	 * 具体实现方法：<br>
+	 * 1)遍历图层,获取点的Geometry<br>
+	 * 2)对每一个点赋予Callout,并添加onClick事件,让使用者点击CallOut能够弹出图片<br>
 	 * 
 	 * @param context
+	 *            上下文
 	 */
 	public void initPhotoCallout(final Context context) {
 		final DatasetVector mDatasetVector = (DatasetVector) LbsApplication
@@ -165,7 +186,7 @@ public class Query {
 					@Override
 					public void onClick(View v) {
 						Log.d(TAG, "img onClick!");
-						initPhotoPopup(context, id);
+						initPhotoPopupWindow(context, id);
 					}
 				});
 				image.setBackgroundResource(R.drawable.ic_pin_photo);
@@ -181,7 +202,13 @@ public class Query {
 	}
 
 	/**
-	 * 上下移动RelativeLayout rllLocationDetail，使用 TranslateAnimation()实现移动
+	 * 用于通过LocationDetail的上下移动,显示其内容<br>
+	 * 具体实现方法：<br>
+	 * 1)通过传入的参数使用 实例一个TranslateAnimation<br>
+	 * 2)设置TranslateAnimation动画为AnticipateOvershootInterpolator()<br>
+	 * 3)设置TranslateAnimation动画的时间为500ms<br>
+	 * 4)设置TranslateAnimation动画过程<br>
+	 * 4)执行TranslateAnimation<br>
 	 * 
 	 * @param fromY
 	 *            移动前位置
@@ -222,13 +249,19 @@ public class Query {
 	}
 
 	/**
-	 * 根据Event的位置，类型，获取相应的Callout
+	 * 用于初始化Event在地图上定位的CallOut<br>
+	 * 具体实现方法：<br>
+	 * 1)根据传入BuildingId,遍历地图,获取相应的Geometry<br>
+	 * 2)根据点的Geometry,初始化CallOut<br>
+	 * 3)根据传入的Type,给每个CallOut附上不同的图片<br>
+	 * 4)返回CallOut<br>
 	 * 
 	 * @param BuildingId
 	 *            Event的发生位置
 	 * @param Type
 	 *            Event的类型
 	 * @param context
+	 *            上下文
 	 * @return Callout 返回Callout
 	 */
 	public CallOut getCallOutViaBuildingId(int BuildingId, int Type,
@@ -274,9 +307,12 @@ public class Query {
 	}
 
 	/**
-	 * 绘制查询缓冲区，半径QUERY_RADIUS为100m
+	 * 用于绘制缓冲区<br>
+	 * 具体方法如下:<br>
+	 * 1)根据位置和半径QUERY_RADIUS绘制缓冲区<br>
+	 * 2)返回缓冲区<br>
 	 * 
-	 * @return GeoRegion
+	 * @return GeoRegion 缓冲区
 	 */
 	public GeoRegion getQueryBuffer() {
 		GeoRegion mGeoRegion = new GeoRegion();
@@ -298,7 +334,8 @@ public class Query {
 	}
 
 	/**
-	 * 排序条件 按时间升序拍列
+	 * 用于设置查询的排序条件<br>
+	 * 按Event发生时间的升序排序 <br>
 	 * 
 	 * @return String 排序条件
 	 */
@@ -309,9 +346,12 @@ public class Query {
 	}
 
 	/**
-	 * 根据类型选择查询条件 0 学术讲座 1 电影演出 2 精品课程 3 我关注的
+	 * 用于Event根据查询类型设置查询条件<br>
+	 * 类型 0 学术讲座 1 电影演出 2 精品课程 3 我关注的<br>
+	 * 时间设置为一周,从查询当天开始算<br>
 	 * 
-	 * @param 查询类型
+	 * @param intIndex
+	 *            查询类型
 	 * @return String 查询条件
 	 */
 	public String getSectionViaType(int intIndex) {
@@ -348,11 +388,15 @@ public class Query {
 	}
 
 	/**
-	 * 获取缓冲区查询结果
+	 * 用于设置在缓存区查询时的查询条件<br>
+	 * 根据传入的mPlace(缓冲区查询的结果)和strQuery(用户输入的内容)进行查询<br>
+	 * 时间设置为一周,从查询当天开始算<br>
 	 * 
 	 * @param mPlace
+	 *            缓冲区查询的结果
 	 * @param strQuery
-	 * @return
+	 *            用户输入的内容
+	 * @return String 查询条件
 	 */
 	public String getQuerySection(Place mPlace, String strQuery) {
 		String strSQL = null;
@@ -368,13 +412,15 @@ public class Query {
 	}
 
 	/**
-	 * 获取普通查询内容
+	 * 用于设置在缓存区查询时的查询条件<br>
+	 * 根据传入的num(Event类别)和strQuery(用户输入的内容)进行查询<br>
+	 * 时间设置为一周,从查询当天开始算<br>
 	 * 
 	 * @param num
 	 *            查询类别
 	 * @param strQuery
-	 *            查询内容
-	 * @return String 查询结果
+	 *            用户输入的内容
+	 * @return String 查询条件
 	 */
 	public String getQuerySection(int intNum, String strQuery) {
 		String sql = null;
@@ -395,18 +441,26 @@ public class Query {
 	}
 
 	/**
-	 * 显示popupwindow
+	 * 用于初始化EventDetail的PopupWindow<br>
+	 * 具体方法如下:<br>
+	 * 1)首先初始化一个PopupWindow,宽度为屏幕的3/4,高度自适应<br>
+	 * 2)通过bindPopupData方法绑数据<br>
+	 * 3)设置背景，用于点击周围关闭弹出PopupWindow<br>
+	 * 4)设置位置水平竖直居中<br>
+	 * 5)设置出现消失动画<br>
+	 * 6)更新PopupWindow<br>
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param rootView
-	 *            显示popupwindow的根view
+	 *            显示PopupWindow的父view
 	 * @param id
-	 *            EventId
+	 *            Event的Id
 	 * @param hasImgMapView
 	 *            是否需要初始化Event定位按钮
 	 */
 	@SuppressWarnings({ "static-access" })
-	public void showPopupwindows(Context context, View rootView, final long id,
+	public void initPopupwindows(Context context, View rootView, final long id,
 			boolean hasImgMapView) {
 		try {
 			LayoutInflater layoutInflater = (LayoutInflater) context
@@ -416,13 +470,10 @@ public class Query {
 					LbsApplication.getScreenWidth() * 3 / 4,
 					LayoutParams.WRAP_CONTENT, true);
 			bindPopupData(id, view, popupWindow, hasImgMapView, context);
-			popupWindow.setBackgroundDrawable(new BitmapDrawable(context
-					.getResources()));
-			popupWindow.showAtLocation(rootView, Gravity.CENTER
-					| Gravity.CENTER, 0, 0);
-			popupWindow.setAnimationStyle(R.anim.anim_popup);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
+			popupWindow.showAtLocation(rootView, Gravity.CENTER
+					| Gravity.CENTER, 0, 0);
 			popupWindow.setAnimationStyle(R.style.popupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
@@ -430,20 +481,36 @@ public class Query {
 		}
 	}
 
-	/*
-	 * 建立接口，用于Fragment和FragmentActivity间交互数据
+	/**
+	 * 接口OnFragmengToActivityListener<br>
+	 * 用于EventListFragment和EventListView间交互数据<br>
+	 * 当使用者在EventListFragment中的点击定位功能时<br>
+	 * 能够将Event的信息传递给EventListView，并最终传递给HomeActivity进行定位。<br>
 	 */
 	public interface OnFragmengToActivityListener {
-		public void onArticleSelected(Event mEvent);
+		public void onEventLocated(Event mEvent);
 	}
 
 	/**
-	 * 缓冲区查询结果实体类 /n intBuildingNum位置id/n strBuildingName 位置名称 /n strDistance
-	 * 与当前位置的距离
+	 * 类Place<br>
+	 * 用于表示缓冲区查询结果实体类,与地图属性数据匹配<br>
+	 * 参数：<br>
+	 * intBuildingNum 查询结果位置的id。<br>
+	 * strBuildingName 查询结果位置的名称。<br>
+	 * strDistance 查询结果与当前位置的距离。<br>
 	 */
 	class Place implements Comparable<Place> {
+		/**
+		 * 用于表示查询结果位置的id。
+		 */
 		int intBuildingNum;
+		/**
+		 * 用于表示查询结果位置的名称。
+		 */
 		String strBuildingName;
+		/**
+		 * 用于表示查询结果与当前位置的距离。
+		 */
 		String strDistance;
 
 		Place(int buildingNum, String buildingName, String distance) {
@@ -452,6 +519,9 @@ public class Query {
 			this.strDistance = distance;
 		}
 
+		/**
+		 * 用于查询结果按其与当前位置的距离间排序。
+		 */
 		@Override
 		public int compareTo(Place place) {
 			// TODO Auto-generated method stub
@@ -468,14 +538,22 @@ public class Query {
 	}
 
 	/**
-	 * 打开美丽校园图层时，根据Callout位置捆绑相应照片，并点击显示照片
+	 * 用于初始化美丽校园的PopupWindow<br>
+	 * 具体方法如下:<br>
+	 * 1)首先初始化一个PopupWindow,宽度、高度自适应<br>
+	 * 2)通过传入的id匹配相应照片<br>
+	 * 3)设置背景，用于点击周围关闭弹出PopupWindow<br>
+	 * 4)设置位置水平竖直居中<br>
+	 * 5)设置出现消失动画<br>
+	 * 6)更新PopupWindow<br>
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param id
-	 *            Callout位置id
+	 *            Photo的id
 	 */
 	@SuppressWarnings("static-access")
-	private void initPhotoPopup(Context context, int id) {
+	private void initPhotoPopupWindow(Context context, int id) {
 		try {
 			LayoutInflater layoutInflater = (LayoutInflater) context
 					.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -503,13 +581,10 @@ public class Query {
 				linearLayout.setBackgroundResource(R.drawable.img_photo_five);
 				break;
 			}
-			popupWindow.setBackgroundDrawable(new BitmapDrawable(context
-					.getResources()));
-			popupWindow.showAtLocation(rootView, Gravity.CENTER
-					| Gravity.CENTER, 0, 0);
-			popupWindow.setAnimationStyle(R.anim.anim_popup);
 			ColorDrawable dw = new ColorDrawable(-00000);
 			popupWindow.setBackgroundDrawable(dw);
+			popupWindow.showAtLocation(rootView, Gravity.CENTER
+					| Gravity.CENTER, 0, 0);
 			popupWindow.setAnimationStyle(R.style.popupAnimation);
 			popupWindow.update();
 		} catch (Exception e) {
@@ -518,17 +593,23 @@ public class Query {
 	}
 
 	/**
-	 * 给popupview绑定数据
+	 * 用于给initPopupWindow()中的PopupWindow绑数据 具体方法如下:<br>
+	 * 1)初始化PopupWindow中的各个View<br>
+	 * 2)根据hasImgMapView是否需要初始化ImgMapView<br>
+	 * 3)根据id查询获取并实例化一个Event<br>
+	 * 4)给各个View绑定数据<br>
+	 * 5)设置likeImageView的onClick事件,用于更新数据库发出广播更新Widget<br>
 	 * 
 	 * @param id
-	 *            eventID
+	 *            Event的id
 	 * @param view
-	 *            popupwindow view
+	 *            PopupWindow的view
 	 * @param popupwindow
-	 *            PopupWindow
+	 *            PopupWindow实例
 	 * @param hasImgMapView
-	 *            是否需要初始化Event定位按钮
+	 *            是否需要初始化Event定位按钮,当从EventDetail入口进入时需要,其他时候不需要.
 	 * @param context
+	 *            上下文
 	 */
 	private void bindPopupData(final long id, View view,
 			final PopupWindow popupwindow, boolean hasImgMapView,
@@ -555,7 +636,7 @@ public class Query {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						popupwindow.dismiss();
-						onFragmengToActivityListener.onArticleSelected(mEvent);
+						onFragmengToActivityListener.onEventLocated(mEvent);
 					}
 				});
 			} else {
@@ -626,7 +707,7 @@ public class Query {
 			if (detailCursor != null) {
 				detailCursor.close();
 			}
-			LbsApplication.getActivityData().closeDatabase();
+			LbsApplication.getEventData().closeDatabase();
 		}
 	}
 

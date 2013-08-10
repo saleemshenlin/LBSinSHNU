@@ -22,15 +22,6 @@
         <item name="android:background">#000</item>
     </style>
 
-    <style name="behindMenuItemLabel">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
-
     <style name="popupAnimation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/anim_popup_enter</item>
         <item name="android:windowExitAnimation">@anim/anim_popup_exit</item>

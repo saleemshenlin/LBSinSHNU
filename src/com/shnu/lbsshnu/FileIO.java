@@ -15,24 +15,29 @@ import android.content.res.XmlResourceParser;
 import android.util.Log;
 
 /**
+ * 类FileIO<br>
  * 用于数据与文件间的交互
  */
 public class FileIO {
 	/**
-	 * Log.()标签
+	 * 定义一个标签,在LogCat内表示FileIO
 	 */
 	private static final String TAG = "FileIO";
 
 	/**
-	 * 从Data.xml获取数据存入sqlite
+	 * 从Data.xml获取数据存入sqlite3<br>
+	 * 具体方法如下:<br>
+	 * 1)判断时候需要导入数据 <br>
+	 * 2)使用pull方式解析XML<br>
+	 * 3)遍历每一条数据,然后调用EventData.insertOrIgnore()存入数据库
 	 */
 	public void getDateFromXML() {
-		if (!LbsApplication.getActivityData().tableIsNull()) {
+		if (!LbsApplication.getEventData().tableIsNull()) {
 			return;
 		}
 
-		XmlResourceParser mXmlResourceParser = LbsApplication.getContext().getResources()
-				.getXml(R.xml.data);
+		XmlResourceParser mXmlResourceParser = LbsApplication.getContext()
+				.getResources().getXml(R.xml.data);
 		int intEventType;
 		StringBuffer mStringBuffer = new StringBuffer();
 		ContentValues mContentValues = new ContentValues();
@@ -41,8 +46,8 @@ public class FileIO {
 			intEventType = mXmlResourceParser.getEventType();
 			while (intEventType != XmlResourceParser.END_DOCUMENT) {
 				if (intEventType == XmlResourceParser.START_TAG) {
-					// Log.d(TAG, "^^^^^^ Start tag " + xrp.getName());
-					String tagName = mXmlResourceParser.getName().toString().trim();
+					String tagName = mXmlResourceParser.getName().toString()
+							.trim();
 					if (!tagName.equals("root")) {
 						mStringBuffer.append(mXmlResourceParser.getName());
 						if (tagName.equals("row")) {
@@ -53,11 +58,13 @@ public class FileIO {
 						}
 					}
 				} else if (intEventType == XmlResourceParser.END_TAG) {
-					String tagName = mXmlResourceParser.getName().toString().trim();
+					String tagName = mXmlResourceParser.getName().toString()
+							.trim();
 					if (tagName.equals("row")) {
 						mStringBuffer.append(")");
 						Log.d(TAG, mStringBuffer.toString());
-						LbsApplication.getActivityData().insertOrIgnore(mContentValues);//
+						LbsApplication.getEventData().insertOrIgnore(
+								mContentValues);
 						mStringBuffer.delete(0, mStringBuffer.length() - 1);
 					} else if (tagName.equals("root")) {
 						Log.d(TAG, "end");
@@ -65,8 +72,10 @@ public class FileIO {
 						mStringBuffer.append(", ");
 					}
 				} else if (intEventType == XmlResourceParser.TEXT) {
-					String tagText = mXmlResourceParser.getText().toString().trim();
-					mStringBuffer.append(mXmlResourceParser.getText().toString().trim());
+					String tagText = mXmlResourceParser.getText().toString()
+							.trim();
+					mStringBuffer.append(mXmlResourceParser.getText()
+							.toString().trim());
 					if (strRowName.equals("id")) {
 						mContentValues.put(EventData.C_ID, tagText);
 					} else if (strRowName.equals("name")) {
@@ -106,9 +115,14 @@ public class FileIO {
 	}
 
 	/**
-	 * 从assets复制地图数据到sdcard
+	 * 用于从assets复制地图数据到SDcard<br>
+	 * 具体方法如下: <br>
+	 * 1)创建SDcard路径 <br>
+	 * 2)使用AssetManager读取地图数据<br>
+	 * 3)调用copyFile,复制文件到SDcard<br>
 	 * 
 	 * @param context
+	 *            上下文
 	 */
 	public void copyMapData(Context context) {
 		createPath(context, "temp");
@@ -155,12 +169,12 @@ public class FileIO {
 	}
 
 	/**
-	 * 文件流的复制
+	 * 用于文件的复制
 	 * 
 	 * @param in
-	 *            assets中文件流
+	 *            复制源
 	 * @param out
-	 *            sdcard中文件流
+	 *            复制目的地
 	 * @throws IOException
 	 */
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
@@ -172,11 +186,12 @@ public class FileIO {
 	}
 
 	/**
-	 * 创建存储地图数据的路径
+	 * 用于根据路径是否存在,创建存储路径
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param path
-	 *            创建地址
+	 *            创建路径
 	 */
 	private static void createPath(Context context, String path) {
 		try {

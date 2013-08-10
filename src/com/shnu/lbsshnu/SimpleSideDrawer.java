@@ -33,7 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
- * 左右sliderUI的实现，来源于Github 
+ * 类SimpleSideDrawer<br>
+ * 用于左右sliderUI的实现，来源于Github<br>
+ * 
  * @author Masahiko Adachi
  */
 @SuppressLint({ "DrawAllocation", "ViewConstructor" })

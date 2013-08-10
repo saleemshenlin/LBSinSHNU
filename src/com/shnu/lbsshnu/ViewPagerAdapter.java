@@ -14,20 +14,40 @@ import android.view.View;
 import android.widget.ImageView;
 
 /**
- * GuideActivity的ViewPagerAdapter
+ * 类ViewPagerAdapter<br>
+ * 用于给GuideActivity绑内容
  */
 public class ViewPagerAdapter extends PagerAdapter {
 
-	// 界面列表
+	/**
+	 * 实例一个List<View>,用来加载需要显示的view
+	 */
 	private List<View> views;
+	/**
+	 * 实例一个Activity
+	 */
 	private Activity activity;
-
+	/**
+	 * 定义一个常量,用于表示SharedPreferences的名称
+	 */
 	private static final String SHAREDPREFERENCES_NAME = "first_pref";
 
+	/**
+	 * 用于构造ViewPagerAdapter
+	 * 
+	 * @param views
+	 *            需要显示的view列表
+	 * @param activity
+	 *            用的 Activity
+	 */
 	public ViewPagerAdapter(List<View> views, Activity activity) {
 		this.views = views;
 		this.activity = activity;
 	}
+
+	/**
+	 * 用于销毁不显示的view
+	 */
 
 	@Override
 	public void destroyItem(View view, int position, Object object) {
@@ -39,7 +59,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 	}
 
 	/**
-	 * 获得当前界面数
+	 * 用于获得当前界面数
 	 */
 	@Override
 	public int getCount() {
@@ -50,32 +70,32 @@ public class ViewPagerAdapter extends PagerAdapter {
 	}
 
 	/**
-	 * 初始化position位置的界面
+	 * 用于初始化position位置的界面<br>
+	 * 1)如果view是最后一个view时,初始化进入应用的按钮<br>
+	 * 2)调用setGuided()更新SharedPreferences<br>
+	 * 3)调用goHome()进入Home
 	 */
 	@Override
 	public Object instantiateItem(View view, int position) {
 		((ViewPager) view).addView(views.get(position), 0);
 		if (position == views.size() - 1) {
-			ImageView mStartWeiboImageButton = (ImageView) view
-					.findViewById(R.id.imgStart);
-			mStartWeiboImageButton
-					.setOnClickListener(new View.OnClickListener() {
+			ImageView mImageView = (ImageView) view.findViewById(R.id.imgStart);
+			mImageView.setOnClickListener(new View.OnClickListener() {
 
-						@Override
-						public void onClick(View v) {
-							// 设置已经引导
-							setGuided();
-							goHome();
+				@Override
+				public void onClick(View v) {
+					setGuided();
+					goHome();
 
-						}
+				}
 
-					});
+			});
 		}
 		return views.get(position);
 	}
 
 	/**
-	 * 判断是否由对象生成界面
+	 * 用于判断是否由对象生成界面
 	 */
 	@Override
 	public boolean isViewFromObject(View view, Object object) {
@@ -96,24 +116,24 @@ public class ViewPagerAdapter extends PagerAdapter {
 	}
 
 	/**
-	 * 进入HomeActivity
+	 * 用于跳转进入HomeActivity
 	 */
 	private void goHome() {
 		Intent intent = new Intent(activity, HomeActivity.class);
 		activity.startActivity(intent);
 		activity.finish();
+		activity.overridePendingTransition(R.anim.anim_in_right2left,
+				R.anim.anim_out_left2right);
 	}
 
 	/**
-	 * method desc：设置已经引导过了，下次启动不用再次引导
+	 * 用于更新SharedPreferences，下次启动不用再次引导
 	 */
 	private void setGuided() {
 		SharedPreferences preferences = activity.getSharedPreferences(
 				SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
-		// 存入数据
 		editor.putBoolean("isFirstIn", false);
-		// 提交修改
 		editor.commit();
 	}
 

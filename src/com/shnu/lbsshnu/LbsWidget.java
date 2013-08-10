@@ -1,6 +1,5 @@
 package com.shnu.lbsshnu;
 
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -12,10 +11,29 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+/**
+ * 类LbsWidget<br>
+ * 用于实现桌面小部件
+ */
 public class LbsWidget extends AppWidgetProvider {
+	/**
+	 * 定义一个标签,在LogCat内表示LbsWidget
+	 */
 	private static final String TAG = "LbsWidget";
+	/**
+	 * 实例一个Event
+	 */
 	private Event mEvent;
 
+	/**
+	 * 用于Widget更新<br>
+	 * 1)查询是否有cursor结果<br>
+	 * 2)如果有结果,遍历每一个Widget<br>
+	 * 3)更新内容<br>
+	 * 4)调用setWidgetDetail()设置从Widget进入Event详细的方法<br>
+	 * 5)调用setWidgetLocation()设置从Widget进入Event定位的方法<br>
+	 * 6)如果没有结果,遍历每一个Widget,更新内容,但不设置上两种方法
+	 */
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
@@ -44,7 +62,6 @@ public class LbsWidget extends AppWidgetProvider {
 							.setTextViewText(R.id.txtWidgetTitle, charTitle);
 					mRemoteViews.setTextViewText(R.id.txtWidgetDateTime,
 							charDate + " " + charTime);
-					// 根据类型使用不同的icon_pin
 					switch (intEventType) {
 					case 1:
 						mRemoteViews.setImageViewResource(
@@ -84,11 +101,14 @@ public class LbsWidget extends AppWidgetProvider {
 		} finally {
 			if (cursor != null) {
 				cursor.close();
-				LbsApplication.getActivityData().closeDatabase();
+				LbsApplication.getEventData().closeDatabase();
 			}
 		}
 	}
 
+	/**
+	 * 用于接收更新Widget的广播,并调用onUpdate()更新Widget
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
@@ -111,15 +131,18 @@ public class LbsWidget extends AppWidgetProvider {
 	}
 
 	/**
-	 * 通过设置PendingIntent，在主应用地图上定位widget信息。
+	 * 用于通过设置PendingIntent，在主应用地图上定位widget信息。
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param remoteViews
+	 *            Widget的View
 	 * @param event
+	 *            Widget显示的Event
 	 */
 	private void setWidgetDetail(Context context, RemoteViews remoteViews,
 			Event event) {
-		Intent intent = new Intent(context, EventListView.class);
+		Intent intent = new Intent(context, EventListActivity.class);
 		intent.setAction("Form_Widget");
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("activity", event);
@@ -130,11 +153,14 @@ public class LbsWidget extends AppWidgetProvider {
 	}
 
 	/**
-	 * 通过设置PendingIntent，在主应用中显示详细信息。
+	 * 用于通过设置PendingIntent，在主应用中显示详细信息。
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param remoteViews
+	 *            Widget的View
 	 * @param event
+	 *            Widget显示的Event
 	 */
 	private void setWidgetLocation(Context context, RemoteViews remoteViews,
 			Event event) {

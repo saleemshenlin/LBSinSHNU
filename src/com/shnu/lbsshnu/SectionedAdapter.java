@@ -9,13 +9,19 @@ import android.widget.Adapter;
 import android.widget.BaseAdapter;
 
 /**
- * 自定义一个类，这个类可以將多个adapter包含在一个adapter。 用于缓冲区查询的list绑定多个adapter
+ * 类SectionedAdapter<br>
+ * 用于將多个adapter包含在一个adapter中<br>
+ * 能够实现ResultActivity中的list绑定多个adapter.<br>
  */
 abstract public class SectionedAdapter extends BaseAdapter {
 	abstract protected View getHeaderView(String caption, String distance,
 			int index, View convertView, ViewGroup parent);
 
+	/**
+	 * 定义一个List<Section> 用与存放Adapter
+	 */
 	private List<Section> sections = new ArrayList<Section>();
+
 	private static int TYPE_SECTION_HEADER = 0;
 
 	public SectionedAdapter() {
@@ -41,11 +47,15 @@ abstract public class SectionedAdapter extends BaseAdapter {
 		return (null);
 	}
 
+	/**
+	 * 用于计算一共有多少item<br>
+	 * 遍历每个adapter组,获取个数后,在加上组名
+	 */
 	public int getCount() {
 		int total = 0;
 
 		for (Section section : this.sections) {
-			total += section.adapter.getCount() + 1; // add one for header
+			total += section.adapter.getCount() + 1;
 		}
 		return (total);
 	}

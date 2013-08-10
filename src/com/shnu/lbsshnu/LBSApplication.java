@@ -24,44 +24,114 @@ import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapView;
 import com.supermap.mapping.TrackingLayer;
 
+/**
+ * 
+ * 类LbsApplication<br>
+ * 用于存储全局变量和方法
+ * 
+ */
 public class LbsApplication extends Application {
-
-	private final static String TAG = "LBSApplication";
-	private static int SCREENWIDTH;
-	private static int SCREENHEIGHT;
-	private static double SCREENDPI;
-	private static Context CONTEXT;
-	private static LocationAPI LOCATIONAPI = new LocationAPI();
-	private static Point2D LASTLOCATION;
-	private static float LOCATIONACCUCRACY;
-	private static Workspace mWorkspace;
-	private static MapView mMapView;
-	private static MapControl mMapControl;
-	private static TrackingLayer mTrackingLayer;
-	private static Layers mlayers;
-	private static EventData activityData;
-	private static boolean isLocateStart = false;
-	private static boolean isActivityLike = false;
-	private static LocationClient locationClient;
-	private static String queryString = "";
-	public static String QUERY_WITH_LOCATION_FLAG = "QUERY_WITH_LOCATION";
 	/**
-	 * startActivityForResult() 的RequestCod，代表Event在地图上定位
+	 * 定义一个标签,在LogCat内表示LBSApplication
+	 */
+	private final static String TAG = "LBSApplication";
+	/**
+	 * 定义一个常数,用于表示屏幕宽度
+	 */
+	private static int SCREENWIDTH;
+	/**
+	 * 定义一个常数,用于表示屏幕高度
+	 */
+	private static int SCREENHEIGHT;
+	/**
+	 * 定义一个常数,用于表示DPI
+	 */
+	private static double SCREENDPI;
+	/**
+	 * 定义一个常量,用于表示上下文
+	 */
+	private static Context CONTEXT;
+	/**
+	 * 定义一个常数,用于表示定位精度
+	 */
+	private static float LOCATIONACCUCRACY;
+	/**
+	 * 定义一个常量,用于表示定位是否开启
+	 */
+	private static boolean isLocateStart = false;
+	/**
+	 * 定义一个常量,用于表示Event是否被关注
+	 */
+	private static boolean isEventLike = false;
+	/**
+	 * 定义一个常量,用于表示查询内容
+	 */
+	private static String queryString = "";
+	/**
+	 * 定义一个常量,用来表示是否属于缓冲区查询
+	 */
+	public static boolean isQueryViaLocation = false;
+	/**
+	 * 定义一个常数,用于表示RequestCode，代表Event在地图上定位
 	 */
 	public static int GET_EVENT = 0;
 	/**
-	 * startActivityForResult() 的RequestCod，代表 查询结果在地图上定位
+	 * 定义一个常数,用于表示RequestCode，代表 查询结果在地图上定位
 	 */
 	public static int GET_QUERY = 1;
 	/**
-	 * 小比例尺wifi层
+	 * 实例一个LOCATIONAPI,并初始化
+	 */
+	private static LocationAPI mLocationAPI = new LocationAPI();
+	/**
+	 * 实例一个Point2D,用于表示最新定位地点
+	 */
+	private static Point2D mPoint2d;
+	/**
+	 * 实例一个Workspace
+	 */
+	private static Workspace mWorkspace;
+	/**
+	 * 实例一个MapView
+	 */
+	private static MapView mMapView;
+	/**
+	 * 实例一个MapControl
+	 */
+	private static MapControl mMapControl;
+	/**
+	 * 实例一个TrackingLayer
+	 */
+	private static TrackingLayer mTrackingLayer;
+	/**
+	 * 实例一个Layers
+	 */
+	private static Layers mlayers;
+	/**
+	 * 实例一个mEventData
+	 */
+	private static EventData mEventData;
+	/**
+	 * 实例一个LocationClient
+	 */
+	private static LocationClient locationClient;
+	/**
+	 * 实例一个Layer,表示小比例尺wifi层
 	 */
 	Layer mWifiLayerS;
 	/**
-	 * 大比例尺wifi层
+	 * 实例一个Layer,表示大比例尺wifi层
 	 */
 	Layer mWifiLayerL;
 
+	/**
+	 * 创建LbsApplication<br>
+	 * 1)获取上下文,赋值个CONTEXT<br>
+	 * 2)获取屏幕分辨率<br>
+	 * 3)初始化SuperMap环境<br>
+	 * 4)初始化mPoint2d和LOCATIONACCUCRACY<br>
+	 * 
+	 */
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -71,7 +141,7 @@ public class LbsApplication extends Application {
 		getScreenDesplay();
 		initEnvironment();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
-		LbsApplication.LASTLOCATION = new Point2D();
+		LbsApplication.mPoint2d = new Point2D();
 		LbsApplication.LOCATIONACCUCRACY = (float) 10;
 	}
 
@@ -83,11 +153,13 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * Dp转像素
+	 * 用于Dp转像素
 	 * 
 	 * @param context
+	 *            上下文
 	 * @param dp
-	 * @return int px
+	 *            DIP
+	 * @return int PX
 	 */
 	public static int Dp2Px(Context context, int dp) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -95,7 +167,9 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 判断是否联网
+	 * 用于判断是否联网
+	 * 
+	 * @return boolean 是否存在
 	 */
 	public static boolean isNetWork() {
 		ConnectivityManager cwjManager = (ConnectivityManager) CONTEXT
@@ -113,7 +187,9 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 判断GPS是否打开
+	 * 用于判断GPS是否打开
+	 * 
+	 * @return boolean 是否存在
 	 */
 	public static boolean isGPSOpen() {
 		LocationManager locationManager = ((LocationManager) getContext()
@@ -124,7 +200,7 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 刷新地图
+	 * 用于刷新地图
 	 */
 	public static void refreshMap() {
 		if (mMapControl != null) {
@@ -134,7 +210,7 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 清除跟踪层
+	 * 用于清除跟踪层
 	 */
 	public static void clearTrackingLayer() {
 		if (mTrackingLayer != null) {
@@ -144,7 +220,7 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 清除点标注
+	 * 用于清除点标注
 	 */
 	public static void clearCallout() {
 		if (mMapView != null) {
@@ -153,7 +229,11 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 保留2位小数
+	 * 用于保留2位小数
+	 * 
+	 * @param value
+	 *            原始值
+	 * @return String 保留2位小数的字符串
 	 */
 	public static String save2Point(float value) {
 		DecimalFormat df = new java.text.DecimalFormat("#.00");
@@ -161,17 +241,10 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 调用FileIO导入地图数据
-	 */
-	public void importMapDataFromAsset() {
-		FileIO fileIO = new FileIO();
-		fileIO.copyMapData(getContext());
-	}
-
-	/**
-	 * 开启服务
+	 * 用于开启服务
 	 * 
 	 * @param context
+	 *            上下文
 	 */
 	public static void startServices(Context context) {
 		if (!LbsService.isRunFlag()) {
@@ -180,9 +253,10 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 隐藏虚拟键盘
+	 * 用于隐藏虚拟键盘
 	 * 
 	 * @param activity
+	 *            当前Activity
 	 */
 	@SuppressWarnings("static-access")
 	public static void hideIme(Activity activity) {
@@ -197,10 +271,11 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 判断虚拟键盘是否打开
+	 * 用于判断虚拟键盘是否打开
 	 * 
 	 * @param context
-	 * @return
+	 *            上下文
+	 * @return boolean 是否打开
 	 */
 	@SuppressWarnings("static-access")
 	public static boolean isImeShow(Context context) {
@@ -210,11 +285,11 @@ public class LbsApplication extends Application {
 	}
 
 	public static LocationAPI getLocationApi() {
-		return LOCATIONAPI;
+		return mLocationAPI;
 	}
 
 	public static void setLocationApi(LocationAPI locationApi) {
-		LbsApplication.LOCATIONAPI = locationApi;
+		LbsApplication.mLocationAPI = locationApi;
 	}
 
 	public static Layers getMlayers() {
@@ -262,11 +337,11 @@ public class LbsApplication extends Application {
 	}
 
 	public static Point2D getLastlocationPoint2d() {
-		return LASTLOCATION;
+		return mPoint2d;
 	}
 
 	public static void setLastlocationPoint2d(Point2D point) {
-		LbsApplication.LASTLOCATION = point;
+		LbsApplication.mPoint2d = point;
 	}
 
 	public static float getLocationAccuracy() {
@@ -301,9 +376,9 @@ public class LbsApplication extends Application {
 		LbsApplication.SCREENDPI = screenDPI;
 	}
 
-	public static EventData getActivityData() {
-		activityData = new EventData(getContext());
-		return activityData;
+	public static EventData getEventData() {
+		mEventData = new EventData(getContext());
+		return mEventData;
 	}
 
 	public static LocationClient getLocationClient() {
@@ -332,15 +407,15 @@ public class LbsApplication extends Application {
 	}
 
 	public static boolean isActivityLike() {
-		return isActivityLike;
+		return isEventLike;
 	}
 
 	public static void setActivityLike(boolean isActivityLike) {
-		LbsApplication.isActivityLike = isActivityLike;
+		LbsApplication.isEventLike = isActivityLike;
 	}
 
 	/**
-	 * 获取屏幕分别率
+	 * 用于获取屏幕分别率
 	 */
 	private void getScreenDesplay() {
 		DisplayMetrics dm = new DisplayMetrics();
@@ -351,7 +426,7 @@ public class LbsApplication extends Application {
 	}
 
 	/**
-	 * 设置SuperMap环境
+	 * 用于设置SuperMap环境
 	 */
 	private void initEnvironment() {
 		Environment.setLicensePath(LbsApplication.getContext()

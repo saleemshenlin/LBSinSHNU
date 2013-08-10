@@ -15,37 +15,97 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Event的DbHelper
+ * 类EventData<br>
+ * 用于与 sqlite3数据库交互
  */
 @SuppressLint("SimpleDateFormat")
 public class EventData {
-	private static final String TAG = "DbHelper";
+	/**
+	 * 定义一个标签,在LogCat内表示EventData
+	 */
+	private static final String TAG = "EventData";
+	/**
+	 * 定义一个恒定时间,为一天
+	 */
 	private static long DAY = 24 * 3600 * 1000;
+	/**
+	 * 定义一个数据库版本
+	 */
 	static final int VERSION = 1;
+	/**
+	 * 用于表示一个数据库名
+	 */
 	static final String DATABASE = "data.db";
-	static final String TABLE = "activity";
-
+	/**
+	 * 用于表示表名
+	 */
+	static final String TABLE = "event";
+	/**
+	 * 用于表示字段Event的id
+	 */
 	static final String C_ID = "_id";
+	/**
+	 * 用于表示字段Event的名称
+	 */
 	static final String C_NAME = "_name";
+	/**
+	 * 用于表示字段Event的发生日期
+	 */
 	static final String C_DATE = "_date";
+	/**
+	 * 用于表示字段Event的发生时间
+	 */
 	static final String C_TIME = "_time";
+	/**
+	 * 用于表示字段Event的位置名称
+	 */
 	static final String C_LOCATION = "_location";
+	/**
+	 * 用于表示字段Event的位置id，与地图属性id匹配
+	 */
 	static final String C_BUILDING = "_building";
+	/**
+	 * 用于表示字段Event的类型，1为学术讲座，2为电影演出，3为精品课程
+	 */
 	static final String C_TYPE = "_type";
+	/**
+	 * 用于表示字段Event的主要表演者
+	 */
 	static final String C_SPEAKER = "_speaker";
+	/**
+	 * 用于表示字段Event的表演者头衔
+	 */
 	static final String C_SPEAKERTITLE = "_speakertitle";
+	/**
+	 * 用于表示字段Event是否被关注
+	 */
 	static final String C_ISLIKE = "_islike";
+	/**
+	 * 用于表示字段Event的票价(无实用)
+	 */
 	static final String C_PRICE = "_price";
+	/**
+	 * 用于表示字段Event的简介
+	 */
 	static final String C_DESCRIPTION = "_description";
 
+	/**
+	 * 类DbHelper<br>
+	 * 针对sqlite3数据库操作
+	 */
 	class DbHelper extends SQLiteOpenHelper {
+		/**
+		 * 用于通过数据名称和版本构造一个DbHelp类
+		 * 
+		 * @param context
+		 *            上下文
+		 */
 		public DbHelper(Context context) {
 			super(context, DATABASE, null, VERSION);
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
-		 * 创建数据库
+		 * 用于创建一个新数据库和一个新表
 		 * 
 		 * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database
 		 *      .sqlite.SQLiteDatabase)
@@ -64,30 +124,42 @@ public class EventData {
 					+ " TEXT)");
 		}
 
+		/**
+		 * 用于在更新数据库时,直接删除旧数据库
+		 */
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub
-			db.execSQL("drop table " + TABLE);
+			db.execSQL("drop table if exists " + TABLE);
 			this.onCreate(db);
 		}
 	}
 
 	private final DbHelper dbHelper;
 
+	/**
+	 * 在初始化EventData时,同时初始化一个DbHelper
+	 * 
+	 * @param context
+	 *            上下文
+	 */
 	public EventData(Context context) {
 		this.dbHelper = new DbHelper(context);
 		Log.i(TAG, "initialized data");
 	}
 
 	/**
-	 * 关闭数据库
+	 * 用于关闭数据库
 	 */
 	public void closeDatabase() {
 		this.dbHelper.close();
 	}
 
 	/**
-	 * 插入数据
+	 * 用于打开应用时插入数据<br>
+	 * 根据tabIsExist()和tableIsNull()的结果决定是否执行<br>
+	 * 具体方法如下:<br>
+	 * 使用insertWithOnConflict(),让数据库自己解决冲突
 	 * 
 	 * @param values
 	 *            数据匹配对
@@ -104,9 +176,13 @@ public class EventData {
 	}
 
 	/**
-	 * 判断是否存在表
+	 * 用于判断是否存在表<br>
+	 * 具体方法如下:<br>
+	 * 1)执行sql语句select count(*) as c from sqlite_master where type ='table' and
+	 * name='event' name ='activity'<br>
+	 * 2)根据结果Cursor来判断
 	 * 
-	 * @return boolean
+	 * @return boolean 是否存在
 	 */
 	public boolean tabIsExist() {
 		boolean isExist = false;
@@ -135,9 +211,12 @@ public class EventData {
 	}
 
 	/**
-	 * 判断表是否为空
+	 * 用于判断表是否为空 <br>
+	 * 具体方法如下:<br>
+	 * 1)执行sql语句select * from event<br>
+	 * 2)根据结果Cursor来判断
 	 * 
-	 * @return boolean
+	 * @return boolean 是否存在
 	 */
 	public boolean tableIsNull() {
 		boolean isNull = false;
@@ -163,7 +242,11 @@ public class EventData {
 	}
 
 	/**
-	 * 更新数据课程数，找到所有数据的时间最早的一条数据 获取它的 日期和现 在日清对比，若大于7天则更新所有课程数据日期加7天
+	 * 用于打开应用时更新课程数据<br>
+	 * 具体方法如下:<br>
+	 * 1)找到所有数据的时间最早的一条数据<br>
+	 * 2)获取它的日期和现在日期对比，若大于7天则更新所有课程数据日期<br>
+	 * 3)更新天数:原有日期和现在日期的相差天数,再加7天<br>
 	 * 
 	 * @throws ParseException
 	 */
@@ -213,9 +296,9 @@ public class EventData {
 	}
 
 	/**
-	 * 获取数据库
+	 * 用于获取数据库DbHelper类
 	 * 
-	 * @return DbHelper
+	 * @return DbHelper DbHelper类
 	 */
 	public DbHelper getDbHelper() {
 		return this.dbHelper;

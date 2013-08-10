@@ -73,11 +73,15 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.shnu.lbsshnu.EventListView"
+            android:name="com.shnu.lbsshnu.EventListActivity"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
         <activity
             android:name="com.shnu.lbsshnu.ResultActivity"
+            android:theme="@android:style/Theme.Holo.Light" >
+        </activity>
+        <activity
+            android:name="com.shnu.lbsshnu.AboutActivity"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
 

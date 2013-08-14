@@ -83,7 +83,7 @@ public class EventListActivity extends FragmentActivity implements TabListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.eventlistactivity_view);
+		setContentView(R.layout.event_list_activity_view);
 		mIntent = getIntent();
 		if (mIntent.getAction() != null) {
 			isFromWidget = true;
@@ -92,25 +92,33 @@ public class EventListActivity extends FragmentActivity implements TabListener,
 		initView();
 		if (mBundle.getString("Tab") != null) {
 			indexTab = Integer.parseInt(mBundle.getString("Tab"));
+			mActionBar.getTabAt(indexTab).select();
 		} else {
 			Event mEvent = mBundle.getParcelable("activity");
-			intEventId = mEvent.getEventId();
-			switch (mEvent.getEventType()) {
-			case 1:
-				indexTab = 1;
-				break;
-			case 2:
-				indexTab = 0;
-				break;
-			case 3:
-				indexTab = 2;
-				break;
-			case 4:
-				indexTab = 3;
-				break;
+			if (mEvent != null) {
+				intEventId = mEvent.getEventId();
+				switch (mEvent.getEventType()) {
+				case 1:
+					indexTab = 1;
+					break;
+				case 2:
+					indexTab = 0;
+					break;
+				case 3:
+					indexTab = 2;
+					break;
+				case 4:
+					indexTab = 3;
+					break;
+				}
+				mActionBar.getTabAt(indexTab).select();
+			} else {
+				intEventId = 0;
+				mActionBar.getTabAt(0).select();
 			}
+
 		}
-		mActionBar.getTabAt(indexTab).select();
+
 	}
 
 	/**

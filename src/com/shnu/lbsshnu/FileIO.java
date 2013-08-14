@@ -16,7 +16,7 @@ import android.util.Log;
 
 /**
  * 类FileIO<br>
- * 用于数据与文件间的交互
+ * 用于数据与文件夹间的交互
  */
 public class FileIO {
 	/**

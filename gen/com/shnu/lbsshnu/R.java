@@ -98,13 +98,13 @@ public final class R {
         public static final int imgWidgetDetail=0x7f0a0046;
         public static final int imgWidgetLocation=0x7f0a0043;
         public static final int listActionbar=0x7f0a0000;
-        public static final int listEvent=0x7f0a000d;
+        public static final int listEvent=0x7f0a000e;
         public static final int listQeuryResult=0x7f0a0027;
         public static final int lnlAbout=0x7f0a003f;
         public static final int lnlActionbar=0x7f0a0012;
         public static final int lnlCourse=0x7f0a0039;
         public static final int lnlDetailPopupBg=0x7f0a0003;
-        public static final int lnlEventList=0x7f0a000c;
+        public static final int lnlEventList=0x7f0a000d;
         public static final int lnlGuide=0x7f0a0011;
         public static final int lnlHeader=0x7f0a0024;
         public static final int lnlLike=0x7f0a003c;
@@ -149,14 +149,14 @@ public final class R {
         public static final int txtWidgetDateTime=0x7f0a0045;
         public static final int txtWidgetTitle=0x7f0a0044;
         public static final int viewpager=0x7f0a0010;
-        public static final int vpgEvent=0x7f0a000e;
+        public static final int vpgEvent=0x7f0a000c;
     }
     public static final class layout {
         public static final int about_actionbar_title=0x7f030000;
         public static final int aboutactivity_view=0x7f030001;
         public static final int detail_popup=0x7f030002;
-        public static final int event_list_fragment=0x7f030003;
-        public static final int eventlistactivity_view=0x7f030004;
+        public static final int event_list_activity_view=0x7f030003;
+        public static final int event_list_fragment=0x7f030004;
         public static final int guide_pager_four=0x7f030005;
         public static final int guide_pager_one=0x7f030006;
         public static final int guide_pager_three=0x7f030007;

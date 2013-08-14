@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 /**
  * 类EventListFragment<br>
- * 用于EventListView的Fragment,用于显示EventList,每个Fragment代表EventListView的一个Tab
+ * 作为EventListView的Fragment,用于显示EventList,每个Fragment代表EventListView的一个Tab
  */
 public class EventListFragment extends Fragment {
 	/**

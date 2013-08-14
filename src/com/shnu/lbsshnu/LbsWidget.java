@@ -87,13 +87,16 @@ public class LbsWidget extends AppWidgetProvider {
 				}
 			} else {
 				for (int appWidgetId : appWidgetIds) {
-					RemoteViews views = new RemoteViews(
+					RemoteViews mRemoteViews = new RemoteViews(
 							context.getPackageName(), R.layout.widget);
-					views.setTextViewText(R.id.txtWidgetTitle, "请先设置我所关注的活动");
-					views.setTextViewText(R.id.txtWidgetDateTime, "");
-					views.setImageViewResource(R.id.imgWidgetLocation,
+					mRemoteViews.setTextViewText(R.id.txtWidgetTitle,
+							"请先设置我所关注的活动");
+					mRemoteViews.setTextViewText(R.id.txtWidgetDateTime, "");
+					mRemoteViews.setImageViewResource(R.id.imgWidgetLocation,
 							R.drawable.ic_pin_info);
-					appWidgetManager.updateAppWidget(appWidgetId, views);
+					setWidgetDetail(context, mRemoteViews, null);
+					setWidgetLocation(context, mRemoteViews, null);
+					appWidgetManager.updateAppWidget(appWidgetId, mRemoteViews);
 				}
 			}
 		} catch (Exception e) {

@@ -459,8 +459,10 @@ public class HomeActivity extends BaseActivity {
 			if (mBundle != null) {
 				if (mBundle.getParcelable("activity") != null) {
 					mEvent = mBundle.getParcelable("activity");
+					if (mEvent != null)
+						locateEventInMap(mEvent);
 				}
-				locateEventInMap(mEvent);
+
 			}
 			prbMapLoad.setVisibility(View.GONE);
 			Toast.makeText(HomeActivity.this, result, Toast.LENGTH_SHORT)

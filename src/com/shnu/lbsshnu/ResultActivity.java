@@ -25,7 +25,7 @@ import com.supermap.data.GeoRegion;
 
 /**
  * 类ResultActivity<br>
- * 用 查询结果显示Activity，分为缓冲区查询和普通查询 <br>
+ * 用于显示查询结果的Activity，分为缓冲区查询和普通查询 <br>
  * 定位开启时调用缓存区查询,未开启时调用普通查询<br>
  */
 public class ResultActivity extends BaseActivity {

@@ -6,7 +6,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * 类LbsService 用于每隔一小时更新Widget的服务
+ * 类LbsService<br>
+ * 用于每隔一小时更新Widget的服务
  * 
  */
 public class LbsService extends Service {

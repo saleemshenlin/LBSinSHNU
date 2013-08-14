@@ -41,7 +41,8 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/splashTheme" >
+        android:theme="@style/splashTheme"
+        android:installLocation="internalOnly" >
         <activity
             android:name="com.shnu.lbsshnu.SplashActivity"
             android:configChanges="keyboardHidden"

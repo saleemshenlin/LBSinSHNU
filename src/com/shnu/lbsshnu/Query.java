@@ -361,21 +361,18 @@ public class Query {
 			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
 					+ EventData.C_DATE
 					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TIME + " > (SELECT TIME('now')) and "
 					+ EventData.C_TYPE + " = 2";
 			return strSQL;
 		case 1:
 			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
 					+ EventData.C_DATE
 					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TIME + " > (SELECT TIME('now')) and "
 					+ EventData.C_TYPE + " = 1";
 			return strSQL;
 		case 2:
 			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
 					+ EventData.C_DATE
 					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TIME + " > (SELECT TIME('now')) and "
 					+ EventData.C_TYPE + " = 3";
 			return strSQL;
 		case 3:

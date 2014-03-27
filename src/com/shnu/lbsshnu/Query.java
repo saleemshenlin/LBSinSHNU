@@ -358,26 +358,30 @@ public class Query {
 		String strSQL;
 		switch (intIndex) {
 		case 0:
-			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
-					+ EventData.C_DATE
-					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TYPE + " = 2";
+			strSQL = EventData.C_TYPE + " = 2";
+			// EventData.C_DATE + " > (SELECT DATE('now')) and "
+			// + EventData.C_DATE
+			// + " < (SELECT DATE('now', '+7 day')) and "
+
 			return strSQL;
 		case 1:
-			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
-					+ EventData.C_DATE
-					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TYPE + " = 1";
+			strSQL = EventData.C_TYPE + " = 1";
+			// EventData.C_DATE + " > (SELECT DATE('now')) and "
+			// + EventData.C_DATE
+			// + " < (SELECT DATE('now', '+7 day')) and "
+			// +
 			return strSQL;
 		case 2:
-			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
-					+ EventData.C_DATE
-					+ " < (SELECT DATE('now', '+7 day')) and "
-					+ EventData.C_TYPE + " = 3";
+			strSQL = EventData.C_TYPE + " = 3";
+			// EventData.C_DATE + " > (SELECT DATE('now')) and "
+			// + EventData.C_DATE
+			// + " < (SELECT DATE('now', '+7 day')) and "
+			// +
 			return strSQL;
 		case 3:
-			strSQL = EventData.C_DATE + " > (SELECT DATE('now')) and "
-					+ EventData.C_ISLIKE + " = 1";
+			strSQL = EventData.C_ISLIKE + " = 1";
+			// EventData.C_DATE +
+			// " > (SELECT DATE('now')) and "
 			return strSQL;
 		default:
 			return null;

@@ -138,13 +138,13 @@ public class FileIO {
 			if (filename.equals("MapData.smwu")
 					|| filename.equals("MapData.udb")
 					|| filename.equals("MapData.udd")
-					|| filename.equals("imobile-GISGame.slm")) {
+					|| filename.equals("SuperMap iMobile Trial(635284888092595000).slm")) {
 				InputStream in = null;
 				OutputStream out = null;
 				try {
 					in = mAssetManager.open(filename);
 					File outFile = null;
-					if (filename.equals("imobile-GISGame.slm")) {
+					if (filename.equals("SuperMap iMobile Trial(635284888092595000).slm")) {
 						outFile = new File(
 								context.getExternalFilesDir("license"),
 								filename);
